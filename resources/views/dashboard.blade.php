@@ -9,145 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome />
-
-                @php
-                    $data = [
-                        [
-                            'codigo' => 'ACT-001',
-                            'descripcion_actuacion' => 'Mantenimiento preventivo de servidores',
-                            'fecha_inicio' => '2024-03-25',
-                            'fecha_fin' => '2024-03-27',
-                            'area_uai' => 'Infraestructura TI',
-                        ],
-                        [
-                            'codigo' => 'ACT-002',
-                            'descripcion_actuacion' => 'Migración de datos a la nueva infraestructura',
-                            'fecha_inicio' => '2024-04-01',
-                            'fecha_fin' => '2024-04-10',
-                            'area_uai' => 'Desarrollo de Software',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                    ];
-
-                @endphp
                 <x-table>
                     <x-slot name="head">
                         <thead>
@@ -177,13 +38,13 @@
                             </tr>
                         </thead>
                     </x-slot>
-                    @foreach ($data as $actuacion)
+                    @foreach ($data as $acta)
                         <tr class="hover:bg-gray-100">
-                            <td class="px-4 py-2">{{ $actuacion['codigo'] }}</td>
-                            <td class="px-4 py-2">{{ $actuacion['fecha_inicio'] }}</td>
-                            <td class="px-4 py-2">{{ $actuacion['descripcion_actuacion'] }}</td>
-                            <td class="px-4 py-2">{{ $actuacion['fecha_fin'] }}</td>
-                            <td class="px-4 py-2">{{ $actuacion['area_uai'] }}</td>
+                            <td class="px-4 py-2">{{ $acta['id'] }}</td>
+                            <td class="px-4 py-2">{{ $acta['actuacionFiscal']['objetivo'] }}</td>
+                            <td class="px-4 py-2">{{ $acta['actuacionFiscal']['inicio'] }}</td>
+                            <td class="px-4 py-2">{{ $acta['actuacionFiscal']['fin'] }}</td>
+                            <td class="px-4 py-2">{{ $acta['personalEntrega']['unidad']['nombre'] }}</td>
                         </tr>
                     @endforeach
                 </x-table>
