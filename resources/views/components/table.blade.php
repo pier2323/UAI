@@ -11,7 +11,7 @@
     }
 </style>
 
-<table id="datatable_users" class="hover dataTable no-footer" style="width: 100%" aria-describedby="datatable_users_info">
+<table id="datatable_users" class=" px-4 py-2 hover dataTable no-footer" style="width: 100%" aria-describedby="datatable_users_info">
     {{ $head }}
     <tbody id="tableBody_users">{{ $slot }}</tbody>
 </table>
