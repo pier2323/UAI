@@ -11,7 +11,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+    include_once ("includes/personal-uai.php");
 });
