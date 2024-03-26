@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         // utilizando la factory para crear x numero de filas
         $filasActuacion = 20;
-        $filasActa = 2;
+        $filasActa = 10;
         ActuacionFiscal::factory($filasActuacion)->create();
         ActaEntrega::factory($filasActa)->create();
     }
