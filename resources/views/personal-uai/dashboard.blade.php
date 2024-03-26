@@ -9,129 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome />
-
-                @php
-                    $data = [
-                        [
-                            'codigo' => 'ACT-001',
-                            'descripcion_actuacion' => 'Mantenimiento preventivo de servidores',
-                            'fecha_inicio' => '2024-03-25',
-                            'fecha_fin' => '2024-03-27',
-                            'area_uai' => 'Infraestructura TI',
-                        ],
-                        [
-                            'codigo' => 'ACT-002',
-                            'descripcion_actuacion' => 'Migración de datos a la nueva infraestructura',
-                            'fecha_inicio' => '2024-04-01',
-                            'fecha_fin' => '2024-04-10',
-                            'area_uai' => 'Desarrollo de Software',
-                        ],
-                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],                        [
-                            'codigo' => 'ACT-003',
-                            'descripcion_actuacion' => 'Capacitación al personal en nuevas tecnologías',
-                            'fecha_inicio' => '2024-05-05',
-                            'fecha_fin' => '2024-05-07',
-                            'area_uai' => 'Recursos Humanos',
-                        ],
-                    ];
-
-                @endphp
                 <x-table>
                     <x-slot name="head">
                         <thead>
@@ -139,34 +16,40 @@
                                 <th class="code centered sorting sorting_desc" tabindex="0"
                                     aria-controls="datatable_users" rowspan="1" colspan="1" {{-- style="width: 50px" --}}
                                     aria-label="#: activate to sort column ascending" aria-sort="descending">
-                                    código
+                                    P00
                                 </th>
                                 <th class="centered sorting" tabindex="0" aria-controls="datatable_users"
                                     rowspan="1" colspan="1" style="width: 189px"
                                     aria-label="Name: activate to sort column ascending">
-                                    Descrición de la Actuacion
+                                    nombre
                                 </th>
                                 <th class="centered sorting" tabindex="0" aria-controls="datatable_users"
                                     rowspan="1" colspan="1" style="width: 166px"
                                     aria-label="Company: activate to sort column ascending">
-                                    Fecha inicio
+                                    correo institucional
                                 </th>
                                 <th class="centered sorting_disabled" rowspan="1" colspan="1" style="width: 60px"
                                     aria-label="Status">
-                                    Fecha fin
+                                    cedula
                                 </th>
                                 <th class="centered sorting_disabled" rowspan="1" colspan="1" style="width: 60px"
-                                    aria-label="Status"> Area UAI
+                                    aria-label="Status"> telefono
                             </tr>
                         </thead>
                     </x-slot>
-                    @foreach ($data as $actuacion)
+                    @foreach ($data as $personalUai)
                         <tr>
-                            <td>{{ $actuacion['codigo'] }}</td>
-                            <td>{{ $actuacion['descripcion_actuacion'] }}</td>
-                            <td>{{ $actuacion['fecha_inicio'] }}</td>
-                            <td>{{ $actuacion['fecha_fin'] }}</td>
-                            <td>{{ $actuacion['area_uai'] }}</td>
+                            <td>{{ $personalUai['p00'] }}</td>
+                            <td>
+                                {{ 
+                                    $personalUai['primer_nombre']." ".
+                                    $personalUai['primer_apellido']." ".
+                                    $personalUai['segundo_apellido']
+                                }}
+                            </td>
+                            <td>{{ $personalUai['email_cantv'] }}</td>
+                            <td>{{ $personalUai['cedula'] }}</td>
+                            <td>{{ $personalUai['telefono'] }}</td>
                         </tr>
                     @endforeach
                 </x-table>
