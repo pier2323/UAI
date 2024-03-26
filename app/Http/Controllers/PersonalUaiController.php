@@ -39,6 +39,12 @@ class PersonalUaiController extends Controller
         //
     }
 
+    public function dashboard() 
+    {
+        $data = PersonalUai::with('cargo')->get();
+        return view('personal-uai.dashboard', ['data' => $data]);
+    }
+
     /**
      * Update the specified resource in storage.
      */

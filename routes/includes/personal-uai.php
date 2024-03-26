@@ -1,13 +1,9 @@
 <?
 
+use App\Http\Controllers\PersonalUaiController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(
-  [
-      'prefix' => 'personalUai',
-      'controller' => 'App\Http\Controllers\personalUaiController',
-  ],
-  Function () {
-      Route::get('/', 'dashboard');
+Route::controller(PersonalUaiController::class)->group(Function () {
+      Route::get('/personal-uai/dashboard', 'dashboard')->name('personal-uai.dashboard');
   }
 );
