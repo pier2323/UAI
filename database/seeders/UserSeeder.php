@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\PersonalUai;
 
 class UserSeeder extends Seeder
 {
@@ -13,26 +14,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $password = '12345678';
 
-        $usersToPush = [
-            [
-                'name' => 'geferson',
-                'email' => 'geferson.job@gmail.com',
-                'password' => '12345678',
-            ],
-            [
-                'name' => 'pier',
-                'email' => 'pier44444@gmail.com',
-                'password' => '12345678',
-            ],
-        ];
-
-        foreach($usersToPush as $userToPush)
+        foreach(PersonalUai::all() as $personal)
         {
             $user = new User();
-            $user->name = $userToPush['name'];
-            $user->email = $userToPush['email'];
-            $user->password = $userToPush['password'];
+            $user->name = $personal->name;
+            $user->email = $personal->email_cantv;
+            $user->password = $password;
             $user->save();
         }
     }
