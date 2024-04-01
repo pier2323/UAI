@@ -74,7 +74,7 @@
         }
 
         dataTable = $("#datatable_users").DataTable(dataTableOptions);
-
+        
         dataTableIsInitialized = true;
     };
 
@@ -91,5 +91,3 @@
 <!-- DataTable -->
 <script src="/js/jquery-dataTables/jquery.dataTables.min.js"></script>
 <script src="/js/jquery-dataTables/dataTables.bootstrap5.min.js"></script>
-<!-- Custom JS -->
-<script src="/js/table/main.js"></script>
