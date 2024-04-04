@@ -10,6 +10,23 @@
                 <x-welcome />
                 <div class="px-4 py-2">
 
+                    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+                        <div class="container my-4 bg-white">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                                        Nueva Acta
+                                    </button>
+                                    <div id="datatable_users_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                        <div class="col-sm-12">
+                                            @include('modal')
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                     <x-table>
                         <x-slot name="head">
                             <thead>
