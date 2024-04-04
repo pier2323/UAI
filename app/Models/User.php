@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
     public function personalUai()
     {
-        return $this->hasOne(PersonalUai::class);
+        return $this->belongsTo(PersonalUai::class);
     }
 }

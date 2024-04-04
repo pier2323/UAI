@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
             // ]);
         // $this->call(ActionSeeder::class);
         $this->call(CargoSeeder::class);
-        $this->call(UserSeeder::class);
         $this->call(UnidadSeeder::class);
         $this->call(UaiSeeder::class);
         $this->call(PersonalUaiSeeder::class);
         $this->call(PersonalEntregaSeeder::class);
         $this->call(PersonalRecibeSeeder::class);
         $this->call(TipoAuditoriaSeeder::class);
+        $this->call(UserSeeder::class);
 
         // utilizando la factory para crear x numero de filas
         $filasActuacion = 20;

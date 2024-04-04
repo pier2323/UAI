@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+
+            // relacion uno a uno con la tabla Personal UAI
+            $table->unsignedBigInteger('personal_uai_id')->nullable();
+            $table->foreign('personal_uai_id')->references('id')->on('personal_uai');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
