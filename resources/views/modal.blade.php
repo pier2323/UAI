@@ -4,13 +4,22 @@
     background-image: url("/images/template/cantv.png");
     background-size: cover;
     color: #fff;
+
 }
 .modal-footer-2 {
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
+}
+#modalBody-centro{
+    overflow: auto;
+    height: 70vh;
+    scroll-behavior: auto
+}
+#exampleModal{
+    overflow: hidden;
+}
 </style>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -22,7 +31,7 @@
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div id="modalBody-centro" class="modal-body">
                 <p class="font-sans font-semibold  display:flex  justify-content:center">
                     Datos del Saliente
                    </p>
@@ -85,7 +94,7 @@
             </div>
             <div class="modal-footer-2">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    cerar
+                    cerrar
                 </button>
                 <button type="button" class="btn btn-primary">guardar</button>
             </div>
