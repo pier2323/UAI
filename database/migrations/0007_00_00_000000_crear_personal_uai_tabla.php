@@ -32,9 +32,6 @@ return new class extends Migration
             $table->unsignedBigInteger('uai_id'); // adscripcion a la coordinacion | gerencia | despacho, de la uai
             $table->foreign('uai_id')->references('id')->on('uai');
 
-            $table->unsignedBigInteger('user_id')->nullable(); // relacion uno a uno con la tabla users
-            $table->foreign('user_id')->references('id')->on('users');
-
             // ------ fecha en que se agrega una fila y se modifica ------
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

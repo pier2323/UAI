@@ -139,7 +139,7 @@ class PersonalUaiSeeder extends Seeder
                 'uai_id' => 7,
                 'telefono' => '4241357637',
                 'gmail' => 'faruiz01.uai@gmail.com',
-                'email_cantv' => null,
+                'email_cantv' => 'fruiz01@cantv.com.ve',
                 // 'user_id' => 8,
               ],
               [
@@ -448,7 +448,7 @@ class PersonalUaiSeeder extends Seeder
                 'uai_id' => 7,
                 'telefono' => null,
                 'gmail' => null,
-                'email_cantv' => null,
+                'email_cantv' => 'ycaste01@cantv.com.ve',
                 // 'user_id' => 30,
               ],
               [
@@ -489,8 +489,8 @@ class PersonalUaiSeeder extends Seeder
                 'cargo_id' => 3,
                 'uai_id' => 7,
                 'telefono' => '4263188810',
-                'gmail' => 'jinfan03.uai@gmail.com',
-                'email_cantv' => 'jinfan03@cantv.com.ve',
+                'gmail' => 'rgome01.uai@gmail.com',
+                'email_cantv' => 'rgome01@cantv.com.ve',
                 // 'user_id' => 33,
               ],
               [
