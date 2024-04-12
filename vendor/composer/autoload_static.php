@@ -757,12 +757,9 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainController.php',
         'App\\Http\\Controllers\\PersonalUaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/PersonalUaiController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
-<<<<<<< HEAD
-        'App\\Http\\Controllers\\acta' => __DIR__ . '/../..' . '/app/Http/Controllers/acta.php',
-=======
         'App\\Http\\Controllers\\designationController' => __DIR__ . '/../..' . '/app/Http/Controllers/designationController.php',
->>>>>>> 6fd8d83b6f9c0e8a8798faab364858d2dafab06d
         'App\\Livewire\\ComponenteNombre' => __DIR__ . '/../..' . '/app/Livewire/ComponenteNombre.php',
+        'App\\Livewire\\Counter' => __DIR__ . '/../..' . '/app/Livewire/Counter.php',
         'App\\Models\\Acreditacion' => __DIR__ . '/../..' . '/app/Models/Acreditacion.php',
         'App\\Models\\ActaEntrega' => __DIR__ . '/../..' . '/app/Models/ActaEntrega.php',
         'App\\Models\\ActuacionFiscal' => __DIR__ . '/../..' . '/app/Models/ActuacionFiscal.php',

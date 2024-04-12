@@ -3,15 +3,66 @@
 namespace App\Services;
 
 // use PhpOffice\PhpWord\PhpWord;
+
+use App\Models\ActuacionFiscal;
+use App\Models\PersonalUai;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class DesignationService
 {
-    public function generate()
+    public function generate($Coordinador = 1, $Auditor = 2, $Actuacion = 3)
     {
         $template = new TemplateProcessor('designation.docx');
-        $name = 'geferson';
-        $template->setValue('name', $name);
+        $coordinador = PersonalUai::find($Coordinador);
+        $auditor = PersonalUai::find($Auditor);
+        $actuacion = ActuacionFiscal::find($Actuacion);
+        $dia = '04';
+        $mes = 'mayo';
+        $año = '2024';
+        $fechaInicio = "$dia de $mes del $año";
+
+        $diasPlanificacion = 5;
+        $fechaPlanificacionInicio = date('d/m/Y');
+        $fechaPlanificacionFin = strtotime("+$diasPlanificacion days", strtotime($fechaPlanificacionInicio));
+
+        $diasEjecucion = 10;
+        $fechaEjecucionInicio = strtotime("+1 days", strtotime($fechaPlanificacionFin));
+        $fechaEjecucionFin = strtotime("+$diasEjecucion days", strtotime($fechaEjecucionInicio));
+
+
+
+
+        $diasPreeliminar = 5;
+        $diasInformeDefinitivo = 5;
+
+        $template->setValue('nombreCoordinador', "$coordinador->primer_nombre $coordinador->primer_apellido");
+        $template->setValue('nombreAuditor', "$auditor->primer_nombre $auditor->primer_apellido");
+        $template->setValue('fechaInicio', $fechaInicio);
+        $template->setValue('tituloActuacion', $actuacion->objetivo);
+
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('fechaPlanificacionInicio', $fechaPlanificacionInicio);
+        $template->setValue('fechaPlanificacionFin', $fechaPlanificacionFin);
+
+        $template->setValue('fechaEjecucionInicio', $fechaEjecucionInicio);
+        $template->setValue('fechaEjecucionFin', $fechaEjecucionFin);
+
+
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+        $template->setValue('diasPlanificacion', $diasPlanificacion);
+
+
+
+
+
+
+
         $tempfile = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
         $template->saveAs($tempfile);
 
