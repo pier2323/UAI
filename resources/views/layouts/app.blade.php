@@ -13,6 +13,7 @@
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
   {{-- links styles --}}
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/bootstrap/app.css"/>
   <link rel="stylesheet" href=" /css/bootstrap/styles.css" />
   <link rel="stylesheet" href="./css/bootstrap/all.min.css" />

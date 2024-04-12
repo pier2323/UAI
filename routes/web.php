@@ -20,6 +20,7 @@ Route::middleware([
 
     Route::controller(PersonalUaiController::class)->group(function () {
         Route::get('/personal-uai/dashboard', 'dashboard')->name('personal-uai.dashboard');
+        Route::get('/personal-uai/show/{personal}', 'showOne')->name('personal-uai.show');
     });
 
     Route::controller(designationController::class)->group(function () {

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('gmail')->nullable();
             $table->string('email_cantv')->nullable();
             $table->string('telefono')->nullable();
-            $table->binary('foto_perfil')->nullable();
+            $table->string('foto_perfil')->nullable();
             $table->integer('p00')->unique();
             $table->integer('cedula')->unique();
             

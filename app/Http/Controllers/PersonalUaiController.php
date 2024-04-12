@@ -26,9 +26,10 @@ class PersonalUaiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showOne($personal)
     {
-        //
+        $personal = PersonalUai::with('cargo', 'uai')->find($personal);
+        return view("personal-uai.show", ["personal"=> $personal]);
     }
 
     /**
