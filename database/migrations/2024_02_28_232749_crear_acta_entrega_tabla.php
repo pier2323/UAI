@@ -30,9 +30,6 @@ return new class extends Migration
             $table->unsignedBigInteger('personal_recibe_id'); // la relacion con la persona que recibe
             $table->foreign('personal_recibe_id')->references('id')->on('personal_recibe');
 
-            $table->unsignedBigInteger('personal_uai_id')->nullable(); // la relacion con la unidad de auditoria interna
-            $table->foreign('personal_uai_id')->references('id')->on('personal_uai');
-            
             // ------ fecha en que se agrega una fila y se modifica ------
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
