@@ -43,6 +43,6 @@ class PersonalUai extends Model
 
     public function actaEntrega()
     {
-        return $this->hasMany(ActaEntrega::class);
+        return $this->belongsToMany(ActaEntrega::class);
     }
 }

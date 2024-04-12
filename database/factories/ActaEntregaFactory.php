@@ -26,7 +26,6 @@ class ActaEntregaFactory extends Factory
             'actuacion_fiscal_id' => rand(1,20),
             'personal_entrega_id' => rand(1, 10),
             'personal_recibe_id' => rand(1,10),
-            'personal_uai_id' => rand(1, 10)
         ];
     }
 }
