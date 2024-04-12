@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class ActaEntregaController extends Controller
 {
+    public function generateDocumentDesignacion()
+    {
+        $template = new \PhpWord\TemplateProcessor('designacionTemplate.docx');
+        $template->setValue('nombre', 'Juan Pérez');
+        return $document;
+    }
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      */
