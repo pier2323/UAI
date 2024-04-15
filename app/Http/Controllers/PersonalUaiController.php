@@ -63,5 +63,6 @@ class PersonalUaiController extends Controller
     {
         $personal = PersonalUai::find($personal);
         $personal->delete();
+        return $this->dashboard();
     }
 }

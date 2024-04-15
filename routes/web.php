@@ -23,7 +23,11 @@ Route::middleware([
         Route::get('/personal-uai/show/{personal}', 'showOne')->name('personal-uai.show'); 
         Route::get('/personal-uai/edit/{personal}', 'edit')->name('personal-uai.edit');
         Route::post('/personal-uai/store/{personal}', 'store')->name('personal-uai.store');
+<<<<<<< HEAD
         Route::put('/personal-uai/edit{personal}', 'update')->name('personal-uai.update');
+=======
+        Route::put('/personal-uai/edit/{personal}', 'update')->name('personal-uai.update');
+>>>>>>> 32669426b5e737acfa89963cd2828c1811b23aef
         Route::delete('/personal-uai/delete/{personal}', 'destroy')->name('personal-uai.delete'); 
     });
 
