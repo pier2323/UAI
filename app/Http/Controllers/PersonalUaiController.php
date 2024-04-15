@@ -35,9 +35,10 @@ class PersonalUaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $personal)
     {
-        //
+        $personal = PersonalUai::with('cargo', 'uai')->find($personal);
+        return view("personal-uai.show", ["personal"=> $personal]);
     }
 
     public function dashboard() 
@@ -49,16 +50,18 @@ class PersonalUaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $personal)
     {
-        //
+        $personal = PersonalUai::find($personal);
+        $personal->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $personal)
     {
-        //
+        $personal = PersonalUai::find($personal);
+        $personal->delete();
     }
 }
