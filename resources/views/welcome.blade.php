@@ -1139,7 +1139,7 @@
 
                 <div>
 
-                    <img width="300px" ,height=300px src="/images/template/sappp.png" float: left>
+                    <img width="200px" ,height=200px src="/images/template/sappp.png" float: left>
 
                 </div>
                 @if (Route::has('login'))
