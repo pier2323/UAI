@@ -1236,7 +1236,7 @@
                 </div>
             </main>
             <footer class=" dark:text-white">
-                <div style="padding: 10px 0;text-align: center;positio:centre; bottom 0;">
+                <div style="padding: 10px 0;text-align: center;positio:centre; backgrond-color:azul;margin-top: 420px;">
                     <p>
                         Gerencia Tecnología de Información
                     </p>

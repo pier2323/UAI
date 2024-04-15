@@ -10,7 +10,7 @@
         <x-welcome />
         <div class="px-4 py-2">
 
-          <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+          <div class="bg-gray-10 bg-opacity-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
             <div class="container my-4 bg-white">
               <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
