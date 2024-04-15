@@ -18,30 +18,31 @@
                         <div class="mr-4 border- w-full text-center sm:w-1/2 sm:text-left">
 
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
-                                <li class="flex items-end">
+                                <li class=" display flex items-center">
                                     <h2 class="text-2xl font-semibold mt-4">
                                         {{ "$personal->primer_nombre $personal->segundo_nombre $personal->primer_apellido $personal->segundo_apellido" }}
                                     </h2>
                                 </li>
-                                <li class="flex items-end">
-                                    <p class="text-gray-600">Cargo: {{ $personal->cargo->nombre}}</p>
+                                <li  class="flex items-center">
+                          
+                                 <p class="text-gray-900">Cargo: {{ $personal->cargo->nombre }} </p>
                                 </li>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">P00: {{ "$personal->p00" }}</p>
+                                    <p class="text-gray-900">P00: {{ "$personal->p00" }}</p>
                                 </li>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">Cedula: {{ "$personal->cedula" }}</p>
+                                    <p class="text-gray-900">Cédula: {{ "$personal->cedula" }}</p>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">Teléfono: +58{{ "$personal->telefono" }}</p>
+                                    <p class="text-gray-900">Teléfono: +58{{ "$personal->telefono" }}</p>
                                 </li>
                                 <li class="flex items-end">
-                                <li class="text-gray-600">Correo electrónico: {{ "$personal->gmail" }}</li>
+                                <li class="text-gray-900">Correo electrónico: {{ "$personal->gmail" }}</li>
                                 </li>
                                 <li class="flex items-end">
-                                <li class="text-gray-600">Correo Institucional: {{ "$personal->email_cantv" }}</li>
+                                <li class="text-gray-900">Correo Institucional: {{ "$personal->email_cantv" }}</li>
                                 </li>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">Area UAI: {{ $personal->uai->nombre }}</p>
+                                    <p class="text-gray-900">Área UAI: {{ $personal->uai->nombre }}</p>
                                 </li>
                             </ul>
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
