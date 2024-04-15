@@ -24,7 +24,7 @@ class CargoSeeder extends Seeder
             'consultor', // 5
             'coordinador', // 6
             'gerente', // 7
-            'gerente general', // 8
+            'auditor interno', // 8
             'conductor', // 9
             'asesor', // 10
             'abogado', // 11
