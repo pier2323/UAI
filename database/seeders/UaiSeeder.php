@@ -16,7 +16,7 @@ class UaiSeeder extends Seeder
         $departamentos = 
         [
             [
-                'nombre' => 'Gerencia General', 
+                'nombre' => 'Despacho', 
                 'nivel' => 1, // 0
             ],
             [

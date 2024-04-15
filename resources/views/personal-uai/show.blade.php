@@ -10,19 +10,21 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2">
                     <section
-                        class="container mx-auto flex flex-col items-center px-8 py-36 sm:flex-row-reverse sm:px-12">
-                        <div class="mb-8 w-full sm:mb-0 sm:w-1/2 sm:pl-4 md:pl-16">
-                            <img alt="foto de perfil" class="rounded-lg sm:rounded-br-[80px] sm:rounded-tl-[120px]"
+                        class="container mx-auto flex flex-col justify-center align-middle items-center px-8 py-3 sm:flex-row-reverse sm:px-12">
+                        <div style="overflow:hidden ; border: 1px solid #777; border-radius: 20px" class=" border-slate-500">
+                            <img alt="foto de perfil" style="width: 15vw" 
                                 src="{{ "$personal->foto_perfil" }}" />
                         </div>
-                        <div class="mr-4 w-full text-center sm:w-1/2 sm:text-left">
+                        <div class="mr-4 border- w-full text-center sm:w-1/2 sm:text-left">
 
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
                                 <li class="flex items-end">
                                     <h2 class="text-2xl font-semibold mt-4">
                                         {{ "$personal->primer_nombre $personal->segundo_nombre $personal->primer_apellido $personal->segundo_apellido" }}
                                     </h2>
-                                    <p>{{ $personal->cargo->nombre }}</p>
+                                </li>
+                                <li class="flex items-end">
+                                    <p class="text-gray-600">Cargo: {{ $personal->cargo->nombre}}</p>
                                 </li>
                                 <li class="flex items-end">
                                     <p class="text-gray-600">P00: {{ "$personal->p00" }}</p>
