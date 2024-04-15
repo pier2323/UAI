@@ -21,10 +21,10 @@ Route::middleware([
     Route::controller(PersonalUaiController::class)->group(function () {
         Route::get('/personal-uai/dashboard', 'dashboard')->name('personal-uai.dashboard');
         Route::get('/personal-uai/show/{personal}', 'showOne')->name('personal-uai.show'); 
-        Route::get('/personal-uai/show/{personal}', 'edit')->name('personal-uai.edit');
-        Route::post('/personal-uai/show/{personal}', 'store')->name('personal-uai.store');
-        Route::put('/personal-uai/show/{personal}', 'update')->name('personal-uai.edit');
-        Route::delete('/personal-uai/show/{personal}', 'destroy')->name('personal-uai.delete'); 
+        Route::get('/personal-uai/edit/{personal}', 'edit')->name('personal-uai.edit');
+        Route::post('/personal-uai/store/{personal}', 'store')->name('personal-uai.store');
+        Route::put('/personal-uai/edit/{personal}', 'update')->name('personal-uai.update');
+        Route::delete('/personal-uai/delete/{personal}', 'destroy')->name('personal-uai.delete'); 
     });
 
     Route::controller(designationController::class)->group(function () {
