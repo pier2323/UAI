@@ -23,10 +23,10 @@
 
   const dataTableOptions = {
     //scrollX: "2000px",
-    lengthMenu: [5, 10, 15, 20, 100, 200, 500],
+    lengthMenu: [6, 10, 15, 20, 100, 200, 500],
     columnDefs: [{
         className: "centered",
-        targets: [0, 1]
+        
       },
       // { orderable: false, targets: [1, ] },
       {
