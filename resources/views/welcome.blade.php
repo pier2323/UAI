@@ -1173,7 +1173,7 @@
 
             <main>
 
-                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-left: 50px;margin-right: 50px;">
+                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-left: 80xpx;margin-right: 50px;">
                     <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
 
                     <div class="carta">
@@ -1215,7 +1215,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-left: 50px;margin-right: 50px;">
+                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-right: 50px;margin-left: 55px;">
                     <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
 
                     <div class="carta">
