@@ -30,8 +30,8 @@
       },
       // { orderable: false, targets: [1, ] },
       {
-        searchable: false,
-        targets: [1]
+        searchable: true,
+       
       },
       // { width: "100%", targets: [0, 1, 2, 3] }
     ],

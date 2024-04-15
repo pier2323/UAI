@@ -1120,6 +1120,11 @@
             transform: rotateY(180deg);
         }
 
+        .footer {
+            padding: 1em 0;
+            text-align: center;
+            position: absolute;
+        }
 
 
         }
@@ -1229,16 +1234,24 @@
                         </div>
                     </div>
                 </div>
-
-
             </main>
+            <footer class=" dark:text-white">
+                <div style="padding: 10px 0;text-align: center;positio:centre; bottom 0;">
+                    <p>
+                        Gerencia Tecnología de Información
+                    </p>
+                    <p>
+                        Gerencia General de Sistema ©CANTV 2024
+
+                    </p>
+                </div>
+            </footer>
+
+
+
+
         </div>
     </div>
-
-
-
-
-
 </body>
 
 </html>

@@ -70,7 +70,7 @@
       </div>
     </div>
   </div>
-  {{-- <div x-data="main()">
+   <div x-data="main()">
     <button @click="incrementar">Incrementar</button>
     <span x-text="contador"></span>
 </div>
@@ -84,5 +84,5 @@
             }
         }
     }
-</script> --}}
+</script> 
 </x-app-layout>
