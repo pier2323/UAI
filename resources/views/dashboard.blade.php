@@ -57,19 +57,32 @@
             </x-slot>
             @foreach ($data as $acta)
               <tr class="hover:bg-gray-100">
-                <td class="px-4 py-2">{{ $acta['id'] }}</td>
-                <td class="px-4 py-2">{{ $acta['actuacionFiscal']['objetivo'] }}</td>
-                <td class="px-4 py-2">{{ $acta['actuacionFiscal']['inicio'] }}</td>
-                <td class="px-4 py-2">{{ $acta['actuacionFiscal']['fin'] }}</td>
-                <td class="px-4 py-2">{{ $acta['personalEntrega']['unidad']['nombre'] }}</td>
+                <td class="px-4 py-2">{{ $acta->id }}</td>
+                <td class="px-4 py-2">{{ $acta->actuacionFiscal->objetivo }}</td>
+                <td class="px-4 py-2">{{ $acta->actuacionFiscal->inicio }}</td>
+                <td class="px-4 py-2">{{ $acta->actuacionFiscal->fin }}</td>
+                <td class="px-4 py-2">{{ $acta->personalEntrega->unidad->nombre }}</td>
               </tr>
             @endforeach
           </x-table>
           <livewire:counter />
-
         </div>
       </div>
     </div>
   </div>
-  <x-input />
+  {{-- <div x-data="main()">
+    <button @click="incrementar">Incrementar</button>
+    <span x-text="contador"></span>
+</div>
+
+<script>
+    function main() {
+        return {
+            contador: 15,
+            incrementar: function() {
+                return this.contador++
+            }
+        }
+    }
+</script> --}}
 </x-app-layout>
