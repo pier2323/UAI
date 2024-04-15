@@ -53,10 +53,16 @@
                                     <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
                                         style="width: 60px" aria-label="Status">
                                         Cédula
+                                    
                                     </th>
-                                        <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
-                                            style="width: 60px" aria-label="Status"> Télefono
-                                        </th>
+                                    <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 60px" aria-label="Status"> Télefono
+                                    </th>
+                                </th>
+                                <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
+                                    style="width: 60px" aria-label="Detalles "> Detalles 
+                                </th>
+
                                 </tr>
                             </thead>
                         </x-slot>
@@ -73,7 +79,7 @@
                                 <td class="px-4 py-2">{{ $personalUai['email_cantv'] }}</td>
                                 <td class="px-4 py-2">{{ $personalUai['cedula'] }}</td>
                                 <td class="px-4 py-2">{{ $personalUai['telefono'] }}</td>
-                                <td class="px-4 py-2"><a href="{{route('personal-uai.show', ['personal' => $personalUai->id])}}">ver</a></td>
+                                <td class="px-4 py-2"><a href="{{route('personal-uai.show', ['personal' => $personalUai->id])}}"><img  src="/images/template/ojo.png" width="30" height="30"></a></td>
                             </tr>
                         @endforeach
                     </x-table>
