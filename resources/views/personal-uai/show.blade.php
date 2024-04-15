@@ -44,18 +44,20 @@
                 </li>
               </ul>
               <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
-                <a href="{{route('personal-uai.edit', $personal->id)}}">
+                <a href="{{ route('personal-uai.edit', $personal->id) }}">
                   <button
                     class="rounded-lg border-0 bg-slate-900 px-6 py-3 text-base text-white shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
                     Editar
                   </button>
                 </a>
-                <a href="{{route('personal-uai.delete', $personal->id)}}">
-                  <button
+                <form action="{{ route('personal-uai.delete', $personal->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit"
                     class="rounded-lg border-0 bg-white px-6 py-3 text-base text-slate-900 shadow-lg shadow-slate-100 transition hover:bg-blue-300 hover:text-slate-900 hover:shadow-blue-600 dark:bg-slate-700 dark:text-slate-300 dark:shadow-sm dark:shadow-slate-800 dark:hover:bg-slate-600 sm:py-2">
                     Eliminar Datos
                   </button>
-                </a>
+                </form>
               </div>
             </div>
           </section>

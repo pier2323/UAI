@@ -38,7 +38,7 @@ class PersonalUaiController extends Controller
     public function edit(string $personal)
     {
         $personal = PersonalUai::with('cargo', 'uai')->find($personal);
-        return view("personal-uai.show", ["personal"=> $personal]);
+        return view("personal-uai.edit", ["personal"=> $personal]);
     }
 
     public function dashboard() 
@@ -63,5 +63,6 @@ class PersonalUaiController extends Controller
     {
         $personal = PersonalUai::find($personal);
         $personal->delete();
+        return $this->dashboard();
     }
 }
