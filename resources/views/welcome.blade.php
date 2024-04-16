@@ -1144,7 +1144,7 @@
 
                 <div>
 
-                    <img width="200px" ,height=200px src="/images/template/sappp.png" float: left>
+                    <img width="150px" ,height=200px src="/images/template/sappp.png" float: left>
 
                 </div>
                 @if (Route::has('login'))
@@ -1162,7 +1162,8 @@
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    style="margin-right: -100px;">
                                     Register
                                 </a>
                             @endif
@@ -1172,78 +1173,102 @@
             </header>
 
             <main>
+                <style>
+                    .contenedor {
+                        display: flex;
+                    }
+                </style>
+                <div class="contenedor">
+                    <div class="carta-box"
+                        style="  margin-top: 60px;margin-bottom: 0px;margin-left: 80px;margin-right: 50px;">
+                        <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
 
-                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-left: 80xpx;margin-right: 50px;">
-                    <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
+                        <div class="carta">
 
-                    <div class="carta">
+                            <div class="cara detras">
+                                <div class="pt-3 sm:pt-5">
 
-                        <div class="cara detras">
-                            <div class="pt-3 sm:pt-5">
-                                <p class="mt-4 text-sm/relaxed  dark:text-white">
-                                    Consolidarse como una dependencia altamente calificada, de asesoría y apoyo
-                                    a
-                                    la gestión de la Contraloría General de la República; y establecerse como
-                                    modelo
-                                    para las Unidades de Auditoría Interna de la Administración Pública.
+                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                        Consolidarse como una dependencia altamente calificada, de
+                                        asesoría y apoyo
+                                        a
+                                        la gestión de la Contraloría General de la República; y establecerse como
+                                        modelo
+                                        para las Unidades de Auditoría Interna de la Administración Pública.
+                                    </FONT>
+
+                                </div>
                                 </p>
                             </div>
-                            </p>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-left: 50px;margin-right: 50px;">
+                    <div class="carta-box"
+                        style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
 
-                    <img src="/images/template/vision-removebg-preview.png" width="300px" height="250px">
+                        <img src="/images/template/vision-removebg-preview.png" width="300px" height="250px">
 
-                    <div class="carta">
+                        <div class="carta">
 
-                        <div class="cara detras">
-                            <div class="pt-3 sm:pt-5">
+                            <div class="cara detras">
+                                <div class="pt-3 sm:pt-5">
 
-                                <p class="mt-4 text-sm/relaxed  dark:text-white">
-                                    Consolidarse como una dependencia altamente calificada, de asesoría y apoyo
-                                    a
-                                    la gestión de la Contraloría General de la República; y establecerse como
-                                    modelo
-                                    para las Unidades de Auditoría Interna de la Administración Pública.
+                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                        Consolidarse como una dependencia altamente calificada, de
+                                        asesoría y apoyo
+                                        a
+                                        la gestión de la Contraloría General de la República; y establecerse como
+                                        modelo
+                                        para las Unidades de Auditoría Interna de la Administración Pública.
+                                    </FONT>
+
+                                </div>
                                 </p>
                             </div>
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="carta-box" style="margin-top: 0px;margin-bottom: 0px;margin-right: 50px;margin-left: 55px;">
-                    <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
 
-                    <div class="carta">
 
-                        <div class="cara detras">
-                            <div class="pt-3 sm:pt-5">
-                                <p class="mt-4 text-sm/relaxed  dark:text-white">
-                                    Consolidarse como una dependencia altamente calificada, de asesoría y apoyo
-                                    a
-                                    la gestión de la Contraloría General de la República; y establecerse como
-                                    modelo
-                                    para las Unidades de Auditoría Interna de la Administración Pública.
-                                </p>
+                    <div class="contenedor">
+                        <div class="carta-box"
+                            style=" margin-top: 60px;margin-bottom: 0px;margin-left: 80px;margin-right: 50px;">
+                            <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
+
+                            <div class="carta">
+
+                                <div class="cara detras">
+                                    <div class="pt-3 sm:pt-5">
+
+                                        <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                            Consolidarse como una dependencia altamente calificada, de
+                                            asesoría y apoyo
+                                            a
+                                            la gestión de la Contraloría General de la República; y establecerse como
+                                            modelo
+                                            para las Unidades de Auditoría Interna de la Administración Pública.
+                                        </FONT>
+
+                                    </div>
+                                    </p>
+                                </div>
                             </div>
-                            </p>
                         </div>
                     </div>
-                </div>
+
             </main>
-            <footer class=" dark:text-white">
-                <div style="padding: 10px 0;text-align: center;positio:centre; backgrond-color:azul;margin-top: 420px;">
-                    <p>
-                        Gerencia Tecnología de Información
-                    </p>
-                    <p>
-                        Gerencia General de Sistema ©CANTV 2024
+            <footer class="">
+                <div
+                    style="padding: 10px 0;text-align: center;positio:centre; backgrond-color:azul;margin-top: 250px;;">
+                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                        <p>
+                            Gerencia Tecnología de Información
+                        </p>
+                        <p>
+                            Gerencia General de Sistema ©CANTV 2024
 
-                    </p>
+                        </p>
+                    </FONT>
                 </div>
             </footer>
 

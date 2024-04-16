@@ -10,14 +10,14 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Navigation Acta -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                    
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                      Acta
                     </x-nav-link>
                 </div>
-                <!-- Navigation Links -->
+                <!-- Navigation Personal -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                    
                     <x-nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai.dashboard')">
