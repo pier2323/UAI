@@ -11,15 +11,16 @@
   <link rel="stylesheet" href="/css/bootstrap/app.css" />
   <link rel="stylesheet" href=" /css/bootstrap/styles.css" />
   <link rel="stylesheet" href="./css/bootstrap/all.min.css" />
-
+  
   {{-- * links bootstrap --}}
   <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="/css/bootstrap/dataTables.bootstrap5.min.css" />
-
+  
   {{-- * Scripts --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-  {{-- * Styles --}}
+  
+  {{-- * Styles library --}}
+  <link rel="stylesheet" href="/css/intlTelInput.css">
   @livewireStyles
   {{-- * Bootstrap --}}
   <script defer src="/js/bootstrap/bootstrap.bundle.min.js"></script>
