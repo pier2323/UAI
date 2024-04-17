@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sap_UAI</title>
+    <link rel="shortcut icon" href="/images/template/logo_azul.ico"  />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -1181,7 +1182,7 @@
                 <div class="contenedor">
                     <div class="carta-box"
                         style="  margin-top: 60px;margin-bottom: 0px;margin-left: 80px;margin-right: 50px;">
-                        <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
+                        <img src="/images/template/Mision.png" width="300px" height="250px">
 
                         <div class="carta">
 
@@ -1207,7 +1208,7 @@
                     <div class="carta-box"
                         style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
 
-                        <img src="/images/template/vision-removebg-preview.png" width="300px" height="250px">
+                        <img src="/images/template/Vision.png" width="300px" height="250px">
 
                         <div class="carta">
 
@@ -1230,31 +1231,31 @@
                     </div>
 
 
-                    <div class="contenedor">
-                        <div class="carta-box"
-                            style=" margin-top: 60px;margin-bottom: 0px;margin-left: 80px;margin-right: 50px;">
-                            <img src="/images/template/mision-removebg-preview(1).png" width="300px" height="250px">
+                    <div class="carta-box"
+                    style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
 
-                            <div class="carta">
+                    <img src="/images/template/objetivo.png" width="300px" height="250px">
 
-                                <div class="cara detras">
-                                    <div class="pt-3 sm:pt-5">
+                    <div class="carta">
 
-                                        <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                            Consolidarse como una dependencia altamente calificada, de
-                                            asesoría y apoyo
-                                            a
-                                            la gestión de la Contraloría General de la República; y establecerse como
-                                            modelo
-                                            para las Unidades de Auditoría Interna de la Administración Pública.
-                                        </FONT>
+                        <div class="cara detras">
+                            <div class="pt-3 sm:pt-5">
 
-                                    </div>
-                                    </p>
-                                </div>
+                                <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                    Consolidarse como una dependencia altamente calificada, de
+                                    asesoría y apoyo
+                                    a
+                                    la gestión de la Contraloría General de la República; y establecerse como
+                                    modelo
+                                    para las Unidades de Auditoría Interna de la Administración Pública.
+                                </FONT>
+
                             </div>
+                            </p>
                         </div>
                     </div>
+                </div>
+                </div>
 
             </main>
             <footer class="">
