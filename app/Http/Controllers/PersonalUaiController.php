@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cargo;
 use App\Models\PersonalUai;
+use App\Models\Uai;
 use Illuminate\Http\Request;
 
 class PersonalUaiController extends Controller
@@ -43,8 +45,10 @@ class PersonalUaiController extends Controller
 
     public function dashboard() 
     {
-        $data = PersonalUai::with('cargo')->get();
-        return view('personal-uai.dashboard', ['data' => $data]);
+        $personal = PersonalUai::with('cargo')->get();
+        $cargos = Cargo::all();
+        $uai = Uai::all();
+        return view('personal-uai.dashboard', ['data' => $personal, 'cargos' => $cargos, 'uais' => $uai]);
     }
 
     /**
