@@ -31,7 +31,7 @@
 
 @php
   $label = 'col-form-label';
-  $input = 'form-control';
+  $input = 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm';
 @endphp
 
 <div class="modal fade" id="Modal-UAI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,7 +47,7 @@
         <form x-data="form()">
           <div class="mb-3">
             <label for="recipient-p00" class="{{ $label }}">P00:</label>
-            <input type="number" class="{{ $input }}" id="recipient-p00" />
+            <input type="number" class="{{ $input }}" id="recipient-p00" required/>
           </div>
           <div class="mb-3">
             <label for="recipient-firstName" class="{{ $label }}">Primer Nombre:</label>
@@ -57,6 +57,7 @@
               class="{{ $input }}"
               x-on:input="firstName = transformedInput(firstName)" 
               x-model="firstName" 
+              required
             />
           </div>
           <div class="mb-3">
@@ -71,9 +72,10 @@
               id="recipient-secondName" 
               type="text" 
               class="{{ $input }}"
-              x-bind:disabled="markedSecondName" {{-- * conditional  --}}
               x-on:input="secondName = transformedInput(secondName)" {{-- * event  --}}
               x-model="secondName" 
+              x-bind:disabled="markedSecondName" {{-- * conditional  --}}
+              x-bind:required="markedSecondName" {{-- * conditional  --}}
             />
           </div>
           <div class="mb-3">
@@ -84,6 +86,7 @@
               class="{{ $input }}"
               x-on:input="firstSurname = transformedInput(firstSurname)" 
               x-model="firstSurname" 
+              required
             />
           </div>
           <div class="mb-3">
@@ -100,15 +103,19 @@
               class="{{ $input }}"
               x-on:input="secondSurname = transformedInput(secondSurname)" 
               x-model="secondSurname"
-              x-bind:disabled="markedSecondSurname" 
+              x-bind:disabled="markedSecondSurname"
+              x-bind:required="markedSecondSurname"
             />
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="{{ $label }}">Cédula:</label>
+            <label for="recipient-cedula" class="{{ $label }}">Cédula:</label>
             <input 
               id="recipient-cedula"
-              type="text" 
-              class="{{ $input }}" 
+              type="text"
+              class="{{ $input }}"
+              x-model="value"
+              x-on:input="value = updateValue(value)"
+              required
             />
           </div>
           <div class="mb-3">
@@ -117,19 +124,41 @@
              type="tel" 
              class="{{ $input }}" 
              id="recipient-phoneNumber" 
+             required
             />
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="{{ $label }}">Correo Institucional:</label>
-            <input type="text" class="{{ $input }}" id="recipient-email_cantv">
+            <label for="recipient-gmail" class="{{ $label }}">Correo UAI gmail:</label>
+            <input 
+              type="email" 
+              class="{{ $input }}" 
+              id="recipient-gmail"
+              required
+            >
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="{{ $label }}">Gerencia:</label>
-            <input type="text" class="{{ $input }}" id="recipient-cedula" />
+            <label for="recipient-email_cantv" class="{{ $label }}">Correo Institucional:</label>
+            <input 
+              type="email" 
+              class="{{ $input }}" 
+              id="recipient-email_cantv"
+            >
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="{{ $label }}">Cargo:</label>
-            <input type="text" class="{{ $input }}" id="recipient-cedula" />
+            <label for="recipient-gerencia" class="{{ $label }}">Gerencia:</label>
+            <select class="{{$input}}" name="gerencia" id="recipient-gerencia" required>
+              @foreach ($uais as $uai)
+                <option value="{{$uai->id}}">{{$uai->nombre}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-cargo" class="{{ $label }}">Cargo:</label>
+            <select class="{{$input}}" name="cargo" id="recipient-cargo" required>
+              @foreach ($cargos as $cargo)
+                <option value="{{$cargo->id}}">{{$cargo->nombre}}</option>
+                @endforeach
+              </select>
           </div>
         </form>
       </div>
@@ -167,23 +196,20 @@ function form() {
     secondSurname: null,
     markedSecondSurname: false,
     labelPhoneNumber: null,
+    value: 'V-',
 
     // functions
     transformedInput: input => input.replace(/\s/g, '').toUpperCase(),
     toggleMark: marked => marked = !marked,
-    phoneNumber: (iti) => {
-      let text;
-      if (input.value) {
-        text = iti.isValidNumber() ? 
-          "Valid number! Full international format: " + iti.getNumber()
-          : "Invalid number - please try again";
-        } else {
-          text = "Please enter a valid number below";
-        }
-        const textNode = document.createTextNode(text);
-        output.innerHTML = "";
-        output.appendChild(textNode);
-      },
-    }
+    updateValue: value => {
+      // Agregar "V-" al principio
+      if (!value.startsWith('V-') === true || value == 'V') return 'V-';
+
+      // Limitar a 8 dígitos
+      if (value.length > 8) return value.slice(0, 10);
+      
+      return value
+    },
+  }
 }
 </script>
