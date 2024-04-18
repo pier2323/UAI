@@ -22,7 +22,11 @@ class PersonalUaiController extends Controller
      */
     public function store(Request $request)
     {
-        PersonalUai::create($request->all());
+        $all = $request->all();
+        $textsExploded = explode('-', $all['cedula']);
+        $all['cedula'] = $textsExploded[1];
+        PersonalUai::create($all);
+        print('todo Ok!');
     }
 
     /**
