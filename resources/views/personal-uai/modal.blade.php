@@ -44,14 +44,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="modalBody-centro" class="modal-body">
-        <form x-data="form()">
+        <form method="POST" action="{{route('personal-uai.store')}}" x-data="form()">
+          @csrf
+          @method('POST')
           <div class="mb-3">
             <label for="recipient-p00" class="{{ $label }}">P00:</label>
-            <input type="number" class="{{ $input }}" id="recipient-p00" required/>
+            <input name="p00" type="number" class="{{ $input }}" id="recipient-p00" required/>
           </div>
           <div class="mb-3">
             <label for="recipient-firstName" class="{{ $label }}">Primer Nombre:</label>
             <input 
+              name="primer_nombre"
               id="recipient-firstName" 
               type="text" 
               class="{{ $input }}"
@@ -69,6 +72,7 @@
             />
             <label for="recipient-secondName" class="{{ $label }}">Segundo Nombre:</label>
             <input 
+              name="segundo_nombre"
               id="recipient-secondName" 
               type="text" 
               class="{{ $input }}"
@@ -81,6 +85,7 @@
           <div class="mb-3">
             <label for="recipient-firstSurname" class="{{ $label }}">Primer Apellido:</label>
             <input 
+              name="primer_apellido"
               id="recipient-firstSurname" 
               type="text" 
               class="{{ $input }}"
@@ -98,6 +103,7 @@
             />
             <label for="recipient-secondSurname" class="{{ $label }}">Segundo Apellido:</label>
             <input 
+              name="segundo_apellido"
               id="recipient-secondSurname"
               type="text"
               class="{{ $input }}"
@@ -110,6 +116,7 @@
           <div class="mb-3">
             <label for="recipient-cedula" class="{{ $label }}">Cédula:</label>
             <input 
+              name="cedula"
               id="recipient-cedula"
               type="text"
               class="{{ $input }}"
@@ -121,15 +128,17 @@
           <div class="mb-3">
             <label for="recipient-phoneNumber" class="{{ $label }}">Teléfono:</label>
             <input
-             type="tel" 
-             class="{{ $input }}" 
-             id="recipient-phoneNumber" 
-             required
+              name="telefono"
+              type="tel" 
+              class="{{ $input }}" 
+              id="recipient-phoneNumber" 
+              required
             />
           </div>
           <div class="mb-3">
             <label for="recipient-gmail" class="{{ $label }}">Correo UAI gmail:</label>
             <input 
+              name="gmail"
               type="email" 
               class="{{ $input }}" 
               id="recipient-gmail"
@@ -139,6 +148,7 @@
           <div class="mb-3">
             <label for="recipient-email_cantv" class="{{ $label }}">Correo Institucional:</label>
             <input 
+              name="email_cantv"
               type="email" 
               class="{{ $input }}" 
               id="recipient-email_cantv"
@@ -146,7 +156,7 @@
           </div>
           <div class="mb-3">
             <label for="recipient-gerencia" class="{{ $label }}">Gerencia:</label>
-            <select class="{{$input}}" name="gerencia" id="recipient-gerencia" required>
+            <select class="{{$input}}" name="uai_id" id="recipient-gerencia" required>
               @foreach ($uais as $uai)
                 <option value="{{$uai->id}}">{{$uai->nombre}}</option>
               @endforeach
@@ -154,23 +164,106 @@
           </div>
           <div class="mb-3">
             <label for="recipient-cargo" class="{{ $label }}">Cargo:</label>
-            <select class="{{$input}}" name="cargo" id="recipient-cargo" required>
+            <select class="{{$input}}" name="cargo_id" id="recipient-cargo" required>
               @foreach ($cargos as $cargo)
-                <option value="{{$cargo->id}}">{{$cargo->nombre}}</option>
-                @endforeach
-              </select>
+              <option value="{{$cargo->id}}">{{$cargo->nombre}}</option>
+              @endforeach
+            </select>
           </div>
+          <div>
+            <label for="foto_perfil">click para subir una imagen</label>
+            <input name="" class="btn btn-primary" multiple type="file" id="recipient-foto_perfil" accept="img/*">
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            cerrar
+          </button>
+          <input type="submit" value="guardar" class="btn btn-primary"/>
         </form>
       </div>
       <div class="modal-footer-2">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          cerrar
-        </button>
-        <button type="button" class="btn btn-primary">guardar</button>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  #zona-carga {
+      width: 300px;
+      height: 200px;
+      border: 1px dashed #ccc;
+      text-align: center;
+      padding: 20px;
+      margin: 20px auto;
+  }
+
+  #zona-carga p {
+      margin: 0;
+  }
+
+  #zona-carga img {
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+  }
+
+  #zona-carga.hover {
+    border-color: #007bff; /* Change border color to blue on hover */
+    background-color: #e8f0fe; /* Add a subtle background color */
+}
+</style>
+
+
+
+
+<div id="zona-carga">
+</div>
+
+<script>
+    const zonaCarga = document.getElementById('zona-carga');
+    const inputImagen = document.getElementById('input-imagen');
+    console.log(inputImagen)
+
+    inputImagen.addEventListener('change', (e) => {
+        const archivo = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            zonaCarga.innerHTML = '';
+            zonaCarga.appendChild(img);
+        };
+
+        reader.readAsDataURL(archivo);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="/js/intlTelInput/intlTelInput.js"></script>
 <script type="module">
@@ -184,6 +277,19 @@ window.intlTelInput($phoneNumber, {
   initialCountry: "ve",
   nationalMode: false,
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 <script>
