@@ -155,8 +155,8 @@
             >
           </div>
           <div class="mb-3">
-            <label for="recipient-gerencia" class="{{ $label }}">Gerencia:</label>
-            <select class="{{$input}}" name="uai_id" id="recipient-gerencia" required>
+            <label for="recipient-departament" class="{{ $label }}">Gerencia:</label>
+            <select class="{{$input}}" name="uai_id" id="recipient-departament" required>
               @foreach ($uais as $uai)
                 <option value="{{$uai->id}}">{{$uai->nombre}}</option>
               @endforeach

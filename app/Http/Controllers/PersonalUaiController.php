@@ -26,7 +26,7 @@ class PersonalUaiController extends Controller
         $textsExploded = explode('-', $all['cedula']);
         $all['cedula'] = $textsExploded[1];
         PersonalUai::create($all);
-        print('todo Ok!');
+        print ('todo Ok!');
     }
 
     /**
@@ -35,7 +35,7 @@ class PersonalUaiController extends Controller
     public function showOne($personal)
     {
         $personal = PersonalUai::with('cargo', 'uai')->find($personal);
-        return view("personal-uai.show", ["personal"=> $personal]);
+        return view("personal-uai.show", ["personal" => $personal]);
     }
 
     /**
@@ -43,11 +43,21 @@ class PersonalUaiController extends Controller
      */
     public function edit(string $personal)
     {
-        $personal = PersonalUai::with('cargo', 'uai')->find($personal);
-        return view("personal-uai.edit", ["personal"=> $personal]);
+        return view
+        (
+            "personal-uai.edit",
+            ["personal" => PersonalUai::with('cargo', 'uai')->find($personal)],
+            [
+                'uai' =>
+                    [
+                        'cargo' => Cargo::all(),
+                        'departaments' => Uai::all()
+                    ]
+            ]
+        );
     }
 
-    public function dashboard() 
+    public function dashboard()
     {
         $personal = PersonalUai::with('cargo')->get();
         $cargos = Cargo::all();
@@ -60,8 +70,22 @@ class PersonalUaiController extends Controller
      */
     public function update(Request $request, string $personal)
     {
-        $personal = PersonalUai::find($personal);
-        $personal->update($request->all());
+        $requestAll = $request->all();
+        $personal = PersonalUai::findOrFail($personal);
+
+
+
+        print_r($requestAll['cargo_id']);
+        $personal->cargo_id = $requestAll['cargo_id'];
+
+        $personal->uai_id = $requestAll['uai_id'];
+        $personal->cedula = $requestAll['cedula'];
+        $personal->telefono = $requestAll['telefono'];
+        $personal->p00 = $requestAll['p00'];
+        $personal->email_cantv = $requestAll['email_cantv'];
+        $personal->gmail = $requestAll['gmail'];
+        $personal->save();
+        return view("personal-uai.show", ["personal" => $personal]);
     }
 
     /**
