@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sap_UAI</title>
-    <link rel="shortcut icon" href="/images/template/logo_azul.ico"  />
+    <link rel="shortcut icon" href="/images/template/logo_azul.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -1190,12 +1190,14 @@
                                 <div class="pt-3 sm:pt-5">
 
                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                        Consolidarse como una dependencia altamente calificada, de
-                                        asesoría y apoyo
-                                        a
-                                        la gestión de la Contraloría General de la República; y establecerse como
-                                        modelo
-                                        para las Unidades de Auditoría Interna de la Administración Pública.
+
+                                        Velar por la adecuada administración de los activos de Anónima Nacional
+                                        Teléfonos de Venezuela (Cantv) y sus filiales, dependientes del Ministerio del
+                                        Poder Popular de Ciencia y Tecnología (Mppct), a través de la actuación del
+                                        Ministerio de Auditoría Interna, así como el ejercicio de autoridad.
+                                        Investigación, para comprobar la ocurrencia de actos, hechos y omisiones con
+                                        violación de disposiciones legales
+
                                     </FONT>
 
                                 </div>
@@ -1216,12 +1218,10 @@
                                 <div class="pt-3 sm:pt-5">
 
                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                        Consolidarse como una dependencia altamente calificada, de
-                                        asesoría y apoyo
-                                        a
-                                        la gestión de la Contraloría General de la República; y establecerse como
-                                        modelo
-                                        para las Unidades de Auditoría Interna de la Administración Pública.
+                                        Consolidarse como una dependencia altamente calificada, de asesoría y apoyo a la
+                                        gestión de la Compañía Anónima Nacional Teléfonos de Venezuela (Cantv) y sus
+                                        filiales y establecerse como modelo para las Unidades de Auditoría Interna de la
+                                        Administración Pública.
                                     </FONT>
 
                                 </div>
@@ -1232,29 +1232,24 @@
 
 
                     <div class="carta-box"
-                    style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
+                        style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
 
-                    <img src="/images/template/objetivo.png" width="300px" height="250px">
+                        <img src="/images/template/objetivo.png" width="300px" height="250px">
 
-                    <div class="carta">
+                        <div class="carta">
 
-                        <div class="cara detras">
-                            <div class="pt-3 sm:pt-5">
+                            <div class="cara detras">
+                                <div class="pt-3 sm:pt-5">
 
-                                <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                    Consolidarse como una dependencia altamente calificada, de
-                                    asesoría y apoyo
-                                    a
-                                    la gestión de la Contraloría General de la República; y establecerse como
-                                    modelo
-                                    para las Unidades de Auditoría Interna de la Administración Pública.
-                                </FONT>
+                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                       
+                                    </FONT>
 
+                                </div>
+                                </p>
                             </div>
-                            </p>
                         </div>
                     </div>
-                </div>
                 </div>
 
             </main>
