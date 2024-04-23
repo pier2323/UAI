@@ -537,9 +537,9 @@
             background-color: rgb(255 45 32 / 0.1)
         }
 
-        .bg-white {
-            --tw-bg-opacity: 1;
-            background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+        .bg-color {
+       
+            background-color: rgb(51, 255, 215/ var(--tw-bg-opacity))
         }
 
         .bg-gradient-to-b {
