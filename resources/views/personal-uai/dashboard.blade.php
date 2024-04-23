@@ -20,7 +20,7 @@
                                     <div id="datatable_users_wrapper"
                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                         <div class="col-sm-12">
-                                            @include('personal-uai.modal')
+                                          
                                         </div>
                                     </div>
                                 </div>

@@ -721,7 +721,7 @@
         }
 
         .hover\:text-black\/70:hover {
-            color: rgb(0 0 0 / 0.7)
+            color: rgb(0, 255, 255)
         }
 
         .hover\:ring-black\/20:hover {
@@ -1134,7 +1134,7 @@
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 
-    <img id="background" class="absolute [5000px]" src="/images/template/cantv.png" />
+    <img id="background" class="absolute [5000px]" src="/images/template/cantv(3).png" />
 
 
     <div
@@ -1149,7 +1149,7 @@
 
                 </div>
                 @if (Route::has('login'))
-                    <nav class="-mx-3 flex flex-1 justify-end">
+                    <nav class="-mx-3 flex flex-1 justify-end" style="margin-right: 15px;">
                         @auth
                             <a href="{{ url('/dashboard') }}"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -1158,14 +1158,14 @@
                         @else
                             <a href="{{ route('login') }}"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Log in
+                             Inicio
                             </a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     style="margin-right: -100px;">
-                                    Register
+                                    Registro
                                 </a>
                             @endif
                         @endauth
@@ -1242,7 +1242,12 @@
                                 <div class="pt-3 sm:pt-5">
 
                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                       
+                                        Establecer los aspectos normativos y procedimentales que regulan las
+                                        actuaciones de control fiscal, actividades que deben realizarse
+                                        durante las fases que componen dicho proceso, señaladas como: Planificación,
+                                        Ejecución, Presentación de Resultados y Seguimiento al plan de acciones
+                                        correctivas
+
                                     </FONT>
 
                                 </div>
