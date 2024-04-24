@@ -20,7 +20,7 @@ Route::middleware([
 
     Route::controller(PersonalUaiController::class)->group(function () {
         Route::get('/personal-uai/dashboard', 'dashboard')->name('personal-uai.dashboard');
-        Route::get('/personal-uai/show/{personal}', 'showOne')->name('personal-uai.show'); 
+        Route::get('/personal-uai/show/{personal}', 'show')->name('personal-uai.show'); 
         Route::get('/personal-uai/edit/{personal}', 'edit')->name('personal-uai.edit');
         Route::post('/personal-uai/store', 'store')->name('personal-uai.store');
         Route::put('/personal-uai/edit/{personal}', 'update')->name('personal-uai.update');
