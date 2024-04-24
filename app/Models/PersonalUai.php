@@ -17,7 +17,7 @@ class PersonalUai extends Model
         'primer_apellido',
         'segundo_apellido',
         'gmail',
-        'emai_cantv',
+        'email_cantv',
         'telefono',
         'p00',
         'cedula',
