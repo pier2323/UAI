@@ -14,13 +14,21 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                    
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                     Inicio
+                    </x-nav-link>
+                </div>
+
+                <!-- Navigation Acta -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                   
+                    <x-nav-link href="{{ route('dashboard-viejo') }}" :active="request()->routeIs('dashboard-viejo')">
                      Actuaciones Fiscales
                     </x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                    
-                    <x-nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai.dashboard')">
+                    <x-nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai*')">
                         personal UAI
                     </x-nav-link>
                 </div>

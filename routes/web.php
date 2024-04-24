@@ -16,6 +16,7 @@ Route::middleware([
 ])->group(function () {
     Route::controller(IndexController::class)->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/dashboard-viejo', 'dashboardViejo')->name('dashboard-viejo');
     });
 
     Route::controller(PersonalUaiController::class)->group(function () {

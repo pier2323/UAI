@@ -12,6 +12,12 @@ class IndexController extends Controller
         return view('index');
     }
 
+    public function dashboardViejo()
+    {
+        $data = ActaEntrega::with('actuacionFiscal', 'personalEntrega.unidad')->get();
+        return view('dashboardViejo', ['data' => $data]);
+    }
+
     public function dashboard()
     {
         $data = ActaEntrega::with('actuacionFiscal', 'personalEntrega.unidad')->get();
