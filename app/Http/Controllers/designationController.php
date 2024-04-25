@@ -16,15 +16,21 @@ class designationController extends Controller
         $this->designationService = $designationService;
     }
 
-    public function download()
-    {    
+    public function index()
+    {
+        return view('designation.index', ['personal' => PersonalUai::all()]);
+    }
+
+    public function download(Request $request)
+    {
         // Generate the document content in memory
-        $document = $this->designationService->generate();
+        $document = $this->designationService->generate($request);
 
-        $header = [
-            'Content-Type : aplication/octet-stream',
-        ];
+        return $document;
+        // $header = [
+        //     'Content-Type : aplication/octet-stream',
+        // ];
 
-        return response()->download($document, 'document01.docx', $header)->deleteFileAfterSend(true);
+        // return response()->download($document, 'document01.docx', $header)->deleteFileAfterSend(true);
     }
 }
