@@ -1,4 +1,4 @@
-<div class="contenedor"style="height: 350px;" >
+<div class="contenedor"style="height: 350px;margin-bottom: 100px;" >
     
     <div class="p-6 lg:p-8 bg-color">
       
