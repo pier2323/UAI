@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" style="margin-bottom: 160px;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2">
+                <div class="px-4 py-2" >
                     <div class="bg-gray-10 bg-opacity-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
                         <div class="container my-4 bg-white">
                             <div class="row">
@@ -86,5 +86,43 @@
             </div>
         </div>
     </div>
-    <x-input />
+
+    <footer>
+        <div class="pie-de-pagina-contenedor">
+            <figure>
+                <img  src="/images/template/sappp.png" alt="Descripción de la imagen">
+
+            </figure>
+            <FONT class="mt-4 text-sm/relaxed " COLOR="white" style="margin-right: 30px;">
+                <p   style="margin-right: 30px;">
+                    <p>Unidad Auditoria Interna</p>
+        
+                <p style="margin-left: 45px";>&copy; cantv2024</p>
+
+            </FONT>
+        </div>
+    </footer>
+    <style>
+        .pie-de-pagina-contenedor {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #0a4275
+      }
+      
+  
+      figure {
+            margin-left: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 160px;
+
+        }
+
+       
+      
+      
+      </style>
+
+    
 </x-app-layout>
