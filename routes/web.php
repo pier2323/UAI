@@ -29,6 +29,7 @@ Route::middleware([
     });
 
     Route::controller(designationController::class)->group(function () {
-        Route::get('/designation', 'download')->name('acta.designation'); // todo it shold be codigo-acta/designation/download
+        Route::get('/designation', 'index')->name('acta.designation');
+        Route::post('/designation', 'download')->name('acta.designation.download'); // todo it shold be codigo-acta/designation/download
     });
 });
