@@ -760,6 +760,7 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Controllers\\designationController' => __DIR__ . '/../..' . '/app/Http/Controllers/designationController.php',
         'App\\Livewire\\ComponenteNombre' => __DIR__ . '/../..' . '/app/Livewire/ComponenteNombre.php',
         'App\\Livewire\\Counter' => __DIR__ . '/../..' . '/app/Livewire/Counter.php',
+        'App\\Livewire\\SaveData' => __DIR__ . '/../..' . '/app/Livewire/SaveData.php',
         'App\\Models\\Acreditacion' => __DIR__ . '/../..' . '/app/Models/Acreditacion.php',
         'App\\Models\\ActaEntrega' => __DIR__ . '/../..' . '/app/Models/ActaEntrega.php',
         'App\\Models\\ActuacionFiscal' => __DIR__ . '/../..' . '/app/Models/ActuacionFiscal.php',

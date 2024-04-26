@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\designationController' => $baseDir . '/app/Http/Controllers/designationController.php',
     'App\\Livewire\\ComponenteNombre' => $baseDir . '/app/Livewire/ComponenteNombre.php',
     'App\\Livewire\\Counter' => $baseDir . '/app/Livewire/Counter.php',
+    'App\\Livewire\\SaveData' => $baseDir . '/app/Livewire/SaveData.php',
     'App\\Models\\Acreditacion' => $baseDir . '/app/Models/Acreditacion.php',
     'App\\Models\\ActaEntrega' => $baseDir . '/app/Models/ActaEntrega.php',
     'App\\Models\\ActuacionFiscal' => $baseDir . '/app/Models/ActuacionFiscal.php',

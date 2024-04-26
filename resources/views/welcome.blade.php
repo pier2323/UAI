@@ -10,1274 +10,447 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/welcome.css" />
+    <script src="/js/welcome.js"></script>
+    <main>
+        <div class="et_pb_bottom_inside_divider"></div>
 
-    <!-- Styles -->
-    <style>
-        /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
-        *,
-        ::after,
-        ::before {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-            border-color: #e5e7eb
-        }
+        <div class="contenedor_nav">
 
-        ::after,
-        ::before {
-            --tw-content: ''
-        }
 
-        :host,
-        html {
-            line-height: 1.5;
-            -webkit-text-size-adjust: 100%;
-            -moz-tab-size: 4;
-            tab-size: 4;
-            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-feature-settings: normal;
-            font-variation-settings: normal;
-            -webkit-tap-highlight-color: transparent
-        }
+            <div class="nav_1" id="navbar2">
 
-        body {
-            margin: 0;
-            line-height: inherit
-        }
-
-        hr {
-            height: 0;
-            color: inherit;
-            border-top-width: 1px
-        }
-
-        abbr:where([title]) {
-            -webkit-text-decoration: underline dotted;
-            text-decoration: underline dotted
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-size: inherit;
-            font-weight: inherit
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit
-        }
-
-        b,
-        strong {
-            font-weight: bolder
-        }
-
-        code,
-        kbd,
-        pre,
-        samp {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-feature-settings: normal;
-            font-variation-settings: normal;
-            font-size: 1em
-        }
-
-        small {
-            font-size: 80%
-        }
-
-        sub,
-        sup {
-            font-size: 75%;
-            line-height: 0;
-            position: relative;
-            vertical-align: baseline
-        }
-
-        sub {
-            bottom: -.25em
-        }
-
-        sup {
-            top: -.5em
-        }
-
-        table {
-            text-indent: 0;
-            border-color: inherit;
-            border-collapse: collapse
-        }
-
-        button,
-        input,
-        optgroup,
-        select,
-        textarea {
-            font-family: inherit;
-            font-feature-settings: inherit;
-            font-variation-settings: inherit;
-            font-size: 100%;
-            font-weight: inherit;
-            line-height: inherit;
-            color: inherit;
-            margin: 0;
-            padding: 0
-        }
-
-        button,
-        select {
-            text-transform: none
-        }
-
-        [type=button],
-        [type=reset],
-        [type=submit],
-        button {
-            -webkit-appearance: button;
-            background-color: transparent;
-            background-image: none
-        }
-
-        :-moz-focusring {
-            outline: auto
-        }
-
-        :-moz-ui-invalid {
-            box-shadow: none
-        }
-
-        progress {
-            vertical-align: baseline
-        }
-
-        ::-webkit-inner-spin-button,
-        ::-webkit-outer-spin-button {
-            height: auto
-        }
-
-        [type=search] {
-            -webkit-appearance: textfield;
-            outline-offset: -2px
-        }
-
-        ::-webkit-search-decoration {
-            -webkit-appearance: none
-        }
-
-        ::-webkit-file-upload-button {
-            -webkit-appearance: button;
-            font: inherit
-        }
-
-        summary {
-            display: list-item
-        }
-
-        blockquote,
-        dd,
-        dl,
-        figure,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        hr,
-        p,
-        pre {
-            margin: 0
-        }
-
-        fieldset {
-            margin: 0;
-            padding: 0
-        }
-
-        legend {
-            padding: 0
-        }
-
-        menu,
-        ol,
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0
-        }
-
-        dialog {
-            padding: 0
-        }
-
-        textarea {
-            resize: vertical
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            opacity: 1;
-            color: #9ca3af
-        }
-
-        [role=button],
-        button {
-            cursor: pointer
-        }
-
-        :disabled {
-            cursor: default
-        }
-
-        audio,
-        canvas,
-        embed,
-        iframe,
-        img,
-        object,
-        svg,
-        video {
-            display: block;
-            vertical-align: middle
-        }
-
-        img,
-        video {
-            max-width: 100%;
-            height: auto
-        }
-
-        [hidden] {
-            display: none
-        }
-
-        *,
-        ::before,
-        ::after {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
-        }
-
-        ::backdrop {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
-        }
-
-        .absolute {
-            position: absolute
-        }
-
-        .relative {
-            position: relative
-        }
-
-        .-left-20 {
-            left: -5rem
-        }
-
-        .top-0 {
-            top: 0px
-        }
-
-        .-bottom-16 {
-            bottom: -4rem
-        }
-
-        .-left-16 {
-            left: -4rem
-        }
-
-        .-mx-3 {
-            margin-left: -0.75rem;
-            margin-right: -0.75rem
-        }
-
-        .mt-4 {
-            margin-top: 1rem
-        }
-
-        .mt-6 {
-            margin-top: 1.5rem
-        }
-
-        .flex {
-            display: flex
-        }
-
-        .grid {
-            display: grid
-        }
-
-        .hidden {
-            display: none
-        }
-
-        .aspect-video {
-            aspect-ratio: 16 / 9
-        }
-
-        .size-12 {
-            width: 3rem;
-            height: 3rem
-        }
-
-        .size-5 {
-            width: 1.25rem;
-            height: 1.25rem
-        }
-
-        .size-6 {
-            width: 1.5rem;
-            height: 1.5rem
-        }
-
-        .h-12 {
-            height: 3rem
-        }
-
-        .h-40 {
-            height: 10rem
-        }
-
-        .h-full {
-            height: 100%
-        }
-
-        .min-h-screen {
-            min-height: 100vh
-        }
-
-        .w-full {
-            width: 100%
-        }
-
-        .w-\[calc\(100\%\+8rem\)\] {
-            width: calc(100% + 8rem)
-        }
-
-        .w-auto {
-            width: auto
-        }
-
-        .max-w-\[877px\] {
-            max-width: 877px
-        }
-
-
-
-        .flex-1 {
-            flex: 1 1 0%
-        }
-
-        .shrink-0 {
-            flex-shrink: 0
-        }
-
-        .grid-cols-2 {
-            grid-template-columns: repeat(2, minmax(0, 1fr))
-        }
-
-        .flex-col {
-            flex-direction: column
-        }
-
-        .items-start {
-            align-items: flex-start
-        }
-
-
-
-        .items-stretch {
-            align-items: stretch
-        }
-
-        .justify-end {
-            justify-content: flex-end
-        }
-
-        .justify-center {
-            justify-content: center
-        }
-
-        .gap-2 {
-            gap: 0.5rem
-        }
-
-        .gap-4 {
-            gap: 1rem
-        }
-
-        .gap-6 {
-            gap: 1.5rem
-        }
-
-        .self-center {
-            align-self: center
-        }
-
-        .overflow-hidden {
-            overflow: hidden
-        }
-
-        .rounded-\[10px\] {
-            border-radius: 10px
-        }
-
-        .rounded-full {
-            border-radius: 9999px
-        }
-
-        .rounded-lg {
-            border-radius: 0.5rem
-        }
-
-        .rounded-md {
-            border-radius: 0.375rem
-        }
-
-        .rounded-sm {
-            border-radius: 0.125rem
-        }
-
-        .bg-\[\#FF2D20\]\/10 {
-            background-color: rgb(255 45 32 / 0.1)
-        }
-
-        .bg-color {
-       
-            background-color: rgb(51, 255, 215/ var(--tw-bg-opacity))
-        }
-
-        .bg-gradient-to-b {
-            background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
-        }
-
-        .from-transparent {
-            --tw-gradient-from: transparent var(--tw-gradient-from-position);
-            --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
-        }
-
-        .via-white {
-            --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
-            --tw-gradient-stops: var(--tw-gradient-from), #fff var(--tw-gradient-via-position), var(--tw-gradient-to)
-        }
-
-        .to-white {
-            --tw-gradient-to: #fff var(--tw-gradient-to-position)
-        }
-
-        .stroke-\[\#FF2D20\] {
-            stroke: #FF2D20
-        }
-
-        .object-cover {
-            object-fit: cover
-        }
-
-        .object-top {
-            object-position: top
-        }
-
-        .p-6 {
-            padding: 1.5rem
-        }
-
-        .px-6 {
-            padding-left: 1.5rem;
-
-        }
-
-        .py-10 {
-            padding-top: 2.5rem;
-
-        }
-
-        .px-3 {
-            padding-left: 0.75rem;
-            padding-right: 0.75rem
-        }
-
-        .py-16 {
-            padding-top: 4rem;
-            padding-bottom: 4rem
-        }
-
-        .py-2 {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem
-        }
-
-        .pt-3 {
-            padding-top: 0.75rem
-        }
-
-        .text-center {
-            text-align: center
-        }
-
-        .font-sans {
-            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji
-        }
-
-        .text-sm {
-            font-size: 0.875rem;
-            line-height: 1.25rem
-        }
-
-        .text-sm\/relaxed {
-            font-size: 0.875rem;
-            line-height: 1.625
-        }
-
-        .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.75rem
-        }
-
-        .font-semibold {
-            font-weight: 600
-        }
-
-        .text-black {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity))
-        }
-
-        .text-white {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity))
-        }
-
-        .underline {
-            -webkit-text-decoration-line: underline;
-            text-decoration-line: underline
-        }
-
-        .antialiased {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale
-        }
-
-        .shadow-\[0px_14px_34px_0px_rgba\(0\2c 0\2c 0\2c 0\.08\)\] {
-            --tw-shadow: 0px 14px 34px 0px rgba(0, 0, 0, 0.08);
-            --tw-shadow-colored: 0px 14px 34px 0px var(--tw-shadow-color);
-            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-        }
-
-        .ring-1 {
-            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
-        }
-
-        .ring-transparent {
-            --tw-ring-color: transparent
-        }
-
-        .ring-white\/\[0\.05\] {
-            --tw-ring-color: rgb(255 255 255 / 0.05)
-        }
-
-        .drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.06\)\] {
-            --tw-drop-shadow: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.06));
-            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-        }
-
-        .drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.25\)\] {
-            --tw-drop-shadow: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.25));
-            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-        }
-
-        .transition {
-            transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms
-        }
-
-        .duration-300 {
-            transition-duration: 300ms
-        }
-
-        .selection\:bg-\[\#FF2D20\] *::selection {
-            --tw-bg-opacity: 1;
-            background-color: rgb(255 45 32 / var(--tw-bg-opacity))
-        }
-
-        .selection\:text-white *::selection {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity))
-        }
-
-        .selection\:bg-\[\#FF2D20\]::selection {
-            --tw-bg-opacity: 1;
-            background-color: rgb(255 45 32 / var(--tw-bg-opacity))
-        }
-
-        .selection\:text-white::selection {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity))
-        }
-
-        .hover\:text-black:hover {
-            --tw-text-opacity: 1;
-            color: rgb(0 0 0 / var(--tw-text-opacity))
-        }
-
-        .hover\:text-black\/70:hover {
-            color: rgb(0, 255, 255)
-        }
-
-        .hover\:ring-black\/20:hover {
-            --tw-ring-color: rgb(0 0 0 / 0.2)
-        }
-
-        .focus\:outline-none:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px
-        }
-
-        .focus-visible\:ring-1:focus-visible {
-            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
-        }
-
-        .focus-visible\:ring-\[\#FF2D20\]:focus-visible {
-            --tw-ring-opacity: 1;
-            --tw-ring-color: rgb(255 45 32 / var(--tw-ring-opacity))
-        }
-
-        @media (min-width: 640px) {
-            .sm\:size-16 {
-                width: 4rem;
-                height: 4rem
-            }
-
-            .sm\:size-6 {
-                width: 1.5rem;
-                height: 1.5rem
-            }
-
-            .sm\:pt-5 {
-                padding-top: 1.25rem
-            }
-        }
-
-        @media (min-width: 768px) {
-            .md\:row-span-3 {
-                grid-row: span 3 / span 3
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .lg\:col-start-2 {
-                grid-column-start: 2
-            }
-
-            .lg\:h-16 {
-                height: 4rem
-            }
-
-            .lg\:max-w-7xl {
-                max-width: 80rem
-            }
-
-            .lg\:grid-cols-3 {
-                grid-template-columns: repeat(3, minmax(0, 1fr))
-            }
-
-            .lg\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-
-            .lg\:flex-col {
-                flex-direction: column
-            }
-
-            .lg\:items-end {
-                align-items: flex-end
-            }
-
-            .lg\:justify-center {
-                justify-content: center
-            }
-
-            .lg\:gap-8 {
-                gap: 2rem
-            }
-
-            .lg\:p-10 {
-                padding: 2.5rem
-            }
-
-            .lg\:pb-10 {
-                padding-bottom: 2.5rem
-            }
-
-            .lg\:pt-0 {
-                padding-top: 0px
-            }
-
-            .lg\:text-\[\#FF2D20\] {
-                --tw-text-opacity: 1;
-                color: rgb(255 45 32 / var(--tw-text-opacity))
-            }
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .dark\:block {
-                display: block
-            }
-
-            .dark\:hidden {
-                display: none
-            }
-
-            .dark\:bg-black {
-                --tw-bg-opacity: 1;
-                background-color: rgb(0 0 0 / var(--tw-bg-opacity))
-            }
-
-            .dark\:bg-zinc-900 {
-                --tw-bg-opacity: 1;
-                background-color: rgb(24 24 27 / var(--tw-bg-opacity))
-            }
-
-            .dark\:via-zinc-900 {
-                --tw-gradient-to: rgb(24 24 27 / 0) var(--tw-gradient-to-position);
-                --tw-gradient-stops: var(--tw-gradient-from), #18181b var(--tw-gradient-via-position), var(--tw-gradient-to)
-            }
-
-            .dark\:to-zinc-900 {
-                --tw-gradient-to: #18181b var(--tw-gradient-to-position)
-            }
-
-            .dark\:text-white\/50 {}
-
-            .dark\:text-white {
-                --tw-text-opacity: 1;
-                color: rgb(255 255 255 / var(--tw-text-opacity))
-            }
-
-            .dark\:text-white\/70 {
-                color: rgb(255 255 255 / 0.7)
-            }
-
-            .dark\:ring-zinc-800 {
-                --tw-ring-opacity: 1;
-                --tw-ring-color: rgb(39 39 42 / var(--tw-ring-opacity))
-            }
-
-            .dark\:hover\:text-white:hover {
-                --tw-text-opacity: 1;
-                color: rgb(255 255 255 / var(--tw-text-opacity))
-            }
-
-            .dark\:hover\:text-white\/70:hover {
-                color: rgb(255 255 255 / 0.7)
-            }
-
-            .dark\:hover\:text-white\/80:hover {
-                color: rgb(255 255 255 / 0.8)
-            }
-
-            .dark\:hover\:ring-zinc-700:hover {
-                --tw-ring-opacity: 1;
-                --tw-ring-color: rgb(63 63 70 / var(--tw-ring-opacity))
-            }
-
-            .dark\:focus-visible\:ring-\[\#FF2D20\]:focus-visible {
-                --tw-ring-opacity: 1;
-                --tw-ring-color: rgb(255 45 32 / var(--tw-ring-opacity))
-            }
-
-            .dark\:focus-visible\:ring-white:focus-visible {
-                --tw-ring-opacity: 1;
-                --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity))
-            }
-
-            .carta-box {
-                margin: 10px;
-                width: 250px;
-                height: 250px;
-                float: left;
-                perspective: 20px;
-
-            }
-
-            .carta-box:hover .carta {
-                transform: rotateY(180deg);
-            }
-
-            .carta {
-                transform-style: preserve-3d;
-                transition: all 0.5s linear;
-
-            }
-
-            .cara {
-                position: absolute;
-                backface-visibility: hidden;
-                margin-top: 0px;
-                margin-bottom: 0px;
-                margin-right: 0px;
-                margin-left: 0px;
-            }
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .carta-box {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-
-
-        }
-
-
-        .carta-box:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .carta-box {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .carta-box:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .carta-box {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .carta-box:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-
-
-
-
-
-
-
-
-
-        .cartas-boxx {
-            margin: 200px;
-            width: 300px;
-            height: 250px;
-            float: left;
-            perspective: 1000px;
-        }
-
-        .cartas-boxx:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            display: flex;
-            justify-content: center;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .carta-box {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .cartas-boxx:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .cartas-boxx {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .cartas-boxx:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .carta-box {
-            margin: 100px;
-            width: 300px;
-            height: 300x;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .carta-box:hover .carta {
-            transform: rotateY(180deg);
-        }
-
-        .carta {
-            transform-style: preserve-3d;
-            transition: all 0.5s linear;
-        }
-
-        .cara {
-            position: absolute;
-            backface-visibility: hidden;
-        }
-
-        .cara.detras {
-            transform: rotateY(180deg);
-        }
-
-        .footer {
-            padding: 1em 0;
-            text-align: center;
-            position: absolute;
-        }
-
-
-        }
-    </style>
-</head>
-
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-
-    <img id="background" class="absolute [5000px]" src="/images/template/cantv(3).png" />
-
-
-    <div
-        class="relative min-h-screen flex flex-col items-center justify-left selection:bg-[#FF2D20] selection:text-white">
-        <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-            <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3"
-                style="justify-items: end;align-content: end;display: flex;">
-
-                <div>
-
-                    <img width="150px" ,height=200px src="/images/template/sappp.png" float: left>
-
+                <!----------Logo CANTV-------------------->
+                <div class="nav_2">
+                    <img src="/images/template/sappp.png" width="140" height="65" id="navbar3">
                 </div>
-                @if (Route::has('login'))
-                    <nav class="-mx-3 flex flex-1 justify-end" style="margin-right: 15px;">
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                             Inicio
-                            </a>
+                <!----------Soporte Aplicaciones---------->
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    style="margin-right: -100px;">
-                                    Registro
-                                </a>
+                <!---------- panel de navegacion ------------>
+
+                <!------------------------------------------->
+
+                <!----------Soporte Canaima--------------->
+
+                <!----------Imagenes Corporativas------------>
+
+                <!-------------------------------------------->
+                <div class="nav_4">
+
+                    <!-- partial:index.partial.html -->
+                    <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog" style="margin-right: 8px;"></i>
+                            @if (Route::has('login'))
+
+                                @auth
+                                    <a href="{{ url('/dashboard') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        Dashboard
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                            Inicio
+                                        </FONT>
+                                    </a>
+                                    <div class="div_1"></div>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            style="margin-right: -100px;">
+                                            <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                                Registro
+                                            </FONT>
+                                        </a>
+                                    @endif
+                                @endauth
+
                             @endif
-                        @endauth
-                    </nav>
-                @endif
-            </header>
 
-            <main>
-                <style>
-                    .contenedor {
-                        display: flex;
-                    }
-                </style>
-                <div class="contenedor">
-                    <div class="carta-box"
-                        style="  margin-top: 60px;margin-bottom: 0px;margin-left: 80px;margin-right: 50px;">
-                        <img src="/images/template/Mision.png" width="300px" height="250px">
-
-                        <div class="carta">
-
-                            <div class="cara detras">
-                                <div class="pt-3 sm:pt-5">
-
-                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-
-                                        Velar por la adecuada administración de los activos de Anónima Nacional
-                                        Teléfonos de Venezuela (Cantv) y sus filiales, dependientes del Ministerio del
-                                        Poder Popular de Ciencia y Tecnología (Mppct), a través de la actuación del
-                                        Ministerio de Auditoría Interna, así como el ejercicio de autoridad.
-                                        Investigación, para comprobar la ocurrencia de actos, hechos y omisiones con
-                                        violación de disposiciones legales
-
-                                    </FONT>
-
-                                </div>
-                                </p>
-                            </div>
-                        </div>
                     </div>
+                    <!---   <script>
+                        $(document).ready(function() {
+                            const suggestions = [
+
+                                //Listado Aplicaciones Corporativa
+                                {
+                                    text: "Autocad 2021",
+                                    link: "Paginacion_Menu/Aplicaciones_Corporativas_Autocad2021.html"
+                                },
 
 
-                    <div class="carta-box"
-                        style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
+                                // ... puedes agregar más sugerencias según tus necesidades
+                            ];
 
-                        <img src="/images/template/Vision.png" width="300px" height="250px">
+                            const searchInput = $(".field input");
+                            const suggestionsContainer = $(".suggestions-container");
+                            const scrollableContainer = $("#miScrollableContainer ul");
 
-                        <div class="carta">
+                            let isMouseDown = false;
+                            let startY, startScrollTop;
 
-                            <div class="cara detras">
-                                <div class="pt-3 sm:pt-5">
+                            function showSuggestions() {
+                                const inputValue = searchInput.val().toLowerCase();
+                                const filteredSuggestions = suggestions.filter(suggestion =>
+                                    suggestion.text.toLowerCase().includes(inputValue)
+                                );
 
-                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                        Consolidarse como una dependencia altamente calificada, de asesoría y apoyo a la
-                                        gestión de la Compañía Anónima Nacional Teléfonos de Venezuela (Cantv) y sus
-                                        filiales y establecerse como modelo para las Unidades de Auditoría Interna de la
-                                        Administración Pública.
-                                    </FONT>
+                                const suggestionList = filteredSuggestions.map(suggestion =>
+                                    `<li class="suggestion" style="justify-content: center; align-items: center;"><i class="material-symbols-outlined">search</i><a style="color:black;" href="${suggestion.link}" target="_blank">${suggestion.text}</a></li>`
+                                );
 
-                                </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                                suggestionsContainer.html(
+                                    `<div class="scrollable-container" id="miScrollableContainer"><ul>${suggestionList.join('')}</ul></div>`
+                                );
+                                suggestionsContainer.toggleClass("show", filteredSuggestions.length > 0);
 
+                                scrollableContainer.on('mousedown', function(e) {
+                                    isMouseDown = true;
+                                    startY = e.clientY;
+                                    startScrollTop = scrollableContainer.scrollTop();
+                                });
 
-                    <div class="carta-box"
-                        style="margin-top: 60px;margin-bottom: 0px;margin-left: 60px;margin-right: 50px;">
+                                $(document).on('mousemove', function(e) {
+                                    if (!isMouseDown) return;
 
-                        <img src="/images/template/objetivo.png" width="300px" height="250px">
+                                    const deltaY = e.clientY - startY;
+                                    scrollableContainer.scrollTop(startScrollTop - deltaY);
+                                });
 
-                        <div class="carta">
+                                $(document).on('mouseup', function() {
+                                    isMouseDown = false;
+                                });
+                            }
 
-                            <div class="cara detras">
-                                <div class="pt-3 sm:pt-5">
+                            searchInput.on('input', showSuggestions);
 
-                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                        Establecer los aspectos normativos y procedimentales que regulan las
-                                        actuaciones de control fiscal, actividades que deben realizarse
-                                        durante las fases que componen dicho proceso, señaladas como: Planificación,
-                                        Ejecución, Presentación de Resultados y Seguimiento al plan de acciones
-                                        correctivas
+                            $(document).on('click', function(event) {
+                                if (!$(event.target).closest('.search').length) {
+                                    suggestionsContainer.removeClass("show");
+                                }
+                            });
+                        });
+                    </script>-------->
 
-                                    </FONT>
-
-                                </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-            </main>
-            <footer class="">
-                <div
-                    style="padding: 10px 0;text-align: center;positio:centre; backgrond-color:azul;margin-top: 250px;;">
-                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                        <p>
-                            Gerencia Tecnología de Información
-                        </p>
-                        <p>
-                            Gerencia General de Sistema ©CANTV 2024
-
-                        </p>
-                    </FONT>
-                </div>
-            </footer>
-
+            </div>
 
 
 
         </div>
-    </div>
-</body>
+
+
+
+        <!-------------------- Modulo 3 iconos circulares -------------------->
+
+        <div class="slider_1">
+
+
+
+
+            <div class="slider_2">
+
+
+
+
+                <div class="slider_completo">
+
+                    <div class="CSSgal">
+
+                        <s id="s1"></s>
+                        <s id="s2"></s>
+                        <s id="s3"></s>
+
+                        <div class="slider">
+
+                            <!----------------------  Titulo de slider  ---------------------------------->
+                            <div style="background-image: url(./images/template/cantv.png); background-size: cover;">
+                            </div>
+
+
+                            <!---------------------------------------------------------------------------->
+
+                            <!-- Slider 2 -->
+
+                            <div
+                                style="background-image: url(./img/Banwer-web-1920px-X-1280px-azul.jpg); background-size: cover;">
+                            </div>
+
+                            <!------------------------------------------------------------->
+
+                            <!-- Slider 3-->
+
+                            <div style="background-image: url(./img/div3/1.png); background-size: cover;">
+                            </div>
+                            <!------------------------------------------------------------->
+                            <!-- Slider 4-->
+                            <!--------<   div style="background-image: url(./img/div3/1.png); background-size: cover;"></div>
+                            ----------------------------------------------------->
+
+                            <!-- Funcionamiento del slider-->
+                               <!-- Ponerle margen asia riba-->
+                        </div>
+                        
+                        <div class="prevNext">
+                            <div><a href="#s3"><i class="fas fa-angle-left fa-2x" style="color: #ffffffd1;"> < </i></a>
+                                <a href="#s2"><i class="fas fa-angle-right  fa-2x"style="color: #ffffffd1;"> > </i></a>
+                            </div>
+                            <div><a href="#s1"><i class="fas fa-angle-left fa-2x" style="color: #e61515d1;"> < </i></a>
+                                <a href="#s3"><i class="fas fa-angle-right  fa-2x"
+                                        style="color: #ff0202d1;"> > </i></a>
+                            </div>
+                            <div><a href="#s2"><i class="fas fa-angle-left fa-2x" style="color: #ffffffd1;"> < </i></a>
+                                <a href="#s1"><i class="fas fa-angle-right  fa-2x"
+                                        style="color: #ffffffd1;"> > </i></a>
+                            </div>
+                           
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modu_2">
+
+            <svg class="svg2" width="100%" height="173px" viewBox="0 0 1280 140" preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g fill="#0C71C3">
+                    <path d="M1280 0l-266 91.52a72.59 72.59 0 0 1-30.76 3.71L0 0v140h1280z" fill-opacity=".5" />
+                    <path d="M1280 0l-262.1 116.26a73.29 73.29 0 0 1-39.09 6L0 0v140h1280z" />
+                </g>
+            </svg>
+
+            <div data-aos="fade-up" class="MODU2">
+
+                <a href="http://devintra/cic/PlanillasCIC_Portal/menu.asp" class="botones_espacio_1">
+
+                    <img src="./img/cic.png" alt="" width="180" height="190">
+                    <div class="texto_1"> Servicios CIC</div>
+
+                    <div class="novedades_b1">
+
+                        <div class="novedades_b_11">
+                            <div style="margin-left: -20px;"> Si presenta algún tipo de falla, </div>
+                            <div style="margin-left: -16px;"> comuníquese al CIC a través del <div
+                                    style="color: #ffcc00;"> 500-8745 </div>
+                            </div>
+                            <div style="margin-left: 5px;"> Haga click para acceder a su portal..</div>
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+
+
+                <div class="botones_espacio_2">
+
+                    <img src="./img/novedades.png" alt="" width="180" height="190">
+                    <div class="texto_1"> Novedades</div>
+
+                    <div class="novedades_b">
+
+                        <a href="./Paginacion_Menu/Aplicaciones_Corporativas_MaprexPlus.html" class="novedades_b_1"
+                            style="border-top-right-radius:10px; border-top-left-radius:10px;">Actualización
+                            de
+                            Maprex</a>
+                        <a href="./Paginacion_Menu/Aplicaciones_Corporativas_Soporte_Remoto.html"
+                            class="novedades_b_1">Soporte Remoto 21/06/2021</a>
+                        <a href="http://corporativa/Download/Drivers/Impresoras/Delcop/Lexmark_Universal.rar"
+                            class="novedades_b_1">Controlador Universal Lexmark 26/10/2021</a>
+                        <a href="http://corporativa/Download/Drivers/Impresoras/Delcop/MFP_526-20220421T183833Z-001.zip"
+                            class="novedades_b_1">Controlador Delcop MFP_526 21/04/2022</a>
+                        <a href="http://corporativa/Download/Aplicaciones/FirefoxParaSacas/Firefox Setup 72.0.2.exe"
+                            class="novedades_b_1">Mozilla Firefox 72.0.2 (Para sacas y boss)</a>
+                        <a href="Paginacion_Menu/Aplicaciones_Corporativas_Oracle9i.html" class="novedades_b_1"
+                            style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;">Oracle9i</a>
+                    </div>
+                </div>
+
+
+                <a class="botones_espacio_2" href="./index.html" id="res_ico_1">
+
+                    <img src="./img/controlInventario.png" alt="" width="180" height="190">
+                    <div class="texto_1"> Control Inventario</div>
+
+
+                </a>
+
+
+
+                <a class="botones_espacio_2" href="./Paginacion_Menu/Aplicaciones_Corporativas_Impresoras.html">
+
+                    <img src="./img/impresora5555.png" alt="" width="180" height="190">
+                    <div class="texto_1"> Impresoras</div>
+
+
+                </a>
+
+
+
+
+
+            </div>
+
+        </div>
+
+        <!-------------------------------------------------------------->
+
+
+        <div class="modu_3">
+
+            <svg class="svg3" width="100%" height="100px" viewBox="0 0 1280 140" preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g fill="#0C71C3">
+                    <path d="M1280 0l-266 91.52a72.59 72.59 0 0 1-30.76 3.71L0 0v140h1280z" fill-opacity=".5" />
+                    <path d="M1280 0l-262.1 116.26a73.29 73.29 0 0 1-39.09 6L0 0v140h1280z" />
+                </g>
+            </svg>
+
+            <div class="app_extra_cor" data-aos="fade-up">
+                <div class="caja_enlace_1">
+
+                    <div class="titulos_enlaces_1">Aplicativos</div>
+                    <a href="http://corporativa.cantv.com.ve/Paginacion_Menu/Aplicaciones_Corporativas_MaprexPlus.html"
+                        class="titulos_enlaces_2">Maprex Plus</a>
+                    <a href="http://corporativa/Download/Desasistidos/SoporteRemoto/new/SoporteRemotoUVNC24112021.rar"
+                        class="titulos_enlaces_2">Soporte Remoto</a>
+                    <a href="http://corporativa/Download/Aplicaciones/FirefoxParaSacas/Firefox Setup 72.0_32BIT.exe"
+                        class="titulos_enlaces_2">Mozilla Firefox 72.0.2 Sacas</a>
+                    <a href="Paginacion_Menu/Aplicaciones_Corporativas_Oracle9i.html"
+                        class="titulos_enlaces_2">Oracle9i</a>
+
+
+                    <div class="titulos_enlaces_1">GNU/LINUX</div>
+                    <a href="http://corporativa/Download/Herramientas/Software%20Libre/Libreoffice/LibreOffice_7.2.2_Win_x86.msi"
+                        class="titulos_enlaces_2">Libre Office 7.2.2 32bit</a>
+                    <a href="http://corporativa/Download/Herramientas/Software%20Libre/Libreoffice/LibreOffice_7.2.2_Win_x64.msi"
+                        class="titulos_enlaces_2">Libre Office 7.2.2 64bit</a>
+
+                    <div class="titulos_enlaces_1">Controladores Imp.</div>
+                    <a href="http://corporativa/Download/Drivers/Impresoras/Delcop/Lexmark_Universal.rar"
+                        class="titulos_enlaces_2">Universal Lexmark </a>
+
+
+
+                </div>
+                <div class="caja_enlace_2">
+
+                    <div class="titulos_enlaces_1">Formatos</div>
+                    <a href="http://corporativa.cantv.com.ve/Planillas_y%20Solicitudes_.html"
+                        class="titulos_enlaces_2">Plantillas y Solicitudes</a>
+                    <a href="http://corporativa.cantv.com.ve/Normativas.html" class="titulos_enlaces_2">Normativas</a>
+
+                    <div class="titulos_enlaces_1">Canaima</div>
+                    <a href="./Manuales.html" class="titulos_enlaces_2">Manuales</a>
+
+                    <div class="titulos_enlaces_1" style="margin-left:10px;">Archivos rar</div>
+                    <a href="http://corporativa/Download/Aplicaciones/Archivosrar/OCSNG-CANTV-Windows-7-10-Agent-2.3.0.0.rar"
+                        class="titulos_enlaces_2" style="margin-left:10px;"> OCSNG Win 7, 10 Agent 2.3.0.0
+                    </a>
+                    <a href="http://corporativa/Download/Aplicaciones/Archivosrar/OCSNG-CANTV-Windows-XP-Agent-2.1.1.1.rar"
+                        class="titulos_enlaces_2" style="margin-left:10px;"> OCSNG Win XP Agent 2.1.1.1
+                    </a>
+
+
+                </div>
+
+
+                <div class="caja_enlace_3">
+
+                    <div class="titulos_enlaces_1">Imagenes Corp.</div>
+                    <a href="http://corporativa.cantv.com.ve/Paginacion_Menu/Imagenes_Corporativas_Equipos_Escritorio.html"
+                        class="titulos_enlaces_2">Equipo de Escritorio</a>
+                    <a href="http://corporativa.cantv.com.ve/Paginacion_Menu/Imagenes_Corporativas_Equipos_Portatiles.html"
+                        class="titulos_enlaces_2">Equipos Portatiles</a>
+
+
+                </div>
+
+
+
+
+            </div>
+            <!------------------------ Modulo de Siguenos ------------------------------------->
+            <div class="redes_extras" data-aos="fade-up">
+
+                <div class="sig">Síguenos</div>
+
+                <div class="sig_2">
+
+                    <a href="https://www.instagram.com/contactocantv/" style="color: white;" id="instagram_1">
+                        <i class="fab fa-instagram" id="instagram_1" style="margin-left: 30px;"></i>
+                    </a>
+
+                    <a href="https://twitter.com/salaprensaCantv" style="color: white;" id="twitter_1">
+                        <i id="twitter_1" class="material-symbols-outlined"
+                            style="margin-left: 28px; margin-top: -2px;">close</i>
+                    </a>
+
+                    <a href="https://www.youtube.com/user/Cantvsalaprensa" style="color: white;" id="youtube_1">
+                        <i id="youtube_1" class="fab fa-youtube" style="margin-left: 18px;"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/ConexionCulturalCantv" style="color: white;" id="facebook_1">
+                        <i id="facebook_1" class="fab fa-facebook-f" style="margin-left: 30px;"></i>
+                    </a>
+
+                </div>
+
+            </div>
+            <!---------------------------------------------------------------------------------->
+        </div>
+
+        <div class="modu_4"> Todos los Derechos Reservados / Desarrollado por GOTID - GEYPTI © 2024 /
+            Políticas
+            de Privacidad / Aviso Legal </div>
+
+        <div class="modu_5">
+
+            <div class="modu_5_1">
+
+                <img src="./img/mincyt.png" alt="" width="350" height="45">
+
+            </div>
+            <div class="modu_5_2">
+
+                <img src="./img/logo2.png" alt="" width="155" height="70">
+
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+        <script src="./js/titulo_slider_1.js"></script>
+        <script src="js/popup.js"></script>
+        <script src="js/popup2.js"></script>
+        <script src="js/popup3.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/slider.js"></script>
+        <script src="js/particles.min.js"></script>
+        <script src="js/app6_inicio.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+        <script src="js/script_barra_de_busqueda.js"></script>
+        <script src="js/script_barra_lista.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="js/codigo.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js'></script>
+        <script src="./js/style_slider_cor.js"></script>
+
+
+        <script>
+            AOS.init();
+        </script>
+
+
+        <script src="./js/efecto_barra_nav.js"></script>
+
+
+
+        </body>
 
 </html>
