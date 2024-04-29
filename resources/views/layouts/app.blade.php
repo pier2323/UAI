@@ -9,8 +9,8 @@
   <title>{{ config('Sap_UAI', 'Sap_UAI') }}</title>
   {{-- * links styles --}}
   <link rel="stylesheet" href="/css/bootstrap/app.css" />
-  <link rel="stylesheet" href=" /css/bootstrap/styles.css" />
-  <link rel="stylesheet" href="./css/bootstrap/all.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap/styles.css" />
+  <link rel="stylesheet" href="/css/bootstrap/all.min.css" />
   
   {{-- * links bootstrap --}}
   <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">

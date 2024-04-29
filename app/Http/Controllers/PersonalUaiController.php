@@ -6,6 +6,7 @@ use App\Models\Cargo;
 use App\Models\PersonalUai;
 use App\Models\Uai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Summary of PersonalUaiController
@@ -35,19 +36,35 @@ class PersonalUaiController extends Controller
     }
 
     /**
-     * todo Store a newly created resource in storage.
+     * todo Store a newly created resource in storage 
      */
     public function store(Request $request)
     {
-        $all = $request->all();
-        $textsExploded = explode('-', $all['cedula']);
-        $all['cedula'] = $textsExploded[1];
-        PersonalUai::create($all);
-        return $this->dashboard();
+        // todo validation
+        $request->validate([
+            'foto_perfil' => 'required|image'
+        ]);
+
+        $data = $request->all();
+
+        // * image
+        $data['foto_perfil'] = Storage::url($request->file('foto_perfil')->store('public'));
+
+        // * cedula 
+        $textsExploded = explode('-', $data['cedula']);
+        $data['cedula'] = $textsExploded[1];
+
+        // todo storage data
+        PersonalUai::create($data);
+        
+
+        $personal = PersonalUai::all()->last();
+        $route = route('personal-uai.show', $personal->id);
+        return redirect($route);
     }
 
     /**
-     * todo Show the form for editing the specified resource.
+     * todo Show the form for editing the specified resource 
      */
     public function edit(string $personal)
     {
@@ -88,6 +105,6 @@ class PersonalUaiController extends Controller
     {
         $personal = PersonalUai::find($personal);
         $personal->delete();
-        return $this->dashboard();
+        return redirect(route('personal-uai.dashboard'));
     }
 }
