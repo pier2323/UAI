@@ -3612,7 +3612,7 @@ footer .redes-footer .fa-instagram:hover {
     height: 660px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background: url(../img/div3/de-an-sun-i8HaBhLwjTw-unsplash.jpg);
+    background: url(../images/carrusel/Diseño\ sin\ título\(5\).png);
     background-size: cover;
 }
 
@@ -3697,6 +3697,8 @@ footer .redes-footer .fa-instagram:hover {
     align-items: center;
     width: 280px;
     height: 400px;
+    margin-left: 50px;
+    margin-right: 50px;
     background-color: rgba(148, 40, 40, 0);
     cursor: pointer;
     -webkit-transition: -webkit-transform 0.5s ease-out;
@@ -3805,13 +3807,36 @@ footer .redes-footer .fa-instagram:hover {
     margin-left: -175px;
 }
 
+
+/*este es el tamaño de caja de texto de los iconos*/
+
 .novedades_b_11 {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     flex-direction: column;
-    width: 65%;
-    height: 85px;
+    width: 70%;
+    height: 90px;
+    align-items: center;
+    justify-content: center;
+    font-family: "Open Sans", sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 12px;
+    background-color: #0c71c3;
+    color: white;
+    line-height: 15px;
+    margin-left: -110px;
+    border-radius: 10px;
+}
+
+.novedades_b_12 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100px;
     align-items: center;
     justify-content: center;
     font-family: "Open Sans", sans-serif;
