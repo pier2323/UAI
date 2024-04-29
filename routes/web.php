@@ -25,7 +25,7 @@ Route::middleware([
         Route::get('/personal-uai/edit/{personal}', 'edit')->name('personal-uai.edit');
         Route::post('/personal-uai/store', 'store')->name('personal-uai.store');
         Route::put('/personal-uai/edit/{personal}', 'update')->name('personal-uai.update');
-        Route::delete('/personal-uai/delete', 'destroy')->name('personal-uai.delete'); 
+        Route::delete('/personal-uai/delete/{personal}', 'destroy')->name('personal-uai.delete'); 
     });
 
     Route::controller(designationController::class)->group(function () {

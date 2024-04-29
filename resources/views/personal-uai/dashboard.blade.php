@@ -14,13 +14,13 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#Modal-UAI" data-bs-whatever="@mdo">
+                                        data-bs-target="#register" data-bs-whatever="@mdo">
                                         registro
                                     </button>
                                     <div id="datatable_users_wrapper"
                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                         <div class="col-sm-12">
-                                          
+                                          @include('personal-uai.modal')
                                         </div>
                                     </div>
                                 </div>

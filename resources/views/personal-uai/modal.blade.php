@@ -58,7 +58,7 @@
 <x-modalBootstrap>
   <x-slot name=header>
     <div class="modal-header modal-header-2">
-      <h1 class="modal-title font-bold fs-5" id="exampleModalLabel">
+      <h1 class="modal-title font-bold fs-5" id="register">
         Registro del Personal
       </h1>
       <button type="button" class="btn-close absolute right-0 top-0 mr-5 mt-4 cursor-pointer rounded transition duration-150 ease-in-out hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600" data-bs-dismiss="modal" aria-label="Close">
