@@ -3584,10 +3584,9 @@ footer .redes-footer .fa-instagram:hover {
     display: -ms-flexbox;
     display: flex;
     width: 100%;
-    height: 550px;
+    height: 400px;
     justify-content: center;
     background-color: #002d87;
-    z-index: 1000;
     padding-top: 17px;
 }
 
@@ -3612,7 +3611,7 @@ footer .redes-footer .fa-instagram:hover {
     height: 660px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background: url(../images/carrusel/Diseño\ sin\ título\(5\).png);
+    background: url(../images/template/pie_pagina.png);
     background-size: cover;
 }
 
