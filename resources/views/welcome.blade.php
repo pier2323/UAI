@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sap_UAI</title>
-    <link rel="shortcut icon" href="/images/template/logo_azul.ico" />
+    <link rel="shortcut icon" href="/images/template/sappl.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/welcome.css" />
     <script src="/js/welcome.js"></script>
+
     <main>
         <div class="et_pb_bottom_inside_divider"></div>
 
@@ -22,7 +23,7 @@
 
                 <!----------Logo CANTV-------------------->
                 <div class="nav_2">
-                    <img src="/images/template/sappp.png" width="140" height="65" id="navbar3">
+                    <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3">
                 </div>
                 <!----------Soporte Aplicaciones---------->
 
@@ -68,74 +69,14 @@
                             @endif
 
                     </div>
-                    <!---   <script>
-                        $(document).ready(function() {
-                            const suggestions = [
-
-                                //Listado Aplicaciones Corporativa
-                                {
-                                    text: "Autocad 2021",
-                                    link: "Paginacion_Menu/Aplicaciones_Corporativas_Autocad2021.html"
-                                },
-
-
-                                // ... puedes agregar más sugerencias según tus necesidades
-                            ];
-
-                            const searchInput = $(".field input");
-                            const suggestionsContainer = $(".suggestions-container");
-                            const scrollableContainer = $("#miScrollableContainer ul");
-
-                            let isMouseDown = false;
-                            let startY, startScrollTop;
-
-                            function showSuggestions() {
-                                const inputValue = searchInput.val().toLowerCase();
-                                const filteredSuggestions = suggestions.filter(suggestion =>
-                                    suggestion.text.toLowerCase().includes(inputValue)
-                                );
-
-                                const suggestionList = filteredSuggestions.map(suggestion =>
-                                    `<li class="suggestion" style="justify-content: center; align-items: center;"><i class="material-symbols-outlined">search</i><a style="color:black;" href="${suggestion.link}" target="_blank">${suggestion.text}</a></li>`
-                                );
-
-                                suggestionsContainer.html(
-                                    `<div class="scrollable-container" id="miScrollableContainer"><ul>${suggestionList.join('')}</ul></div>`
-                                );
-                                suggestionsContainer.toggleClass("show", filteredSuggestions.length > 0);
-
-                                scrollableContainer.on('mousedown', function(e) {
-                                    isMouseDown = true;
-                                    startY = e.clientY;
-                                    startScrollTop = scrollableContainer.scrollTop();
-                                });
-
-                                $(document).on('mousemove', function(e) {
-                                    if (!isMouseDown) return;
-
-                                    const deltaY = e.clientY - startY;
-                                    scrollableContainer.scrollTop(startScrollTop - deltaY);
-                                });
-
-                                $(document).on('mouseup', function() {
-                                    isMouseDown = false;
-                                });
-                            }
-
-                            searchInput.on('input', showSuggestions);
-
-                            $(document).on('click', function(event) {
-                                if (!$(event.target).closest('.search').length) {
-                                    suggestionsContainer.removeClass("show");
-                                }
-                            });
-                        });
-                    </script>-------->
+                   
 
                 </div>
 
             </div>
-
+            <div class="mensaje_1"><marquee> ¡Se a Actualizado en 2024! </marquee></div>
+    
+        </div>
 
 
         </div>
@@ -165,12 +106,41 @@
                         <div class="slider">
 
                             <!----------------------  Titulo de slider  ---------------------------------->
-                            <div style="background-image: url(./images/template/cantv.png); background-size: cover;">
+
+                            <div id="slider_11">
+                                <div class="span" id="sliderValue">
+
+                                    <div class="start animation" style="animation-delay: 0s;">U</div>
+                                    <div class="start animation" style="animation-delay: 0.1s;">i</div>
+                                    <div class="start animation" style="animation-delay: 0.2s;">d</div>
+                                    <div class="start animation" style="animation-delay: 0.3s;">a</div>
+                                    <div class="start animation" style="animation-delay: 0.4s;">d</div>
+                                    <div class="start animation" style="animation-delay: 0.7s;">&nbsp;</div>
+                                    <div class="start animation" style="animation-delay: 0.5s;">A</div>
+                                    <div class="start animation" style="animation-delay: 0.6s;">i</div>
+                                    <div class="start animation" style="animation-delay: 0.8s;">d</div>
+                                    <div class="start animation" style="animation-delay: 0.9s;">i</div>
+                                    <div class="start animation" style="animation-delay: 1s;">t</div>
+                                    <div class="start animation" style="animation-delay: 1.1s;">o</div>
+                                    <div class="start animation" style="animation-delay: 1.2s;">r</div>
+                                    <div class="start animation" style="animation-delay: 1.3s;">i</div>
+                                    <div class="start animation" style="animation-delay: 1.4s;">a</div>
+                                    <div class="start animation" style="animation-delay: 0.7s;">&nbsp;</div>
+                                    <div class="start animation" style="animation-delay: 1.5s;">I</div>
+                                    <div class="start animation" style="animation-delay: 1.6s;">n</div>
+                                    <div class="start animation" style="animation-delay: 1.7s;">t</div>
+                                    <div class="start animation" style="animation-delay: 1.8s;">e</div>
+                                    <div class="start animation" style="animation-delay: 1.8s;">r</div>
+                                    <div class="start animation" style="animation-delay: 1.8s;">n</div>
+                                    <div class="start animation" style="animation-delay: 1.8s;">a</div>
+                                </div>
                             </div>
 
 
-                            <!---------------------------------------------------------------------------->
 
+                            <!---------------------------------------------------------------------------->
+                            <div style="background-image: url(./images/carrusel/prueva2.png); background-size: cover;">
+                            </div>
                             <!-- Slider 2 -->
 
                             <div
@@ -194,19 +164,22 @@
 
                         <div class="prevNext" style="margin-top: -90px;">
                             <div><a href="#s3" style="margin-left: 8px"><i class="fas fa-angle-left fa-2x"><img
-                                            src="/images/iconos/flecha_izquierda.png" style="width: 30px"> </i></a>
-                                <a href="#s2" style="margin-right: 20px"><i class="fas fa-angle-right  fa-2x"> <img
-                                            src="/images/iconos/flecha_Derecha.png" style="width: 30px;"></i></a>
-                            </div>
-                            <div><a href="#s1"><i class="fas fa-angle-left fa-2x" style="color: #e61515d1;">
-                                        < </i></a>
-                                <a href="#s3"><i class="fas fa-angle-right  fa-2x" style="color: #ff0202d1;"> >
+                                            src="/images/iconos/flecha_izquierda.png" style="width: 30px">
                                     </i></a>
+                                <a href="#s2" style="margin-right: 20px"><i class="fas fa-angle-right  fa-2x">
+                                        <img src="/images/iconos/flecha_Derecha.png" style="width: 30px;"></i></a>
                             </div>
-                            <div><a href="#s2"><i class="fas fa-angle-left fa-2x" style="color: #ffffffd1;">
-                                        < </i></a>
-                                <a href="#s1"><i class="fas fa-angle-right  fa-2x" style="color: #ffffffd1;"> >
+                            <div><a href="#s1" style="margin-left: 8px"><i class="fas fa-angle-left fa-2x"><img
+                                            src="/images/iconos/flecha_izquierda.png" style="width: 30px">
                                     </i></a>
+                                <a href="#s3" style="margin-right: 20px"><i class="fas fa-angle-right  fa-2x">
+                                        <img src="/images/iconos/flecha_Derecha.png" style="width: 30px;"></i></a>
+                            </div>
+                            <div><a href="#s2" style="margin-left: 8px"><i class="fas fa-angle-left fa-2x"><img
+                                            src="/images/iconos/flecha_izquierda.png" style="width: 30px">
+                                    </i></a>
+                                <a href="#s1" style="margin-right: 20px"><i class="fas fa-angle-right  fa-2x">
+                                        <img src="/images/iconos/flecha_Derecha.png" style="width: 30px;"></i></a>
                             </div>
 
                         </div>
@@ -218,13 +191,7 @@
 
             <div class="modu_2">
 
-                <img class="svg2" src="" width="100%" height="173px" viewBox="0 0 1280 140"
-                    preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#0C71C3">
-                    <path d="M1280 0l-266 91.52a72.59 72.59 0 0 1-30.76 3.71L0 0v140h1280z" fill-opacity=".5" />
-                    <path d="M1280 0l-262.1 116.26a73.29 73.29 0 0 1-39.09 6L0 0v140h1280z" />
-                </g>
-                </svg>
+
 
                 <div data-aos="fade-up" class="MODU2">
 
@@ -237,7 +204,8 @@
 
                             <div class="novedades_b_12">
                                 <div style="margin-left: 15px;">Velar por el patrimonio de la Compañía Anónima
-                                    Nacional Teléfonos de Venezuela (Cantv) y sus filiales, mediante la realización de
+                                    Nacional Teléfonos de Venezuela (Cantv) y sus filiales, mediante la realización
+                                    de
                                     Auditorías Internas, así como el ejercicio de la potestad investigativa
                                     y procedimientos administrativos para la determinación de
                                     responsabilidades y eventuales acciones fiscales.
@@ -261,7 +229,8 @@
                             <div class="novedades_b_11">
                                 <div style="margin-left: 15px;"> Consolidarse como una dependencia altamente
                                     calificada. de asesoría y apoyo a
-                                    la gestión de la Contraloría General de la República y establecerse como model para
+                                    la gestión de la Contraloría General de la República y establecerse como model
+                                    para
                                     las Unidades de Auditoría Interna de la
                                     Administración Pública
 
@@ -284,7 +253,8 @@
 
                             <div class="novedades_b_11">
                                 <div style="margin-left: 15px;"> Lorem ipsum dolor sit amet consectetur adipisicing
-                                    elit. Reprehenderit illum deserunt laborum architecto assumenda amet ad id, aliquam
+                                    elit. Reprehenderit illum deserunt laborum architecto assumenda amet ad id,
+                                    aliquam
                                     obcaecati earum, a odit, quaerat facere. Asperiores, consequuntur. Expedita
                                     distinctio ipsum eum!
 
@@ -325,57 +295,39 @@
 
                 </div>
                 <!------------------------ Modulo de Siguenos ------------------------------------->
-                
+
                 <!---------------------------------------------------------------------------------->
             </div>
 
-            <div class="modu_4"> Todos los Derechos Reservados / Desarrollado por GOTID - GEYPTI © 2024 /
-                Políticas
+            <div class="modu_4"> Todos los Derechos Reservados / Unidad de Auditoria Interna
                 de Privacidad / Aviso Legal </div>
 
             <div class="modu_5">
 
                 <div class="modu_5_1">
 
-                    <img src="./img/mincyt.png" alt="" width="350" height="45">
+                    <img src="./images/template/mincyt.png" alt="" width="350" height="45">
 
                 </div>
                 <div class="modu_5_2">
 
-                    <img src="./img/logo2.png" alt="" width="155" height="70">
+                    <img src="./images/template/logo2.png" alt="" width="155" height="70">
 
                 </div>
             </div>
-            <script src="js/main.js"></script>
-            <script src="./js/titulo_slider_1.js"></script>
-            <script src="js/popup.js"></script>
-            <script src="js/popup2.js"></script>
-            <script src="js/popup3.js"></script>
-            <script src="js/jquery.js"></script>
-            <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/slider.js"></script>
-            <script src="js/particles.min.js"></script>
-            <script src="js/app6_inicio.js"></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-            <script src="js/script_barra_de_busqueda.js"></script>
-            <script src="js/script_barra_lista.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="js/codigo.js"></script>
-            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js'></script>
-            <script src="./js/style_slider_cor.js"></script>
 
 
+
+
+            <script src="./js/corporativa/titulo_slider_1.js"></script>
+            <script src="./js/corporativa/aos.js"></script>
+            <script src="./js/corporativa/flickity.pkgd.min.js"></script>
+            <script src="./js/corporativa/jquery-3.6.0.min.js"></script>
+            <script src="./js/corporativa/jquery.min.js"></script>
             <script>
                 AOS.init();
             </script>
-
-
-            <script src="./js/efecto_barra_nav.js"></script>
-
-
-
-            </body>
+        </div>
+    </main>
 
 </html>
