@@ -25,17 +25,7 @@
                 <div class="nav_2">
                     <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3">
                 </div>
-                <!----------Soporte Aplicaciones---------->
-
-                <!---------- panel de navegacion ------------>
-
-                <!------------------------------------------->
-
-                <!----------Soporte Canaima--------------->
-
-                <!----------Imagenes Corporativas------------>
-
-                <!-------------------------------------------->
+               
                 <div class="nav_4">
 
                     <!-- partial:index.partial.html -->
@@ -139,19 +129,19 @@
 
 
                             <!---------------------------------------------------------------------------->
-                            <div style="background-image: url(./images/carrusel/prueva2.png); background-size: cover;">
+                            <div style="background-image: url(./images/carrusel/carrisel1.png); background-size: cover;">
                             </div>
                             <!-- Slider 2 -->
 
                             <div
-                                style="background-image: url(./img/Banwer-web-1920px-X-1280px-azul.jpg); background-size: cover;">
+                                style="background-image: url(./images/carrusel/carrusel2.gif); background-size: cover;">
                             </div>
 
                             <!------------------------------------------------------------->
 
                             <!-- Slider 3-->
 
-                            <div style="background-image: url(./img/div3/1.png); background-size: cover;">
+                            <div style="background-image: url(./images/carrusel/carusel3.png); background-size: cover;">
                             </div>
                             <!------------------------------------------------------------->
                             <!-- Slider 4-->
