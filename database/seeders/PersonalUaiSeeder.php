@@ -199,20 +199,6 @@ class PersonalUaiSeeder extends Seeder
                 'foto_perfil' => '/images/uai/150389.jpg',
               ],
               [
-                'p00' => '154264',
-                'cedula' => '13872885',
-                'primer_nombre' => 'MARIA',
-                'segundo_nombre' => 'ANDREINA',
-                'primer_apellido' => 'BASTIDAS',
-                'segundo_apellido' => 'AVENDAÑO',
-                'cargo_id' => 4,
-                'uai_id' => 6,
-                'telefono' => '4168280138',
-                'gmail' => 'mbast.uai@gmail.com',
-                'email_cantv' => 'mbasti01@cantv.com.ve',
-                'foto_perfil' => '/images/uai/154264.jpg',
-              ],
-              [
                 'p00' => '155501',
                 'cedula' => '5223346',
                 'primer_nombre' => 'ELIZABETH',
@@ -227,20 +213,6 @@ class PersonalUaiSeeder extends Seeder
                 'foto_perfil' => '/images/uai/155501.jpg',
               ],
               [
-                'p00' => '128947',
-                'cedula' => '13600736',
-                'primer_nombre' => 'JOENMERY',
-                'segundo_nombre' => 'LUCIA',
-                'primer_apellido' => 'SUAREZ',
-                'segundo_apellido' => 'PEREIRA',
-                'cargo_id' => 3,
-                'uai_id' => 6,
-                'telefono' => '4265369616',
-                'gmail' => 'jsuare04.uai@gmail.com',
-                'email_cantv' => 'jsuare04@cantv.com.ve',
-                'foto_perfil' => '/images/uai/128947.jpg',
-              ],
-              [
                 'p00' => '206397',
                 'cedula' => '10381685',
                 'primer_nombre' => 'ZENOBIO',
@@ -253,9 +225,7 @@ class PersonalUaiSeeder extends Seeder
                 'gmail' => 'zorope.uai@gmail.com',
                 'email_cantv' => 'zorope@cantv.com.ve',
                 'foto_perfil' => '/images/uai/206397.jpg',
-              ],
-              
-              [
+              ],[
                 'p00' => '146196',
                 'cedula' => '10584414',
                 'primer_nombre' => 'MARIA',
