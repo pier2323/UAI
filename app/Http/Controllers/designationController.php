@@ -7,6 +7,7 @@ use App\Models\PersonalUai;
 use App\Services\DesignationService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class designationController extends Controller
 {
@@ -21,16 +22,12 @@ class designationController extends Controller
         return view('designation.index', ['personal' => PersonalUai::all()]);
     }
 
-    public function download(Request $request)
+    public function download(Request $request): BinaryFileResponse|Request
     {
+        return $request;
         // Generate the document content in memory
         $document = $this->designationService->generate($request);
 
         return $document;
-        // $header = [
-        //     'Content-Type : aplication/octet-stream',
-        // ];
-
-        // return response()->download($document, 'document01.docx', $header)->deleteFileAfterSend(true);
     }
 }
