@@ -2,16 +2,15 @@
 
 namespace App\Services;
 
-// use PhpOffice\PhpWord\PhpWord;
-
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Models\ActuacionFiscal;
 use App\Models\PersonalUai;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Response;
 use PhpOffice\PhpWord\TemplateProcessor;
-use PhpOffice\PhpWord\PhpWord;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Date;
+// use PhpOffice\PhpWord\PhpWord;
+// use Illuminate\Support\Facades\Storage;
 
 class DesignationService
 {
@@ -37,11 +36,17 @@ class DesignationService
     private $pathDocument;
     private $formatDate = 'd/m/Y';
     private $date;
-    public function generate($request)
+
+    /**
+     * Summary of generate
+     * @param mixed $request
+     * @return BinaryFileResponse
+     */
+    public function generate($request):BinaryFileResponse
     {
         //* RUTA TEMPORAL DEL DOCUMENTO 
         $this->pathDocument = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
-        $this->date = Carbon::now();
+        $this->date = Carbon::parse("2024-04-10");
 
         /**
          * todo Obtener los auditores y el coordinador de la designacion y ordernar el string 
@@ -60,74 +65,73 @@ class DesignationService
 
         $diasPlanificacion = 5;
         //* FECHA DE FASE DE PLANIFICACION 
-        $fechaPlanificacionInicio = $this->date->format($this->formatDate);
-        $diasPlanificacion = $diasPlanificacion+$this->countDays($fechaPlanificacionInicio, $this->excludedDates, $diasPlanificacion);
-        $fechaPlanificacionFin = $this->date->addDays($diasPlanificacion)->format($this->formatDate);
+        $fechaPlanificacionInicio = $this->toFormat($this->date);
+        $diasPlanificacion = $diasPlanificacion+$this->countDays($fechaPlanificacionInicio, $diasPlanificacion);
+        $fechaPlanificacionFin = $this->toFormat($this->addDays($diasPlanificacion));
         $diasPlanificacion = 5;
         
         //* FECHA DE FASE DE EJECUCION 
         $diasEjecucion = 10;
-        $fechaEjecucionInicio = $this->date->addDays(1+$this->countDays($this->date->toDateString(), $this->excludedDates, 2))->toDateString();
-        $diasEjecucion = $diasEjecucion+$this->countDays($fechaEjecucionInicio, $this->excludedDates, $diasEjecucion);
-        $fechaEjecucionFin = $this->date->addDays($diasEjecucion)->format($this->formatDate);
+        $fechaEjecucionInicio = $this->toFormat($this->addDays(1));
+        $diasEjecucion = $diasEjecucion+$this->countDays($fechaEjecucionInicio, $diasEjecucion);
+        $fechaEjecucionFin = $this->toFormat($this->addDays($diasEjecucion));
         $diasEjecucion = 10;
 
         //* FECHA DE FASE DE INFORME PREELIMINAR 
         $diasPreeliminar = 10;
-        $fechaPreeliminarInicio = $this->date->addDays(1+$this->countDays($this->date->toDateString(), $this->excludedDates, 2))->toDateString();
-        $diasPreeliminar = $diasPreeliminar+$this->countDays($fechaPreeliminarInicio, $this->excludedDates, $diasPreeliminar);
-        $fechaPreeliminarFin = $this->date->addDays($diasPreeliminar)->format($this->formatDate);
+        $fechaPreeliminarInicio = $this->toFormat($this->addDays(1));
+        $diasPreeliminar = $diasPreeliminar+$this->countDays($fechaPreeliminarInicio, $diasPreeliminar);
+        $fechaPreeliminarFin = $this->toFormat($this->addDays($diasPreeliminar));
         $diasPreeliminar = 10;
 
 
         //* FECHA DE FASE DE DESCARGO 
         $diasDescargo = 10;
-        $fechaDescargoInicio = $this->date->addDays(1+$this->countDays($this->date->toDateString(), $this->excludedDates, 2))->toDateString();
-        $diasDescargo = $diasDescargo+$this->countDays($fechaDescargoInicio, $this->excludedDates, $diasDescargo);
-        $fechaDescargoFin = $this->date->addDays($diasDescargo)->format($this->formatDate);
+        $fechaDescargoInicio = $this->toFormat($this->addDays(1));
+        $diasDescargo = $diasDescargo+$this->countDays($fechaDescargoInicio, $diasDescargo);
+        $fechaDescargoFin = $this->toFormat($this->addDays($diasDescargo));
         $diasDescargo = 10;
 
 
         //* FECHA DE FASE DE INFORME DEFINITIVO 
         $diasDefinitivo = 5;
-        $fechaDefinitivoInicio = $this->date->addDays(1+$this->countDays($this->date->toDateString(), $this->excludedDates, 2))->toDateString();
-        $diasDefinitivo = $diasDefinitivo+$this->countDays($fechaDefinitivoInicio, $this->excludedDates, $diasDefinitivo);
-        $fechaDefinitivoFin = $this->date->addDays($diasDefinitivo)->format($this->formatDate);
+        $fechaDefinitivoInicio = $this->toFormat($this->addDays(1));
+        $diasDefinitivo = $diasDefinitivo+$this->countDays($fechaDefinitivoInicio, $diasDefinitivo);
+        $fechaDefinitivoFin = $this->toFormat($this->addDays($diasDefinitivo));
         $diasDefinitivo = 5;
 
-
         $data =
-            [
+        [
                 'año' => $año,
                 'actuacionFiscal' => $actuacion->id,
                 'fechaInicio' => $fechaInicio,
                 'tituloActuacion' => $actuacion->target,
                 'auditores' => implode($saltoEnLinea, $this->auditors),
+                
                 'diasPlanificacion' => $diasPlanificacion,
-                'fechaPlanificacionInicio' => $fechaPlanificacionInicio,
-                'fechaPlanificacionFin' => $fechaPlanificacionFin,
+                'fechaPlanificacionInicio' => Carbon::parse($fechaPlanificacionInicio)->format($this->formatDate),
+                'fechaPlanificacionFin' => Carbon::parse($fechaPlanificacionFin)->format($this->formatDate),
+                
                 'diasEjecucion' => $diasEjecucion,
                 'fechaEjecucionInicio' => Carbon::parse($fechaEjecucionInicio)->format($this->formatDate),
-                'fechaEjecucionFin' => $fechaEjecucionFin,
+                'fechaEjecucionFin' => Carbon::parse($fechaEjecucionFin)->format($this->formatDate),
+                
                 'diasPreeliminar' => $diasPreeliminar,
                 'fechaPreeliminarInicio' => Carbon::parse($fechaPreeliminarInicio)->format($this->formatDate),
-                'fechaPreeliminarFin' => $fechaPreeliminarFin,
+                'fechaPreeliminarFin' => Carbon::parse($fechaPreeliminarFin)->format($this->formatDate),
+                
                 'diasDescargo' => $diasDescargo,
                 'fechaDescargoInicio' => Carbon::parse($fechaDescargoInicio)->format($this->formatDate),
-                'fechaDescargoFin' => $fechaDescargoFin,
+                'fechaDescargoFin' => Carbon::parse($fechaDescargoFin)->format($this->formatDate),
                 'diasDefinitivo' => $diasDefinitivo,
                 'fechaDefinitivoInicio' => Carbon::parse($fechaDefinitivoInicio)->format($this->formatDate),
-                'fechaDefinitivoFin' => $fechaDefinitivoFin,
+                'fechaDefinitivoFin' => Carbon::parse($fechaDefinitivoFin)->format($this->formatDate),
             ];
 
-        return $data;
-
         $this->create($data);
+
         return Response::download($this->pathDocument, $this->nameDocument);
     }
-
-
-
 
     /**
      * todo [silvia vargas, coordinador]
@@ -147,6 +151,11 @@ class DesignationService
         }
     }
 
+    /**
+     * Summary of create
+     * @param array $data
+     * @return void
+     */
     private function create(array $data): void
     {
         $template = new TemplateProcessor($this->templateFile);
@@ -157,74 +166,45 @@ class DesignationService
     /**
      * Summary of countDays
      * @param string $startDate // * "08/05/2024" 
-     * @param array $excludedDates 
      * @param int $workDays
      * @return int
      */
-    private function countDays(string $startDate, array $excludedDates, int $workDays): int
+    private function countDays(string $startDate, int $workDays): int
     {
         $current = Carbon::parse($startDate);
-        $days = 0;
+        $weekEndDays = 0;
 
-        for ($i = 0; $i <= $workDays+1; $i++) 
+        for ($i = 0; $i <= $workDays; $i++) 
         {
             // in_array($current->format('d/m/Y'), $excludedDates) || //! fase dos 
             if ($current->isWeekEnd()) 
             {
-                $days++;
+                $weekEndDays++;
             }
             $current->addDay();
-            echo "current es: ".$current->format('d/m/Y'). " fecha: ".$current->isWeekend()."<br>";
         }
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        return $days;
+
+        return $weekEndDays;
+    }
+    
+    /**
+     * Summary of addDays
+     * @param int $days
+     * @return \Carbon\Carbon
+     */
+    private function addDays(int $days): Carbon
+    {
+        $this->date->addDays($days);
+        while ($this->date->isWeekend()) 
+        {
+            $this->date->addDay();
+        }
+
+      return $this->date;
+    }
+
+    private function toFormat (Carbon $date): string
+    {
+        return $date->toDateString();
     }
 }
