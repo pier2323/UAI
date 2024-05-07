@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/welcome.css" />
-    <script src="/js/welcome.js"></script>
+
 
     <main>
         <div class="et_pb_bottom_inside_divider"></div>
@@ -25,7 +25,7 @@
                 <div class="nav_2">
                     <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3">
                 </div>
-               
+
                 <div class="nav_4">
 
                     <!-- partial:index.partial.html -->
@@ -35,7 +35,9 @@
                                 @auth
                                     <a href="{{ url('/dashboard') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                        Dashboard
+                                        <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                            Aplicación
+                                        </FONT>
                                     </a>
                                 @else
                                     <a href="{{ route('login') }}"
@@ -59,13 +61,15 @@
                             @endif
 
                     </div>
-                   
+
 
                 </div>
 
             </div>
-            <div class="mensaje_1"><marquee> ¡Se a Actualizado en 2024! </marquee></div>
-    
+            <div class="mensaje_1">
+                <marquee> ¡Se a Actualizado en 2024! </marquee>
+            </div>
+
         </div>
 
 
@@ -129,7 +133,8 @@
 
 
                             <!---------------------------------------------------------------------------->
-                            <div style="background-image: url(./images/carrusel/carrisel1.png); background-size: cover;">
+                            <div
+                                style="background-image: url(./images/carrusel/carrisel1.png); background-size: cover;">
                             </div>
                             <!-- Slider 2 -->
 
@@ -141,7 +146,8 @@
 
                             <!-- Slider 3-->
 
-                            <div style="background-image: url(./images/carrusel/carusel3.png); background-size: cover;">
+                            <div
+                                style="background-image: url(./images/carrusel/carusel3.png); background-size: cover;">
                             </div>
                             <!------------------------------------------------------------->
                             <!-- Slider 4-->
