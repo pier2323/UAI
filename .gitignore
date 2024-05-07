@@ -10,4 +10,9 @@ storage/framework/cache/data/
 storage/framework/cache/meta/
 storage/framework/views/
 storage/framework/testing/
+uai_post/pgdata/
+public/storage/
+public/hot/
+public/storage
+public/hot
 *.env
