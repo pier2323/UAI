@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  <link rel="shortcut icon" href="/images/template/sappl.png"  />
+  <link rel="shortcut icon" href="/images/template/sappl.png" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -12,15 +12,17 @@
   <link rel="stylesheet" href="/css/bootstrap/app.css" />
   <link rel="stylesheet" href="/css/bootstrap/styles.css" />
   <link rel="stylesheet" href="/css/bootstrap/all.min.css" />
-  
+
   {{-- * links bootstrap --}}
   <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="/css/bootstrap/dataTables.bootstrap5.min.css" />
-  
+
   {{-- * Scripts --}}
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  
+
   {{-- * Styles library --}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="/css/intlTelInput.css">
   @livewireStyles
   {{-- * Bootstrap --}}
