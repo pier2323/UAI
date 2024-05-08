@@ -9,10 +9,11 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="./images/carrusel/carusel3.png" class="d-block w-100" alt="1">
+                <img src="./images/carrusel/Diseño8).png" class="d-block w-100" alt="1">
             </div>
-
-
+            <div class="carousel-item ">
+                <img src="./images/carrusel/carusel3.png" class="d-block w-100" alt="2">
+            </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
             data-bs-slide="prev">
@@ -25,50 +26,43 @@
             <span class="visually-hidden"></span>
         </button>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class=" icono col">
+                <a href="{{ route('profile.show') }}">
+                    <div class="iconoA">
+                        <img src="/images/iconos/administracion.png" width="100px"
+                            height="100px"style="margin-left: 75px;margin-right: 80px;">
+                    </div>
+                </a>
 
-    <div class="icono">
-        <a href="{{ route('profile.show') }}">
-            <div class="iconoA">
-                <img src="/images/iconos/administracion.png" width="100px"
-                    height="100px"style="margin-left: 75px;margin-right: 80px;">
-            </div>
-        </a>
+                <a href="{{ route('dashboard') }}">
+                    <div class="iconoB">
+                        <img src="/images/iconos/plan.png" width="84px" height="100px"
+                            style="margin-left: 100px;margin-right: 80px;">
+                        </button>
 
-        <a href="{{ route('dashboard') }}">
-            <div class="iconoB">
-                <img src="/images/iconos/plan.png" width="84px" height="100px"
-                    style="margin-left: 100px;margin-right: 80px;">
-                </button>
+                    </div>
+                </a>
+                <a href="{{ route('personal-uai.dashboard') }}">
+                    <div class="iconoC">
+                        <img src="/images/iconos/personal.png" width="110px"
+                            height="100px"style="margin-left: 100px;margin-right: 80px;">
+                        </button>
 
-            </div>
-        </a>
-        <a href="{{ route('personal-uai.dashboard') }}">
-            <div class="iconoC">
-                <img src="/images/iconos/personal.png" width="110px"
-                    height="100px"style="margin-left: 100px;margin-right: 80px;">
-                </button>
+                    </div>
+                </a>
+                <a href="{{ route('dashboard-viejo') }}">
+                    <div class="iconoD">
+                        <img src="/images/iconos/Actas.png" width="95px"
+                            height="100px">
+                        </button>
 
-            </div>
-        </a>
-        <a href="{{ route('dashboard-viejo') }}">
-            <div class="iconoD">
-                <img src="/images/iconos/Actas.png" width="95px"
-                    height="100px"style="margin-left: 100px;margin-right: 80px;">
-                </button>
-
-            </div>
-        </a>
-        <a href="{{ route('dashboard-viejo') }}">
-            <div class="iconoE">
-                <img src="/images/iconos/Actuacion.png" width="110px"
-                    height="100px"style="margin-left: 100px;margin-right: 140px;">
-                </button>
+                    </div>
+                </a>
 
             </div>
-        </a>
+        </div>
     </div>
-
-
-
-
+    <x-footer></x-footer>
 </x-app-layout>
