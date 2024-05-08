@@ -1,9 +1,5 @@
 <x-app-layout>
-
-  <link rel="stylesheet"
-    href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <x-section-basic>
 
 
   <form action="{{ route('designation.download') }}" method="POST">
@@ -74,46 +70,38 @@
 
 
 
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <div class="text-center mt-20">
-        <lable class="text-lg font-semibold">Choose Date</lable> <br>
-        <input id="datepicker" class="border-2 border-gray-300 rounded px-3 py-2 w-56" type="text"
-            placeholder="Select a date">
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        flatpickr("#datepicker", {
-            // Configuration options for Flatpickr
-            // You can customize the appearance and behavior here
-        });
-    </script>
+      <lable class="text-lg font-semibold">Fecha de la Fase de Planificacion:</lable> <br>
+      <div>
+        <input id="" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="text" placeholder="04/04/2024"> -
+        <input id="" class="datepicker border-2 border-gray-300 rounded px-3 py-2 w-56" type="text" placeholder="04/0/2024">
+      </div>
+  </div>
+</form>
 
 
 
 
 
 
+{{-- todo flatpickr script --}}
+<script>flatpickr(".datepicker", {});</script>
 
-
-
-  </form>
-
-  <script>
-    function data() {
-      return {
-        inputs: 1,
-        addInput() {
-          this.inputs++;
-        },
-        removeInput() {
-          if (this.inputs > 1) {
-            this.inputs--;
-          }
+{{-- todo add Auditor --}}
+<script>
+function data() {
+  return {
+    inputs: 1,
+    addInput() {
+      this.inputs++;
+    },
+    removeInput() {
+        if (this.inputs > 1) {
+          this.inputs--;
         }
       }
     }
-  </script>
+  }
+</script>
+</x-section-basic>
 </x-app-layout>
