@@ -63,60 +63,25 @@
               </tr>
             @endforeach
           </x-table>
-          <livewire:counter />
+       {{--    <livewire:counter /> --}}
         </div>
       </div>
     </div>
   </div>
-   <div x-data="main()">
+{{--    <div x-data="main()">
     <button @click="incrementar">Incrementar</button>
     <span x-text="contador"></span>
 </div>
 
 <script>
     function main() {
-        return {
+        return 
+        {
             contador: 15,
             incrementar: function() {
                 return this.contador++
             }
         }
     }
-</script>
-<footer>
-  <div class="pie-de-pagina-contenedor">
-    <figure>
-      <img src="/images/template/sappp.png" alt="Descripción de la imagen">
-   
-    </figure>
-    <FONT class="mt-4 text-sm/relaxed " COLOR="white"
-    style="margin-right: 30px;">
-    <p>Unidad Auditoria Interna</p>
-  
-    <p style="margin-left: 45px";>&copy; cantv2024</p>
-
-    </FONT>
-  </div>
-</footer>
- 
+</script> --}}
 </x-app-layout>
-<style>
-  .pie-de-pagina-contenedor {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #0a4275
-}
-
-figure {
-  margin-left: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  
-}
-
-img {
-  width: 160px; /* Ajustar el ancho según sea necesario */
-}
-
-</style>

@@ -1,8 +1,8 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="Azul">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+        <div class="flex justify-between h-16 ">
+            <div class="flex white">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -10,25 +10,25 @@
                     </a>
                 </div>
 
-                <!-- Navigation Acta -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <!-- Navigation Acta --> 
+                <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                    
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                     Inicio
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" style="color: white;">
+                     <h1>Inicio</h1>
                     </x-nav-link>
                 </div>
 
                 <!-- Navigation Acta -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                   
-                    <x-nav-link href="{{ route('dashboard-viejo') }}" :active="request()->routeIs('dashboard-viejo')">
+                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white" >
+
+                    <x-nav-link href="{{ route('dashboard-viejo') }}" :active="request()->routeIs('dashboard-viejo')" style="color: white">
                      Actuaciones Fiscales
                     </x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                    
-                    <x-nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai*')">
+                    <x-nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai*')"  style="color: white">
                         personal UAI
                     </x-nav-link>
                 </div>

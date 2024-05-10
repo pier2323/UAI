@@ -8,7 +8,7 @@
     <div class="py-12" style="margin-bottom: 160px;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2" >
+                <div class="px-4 py-2">
                     <div class="bg-gray-10 bg-opacity-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
                         <div class="container my-4 bg-white">
                             <div class="row">
@@ -20,7 +20,7 @@
                                     <div id="datatable_users_wrapper"
                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                         <div class="col-sm-12">
-                                          @include('personal-uai.modal')
+                                            @include('personal-uai.modal')
                                         </div>
                                     </div>
                                 </div>
@@ -52,15 +52,15 @@
                                     <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
                                         style="width: 60px" aria-label="Status">
                                         Cédula
-                                    
+
                                     </th>
                                     <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
                                         style="width: 60px" aria-label="Status"> Télefono
                                     </th>
-                                </th>
-                                <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
-                                    style="width: 60px" aria-label="Detalles "> Detalles 
-                                </th>
+                                    </th>
+                                    <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 60px" aria-label="Detalles "> Detalles
+                                    </th>
 
                                 </tr>
                             </thead>
@@ -78,7 +78,9 @@
                                 <td class="px-4 py-2">{{ $personalUai['email_cantv'] }}</td>
                                 <td class="px-4 py-2">{{ $personalUai['cedula'] }}</td>
                                 <td class="px-4 py-2">{{ $personalUai['telefono'] }}</td>
-                                <td class="px-4 py-2"><a href="{{route('personal-uai.show', ['personal' => $personalUai->id])}}"><img  src="/images/template/ojo.png" width="30" height="30"></a></td>
+                                <td class="px-4 py-2"><a
+                                        href="{{ route('personal-uai.show', ['personal' => $personalUai->id]) }}"><img
+                                            src="/images/template/ojo.png" width="30" height="30"></a></td>
                             </tr>
                         @endforeach
                     </x-table>
@@ -87,42 +89,5 @@
         </div>
     </div>
 
-    <footer>
-        <div class="pie-de-pagina-contenedor">
-            <figure>
-                <img  src="/images/template/sappp.png" alt="Descripción de la imagen">
 
-            </figure>
-            <FONT class="mt-4 text-sm/relaxed " COLOR="white" style="margin-right: 30px;">
-                <p   style="margin-right: 30px;">
-                    <p>Unidad Auditoria Interna</p>
-        
-                <p style="margin-left: 45px";>&copy; cantv2024</p>
-
-            </FONT>
-        </div>
-    </footer>
-    <style>
-        .pie-de-pagina-contenedor {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #0a4275
-      }
-      
-  
-      figure {
-            margin-left: 30px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 160px;
-
-        }
-
-       
-      
-      
-      </style>
-
-    
 </x-app-layout>

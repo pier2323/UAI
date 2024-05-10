@@ -15,12 +15,12 @@ xmlns="http://www.w3.org/2000/svg">
 
   <div class="modu_5_1">
 
-      <img src="./images/template/mincyt.png" alt="" width="350" height="45">
+      <img src="/images/template/mincyt.png" alt="" width="350" height="45">
 
   </div>
   <div class="modu_5_2">
 
-      <img src="./images/template/logo2.png" alt="" width="155" height="70">
+      <img src="/images/template/logo2.png" alt="" width="155" height="70">
 
   </div>
 </div>
