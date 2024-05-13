@@ -1,26 +1,4 @@
-
-<style>
-.modal-header-2 {
-    background-image: url("/images/template/cantv.png");
-    background-size: cover;
-    color: #fff;
-
-}
-.modal-footer-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-#modalBody-centro{
-    overflow: auto;
-    height: 70vh;
-    scroll-behavior: auto
-}
-#exampleModal{
-    overflow: hidden;
-}
-</style>
+<link rel="stylesheet" href="/css/modal.css">
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -33,9 +11,7 @@
                 <p class="font-sans font-semibold  display:flex  justify-content:center">
                     Datos del Saliente
                    </p>
-
                 <form>
-
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre </label>
                         <input type="text" class="form-control" id="recipient-name" />
@@ -53,12 +29,9 @@
                         <label for="recipient-name" class="col-form-label">Gerencia </label>
                         <input type="text" class="form-control" id="recipient-cedula" />
                         <br>
-
-                        
                         <p class="font-sans font-semibold  display:flex  justify-content:center">
                          Datos del Entrante
                         </p>
-
                     </div>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nombre </label>
@@ -68,7 +41,6 @@
                         <label for="recipient-name" class="col-form-label">Apellido </label>
                         <input type="text" class="form-control" id="recipient-name" />
                     </div>
-
                     <label for="recipient-name" class="col-form-label">Teléfono </label>
                     <input type="text" class="form-control" id="recipient-cedula" />
                     <label for="recipient-name" class="col-form-label">Cédula </label>
