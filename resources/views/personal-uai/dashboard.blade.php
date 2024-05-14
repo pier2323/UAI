@@ -24,7 +24,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <x-table>
@@ -59,7 +58,6 @@
                                     <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
                                         style="width: 60px" aria-label="Detalles "> Detalles
                                     </th>
-
                                 </tr>
                             </thead>
                         </x-slot>

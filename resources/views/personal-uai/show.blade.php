@@ -4,18 +4,16 @@
       {{ __('Dashboard') }}
     </h2>
   </x-slot>
-
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
         <div class="px-4 py-2">
           <section
             class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
-            <div style="overflow:hidden ; border: 1px solid #777; border-radius: 20px" class="border-slate-500">
+            <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px" class="border-slate-500">
               <img alt="foto de perfil" style="width: 15vw" src="{{ "$personal->foto_perfil" }}" />
             </div>
             <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
-
               <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
                 <li class="flex items-end">
                   <h2 class="mt-4 text-2xl font-semibold">

@@ -5,41 +5,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sap_UAI</title>
+    <!-- icono del buscador  -->
     <link rel="shortcut icon" href="/images/template/sappl.png" />
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/welcome.css" />
     <main>
         <div class="et_pb_bottom_inside_divider"></div>
-
-        <div class="contenedor_nav">
-
-
+        <div class="contenedor_nav ">
             <div class="nav_1" id="navbar2">
-
-                <!----------Logo CANTV-------------------->
+                <!----------Logo CANTV Blanco-------------------->
                 <div class="nav_2">
                     <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3">
                 </div>
-
                 <div class="nav_4">
-
                     <!-- partial:index.partial.html -->
-                    <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog" style="margin-right: 8px;"></i>
+                    <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog" style="margin-right: 9px;"></i>
                             @if (Route::has('login'))
-
                                 @auth
                                     <a href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                             Aplicación
                                         </FONT>
                                     </a>
                                 @else
                                     <a href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                             Inicio
                                         </FONT>
@@ -63,8 +55,7 @@
                 <marquee> ¡Se a Actualizado en 2024! </marquee>
             </div>
         </div>
-        </div>
-        <!-------------------- Modulo 3 iconos circulares -------------------->
+        <!-------------------- controladores del carrusel -------------------->
         <div class="slider_1">
             <div class="slider_2">
                 <div class="slider_completo">
@@ -73,49 +64,22 @@
                         <s id="s2"></s>
                         <s id="s3"></s>
                         <div class="slider">
-                            <!----------------------  Titulo de slider  ---------------------------------->
+                            <!---------------------- letras en movimiento  ---------------------------------->
                             <div id="slider_11">
                                 <div class="span" id="sliderValue">
-                                    <div class="start animation" style="animation-delay: 0s;">U</div>
-                                    <div class="start animation" style="animation-delay: 0.1s;">i</div>
-                                    <div class="start animation" style="animation-delay: 0.2s;">d</div>
-                                    <div class="start animation" style="animation-delay: 0.3s;">a</div>
-                                    <div class="start animation" style="animation-delay: 0.4s;">d</div>
-                                    <div class="start animation" style="animation-delay: 0.7s;">&nbsp;</div>
-                                    <div class="start animation" style="animation-delay: 0.5s;">A</div>
-                                    <div class="start animation" style="animation-delay: 0.6s;">i</div>
-                                    <div class="start animation" style="animation-delay: 0.8s;">d</div>
-                                    <div class="start animation" style="animation-delay: 0.9s;">i</div>
-                                    <div class="start animation" style="animation-delay: 1s;">t</div>
-                                    <div class="start animation" style="animation-delay: 1.1s;">o</div>
-                                    <div class="start animation" style="animation-delay: 1.2s;">r</div>
-                                    <div class="start animation" style="animation-delay: 1.3s;">i</div>
-                                    <div class="start animation" style="animation-delay: 1.4s;">a</div>
-                                    <div class="start animation" style="animation-delay: 0.7s;">&nbsp;</div>
-                                    <div class="start animation" style="animation-delay: 1.5s;">I</div>
-                                    <div class="start animation" style="animation-delay: 1.6s;">n</div>
-                                    <div class="start animation" style="animation-delay: 1.7s;">t</div>
-                                    <div class="start animation" style="animation-delay: 1.8s;">e</div>
-                                    <div class="start animation" style="animation-delay: 1.8s;">r</div>
-                                    <div class="start animation" style="animation-delay: 1.8s;">n</div>
-                                    <div class="start animation" style="animation-delay: 1.8s;">a</div>
                                 </div>
                             </div>
-
+                            <!---------------------- imagenes del carrusel ---------------------------------->
                             <div
                                 style="background-image: url(./images/carrusel/carrisel1.png); background-size: cover;">
                             </div>
-                            <!-- Slider 2 -->
                             <div
                                 style="background-image: url(./images/carrusel/carrusel2.gif); background-size: cover;">
                             </div>
-                            <!------------------------------------------------------------>
-                            <!-- Slider 3-->
-
-                            <div
-                                style="background-image: url(./images/carrusel/carusel3.png); background-size: cover;">
+                            <div style="background-image: url(./images/carrusel/carusel3.png); background-size: cover;">
                             </div>
                         </div>
+                        <!---------------------- iconos  de las fechas del carrusel  ---------------------------------->
                         <div class="prevNext" style="margin-top: -90px;">
                             <div><a href="#s3" style="margin-left: 8px"><i class="fas fa-angle-left fa-2x"><img
                                             src="/images/iconos/flecha_izquierda.png" style="width: 30px">
@@ -139,9 +103,10 @@
                     </div>
                 </div>
             </div>
+            <!-- iconos de mision ,vison y objectivo -->
             <div class="modu_2">
                 <div data-aos="fade-up" class="MODU2">
-                    <a  class="botones_espacio_1">
+                    <a class="botones_espacio_1">
                         <img src="/images/iconos/Misicion.png" alt="" width="180" height="190">
                         <div class="texto_1"> Misión </div>
                         <div class="novedades_b1">
@@ -189,7 +154,6 @@
                     </div>
                 </div>
             </div>
-            <!-------------------------------------------------------------->
             <div class="modu_3">
                 <svg class="svg3" width="100%" height="100px" viewBox="0 0 1280 140" preserveAspectRatio="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -202,8 +166,7 @@
                 <div class="app_extra_cor" data-aos="fade-up">
                     <div class="caja_enlace_1"></div>
                 </div>
-                <!------------------------ Modulo de Siguenos ------------------------------------->
-                <!---------------------------------------------------------------------------------->
+                <!------------------------ pie de pagina  ------------------------------------->
             </div>
             <div class="modu_4"> Todos los Derechos Reservados / Unidad de Auditoria Interna
                 de Privacidad / Aviso Legal </div>
@@ -225,4 +188,5 @@
             </script>
         </div>
     </main>
+
 </html>

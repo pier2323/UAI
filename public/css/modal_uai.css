@@ -1,0 +1,48 @@
+.modal-header-2 {
+    background-image: url("/images/template/cantv.png");
+    background-size: cover;
+    color: #fff;
+}
+
+.modal-footer-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalBody-centro {
+    overflow: auto;
+    height: 70vh;
+    scroll-behavior: auto
+}
+
+.iti {
+    --iti-path-flags-1x: url('/images/flags/flags.png');
+    --iti-path-globe-1x: url('/images/flags/globe.png');
+    --iti-path-flags-2x: url('/images/flags/flags@2x.png');
+    --iti-path-globe-2x: url('/images/flags/globe@2x.png');
+}
+
+.zona-carga-active {
+    border: 1px dashed #ccc;
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+#zona-carga p {
+    margin: 0;
+}
+
+#zona-carga img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+#zona-carga.hover {
+    border-color: #007bff;
+    /* Change border color to blue on hover */
+    background-color: #e8f0fe;
+    /* Add a subtle background color */
+}

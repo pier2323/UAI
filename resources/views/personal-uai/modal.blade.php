@@ -1,55 +1,4 @@
-<style>
-  .modal-header-2 {
-    background-image: url("/images/template/cantv.png");
-    background-size: cover;
-    color: #fff;
-  }
-
-  .modal-footer-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #modalBody-centro {
-    overflow: auto;
-    height: 70vh;
-    scroll-behavior: auto
-  }
-
-  .iti {
-    --iti-path-flags-1x: url('/images/flags/flags.png');
-    --iti-path-globe-1x: url('/images/flags/globe.png');
-    --iti-path-flags-2x: url('/images/flags/flags@2x.png');
-    --iti-path-globe-2x: url('/images/flags/globe@2x.png');
-  }
-
-  .zona-carga-active {
-    border: 1px dashed #ccc;
-    text-align: center;
-    padding: 20px;
-    margin: 20px auto;
-  }
-
-  #zona-carga p {
-    margin: 0;
-  }
-
-  #zona-carga img {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-  }
-  
-  #zona-carga.hover {
-    border-color: #007bff;
-    /* Change border color to blue on hover */
-    background-color: #e8f0fe;
-    /* Add a subtle background color */
-  }
-
-  </style>
-
+<link rel="stylesheet" href="/css/modal_uai.css">
 @php
   $label = 'col-form-label';
   $input = 'mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none';
@@ -165,7 +114,6 @@
           @enderror
         </div>
       </div>
-      
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
         cerrar
       </button>
@@ -174,34 +122,28 @@
   <div class="modal-footer-2">
   </div>
 </x-modalBootstrap>
-
 {{-- todo charge image --}}
 <script>
   const zonaCarga = document.getElementById('zona-carga');
   const inputImagen = document.getElementById('recipient-foto_perfil');
-
   inputImagen.addEventListener('change', (e) => {
     zonaCarga.classList.toggle('zona-carga-active');
     const archivo = e.target.files[0];
     const reader = new FileReader();
-
     reader.onload = (e) => {
       const img = document.createElement('img');
       img.src = e.target.result;
       zonaCarga.innerHTML = '';
       zonaCarga.appendChild(img);
     };
-
     reader.readAsDataURL(archivo);
   });
 </script>
-
 {{-- todo phone library *intlTelInput* --}}
 <script src="/js/intlTelInput/intlTelInput.js"></script>
 <script type="module">
   import es from "/js/intlTelInput/es/index.mjs";
   const $phoneNumber = document.querySelector("#recipient-phoneNumber");
-
   window.intlTelInput($phoneNumber, {
     i18n: es,
     utilsScript: "/js/intlTelInput/utils.js",
@@ -209,7 +151,6 @@
     nationalMode: false,
   });
 </script>
-
 {{-- todo Alpine JS object --}}
 <script>
   function form() {
@@ -222,7 +163,6 @@
       markedSecondSurname: false,
       labelPhoneNumber: null,
       value: 'V-',
-
       // functions
       transformedInput: input => input.replace(/\s/g, '').toUpperCase(),
       toggleMark: marked => {
@@ -243,116 +183,3 @@
     }
   }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- 
-<div class="absolute bottom-0 left-0 right-0 top-0 z-10 bg-gray-700 py-12 transition duration-150 ease-in-out"
-  id="modal">
-  <div role="alert" class="container mx-auto w-11/12 max-w-lg md:w-2/3">
-    <div class="relative rounded border border-gray-400 bg-white px-5 py-8 shadow-md md:px-10"> --}}
-      {{-- <div class="mb-3 flex w-full justify-start text-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="52"
-          height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <path
-            d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
-          <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
-        </svg>
-      </div> --}}
-      {{-- <h1 class="font-lg mb-4 font-bold leading-tight tracking-normal text-gray-800">Enter Billing Details</h1>
-      <label for="name" class="text-sm font-bold leading-tight tracking-normal text-gray-800">Owner Name</label>
-      <input id="name"
-        class="mb-5 mt-2 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none"
-        placeholder="James" />
-      <label for="email2" class="text-sm font-bold leading-tight tracking-normal text-gray-800">Card Number</label>
-      <div class="relative mb-5 mt-2">
-        <div class="absolute flex h-full items-center border-r px-4 text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="20"
-            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <rect x="3" y="5" width="18" height="14" rx="3" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-            <line x1="7" y1="15" x2="7.01" y2="15" />
-            <line x1="11" y1="15" x2="13" y2="15" />
-          </svg>
-        </div>
-        <input id="email2"
-          class="flex h-10 w-full items-center rounded border border-gray-300 pl-16 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none"
-          placeholder="XXXX - XXXX - XXXX - XXXX" />
-      </div>
-      <label for="expiry" class="text-sm font-bold leading-tight tracking-normal text-gray-800">Expiry Date</label>
-      <div class="relative mb-5 mt-2">
-        <div class="absolute right-0 flex h-full cursor-pointer items-center pr-3 text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="20"
-            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <rect x="4" y="5" width="16" height="16" rx="2" />
-            <line x1="16" y1="3" x2="16" y2="7" />
-            <line x1="8" y1="3" x2="8" y2="7" />
-            <line x1="4" y1="11" x2="20" y2="11" />
-            <rect x="8" y="15" width="2" height="2" />
-          </svg>
-        </div>
-        <input id="expiry"
-          class="flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none"
-          placeholder="MM/YY" />
-      </div>
-      <label for="cvc" class="text-sm font-bold leading-tight tracking-normal text-gray-800">CVC</label>
-      <div class="relative mb-5 mt-2">
-        <div class="absolute right-0 flex h-full cursor-pointer items-center pr-3 text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20"
-            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z"></path>
-            <circle cx="12" cy="12" r="9"></circle>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            <polyline points="11 12 12 12 12 16 13 16"></polyline>
-          </svg>
-        </div>
-        <input id="cvc"
-          class="mb-8 flex h-10 w-full items-center rounded border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-700 focus:outline-none"
-          placeholder="MM/YY" />
-      </div>
-      <div class="flex w-full items-center justify-start">
-        <button
-          class="rounded bg-indigo-700 px-8 py-2 text-sm text-white transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2">Submit</button>
-        <button
-          class="ml-3 rounded border bg-gray-100 px-8 py-2 text-sm text-gray-600 transition duration-150 ease-in-out hover:border-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
-          onclick="modalHandler()">Cancel</button>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-<div class="flex w-full justify-center py-12" id="button">
-  <button
-    class="mx-auto rounded bg-indigo-700 px-4 py-2 text-xs text-white transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 sm:px-8 sm:text-sm"
-    onclick="modalHandler(true)">Open Modal</button>
-</div> --}}
