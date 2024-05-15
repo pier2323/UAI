@@ -34,9 +34,4 @@ class ActaEntrega extends Model
     {
         return $this->belongsTo(PersonalRecibe::class);
     }
-
-    public function personalUai()
-    {
-        return $this->belongsToMany(PersonalUai::class);
-    }
 }

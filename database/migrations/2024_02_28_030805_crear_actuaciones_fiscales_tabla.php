@@ -15,12 +15,20 @@ return new class extends Migration
         {
             $table->id();
             $table->string('objetivo');
-            $table->date('inicio');
-            $table->date('fin');
+            $table->date('planning_start')->nullable();
+            $table->date('planning_end')->nullable();
+            $table->date('execution_start')->nullable();
+            $table->date('execution_end')->nullable();
+            $table->date('preliminary_start')->nullable();
+            $table->date('preliminary_end')->nullable();
+            $table->date('download_start')->nullable();
+            $table->date('download_end')->nullable();
+            $table->date('definitive_start')->nullable();
+            $table->date('definitive_end')->nullable();
 
             // ------ relaciones ------
             $table->unsignedBigInteger('tipo_auditoria_id');
-            $table->foreign('tipo_auditoria_id')->references('id')->on('tipo_auditoria');   
+            $table->foreign('tipo_auditoria_id')->references('id')->on('tipo_auditoria');
 
             // ------ fecha en que se agrega una fila y se modifica ------
             $table->timestamp('created_at')->useCurrent();

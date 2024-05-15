@@ -40,9 +40,8 @@ class PersonalUai extends Model
     {
         return $this->belongsTo(Uai::class);
     }
-
-    public function actaEntrega()
+    public function actuacionFiscal()
     {
-        return $this->belongsToMany(ActaEntrega::class);
+        return $this->belongsToMany(ActuacionFiscal::class);
     }
 }
