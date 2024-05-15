@@ -19,7 +19,7 @@
                 </div>
                 <!-- Navigation Acta -->
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-default.nav-link href="{{ route('dashboard-viejo') }}" :active="request()->routeIs('dashboard-viejo')" style="color: white">
+                    <x-default.nav-link href="{{ route('action') }}" :active="request()->routeIs('action*')" style="color: white">
                         Actuaciones Fiscales
                     </x-default.nav-link>
                 </div>

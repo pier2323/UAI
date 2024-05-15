@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index()
-    {
-        return view('index');
-    }
-
-    public function dashboardViejo()
+    public function action()
     {
         $data = ActaEntrega::with('actuacionFiscal', 'personalEntrega.unidad')->get();
-        return view('dashboardViejo', ['data' => $data]);
+        return view('action.index', ['data' => $data]);
     }
 
-    public function dashboard()
+    public function index()
     {
         $data = ActaEntrega::with('actuacionFiscal', 'personalEntrega.unidad')->get();
         return view('dashboard', ['data' => $data]);
+    }
+
+    public function show()
+    {
+        return view('action.show');
     }
 }
