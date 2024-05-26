@@ -1,0 +1,10 @@
+# Directorios que no se deben incluir en la imagen
+node_modules/
+vendor/
+.git/
+.env
+logs/
+storage/
+bootstrap/cache/
+# Archivos específicos que no se deben incluir
+composer.lock
