@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
     public function personalUai()
     {
-        return $this->belongsTo(PersonalUai::class)->cascadeOnDelete();
+        return $this->belongsTo(Employee::class)->cascadeOnDelete();
     }
 }

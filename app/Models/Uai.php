@@ -11,13 +11,10 @@ class Uai extends Model
 
     protected $table = 'uai';
 
-    protected $fillable = [
-        'nombre',
-        'nivel'
-    ];
+    protected $fillable = [];
 
-    public function PersonalUai()
+    public function employee(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        $this->hasMany(PersonalUai::class);
+        return $this->hasMany(Employee::class);
     }
 }
