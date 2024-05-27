@@ -48,7 +48,7 @@
                         </button>
                     </div>
                 </a>
-                <a href="{{ route('dashboard-viejo') }}">
+                <a href="{{ route('action') }}">
                     <div class="iconoD">
                         <img src="/images/iconos/Actas.png" width="95px" height="100px">
                         </button>

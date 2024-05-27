@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('acta_entrega_personal_uai', function (Blueprint $table) // tabla que guarda las acta de entrega
+        Schema::create('actuacion_fiscal_personal_uai', function (Blueprint $table) // tabla que guarda las acta de entrega
         {
             $table->id();
-            $table->unsignedBigInteger('acta_entrega_id')->nullable(); // la relacion con la unidad de auditoria interna
-            $table->foreign('acta_entrega_id')->references('id')->on('acta_entrega')->onDelete('cascade');
+            $table->unsignedBigInteger('actuacion_fiscal_id')->nullable(); // la relacion con la unidad de auditoria interna
+            $table->foreign('actuacion_fiscal_id')->references('id')->on('actuaciones_fiscales')->onDelete('cascade');
             $table->unsignedBigInteger('personal_uai_id')->nullable(); // 
             $table->foreign('personal_uai_id')->references('id')->on('personal_uai')->onDelete('cascade');
 
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::drop('acta_entrega_personal_uai');
+        Schema::drop('actuaciones_fiscales_personal_uai');
     }
 };

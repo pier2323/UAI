@@ -30,12 +30,12 @@ class DesignationService
             "31/12/2024", // * Fin de Año 
         ];
     private $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+    private $month = ["hola", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     private $auditors = array();
     private $templateFile = 'designationTemplate.docx';
     private $nameDocument = 'designacion.docx';
     private $pathDocument;
     private $formatDate = 'd/m/Y';
-    private $date;
 
     /**
      * Summary of generate
@@ -46,7 +46,6 @@ class DesignationService
     {
         //* RUTA TEMPORAL DEL DOCUMENTO 
         $this->pathDocument = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
-        $this->date = Carbon::parse("2024-04-10");
 
         /**
          * todo Obtener los auditores y el coordinador de la designacion y ordernar el string 
@@ -58,47 +57,18 @@ class DesignationService
         $saltoEnLinea = str_repeat(' ', 500);
 
         // * FECHA INICIO 
-        $dia = '04';
-        $mes = 'mayo';
-        $año = '2024';
+        $dateNow = Carbon::now();
+        $actionStart= explode("/", $dateNow->format($this->formatDate));
+
+        $dia = $actionStart[0];
+        $mes = $this->month[$dateNow->month];
+        $año = $actionStart[2];
+
+    
         $fechaInicio = "$dia de $mes del $año";
 
-        $diasPlanificacion = 5;
-        //* FECHA DE FASE DE PLANIFICACION 
-        $fechaPlanificacionInicio = $this->toFormat($this->date);
-        $diasPlanificacion = $diasPlanificacion+$this->countDays($fechaPlanificacionInicio, $diasPlanificacion);
-        $fechaPlanificacionFin = $this->toFormat($this->addDays($diasPlanificacion));
-        $diasPlanificacion = 5;
-        
-        //* FECHA DE FASE DE EJECUCION 
-        $diasEjecucion = 10;
-        $fechaEjecucionInicio = $this->toFormat($this->addDays(1));
-        $diasEjecucion = $diasEjecucion+$this->countDays($fechaEjecucionInicio, $diasEjecucion);
-        $fechaEjecucionFin = $this->toFormat($this->addDays($diasEjecucion));
-        $diasEjecucion = 10;
 
-        //* FECHA DE FASE DE INFORME PREELIMINAR 
-        $diasPreeliminar = 10;
-        $fechaPreeliminarInicio = $this->toFormat($this->addDays(1));
-        $diasPreeliminar = $diasPreeliminar+$this->countDays($fechaPreeliminarInicio, $diasPreeliminar);
-        $fechaPreeliminarFin = $this->toFormat($this->addDays($diasPreeliminar));
-        $diasPreeliminar = 10;
-
-
-        //* FECHA DE FASE DE DESCARGO 
-        $diasDescargo = 10;
-        $fechaDescargoInicio = $this->toFormat($this->addDays(1));
-        $diasDescargo = $diasDescargo+$this->countDays($fechaDescargoInicio, $diasDescargo);
-        $fechaDescargoFin = $this->toFormat($this->addDays($diasDescargo));
-        $diasDescargo = 10;
-
-
-        //* FECHA DE FASE DE INFORME DEFINITIVO 
-        $diasDefinitivo = 5;
-        $fechaDefinitivoInicio = $this->toFormat($this->addDays(1));
-        $diasDefinitivo = $diasDefinitivo+$this->countDays($fechaDefinitivoInicio, $diasDefinitivo);
-        $fechaDefinitivoFin = $this->toFormat($this->addDays($diasDefinitivo));
-        $diasDefinitivo = 5;
+        // return $request->all();
 
         $data =
         [
@@ -108,24 +78,24 @@ class DesignationService
                 'tituloActuacion' => $actuacion->target,
                 'auditores' => implode($saltoEnLinea, $this->auditors),
                 
-                'diasPlanificacion' => $diasPlanificacion,
-                'fechaPlanificacionInicio' => Carbon::parse($fechaPlanificacionInicio)->format($this->formatDate),
-                'fechaPlanificacionFin' => Carbon::parse($fechaPlanificacionFin)->format($this->formatDate),
+                'diasPlanificacion' => $request->planningDays,
+                'fechaPlanificacionInicio' => $request->planningStart,
+                'fechaPlanificacionFin' => $request->planningEnd,
                 
-                'diasEjecucion' => $diasEjecucion,
-                'fechaEjecucionInicio' => Carbon::parse($fechaEjecucionInicio)->format($this->formatDate),
-                'fechaEjecucionFin' => Carbon::parse($fechaEjecucionFin)->format($this->formatDate),
+                'diasEjecucion' => $request->executionDays,
+                'fechaEjecucionInicio' => $request->executionStart,
+                'fechaEjecucionFin' => $request->executionEnd,
                 
-                'diasPreeliminar' => $diasPreeliminar,
-                'fechaPreeliminarInicio' => Carbon::parse($fechaPreeliminarInicio)->format($this->formatDate),
-                'fechaPreeliminarFin' => Carbon::parse($fechaPreeliminarFin)->format($this->formatDate),
+                'diasPreeliminar' => $request->preliminaryDays,
+                'fechaPreeliminarInicio' => $request->preliminaryStart,
+                'fechaPreeliminarFin' => $request->preliminaryEnd,
                 
-                'diasDescargo' => $diasDescargo,
-                'fechaDescargoInicio' => Carbon::parse($fechaDescargoInicio)->format($this->formatDate),
-                'fechaDescargoFin' => Carbon::parse($fechaDescargoFin)->format($this->formatDate),
-                'diasDefinitivo' => $diasDefinitivo,
-                'fechaDefinitivoInicio' => Carbon::parse($fechaDefinitivoInicio)->format($this->formatDate),
-                'fechaDefinitivoFin' => Carbon::parse($fechaDefinitivoFin)->format($this->formatDate),
+                'diasDescargo' => $request->downloadDays,
+                'fechaDescargoInicio' => $request->downloadStart,
+                'fechaDescargoFin' => $request->downloadEnd,
+                'diasDefinitivo' => $request->definitiveDays,
+                'fechaDefinitivoInicio' => $request->definitiveStart,
+                'fechaDefinitivoFin' => $request->definitiveEnd,
             ];
 
         $this->create($data);
@@ -161,50 +131,5 @@ class DesignationService
         $template = new TemplateProcessor($this->templateFile);
         $template->setValues($data);
         $template->saveAs($this->pathDocument);
-    }
-
-    /**
-     * Summary of countDays
-     * @param string $startDate // * "08/05/2024" 
-     * @param int $workDays
-     * @return int
-     */
-    private function countDays(string $startDate, int $workDays): int
-    {
-        $current = Carbon::parse($startDate);
-        $weekEndDays = 0;
-
-        for ($i = 0; $i <= $workDays; $i++) 
-        {
-            // in_array($current->format('d/m/Y'), $excludedDates) || //! fase dos 
-            if ($current->isWeekEnd()) 
-            {
-                $weekEndDays++;
-            }
-            $current->addDay();
-        }
-
-        return $weekEndDays;
-    }
-    
-    /**
-     * Summary of addDays
-     * @param int $days
-     * @return \Carbon\Carbon
-     */
-    private function addDays(int $days): Carbon
-    {
-        $this->date->addDays($days);
-        while ($this->date->isWeekend()) 
-        {
-            $this->date->addDay();
-        }
-
-      return $this->date;
-    }
-
-    private function toFormat (Carbon $date): string
-    {
-        return $date->toDateString();
     }
 }

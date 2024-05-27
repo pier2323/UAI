@@ -22,8 +22,6 @@ class ActuacionFiscalFactory extends Factory
     {
         return [
             'objetivo' => $this->faker->sentence(),
-            'inicio' => $this->faker->dateTimeBetween('-30 days', '+30 days'),
-            'fin' => $this->faker->dateTimeBetween('+60 days', '+120 days'),
             'tipo_auditoria_id' => 1
         ];
     }

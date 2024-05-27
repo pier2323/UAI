@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  # Definimos el servicio para la aplicación Laravel
+  laravel:
+    build: . # Construimos la imagen desde el directorio actual
+    ports:
+      - "80:80" # Exponemos el puerto 80 del contenedor al puerto 80 del host
+    volumes:
+      - ./:/var/www # Montamos el directorio local `/home/usuario` en el directorio `/var/www` del contenedor
+      - ./logs:/var/log/apache2 # Montamos el directorio local `./logs` en el directorio `/var/log/apache2` del contenedor
+    environment:
+      - APP_DEBUG=true # Habilitamos el modo debug de Laravel
+      - APP_ENV=local # Establecemos el entorno de la aplicación en "local"
+    depends_on:
+      - db # Especificamos que el servicio `laravel` depende del servicio `db`
+
+  # Definimos el servicio para la base de datos MySQL
+  db:
+    container_name: postgres-db
+    image: postgres
+    volumes:
+      # - pokemon_post:/var/lib/postgresql/data
+      - ./uai_post:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment: 
+      - POSTGRES_PASSWORD=123456
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+# volumes:
+#   Definimos un volumen para persistir los datos de MySQL
+#   db-data:
+
