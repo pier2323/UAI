@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('handover_document', function(Blueprint $table) 
-        {
+        Schema::create('handover_document', function(Blueprint $table) {
             $table->id();
             
             $table->date('subscription')->nullable(); 

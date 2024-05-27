@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('audit_activity', function(Blueprint $table)
-        {
+        Schema::create('audit_activity', function(Blueprint $table) {
             $table->id();
             $table->string('objective');
             $table->date('planning_start')->nullable();

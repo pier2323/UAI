@@ -6,21 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('departament', function(Blueprint $table) {
+        Schema::create('audit', function (Blueprint $table): void {
             $table->id();
-            $table->string('name');
-            $table->integer('level');
-
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::drop('departament');
-
+        Schema::dropIfExists('audit');
     }
 };

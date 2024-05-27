@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('employee_outgoing', function(Blueprint $table)
-        {
+        Schema::create('employee_outgoing', function(Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('second_name')->nullable();

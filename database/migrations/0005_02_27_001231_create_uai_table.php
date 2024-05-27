@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('uai', function(Blueprint $table)
-        {
+        Schema::create('uai', function(Blueprint $table){
             $table->id('id');
             $table->string('nombre');
             $table->integer('nivel');

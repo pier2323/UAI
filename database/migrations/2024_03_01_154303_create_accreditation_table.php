@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('accreditation', function(Blueprint $table)
-        {
+        Schema::create('accreditation', function(Blueprint $table) {
             $table->id('id');
             $table->binary('archivo');
 

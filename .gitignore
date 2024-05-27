@@ -15,4 +15,5 @@ public/storage/
 public/hot/
 public/storage
 public/hot
+pgadmin4.db
 *.env
