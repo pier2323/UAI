@@ -19,7 +19,7 @@
                                     <div id="datatable_users_wrapper"
                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                         <div class="col-sm-12">
-                                            @include('personal-uai.modal')
+                                            {{-- @include('personal-uai.modal') --}}
                                         </div>
                                     </div>
                                 </div>
@@ -61,21 +61,21 @@
                                 </tr>
                             </thead>
                         </x-slot>
-                        @foreach ($data as $personalUai)
+                        @foreach ($employees as $employee)
                             <tr class="hover:bg-gray-100">
-                                <td class="px-4 py-2"> {{ $personalUai['p00'] }}</td>
+                                <td class="px-4 py-2"> {{ $employee->p00 }}</td>
                                 <td class="px-4 py-2">
-                                    {{ $personalUai['primer_nombre'] .
+                                    {{ $employee->first_name .
                                         ' ' .
-                                        $personalUai['primer_apellido'] .
+                                        $employee->first_surname .
                                         ' ' .
-                                        $personalUai['segundo_apellido'] }}
+                                        $employee->second_surname }}
                                 </td>
-                                <td class="px-4 py-2">{{ $personalUai['email_cantv'] }}</td>
-                                <td class="px-4 py-2">{{ $personalUai['cedula'] }}</td>
-                                <td class="px-4 py-2">{{ $personalUai['telefono'] }}</td>
+                                <td class="px-4 py-2">{{ $employee->email_cantv }}</td>
+                                <td class="px-4 py-2">{{ $employee->persona_id }}</td>
+                                <td class="px-4 py-2">{{ $employee->phone }}</td>
                                 <td class="px-4 py-2"><a
-                                        href="{{ route('personal-uai.show', ['personal' => $personalUai->id]) }}"><img
+                                        href="{{ route('employee.show', $employee->id) }}"><img
                                             src="/images/template/ojo.png" width="30" height="30"></a></td>
                             </tr>
                         @endforeach

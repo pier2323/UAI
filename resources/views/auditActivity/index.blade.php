@@ -102,21 +102,14 @@
 								</tr>
 							</thead>
 						</x-slot>
-						@foreach ($data as $acta)
+						@foreach ($auditActivities as $auditActivity)
 							<tr
 								{{-- @click="window.location.href = link" --}}
 								class="hover:bg-gray-100"
-								x-data="{ link: '{{ route("action.show", $acta->id) }}', }"
+								x-data="{ link: '{{ route("auditActivity.index") }}', }"
 							>
-								<td
-									@click="console.log('hola')"
-									class="px-4 py-2"
-								>{{ $acta->id }}</td>
-								<td class="px-4 py-2">{{ $acta->actuacionFiscal->objetivo }}</td>
-								<td class="px-4 py-2">{{ $acta->actuacionFiscal->inicio }}</td>
-								<td class="px-4 py-2">{{ $acta->actuacionFiscal->fin }}</td>
-								<td class="px-4 py-2">{{ $acta->personalEntrega->unidad->nombre }}</td>
-								<td class="px-4 py-2">
+								<td class="px-4 py-2">{{ $auditActivity->id }}</td>
+								<td class="px-4 py-2">{{ $auditActivity->objective }}</td>
 							</tr>
 						@endforeach
 					</x-table>

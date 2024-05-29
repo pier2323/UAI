@@ -41,14 +41,14 @@
                         </button>
                     </div>
                 </a>
-                <a href="{{ route('personal-uai.dashboard') }}">
+                <a href="{{ route('employee.index') }}">
                     <div class="iconoC">
                         <img src="/images/iconos/personal.png" width="110px"
                             height="100px"style="margin-left: 100px;margin-right: 80px;">
                         </button>
                     </div>
                 </a>
-                <a href="{{ route('action') }}">
+                <a href="{{ route('auditActivity.index') }}">
                     <div class="iconoD">
                         <img src="/images/iconos/Actas.png" width="95px" height="100px">
                         </button>

@@ -19,15 +19,15 @@
                 </div>
                 <!-- Navigation Acta -->
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-default.nav-link href="{{ route('action') }}" :active="request()->routeIs('action*')" style="color: white">
+                    <x-default.nav-link href="{{ route('auditActivity.index') }}" :active="request()->routeIs('auditActivity*')" style="color: white">
                         Actuaciones Fiscales
                     </x-default.nav-link>
                 </div>
                 <!-- Navigation Personal -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
-                    <x-default.nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai*')" style="color: white">
-                        personal UAI
+                    <x-default.nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" style="color: white">
+                        Personal
                     </x-default.nav-link>
                 </div>
             </div>
