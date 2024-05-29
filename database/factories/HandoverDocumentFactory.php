@@ -21,11 +21,28 @@ class HandoverDocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'suscripcion' => $this->faker->dateTimeBetween('-30 days', '-20 days'),
-            'recepcion_uai' => $this->faker->dateTimeBetween('-20 days', '-10 days'),
-            'actuacion_fiscal_id' => rand(1,20),
-            'personal_entrega_id' => rand(1, 10),
-            'personal_recibe_id' => rand(1,10),
+            'subscription' => $this->faker->dateTimeBetween(startDate: '-30 days', endDate: '-20 days'),
+            'delivery_uai' => $this->faker->dateTimeBetween(startDate: '-20 days', endDate: '-10 days'),
+            'audit_activity_id' => $this->generateNewId(),
+            'employee_outgoing_id' => rand(min: 1, max: 10),
+            'employee_incoming_id' => rand(min: 1, max: 10),
         ];
+    }
+
+    // ! to fix
+    private function generateNewId(): int
+    {
+        do {
+            $audit_activity_id = rand(min: 1, max: 20);
+            echo "$audit_activity_id\n";
+            echo "--------------------\n";
+            var_dump(HandoverDocument::where(column: 'audit_activity_id', operator: $audit_activity_id)->exists());
+            echo "--------------------\n";
+        } 
+        while (HandoverDocument::where(column: 'audit_activity_id', operator: $audit_activity_id)->exists());
+
+        echo "end\n";
+
+        return $audit_activity_id;
     }
 }

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_incoming_id'); 
             $table->foreign('employee_incoming_id')->references('id')->on('employee_incoming');
 
+            $table->unsignedBigInteger('audit_activity_id')->unique();
+            $table->foreign('audit_activity_id')->references('id')->on('audit_activity');
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

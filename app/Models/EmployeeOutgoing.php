@@ -15,16 +15,16 @@ class EmployeeOutgoing extends Model
 
     public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(JobTitle::class);
+        return $this->belongsTo(related: JobTitle::class);
     }
 
     public function departament(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Departament::class);
+        return $this->belongsTo(related: Departament::class);
     }
 
     public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(HandoverDocument::class);
+        return $this->hasMany(related: HandoverDocument::class);
     }
 }

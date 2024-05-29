@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('uai', function(Blueprint $table){
             $table->id('id');
-            $table->string('nombre');
-            $table->integer('nivel');
+            $table->string('name');
+            $table->integer('level');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -15,6 +15,6 @@ class Uai extends Model
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(related: Employee::class);
     }
 }

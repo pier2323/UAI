@@ -26,13 +26,18 @@ class AuditActivity extends Model
         'type_audit',
     ];
 
-    public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->hasOne(HandoverDocument::class);
+        return $this->hasOne(related: HandoverDocument::class);
     }
 
-    public function Employee(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function audit(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->hasOne(related: Audit::class);
+    }
+
+    public function employee(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(related: Employee::class);
     }
 }

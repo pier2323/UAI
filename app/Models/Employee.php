@@ -15,20 +15,20 @@ class Employee extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class)->onDelete('cascade');
+        return $this->hasOne(related: User::class)->onDelete('cascade');
     }
 
     public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(JobTitle::class);
+        return $this->belongsTo(related: JobTitle::class);
     }
 
     public function uai(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Uai::class);
+        return $this->belongsTo(related: Uai::class);
     }
     public function auditActivity(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(AuditActivity::class);
+        return $this->belongsToMany(related: AuditActivity::class);
     }
 }

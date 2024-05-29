@@ -15,6 +15,6 @@ class Departament extends Model
 
     public function employeeOutgoing(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(EmployeeOutgoing::class);
+        return $this->hasMany(related: EmployeeOutgoing::class);
     }
 }

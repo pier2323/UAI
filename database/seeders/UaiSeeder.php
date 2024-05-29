@@ -13,51 +13,51 @@ class UaiSeeder extends Seeder
      */
     public function run(): void
     {
-        $departamentos = 
+        $departaments = 
         [
             [
-                'nombre' => 'Despacho', 
-                'nivel' => 1, // 0
+                'name' => 'Despacho', 
+                'level' => 1, // 0
             ],
             [
-                'nombre' => 'Control Posterior', 
-                'nivel' => 2, // 1
+                'name' => 'Control Posterior', 
+                'level' => 2, // 1
             ],
             [
-                'nombre' => 'Determinacion de Responsabilidades', 
-                'nivel' => 2, // 2
+                'name' => 'Determinacion de Responsabilidades', 
+                'level' => 2, // 2
             ],
             [
-                'nombre' => 'Auditoria de Sitemas', 
-                'nivel' => 3, // 3
+                'name' => 'Auditoria de Sitemas', 
+                'level' => 3, // 3
             ],
             [
-                'nombre' => 'Auditoria de Gestion', 
-                'nivel' => 3, // 4
+                'name' => 'Auditoria de Gestion', 
+                'level' => 3, // 4
             ],
             [
-                'nombre' => 'Auditoria de Seguimiento', 
-                'nivel' => 3, // 5
+                'name' => 'Auditoria de Seguimiento', 
+                'level' => 3, // 5
             ],
             [
-                'nombre' => 'Auditoria Financiera', 
-                'nivel' => 3, // 6
+                'name' => 'Auditoria Financiera', 
+                'level' => 3, // 6
             ],
             [
-                'nombre' => 'Potestad Investigativa', 
-                'nivel' => 3, // 7
+                'name' => 'Potestad Investigativa', 
+                'level' => 3, // 7
             ],
             [
-                'nombre' => 'Planificacion y Control', 
-                'nivel' => 3, // 8
+                'name' => 'Planificacion y Control', 
+                'level' => 3, // 8
             ]
         ];
 
-        foreach($departamentos as $departamento)
+        foreach($departaments as $departament)
         {
             $uai = new Uai();
-            $uai->nombre = $departamento['nombre'];
-            $uai->nivel = $departamento['nivel'];
+            $uai->name = $departament['name'];
+            $uai->level = $departament['level'];
             $uai->save();
         }
     }

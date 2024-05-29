@@ -16,130 +16,130 @@ class DepartamentSeeder extends Seeder
         $unidadesToPush = [
             // * PRESIDENCIA
             [
-                'nombre' => 'presidencia', 
-                'nivel' => 1, 
+                'name' => 'presidencia', 
+                'level' => 1, 
             ],[
-                'nombre' => 'gerencia general seguridad integral', 
-                'nivel' => 3, 
+                'name' => 'gerencia general seguridad integral', 
+                'level' => 3, 
             ],[
-                'nombre' => 'oficina de proyectos estrategicos', 
-                'nivel' => 3, 
+                'name' => 'oficina de proyectos estrategicos', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general para el fortalecimiento del poder popular', 
-                'nivel' => 3, 
+                'name' => 'gerencia general para el fortalecimiento del poder popular', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general consultoría jurídica', 
-                'nivel' => 3, 
+                'name' => 'gerencia general consultoría jurídica', 
+                'level' => 3, 
             ],
             
 
             // * VICEPRESIDENCIA DE GESTION INTERNA
             [ 
-                'nombre' => 'vicepresidencia de gestión interna',
-                'nivel' => 2, 
+                'name' => 'vicepresidencia de gestión interna',
+                'level' => 2, 
             ],[
-                'nombre' => 'gerencia recaudación y pagos', 
-                'nivel' => 3, 
+                'name' => 'gerencia recaudación y pagos', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general gestión humana', 
-                'nivel' => 3, 
+                'name' => 'gerencia general gestión humana', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general finanzas', 
-                'nivel' => 3, 
+                'name' => 'gerencia general finanzas', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general procura', 
-                'nivel' => 3, 
+                'name' => 'gerencia general procura', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general comunicaciones asuntos públicos', 
-                'nivel' => 3, 
+                'name' => 'gerencia general comunicaciones asuntos públicos', 
+                'level' => 3, 
             ],
             
 
             // * VICEPRESIDENCIA DE PRESTACIÓN DE SERVICIOS
             [ 
-                'nombre' => 'vicepresidencia de prestación de servicios', 
-                'nivel' => 2, 
+                'name' => 'vicepresidencia de prestación de servicios', 
+                'level' => 2, 
             ],[
-                'nombre' => 'gerencia de cobranzas y reclamos', 
-                'nivel' => 3, 
+                'name' => 'gerencia de cobranzas y reclamos', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general de mercadeo corporativo', 
-                'nivel' => 3, 
+                'name' => 'gerencia general de mercadeo corporativo', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general operadores de telecomunicaciones', 
-                'nivel' => 3, 
+                'name' => 'gerencia general operadores de telecomunicaciones', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general mercados masivos', 
-                'nivel' => 3, 
+                'name' => 'gerencia general mercados masivos', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia arquitectura e ingeniería de soluciones y desarrollo tic', 
-                'nivel' => 3, 
+                'name' => 'gerencia arquitectura e ingeniería de soluciones y desarrollo tic', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general empresas e instituciones privadas', 
-                'nivel' => 3, 
+                'name' => 'gerencia general empresas e instituciones privadas', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general instituciones públicas', 
-                'nivel' => 3, 
+                'name' => 'gerencia general instituciones públicas', 
+                'level' => 3, 
             ],
             
 
             // * VICEPRESIDENCIA EJECUTIVA
             [ 
-                'nombre' => 'vicepresidencia ejecutiva', 
-                'nivel' => 2, 
+                'name' => 'vicepresidencia ejecutiva', 
+                'level' => 2, 
             ],[
-                'nombre' => 'gerencia gestión y articulación región', 
-                'nivel' => 3, 
+                'name' => 'gerencia gestión y articulación región', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general de seguimiento y control integral de la gestión', 
-                'nivel' => 3, 
+                'name' => 'gerencia general de seguimiento y control integral de la gestión', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general planificación', 
-                'nivel' => 3, 
+                'name' => 'gerencia general planificación', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general servicios y logística', 
-                'nivel' => 3, 
+                'name' => 'gerencia general servicios y logística', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general gestión de flota', 
-                'nivel' => 3, 
+                'name' => 'gerencia general gestión de flota', 
+                'level' => 3, 
             ],
 
             // * VICEPRESIDENCIA DE TECNOLOGÍA E INFRAESTRUCTURA
             [
-                'nombre' => 'vicepresidencia de tecnología e infraestructura', 
-                'nivel' => 2, 
+                'name' => 'vicepresidencia de tecnología e infraestructura', 
+                'level' => 2, 
             ],[
-                'nombre' => 'gerencia soporte administrativo', 
-                'nivel' => 3, 
+                'name' => 'gerencia soporte administrativo', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general sistemas', 
-                'nivel' => 3, 
+                'name' => 'gerencia general sistemas', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general tecnología y operaciones', 
-                'nivel' => 3, 
+                'name' => 'gerencia general tecnología y operaciones', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general operaciones centralizadas', 
-                'nivel' => 3, 
+                'name' => 'gerencia general operaciones centralizadas', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general proyectos mayores', 
-                'nivel' => 3, 
+                'name' => 'gerencia general proyectos mayores', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general energía y climatización', 
-                'nivel' => 3, 
+                'name' => 'gerencia general energía y climatización', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general infraestructura', 
-                'nivel' => 3, 
+                'name' => 'gerencia general infraestructura', 
+                'level' => 3, 
             ],[
-                'nombre' => 'gerencia general planificación tecnológica', 
-                'nivel' => 3, 
+                'name' => 'gerencia general planificación tecnológica', 
+                'level' => 3, 
             ]
         ];
 
         foreach($unidadesToPush as $unidadToPush)
         {
             $unidad = new Departament();
-            $unidad->nombre = $unidadToPush['nombre'];
-            $unidad->nivel = $unidadToPush['nivel'];
+            $unidad->name = $unidadToPush['name'];
+            $unidad->level = $unidadToPush['level'];
             $unidad->save();
         }
     }

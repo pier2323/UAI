@@ -15,16 +15,16 @@ class JobTitle extends Model
 
     public function employeeIncoming(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(EmployeeIncoming::class);
+        return $this->hasMany(related: EmployeeIncoming::class);
     }
 
     public function employeeOutgoing(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(EmployeeOutgoing::class);
+        return $this->hasMany(related: EmployeeOutgoing::class);
     }
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(related: Employee::class);
     }
 }

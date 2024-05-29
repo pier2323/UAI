@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function personalUai()
+    public function personalUai(): mixed
     {
-        return $this->belongsTo(Employee::class)->cascadeOnDelete();
+        return $this->belongsTo(related: Employee::class)->cascadeOnDelete();
     }
 }

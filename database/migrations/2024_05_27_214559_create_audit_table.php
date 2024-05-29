@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('audit', function (Blueprint $table): void {
+        Schema::create('audit', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+
+            $table->unsignedBigInteger('audit_activity_id')->unique();
+            $table->foreign('audit_activity_id')->references('id')->on('audit_activity');
+            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -13,246 +13,246 @@ class EmployeeOutgoingSeeder extends Seeder
      */
     public function run(): void
     {
-        $personalEntrega = [
+        $employeesOutgoing = [
             [
-                'primer_nombre' => 'Ramon',
-                'segundo_nombre' => 'Jose',
-                'primer_apellido' => 'Rangel',
-                'segundo_apellido' => 'Salazar',
+                'first_name' => 'Ramon',
+                'second_name' => 'Jose',
+                'first_surname' => 'Rangel',
+                'second_surname' => 'Salazar',
                 'gmail' => 'ramonrangel01@gmail.com',
                 'email_cantv' => 'rrange01@cantv.com.ve',
-                'telefono' => '04125637548',
+                'phone' => '04125637548',
                 'p00' => '154976',
-                'cedula' => '23465345',
-                'cargo_id' => 1,
-                'unidad_id' => 1,
+                'personal_id' => '23465345',
+                'job_title_id' => 1,
+                'departament_id' => 1,
             ],
 
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
+                'phone' => '04242295529',
                 'p00' => '156373',
-                'cedula' => '1278678',
-                'cargo_id' => 1,
-                'unidad_id' => 1,
+                'personal_id' => '1278678',
+                'job_title_id' => 1,
+                'departament_id' => 1,
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '156173',
-                'cedula' => '12345678',
-                'cargo_id' => 1
+                'personal_id' => '12345678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '156773',
-                'cedula' => '12344678',
-                'cargo_id' => 1
+                'personal_id' => '12344678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '168773',
-                'cedula' => '15345678',
-                'cargo_id' => 1
+                'personal_id' => '15345678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '1563663',
-                'cedula' => '12545678',
-                'cargo_id' => 1
+                'personal_id' => '12545678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '156343',
-                'cedula' => '123875678',
-                'cargo_id' => 1
+                'personal_id' => '123875678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '1587373',
-                'cedula' => '123025678',
-                'cargo_id' => 1
+                'personal_id' => '123025678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '156873',
-                'cedula' => '12335678',
-                'cargo_id' => 1
+                'personal_id' => '12335678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '156374',
-                'cedula' => '1275678',
-                'cargo_id' => 1
+                'personal_id' => '1275678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '15639',
-                'cedula' => '12645678',
-                'cargo_id' => 1
+                'personal_id' => '12645678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '1563473',
-                'cedula' => '12658678',
-                'cargo_id' => 1
+                'personal_id' => '12658678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '165473',
-                'cedula' => '12369878',
-                'cargo_id' => 1
+                'personal_id' => '12369878',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '164593',
-                'cedula' => '654465',
-                'cargo_id' => 1
+                'personal_id' => '654465',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '15635313',
-                'cedula' => '12324678',
-                'cargo_id' => 1
+                'personal_id' => '12324678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '1554773',
-                'cedula' => '1265678',
-                'cargo_id' => 1
+                'personal_id' => '1265678',
+                'job_title_id' => 1
             ],
             [
-                'primer_nombre' => 'pier',
-                'segundo_nombre' => 'luigi',
-                'primer_apellido' => 'bolech',
-                'segundo_apellido' => 'diaz',
+                'first_name' => 'pier',
+                'second_name' => 'luigi',
+                'first_surname' => 'bolech',
+                'second_surname' => 'diaz',
                 'gmail' => 'pier44444gmail.com',
                 'email_cantv' => 'pbolec0@cantv.com.ve',
-                'telefono' => '04242295529',
-                'unidad_id' => 1,
+                'phone' => '04242295529',
+                'departament_id' => 1,
                 'p00' => '15633643',
-                'cedula' => '12345478',
-                'cargo_id' => 1
+                'personal_id' => '12345478',
+                'job_title_id' => 1
             ]
         ];
 
-        foreach ($personalEntrega as $personal) {
-            $persona = new EmployeeOutgoing();
+        foreach ($employeesOutgoing as $employeeOutgoing ) {
+            $employee = new EmployeeOutgoing();
 
-            $persona->primer_nombre = $personal['primer_nombre'];
-            $persona->segundo_nombre = $personal['segundo_nombre'];
-            $persona->primer_apellido = $personal['primer_apellido'];
-            $persona->segundo_apellido = $personal['segundo_apellido'];
-            $persona->gmail = $personal['gmail'];
-            $persona->email_cantv = $personal['email_cantv'];
-            $persona->telefono = $personal['telefono'];
-            $persona->p00 = $personal['p00'];
-            $persona->cedula = $personal['cedula'];
-            $persona->cargo_id = $personal['cargo_id'];
-            $persona->unidad_id = $personal['unidad_id'];
-            $persona->save();
+            $employee->first_name = $employeeOutgoing['first_name'];
+            $employee->second_name = $employeeOutgoing['second_name'];
+            $employee->first_surname = $employeeOutgoing['first_surname'];
+            $employee->second_surname = $employeeOutgoing['second_surname'];
+            $employee->gmail = $employeeOutgoing['gmail'];
+            $employee->email_cantv = $employeeOutgoing['email_cantv'];
+            $employee->phone = $employeeOutgoing['phone'];
+            $employee->p00 = $employeeOutgoing['p00'];
+            $employee->personal_id = $employeeOutgoing['personal_id'];
+            $employee->job_title_id = $employeeOutgoing['job_title_id'];
+            $employee->departament_id = $employeeOutgoing['departament_id'];
+            $employee->save();
         }
     }
 }

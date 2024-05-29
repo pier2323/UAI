@@ -13,18 +13,21 @@ class HandoverDocument extends Model
 
     protected $fillable = [];
 
-    public function auditActivity(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function auditActivity(): \Illuminate\Database\Eloquent\Relations\belongsTo
     {
-        return $this->belongsTo(AuditActivity::class);
+        return $this->belongsTo(
+            related: AuditActivity::class,
+            foreignKey: 'audit_activity_id'
+        );
     }
 
     public function employeeOutgoing(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(EmployeeOutgoing::class);
+        return $this->belongsTo(related: EmployeeOutgoing::class);
     }
 
     public function employeeIncoming(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(EmployeeIncoming::class);
+        return $this->belongsTo(related: EmployeeIncoming::class);
     }
 }

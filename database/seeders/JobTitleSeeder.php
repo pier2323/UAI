@@ -14,7 +14,7 @@ class JobTitleSeeder extends Seeder
      */
     public function run(): void
     {
-        $nombres = 
+        $names = 
         [
             'administrador de soporte', // 1
             'auditor I', // 2
@@ -33,10 +33,10 @@ class JobTitleSeeder extends Seeder
             'mensajero', // 12
         ];
 
-        foreach($nombres as $nombre)
+        foreach($names as $name)
         {
             $cargo = new JobTitle();
-            $cargo->nombre = $nombre;
+            $cargo->name = $name;
             $cargo->save();
         }
     }

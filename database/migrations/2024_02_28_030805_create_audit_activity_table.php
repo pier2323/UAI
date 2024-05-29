@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('audit_activity', function(Blueprint $table) {
             $table->id();
-            $table->string('objective');
+            $table->string('objective')->nullable();
             $table->date('planning_start')->nullable();
             $table->date('planning_end')->nullable();
             $table->date('execution_start')->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('definitive_start')->nullable();
             $table->date('definitive_end')->nullable();
 
-            $table->unsignedBigInteger('type_audit_id');
+            $table->unsignedBigInteger('type_audit_id')->nullable();
             $table->foreign('type_audit_id')->references('id')->on('type_audit');
 
             $table->timestamp('created_at')->useCurrent();

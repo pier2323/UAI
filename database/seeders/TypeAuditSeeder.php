@@ -13,27 +13,27 @@ class TypeAuditSeeder extends Seeder
      */
     public function run(): void
     {
-        $tipoAuditoria = 
+        $typesAudit = 
         [
-            ['nombre' => 'acta de entrega', 'codigo' => 'ae'],
-            ['nombre' => 'auditoria de cumplimiento', 'codigo' => 'ac'],
-            ['nombre' => 'auditoria financiera', 'codigo' => 'af'],
-            ['nombre' => 'auditoria de inspeccion', 'codigo' => 'ains'],
-            ['nombre' => 'auditoria de inventario', 'codigo' => 'ainv'],
-            ['nombre' => 'auditoria de gestion', 'codigo' => 'ag'],
-            ['nombre' => 'auditoria de seguimiento', 'codigo' => 'ase'],
-            ['nombre' => 'auditoria de sistemas', 'codigo' => 'asi'],
-            ['nombre' => 'examen de la cuenta', 'codigo' => 'ec'],
-            ['nombre' => 'auditoria de proyeto', 'codigo' => 'ap'],
-            ['nombre' => 'auditoria de operativa', 'codigo' => 'ao']
+            ['name' => 'acta de entrega', 'code' => 'ae'],
+            ['name' => 'auditoria de cumplimiento', 'code' => 'ac'],
+            ['name' => 'auditoria financiera', 'code' => 'af'],
+            ['name' => 'auditoria de inspeccion', 'code' => 'ains'],
+            ['name' => 'auditoria de inventario', 'code' => 'ainv'],
+            ['name' => 'auditoria de gestion', 'code' => 'ag'],
+            ['name' => 'auditoria de seguimiento', 'code' => 'ase'],
+            ['name' => 'auditoria de sistemas', 'code' => 'asi'],
+            ['name' => 'examen de la cuenta', 'code' => 'ec'],
+            ['name' => 'auditoria de proyeto', 'code' => 'ap'],
+            ['name' => 'auditoria de operativa', 'code' => 'ao']
         ];
 
-        foreach($tipoAuditoria as $tipo)
+        foreach($typesAudit as $typeAudit)
         {
-            $tipoAuditoria = new TypeAudit();
-            $tipoAuditoria->nombre = $tipo['nombre'];
-            $tipoAuditoria->codigo = $tipo['codigo'];
-            $tipoAuditoria->save();
+            $typeAuditModel = new TypeAudit();
+            $typeAuditModel->name = $typeAudit['name'];
+            $typeAuditModel->code = $typeAudit['code'];
+            $typeAuditModel->save();
         }
     }
 }

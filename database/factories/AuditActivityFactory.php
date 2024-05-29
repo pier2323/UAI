@@ -21,8 +21,8 @@ class AuditActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            'objetivo' => $this->faker->sentence(),
-            'tipo_auditoria_id' => 1
+            'objective' => $this->faker->sentence(),
+            'type_audit_id' => 1
         ];
     }
 

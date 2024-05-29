@@ -15,11 +15,11 @@ class EmployeeIncoming extends Model
 
     public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(JobTitle::class);
+        return $this->belongsTo(related: JobTitle::class);
     }
 
     public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(HandoverDocument::class);
+        return $this->hasMany(related: HandoverDocument::class);
     }
 }
