@@ -8,7 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('Sap_UAI', 'Sap_UAI') }}</title>
     {{-- * links styles --}}
-    <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/bootstrap/app.css" />
     <link rel="stylesheet" href="/css/bootstrap/styles.css" />
     <link rel="stylesheet" href="/css/bootstrap/all.min.css" />

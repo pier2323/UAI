@@ -8,7 +8,7 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top: 0px">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="./images/carrusel/defenitivo.png" class="d-block w-100" alt="1">
+                <img src="./images/carrusel/prueva9.png" class="d-block w-100" alt="1">
             </div>
             <div class="carousel-item ">
                 <img src="./images/carrusel/carusel3.png" class="d-block w-100" alt="2">
