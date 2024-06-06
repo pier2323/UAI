@@ -11,7 +11,20 @@ class Employee extends Model
 
     protected $table = 'employee';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'first_name',
+        'second_name',
+        'first_surname',
+        'second_surname',
+        'gmail',
+        'email_cantv',
+        'phone',
+        'profile_photo',
+        'p00',
+        'personal_id',
+        'job_title_id',
+        'uai_id',
+    ];
 
     public function user()
     {

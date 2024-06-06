@@ -1,87 +1,99 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-    <div class="py-12" style="margin-bottom: 160px;">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2">
-                    <div class="bg-gray-10 bg-opacity-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
-                        <div class="container my-4 bg-white">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#register" data-bs-whatever="@mdo">
-                                        registro
-                                    </button>
-                                    <div id="datatable_users_wrapper"
-                                        class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                        <div class="col-sm-12">
-                                            {{-- @include('personal-uai.modal') --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <x-table>
-                        <x-slot name="head">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 code centered sorting sorting_desc" tabindex="0"
-                                        aria-controls="datatable_users" rowspan="1" colspan="1"
-                                        {{-- style="width: 50px" --}} aria-label="#: activate to sort column ascending"
-                                        aria-sort="descending">
-                                        P00
-                                    </th>
-                                    <th class="px-4 py-2 centered sorting" tabindex="0"
-                                        aria-controls="datatable_users" rowspan="1" colspan="1"
-                                        style="width: 189px" aria-label="Name: activate to sort column ascending">
-                                        Nombre
-                                    </th>
-                                    <th class="px-4 py-2 centered sorting" tabindex="0"
-                                        aria-controls="datatable_users" rowspan="1" colspan="1"
-                                        style="width: 166px" aria-label="Company: activate to sort column ascending">
-                                        Correo institucional
-                                    </th>
-                                    <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
-                                        style="width: 60px" aria-label="Status">
-                                        Cédula
+	<x-slot name="header">
+		<h2 class="text-xl font-semibold leading-tight text-gray-800">
+			{{ __("Dashboard") }}
+		</h2>
+	</x-slot>
+	<x-section-basic class="pb-5">
+		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="m-16">
+				@livewire('employee.registerForm')
+			</div>
+		</div>
+		<x-table>
+			<x-slot name="head">
+				<thead>
+					<tr>
+						<th
+							{{-- style="width: 50px" --}}
+							aria-controls="datatable_users"
+							aria-label="#: activate to sort column ascending"
+							aria-sort="descending"
+							class="code centered sorting sorting_desc px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							tabindex="0"
+						>
+							P00
+						</th>
+						<th
+							aria-controls="datatable_users"
+							aria-label="Name: activate to sort column ascending"
+							class="centered sorting px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							style="width: 189px"
+							tabindex="0"
+						>
+							Nombre
+						</th>
+						<th
+							aria-controls="datatable_users"
+							aria-label="Company: activate to sort column ascending"
+							class="centered sorting px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							style="width: 166px"
+							tabindex="0"
+						>
+							Correo institucional
+						</th>
+						<th
+							aria-label="Status"
+							class="centered sorting_disabled px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							style="width: 60px"
+						>
+							Cédula
 
-                                    </th>
-                                    <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
-                                        style="width: 60px" aria-label="Status"> Télefono
-                                    </th>
-                                    </th>
-                                    <th class="px-4 py-2 centered sorting_disabled" rowspan="1" colspan="1"
-                                        style="width: 60px" aria-label="Detalles "> Detalles
-                                    </th>
-                                </tr>
-                            </thead>
-                        </x-slot>
-                        @foreach ($employees as $employee)
-                            <tr class="hover:bg-gray-100">
-                                <td class="px-4 py-2"> {{ $employee->p00 }}</td>
-                                <td class="px-4 py-2">
-                                    {{ $employee->first_name .
-                                        ' ' .
-                                        $employee->first_surname .
-                                        ' ' .
-                                        $employee->second_surname }}
-                                </td>
-                                <td class="px-4 py-2">{{ $employee->email_cantv }}</td>
-                                <td class="px-4 py-2">{{ $employee->persona_id }}</td>
-                                <td class="px-4 py-2">{{ $employee->phone }}</td>
-                                <td class="px-4 py-2"><a
-                                        href="{{ route('employee.show', $employee->id) }}"><img
-                                            src="/images/template/ojo.png" width="30" height="30"></a></td>
-                            </tr>
-                        @endforeach
-                    </x-table>
-                </div>
-            </div>
-        </div>
-    </div>
+						</th>
+						<th
+							aria-label="Status"
+							class="centered sorting_disabled px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							style="width: 60px"
+						> Télefono
+						</th>
+						</th>
+						<th
+							aria-label="Detalles "
+							class="centered sorting_disabled px-4 py-2"
+							colspan="1"
+							rowspan="1"
+							style="width: 60px"
+						> Detalles
+						</th>
+					</tr>
+				</thead>
+			</x-slot>
+			@foreach ($employees as $employee)
+				<tr class="hover:bg-gray-100">
+					<td class="px-4 py-2"> {{ $employee->p00 }}</td>
+					<td class="px-4 py-2">
+						{{ $employee->first_name . " " . $employee->first_surname . " " . $employee->second_surname }}
+					</td>
+					<td class="px-4 py-2">{{ $employee->email_cantv }}</td>
+					<td class="px-4 py-2">{{ $employee->persona_id }}</td>
+					<td class="px-4 py-2">{{ $employee->phone }}</td>
+					<td class="px-4 py-2"><a href="{{ route("employee.show", $employee->id) }}"><img
+								height="30"
+								src="/images/template/ojo.png"
+								width="30"
+							></a></td>
+				</tr>
+			@endforeach
+		</x-table>
+	</x-section-basic>
 </x-app-layout>

@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 
 class Modal extends Component
 {
-    public $open = false;
-    public function openModal()
+    public $id;
+    
+    public function mount($id)
     {
-        $this->open = true;
+        $this->id = $id;
     }
-    public function closeModal()
+
+    public function render()
     {
-        $this->open = false;
-    }
-    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-    {
-        return view('livewire.liveModal', ['showModal']);
+        return view('livewire.modal');
     }
 }

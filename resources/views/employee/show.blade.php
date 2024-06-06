@@ -41,12 +41,15 @@
                   <p class="text-gray-600">Area UAI: {{ $employee->uai->name }}</p>
                 </li>
               </ul>
+
+              <livewire:employee.launch></livewire:employee.launch>
+
               <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
                 <a href="{{ route('employee.index', $employee->id) }}">
-                  <button
+                  {{-- <button
                     class="rounded-lg border-0 bg-slate-900 px-6 py-3 text-base text-white shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
                     Editar
-                  </button>
+                  </button> --}}
                 </a>
                 <form action="{{ route('employee.index', $employee->id) }}" method="POST">
                   @csrf
