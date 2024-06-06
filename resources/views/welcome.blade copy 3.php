@@ -16,9 +16,11 @@
             <div class="nav_1" id="navbar2">
                 <!----------Logo CANTV Blanco-------------------->
                 <div class="nav_2">
-                    <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3 "style="margin-left: -90px;">
+                    <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3">
                 </div>
                 <div class="nav_4">
+                    <!-- partial:index.partial.html -->
+
                     <nav>
                         <ul class="menu-horizontal">
                             <li style="margin-left: 50px;margin-right: 50px;"><a href="#inicio">Inicio</a></li>
@@ -39,13 +41,18 @@
                                 </ul>
                             </li>
                             <ul class="menu-horizontal">
-                              
+                                {{-- <li style="margin-left: 50px;margin-right: 50px;">
+                                    <a href="#">Marco normativo</a>
+                                    <ul style="margin-left: 50px;margin-right: 50px;" class="menu-vertical">
+                                        <a href="/images/carrusel/hola.pdf" download="hola">
+                                            hola</a>
+                                    </ul> --}}
                                     <li style="margin-left: 50px;margin-right: 50px;">
-                                    <a href="#">Marco Normativo</a>
+                                    <a href="#">Marco normativo</a>
                                 <ul style="margin-left: 50px;margin-right: 50px;" class="menu-vertical">
-                                    <li><a href="{{ route('leyes') }}">Ley</a></li>
-                                    <li><a href="{{ route('reglamentos') }}">reglamentos</a></li>
-                                    <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li>
+                                    <li><a href="#mision">ley</a></li>
+                                    <li><a href="#mision">reglamento</a></li>
+                                    <li><a href="#mision">documentoNormativo</a></li>
                                 </ul>
                                 </li>
                             </ul>
@@ -84,9 +91,22 @@
 
                             </ul>
                     </nav>
+
+                    {{-- <ul>
+                        <li><a href="#inicio">
+
+                                <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                    Objectivos</font>
+                            </a>
+                        </li>
+
+                    </ul> --}}
                 </div>
             </div>
         </div>
+
+
+
         <div class="mensaje_1" id="inicio">
             <marquee> ¡Se a Actualizado en 2024! </marquee>
         </div>
@@ -209,7 +229,7 @@
                 </svg>
                 <div class="Organigrama">
 
-                    <img src="/images/template/Organigrama1.jpg" style="width: 420px;margin-left: 760px;">
+                    <img src="/images/template/Organigrama1.jpg" style="width: 570px;margin-left: 760px;">
                     <h2 style="margin-top: -90px;">Organigrama</h2>
                     <img src="/images/template/Organigrama3.jpg"
                         style="width: 570px; padding-left: 0px;margin-left: 0px;">
