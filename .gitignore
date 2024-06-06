@@ -1,8 +1,10 @@
 .vscode/
 node_modules/
 vendor/
+public/fonts/
 public/storage/
 bootstrap/cache/
+storage/app/
 storage/logs/
 storage/app/debugbar/
 storage/framework/sessions/
