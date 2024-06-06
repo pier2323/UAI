@@ -18,18 +18,25 @@
                     </x-default.nav-link>
                 </div>
                 <!-- Navigation Acta -->
-                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-default.nav-link href="{{ route('action') }}" :active="request()->routeIs('action*')" style="color: white">
-                        Actuaciones Fiscales
-                    </x-default.nav-link>
-                </div>
-                <!-- Navigation Personal -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
                     <x-default.nav-link href="{{ route('personal-uai.dashboard') }}" :active="request()->routeIs('personal-uai*')" style="color: white">
                         personal UAI
                     </x-default.nav-link>
                 </div>
+
+                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
+                    <x-default.nav-link href="{{ route('plan de auditoria') }}" :active="request()->routeIs('action*')" style="color: white">
+                        Plan de Auditoria
+                    </x-default.nav-link>
+                </div>
+                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
+                    <x-default.nav-link href="{{ route('actuaciones') }}" :active="request()->routeIs('action*')" style="color: white">
+                       Actuaciones Fiscales
+                    </x-default.nav-link>
+                </div>
+                <!-- Navigation Personal -->
+               
             </div>
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->

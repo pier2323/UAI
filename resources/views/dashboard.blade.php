@@ -48,13 +48,31 @@
                         </button>
                     </div>
                 </a>
-                <a href="{{ route('action') }}">
+                <a href="{{ route('plan de auditoria') }}">
                     <div class="iconoD">
-                        <img src="/images/iconos/Actas.png" width="95px" height="100px">
+                        <img src="/images/iconos/Actas.png" width="95px" height="100px">  
+
+                        
                         </button>
                     </div>
                 </a>
             </div>
         </div>
     </div>
+@if (isset($dashboard))
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+@endif
+
 </x-app-layout>
