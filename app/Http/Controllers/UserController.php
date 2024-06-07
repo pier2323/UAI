@@ -20,7 +20,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        echo "hola";
         return redirect()->to(route('sign.login'));
     }
 }

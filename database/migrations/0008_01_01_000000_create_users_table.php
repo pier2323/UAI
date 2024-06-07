@@ -22,10 +22,10 @@ return new class extends Migration {
             $table->timestamps();
 
             // relacion uno a uno con la tabla Personal UAI
-            $table->unsignedBigInteger('personal_uai_id')->nullable();
-            $table->foreign('personal_uai_id')
+            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->foreign('employee_id')
                 ->references('id')
-                ->on('personal_uai')
+                ->on('employee')
                 ->onDelete('cascade');
         });
 
