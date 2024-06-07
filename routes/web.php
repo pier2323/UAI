@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\designationController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\PersonalUaiController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AuditActivityController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +13,14 @@ Route::get('/', function () {
 Route::middleware([
 ])->group(function () {
 
-    Route::get('/leyes', function () {
+    Route::get(uri: '/dashboard', action: [MainController::class, '__invoke'])->name('dashboard');
+
+    Route::controller(AuditActivityController::class)->group(function () {
+        Route::get(uri: '/actuacion-fiscal', action: 'index')->name('auditActivity.index');
+        Route::get(uri: '/actuacion-fiscal/{id}', action: 'show')->name('auditActivity.show');
+/* 
+
+Route::get('/leyes', function () {
         return view('leyes');
     })->name('leyes');
 
@@ -33,23 +41,24 @@ Route::middleware([
     Route::get('/Detalles', function () {
         return view('detalles');
     })->name('detalles');
-
-   
-
+    
+    
+    
     Route::controller(IndexController::class)->group(function (): void {
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/Plan de auditoria', 'action')->name('plan de auditoria');
         Route::get('/Plan de auditoria/{id}', 'show')->name('action.show');
-
+        
+        --}}
+        */
     });
-
-    Route::controller(PersonalUaiController::class)->group(function (): void {
-        Route::get('/personal-uai/dashboard', 'dashboard')->name('personal-uai.dashboard');
-        Route::get('/personal-uai/show/{personal}', 'show')->name('personal-uai.show');
-        Route::get('/personal-uai/edit/{personal}', 'edit')->name('personal-uai.edit');
-        Route::post('/personal-uai/store', 'store')->name('personal-uai.store');
-        Route::put('/personal-uai/edit/{personal}', 'update')->name('personal-uai.update');
-        Route::delete('/personal-uai/delete/{personal}', 'destroy')->name('personal-uai.delete');
+    Route::controller(EmployeeController::class)->group(function (): void {
+        Route::get('/personal', 'index')->name('employee.index');
+        Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
+        Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
+        Route::post('/personal/almacenar', 'store')->name('employee.store');
+        Route::put('/personal/editar/{personal}', 'update')->name('employee.update');
+        Route::delete('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
     });
 
     Route::controller(designationController::class)->group(function (): void {

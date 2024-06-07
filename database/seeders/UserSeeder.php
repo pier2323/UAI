@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\PersonalUai;
-use Faker\Factory;
 
 class UserSeeder extends Seeder
 {
@@ -16,13 +14,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $password = '12345678';
-        foreach(PersonalUai::all() as $personal)
+        foreach(Employee::all() as $employee)
         {
             $user = new User();
-            $user->name = $personal->primer_nombre;
-            $user->email = $personal->email_cantv;
+            $user->name = $employee->first_name;
+            $user->email = $employee->email_cantv;
             $user->password = $password;
-            $user->personal_uai_id = $personal->id;
+            $user->employee_id = $employee->id;
             $user->save();
         }
     }
