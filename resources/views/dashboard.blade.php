@@ -8,7 +8,7 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top: 0px">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="./images/carrusel/defenitivo.png" class="d-block w-100" alt="1">
+                <img src="./images/carrusel/prueva9.png" class="d-block w-100" alt="1">
             </div>
             <div class="carousel-item ">
                 <img src="./images/carrusel/carusel3.png" class="d-block w-100" alt="2">
@@ -49,12 +49,33 @@
                     </div>
                 </a>
                 <a href="{{ route('auditActivity.index') }}">
-                    <div class="iconoD">
-                        <img src="/images/iconos/Actas.png" width="95px" height="100px">
+                    {{-- 
+                <a href="{{ route('plan de auditoria') }}">
+                 --}}      
+<div class="iconoD">
+                        <img src="/images/iconos/Actas.png" width="95px" height="100px">  
+
+                        
                         </button>
                     </div>
                 </a>
             </div>
         </div>
     </div>
+@if (isset($dashboard))
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+<h1 classs="bg-red">si es</h1> 
+@endif
+
 </x-app-layout>
