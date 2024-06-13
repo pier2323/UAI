@@ -30,8 +30,44 @@ class EmployeeController extends Controller
      */
     public function show(string $employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view(view: "employee.show", data: [
+        return view(view: " employee.show", data: [
             "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee)
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function edit(string $employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view(view: " employee.edit", data: [
+            "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee),
+            'jobTitle'=> Jobtitle::all(),
+            'uai'=> Uai::all(),
         ]);
     }
 }
