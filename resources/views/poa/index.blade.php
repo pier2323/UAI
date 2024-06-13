@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Dashboard') }}
@@ -11,18 +12,6 @@
                     <div class="bg-gray-10 grid grid-cols-1 gap-6 bg-opacity-10 p-6 md:grid-cols-2 lg:gap-8 lg:p-8">
                         <div class="container my-4 bg-white">
                             <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <button class="btn btn-primary" data-bs-target="#exampleModal"
-                                        data-bs-toggle="modal" data-bs-whatever="@mdo" type="button">
-                                        Nueva Acta
-                                    </button>
-                                    @include('modal')
-                                    <div class="dataTables_wrapper dt-bootstrap5 no-footer"
-                                        id="datatable_users_wrapper">
-                                        <div class="col-sm-12">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,6 +31,11 @@
                                         style="width: 189px" tabindex="0">
                                         Descrición de la Actuacion
                                     </th>
+                                    <th aria-controls="datatable_users"
+                                    aria-label="Company: activate to sort column ascending"
+                                    class="centered sorting px-4 py-2" colspan="1" rowspan="1"
+                                    style="width: 166px" tabindex="0">
+                                    Fecha de recepción                                </th>
                                     <th aria-controls="datatable_users"
                                         aria-label="Company: activate to sort column ascending"
                                         class="centered sorting px-4 py-2" colspan="1" rowspan="1"
@@ -63,29 +57,22 @@
                                     </th>
                                 </tr>
                             </thead>
-                        </x-slot>
-                       
-                        
+                        </x-slot>                        
+                        <tr >
+                            <td class="px-4 py-2"> hola  </td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"></td>
+                            <td class="px-4 py-2"><a href="{{ route('detalles') }}"><img
+                                        src="/images/template/ojo.png" width="30" height="30"></a></td>
+                        </tr>
                     </x-table>
-                    {{--    <livewire:counter /> --}}
+                    
                 </div>
             </div>
         </div>
     </div>
-    {{--    <div x-data="main()">
-    <button @click="incrementar">Incrementar</button>
-    <span x-text="contador"></span>
-</div>
-
-<script>
-    function main() {
-        return 
-        {
-            contador: 15,
-            incrementar: function() {
-                return this.contador++
-            }
-        }
-    }
-</script> --}}
 </x-app-layout>

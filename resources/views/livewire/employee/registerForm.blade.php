@@ -1,178 +1,81 @@
 <div>
-	@php
-		// todo Get the public/js directory path and get the all of files
-		$scripts = scandir(public_path("js/employee/registerFormScript"));
-		$scripts = array_slice($scripts, 2, count($scripts) - 1);
+    @php
+        // todo Get the public/js directory path and get the all of files
+        $scripts = scandir(public_path('js/employee/registerFormScript'));
+        $scripts = array_slice($scripts, 2, count($scripts) - 1);
 
-		$label = "col-form-label";
-		$input =
-		    "mb-5 mt-2 flex h-10 w-full items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm";
-		$title = "Registro de personal";
-	@endphp
-	<x-button wire:click="$toggle('isOpened')">Registrar nuevo personal</x-button>
+        $label = 'col-form-label';
+        $input =
+            'mb-5 mt-2 flex h-10 w-full items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm';
+        $title = 'Registro de personal';
+    @endphp
+    <x-button wire:click="$toggle('isOpened')">Registrar nuevo personal</x-button>
 
-	<x-dialog-modal
-		id="employee-register-form"
-		maxWidth="md"
-		wire:model="isOpened"
-	>
-		<x-slot name="title">{{ $title }}</x-slot>
+    <x-dialog-modal id="employee-register-form" maxWidth="md" wire:model="isOpened">
+        <x-slot name="title">{{ $title }}</x-slot>
 
-		<x-slot name="content">
-			<form
-				enctype="multipart/form-data"
-				method="POST"
-				x-data="form()"
-			>
-				@csrf
-				@method("POST")
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-p00"
-					>P00:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-p00"
-						name="p00"
-						placeholder="155718"
-						required
-						type="number"
-					/>
-				</div>
-				<div class="bg mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-firstName"
-					>Primer Nombre:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-firstName"
-						name="first_name"
-						placeholder="JENBLUK"
-						required
-						type="text"
-						x-model="firstName"
-						x-on:input="firstName = transformedInput(firstName)"
-					/>
-				</div>
-				<div class="mb-3">
-					<label for="recipient-secondSurname-checkbox">No aplica</label>
-					<input
-						id="recipient-secondSurname-checkbox"
-						type="checkbox"
-						x-on:change="{marked: markedSecondName, inputValue: secondName} = toggleMark(markedSecondName)"
-					/>
-					<br>
-					<label
-						class="{{ $label }}"
-						for="recipient-secondName"
-					>Segundo Nombre:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-secondName"
-						name="second_name"
-						type="text"
-						x-bind:class="markedSecondName ? 'bg-gray-200' : ''"
-						x-bind:disabled="markedSecondName"
-						x-bind:required="markedSecondName"
-						x-model="secondName"
-						x-on:input="secondName = transformedInput(secondName)"
-					/>
-				</div>
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-firstSurname"
-					>Primer Apellido:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-firstSurname"
-						name="first_surname"
-						placeholder="VANEGAS"
-						required
-						type="text"
-						x-model="firstSurname"
-						x-on:input="firstSurname = transformedInput(firstSurname)"
-					/>
-				</div>
-				<div class="mb-3">
-					<label for="recipient-secondSurname-checkbox">No aplica</label>
-					<input
-						id="recipient-secondSurname-checkbox"
-						type="checkbox"
-						x-on:change="{marked: markedSecondSurname, inputValue: secondSurname} = toggleMark(markedSecondSurname)"
-					/>
-					<br>
-					<label
-						class="{{ $label }}"
-						for="recipient-secondSurname"
-					>Segundo Apellido:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-secondSurname"
-						name="second_surname"
-						placeholder="GARCÍA"
-						type="text"
-						x-bind:class="markedSecondSurname ? 'bg-gray-200' : ''"
-						x-bind:disabled="markedSecondSurname"
-						x-bind:required="markedSecondSurname"
-						x-model="secondSurname"
-						x-on:input="secondSurname = transformedInput(secondSurname)"
-					/>
-				</div>
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-personal_id"
-					>Cédula:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-personal_id"
-						name="personal_id"
-						required
-						type="text"
-						x-model="value"
-						x-on:input="value = updateValue(value)"
-					/>
-				</div>
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-phoneNumber"
-					>Teléfono:</label>
-					<input
-						class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-						id="recipient-phoneNumber"
-						name="phone"
-						required
-						type="tel"
-					/>
-				</div>
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-gmail"
-					>Correo UAI gmail:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-gmail"
-						name="gmail"
-						placeholder="jenblukvanegas@gmail.com"
-						required
-						type="email"
-					>
-				</div>
-				<div class="mb-3">
-					<label
-						class="{{ $label }}"
-						for="recipient-email_cantv"
-					>Correo Institucional:</label>
-					<input
-						class="{{ $input }}"
-						id="recipient-email_cantv"
-						name="email_cantv"
-						placeholder="jvane01@cantv.com.ve"
+        <x-slot name="content">
+            <form enctype="multipart/form-data" method="POST" x-data="form()">
+                @csrf
+                @method('POST')
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-p00">P00:</label>
+                    <input class="{{ $input }}" id="recipient-p00" name="p00" placeholder="155718" required
+                        type="number" />
+                </div>
+                <div class="bg mb-3">
+                    <label class="{{ $label }}" for="recipient-firstName">Primer Nombre:</label>
+                    <input class="{{ $input }}" id="recipient-firstName" name="first_name" placeholder="JENBLUK"
+                        required type="text" x-model="firstName"
+                        x-on:input="firstName = transformedInput(firstName)" />
+                </div>
+                <div class="mb-3">
+                    <label for="recipient-secondSurname-checkbox">No aplica</label>
+                    <input id="recipient-secondSurname-checkbox" type="checkbox"
+                        x-on:change="{marked: markedSecondName, inputValue: secondName} = toggleMark(markedSecondName)" />
+                    <br>
+                    <label class="{{ $label }}" for="recipient-secondName">Segundo Nombre:</label>
+                    <input class="{{ $input }}" id="recipient-secondName" name="second_name" type="text"
+                        x-bind:class="markedSecondName ? 'bg-gray-200' : ''" x-bind:disabled="markedSecondName"
+                        x-bind:required="markedSecondName" x-model="secondName"
+                        x-on:input="secondName = transformedInput(secondName)" />
+                </div>
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-firstSurname">Primer Apellido:</label>
+                    <input class="{{ $input }}" id="recipient-firstSurname" name="first_surname"
+                        placeholder="VANEGAS" required type="text" x-model="firstSurname"
+                        x-on:input="firstSurname = transformedInput(firstSurname)" />
+                </div>
+                <div class="mb-3">
+                    <label for="recipient-secondSurname-checkbox">No aplica</label>
+                    <input id="recipient-secondSurname-checkbox" type="checkbox"
+                        x-on:change="{marked: markedSecondSurname, inputValue: secondSurname} = toggleMark(markedSecondSurname)" />
+                    <br>
+                    <label class="{{ $label }}" for="recipient-secondSurname">Segundo Apellido:</label>
+                    <input class="{{ $input }}" id="recipient-secondSurname" name="second_surname"
+                        placeholder="GARCÍA" type="text" x-bind:class="markedSecondSurname ? 'bg-gray-200' : ''"
+                        x-bind:disabled="markedSecondSurname" x-bind:required="markedSecondSurname"
+                        x-model="secondSurname" x-on:input="secondSurname = transformedInput(secondSurname)" />
+                </div>
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-personal_id">Cédula:</label>
+                    <input class="{{ $input }}" id="recipient-personal_id" name="personal_id" required
+                        type="text" x-model="value" x-on:input="value = updateValue(value)" />
+                </div>
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-phoneNumber">Teléfono:</label>
+                    <input class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        id="recipient-phoneNumber" name="phone" required type="tel" />
+                </div>
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-gmail">Correo UAI gmail:</label>
+                    <input class="{{ $input }}" id="recipient-gmail" name="gmail"
+                        placeholder="jenblukvanegas@gmail.com" required type="email">
+                </div>
+                <div class="mb-3">
+                    <label class="{{ $label }}" for="recipient-email_cantv">Correo Institucional:</label>
+                    <input class="{{ $input }}" id="recipient-email_cantv" name="email_cantv"
+                        placeholder="jvane01@cantv.com.ve"
 						type="email"
 					>
 				</div>
@@ -221,7 +124,7 @@
 						type="file"
 					>
 					<div class="mb-3">
-						@error("profile_photo")
+						@error('profile_photo')
 							<div
 								class="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
 								role="alert"
@@ -259,9 +162,9 @@
 
 	@foreach ($scripts as $script)
 		<script 
-		@if ($script != "alpine.js")
+		@if ($script != 'alpine.js')
 			type="module" @endif
-		src="/js/employee/registerFormScript/{{ $script }}"
-					></script>
-					@endforeach
-				</div>
+		src="/js/employee/registerFormScript/{{ $script }}">
+                    </script>
+                    @endforeach
+                </div>

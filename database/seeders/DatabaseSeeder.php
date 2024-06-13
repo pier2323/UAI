@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         // utilizando la factory para crear x numero de filas
 
-        AuditActivity::factory(count: 20)->create();
-        HandoverDocument::factory(count: 10)->create();
+        // AuditActivity::factory(count: 5)->create();
+        // HandoverDocument::factory(count: 5)->create();
     }
 }
