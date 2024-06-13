@@ -16,6 +16,12 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" style="color: white;">
                         <h1>Inicio</h1>
                     </x-nav-link>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+    
+                        <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" style="color: white">
+                            Personal
+                        </x-nav-link>
+                    </div>
                 </div>
                 <!-- Navigation Acta -->
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
@@ -24,22 +30,16 @@
                     </x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
-                    <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" style="color: white">
-                        Personal
+                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
+                    <x-nav-link href="{{ route('poa') }}" :active="request()->routeIs('action*')" style="color: white">
+                        Plan de Auditoria
                     </x-nav-link>
                 </div>
-
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-default.nav-link href="{{ route('plan de auditoria') }}" :active="request()->routeIs('action*')" style="color: white">
-                        Plan de Auditoria
-                    </x-default.nav-link>
-                </div>
-                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-default.nav-link href="{{ route('actuaciones') }}" :active="request()->routeIs('action*')" style="color: white">
+                    <x-nav-link href="{{ route('actuaciones') }}" :active="request()->routeIs('action*')" style="color: white">
                        Actuaciones Fiscales
-                    </x-default.nav-link>
+                    </x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
                
