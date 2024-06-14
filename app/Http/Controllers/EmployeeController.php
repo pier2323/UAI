@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\JobTitle;
 use App\Models\Uai;
+use Illuminate\Http\Request;
 
 /**
  * Summary of PersonalUaiController
@@ -19,9 +20,9 @@ class EmployeeController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view(view: 'employee.index', data: [
-            'employees' => Employee::with(relations: 'jobTitle')->get(), 
-            'jobTitles' => JobTitle::all(), 
-            'uais'      => Uai::all()
+            'employees' => Employee::with(relations: 'jobTitle')->get(),
+            'jobTitles' => JobTitle::all(),
+            'uais' => Uai::all()
         ]);
     }
 
@@ -61,13 +62,12 @@ class EmployeeController extends Controller
 
 
 
-
     public function edit(string $employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view(view: " employee.edit", data: [
             "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee),
-            'jobTitle'=> Jobtitle::all(),
-            'uai'=> Uai::all(),
+            'jobTitle' => Jobtitle::all(),
+            'uai' => Uai::all(),
         ]);
     }
 }

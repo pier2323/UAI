@@ -11,7 +11,7 @@
           <section
             class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
             <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px" class="border-slate-500">
-              <img alt="foto de perfil" style="width: 15vw" src="{{ "$employee->profile_photo" }}" />
+              <img alt="foto de perfil" style="width: 15vw"src="{{ "/storage/$employee->profile_photo" }}" />
             </div>
             <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
               <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
