@@ -28,16 +28,16 @@
                                 </li>
 
                                 <form class="{{ $liClass }}"
-                                    action="{{ route('employee.show', $employee->personal_id) }}" method="POST">
+                                    action="{{ route('employee.update', $employee->personal_id) }}" method="POST">
                                     @method('PUT')
                                     @csrf
                                     <label for="recipient-cargo" class="col-form-label">Cargo:</label>
-                                     <select id="recipient-cargo" name="cargo_id" type="text"
+                                    <select id="recipient-cargo" name="cargo_id" type="text"
                                         class="{{ $inputClass }}"
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                         @foreach ($jobTitle as $cargo)
                                             <option value="{{ $cargo->id }}">{{ $cargo->name }}</option>
-                                        @endforeach 
+                                        @endforeach
                                     </select>
                                     <li class="{{ $liClass }}">
                                         <div>
@@ -75,8 +75,8 @@
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
 
                                         @foreach ($uai as $departament)
-                      <option value="{{ $departament->id  }}">{{ $departament->name }}</option>
-                    @endforeach 
+                                            <option value="{{ $departament->id }}">{{ $departament->name }}</option>
+                                        @endforeach
                                     </select>
                             </ul>
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">

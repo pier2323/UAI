@@ -35,34 +35,18 @@ class EmployeeController extends Controller
             "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee)
         ]);
     }
+    public function destroy($id)
+    {
+
+        $id = Employee::find($id);
+        $id->delete();
+        return redirect()->route('employee.index');
+
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function edit(string $employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+   
+    public function edit( $employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view(view: " employee.edit", data: [
             "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee),
@@ -70,4 +54,25 @@ class EmployeeController extends Controller
             'uai' => Uai::all(),
         ]);
     }
+   
+
+public function update(Request $request, string $employee)
+{
+    // dd($employee);
+    $employee = employee::find($employee);
+    $employee->update($request->all());
+    $requestAll = $request->all();
+    $employee = employee::findOrFail($employee);
+    print_r($requestAll['cargo_id']);
+    $employee->cargo_id = $requestAll['cargo_id'];
+
+    $employee->uai_id = $requestAll['uai_id'];
+    $employee->cedula = $requestAll['cedula'];
+    $employee->telefono = $requestAll['telefono'];
+    $employee->p00 = $requestAll['p00'];
+    $employee->email_cantv = $requestAll['email_cantv'];
+    $employee->gmail = $requestAll['gmail'];
+    $employee->save();
+    return view("employee.store", ["employee" => $employee]);
+}
 }

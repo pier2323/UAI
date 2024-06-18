@@ -56,6 +56,7 @@ Route::middleware([
         Route::post('/personal/almacenar', 'store')->name('employee.store');
         Route::put('/personal/editar/{personal}', 'update')->name('employee.update');
         Route::delete('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
+        
     });
 
     Route::controller(designationController::class)->group(function (): void {
