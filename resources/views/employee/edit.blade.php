@@ -28,11 +28,11 @@
                                 </li>
 
                                 <form class="{{ $liClass }}"
-                                    action="{{ route('employee.update', $employee->personal_id) }}" method="POST">
+                                    action="{{ route('employee.update', $employee->id) }}" method="POST">
                                     @method('PUT')
                                     @csrf
-                                    <label for="recipient-cargo" class="col-form-label">Cargo:</label>
-                                    <select id="recipient-cargo" name="cargo_id" type="text"
+                                    <label for="job_title" class="col-form-label">Cargo:</label>
+                                    <select id="job_title" name="job_title" type="text"
                                         class="{{ $inputClass }}"
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                         @foreach ($jobTitle as $cargo)
@@ -43,35 +43,35 @@
                                         <div>
 
                                         </div>
-                                        <label for="recipient-p00" class="col-form-label">P00:</label>
-                                        <input id="recipient-p00" name="p00" type="text"
+                                        <label for="p00" class="col-form-label">P00:</label>
+                                        <input id="p00" name="p00" type="text"
                                             class="{{ $inputClass }}" value="{{ $employee->p00 }}" />
                                     </li>
                                     <li class="{{ $liClass }}">
-                                        <label for="recipient-cedula" class="col-form-label">Cedula:</label>
-                                        <input id="recipient-cedula" name="cedula" type="text"
+                                        <label for="personal_id" class="col-form-label">Cedula:</label>
+                                        <input id="personal_id" name="personal_id" type="text"
                                             class="{{ $inputClass }}" value="{{ $employee->personal_id }}" />
                                     </li>
                                     <li class="{{ $liClass }}">
-                                        <label for="recipient-phoneNumber" class="col-form-label">Telefono:</label>
-                                        <input id="recipient-phoneNumber" name="telefono" type="text"
+                                        <label for="phone" class="col-form-label">Telefono:</label>
+                                        <input id="phone" name="phone" type="text"
                                             class="{{ $inputClass }}" value="{{ $employee->phone }}" />
                                     </li>
                                     <li class="{{ $liClass }}">
-                                        <label for="recipient-gmail" class="col-form-label">Correo
+                                        <label for="gmail" class="col-form-label">Correo
                                             electrónico:</label>
-                                        <input id="recipient-gmail" name="gmail" type="text"
+                                        <input id="gmail" name="gmail" type="text"
                                             class="{{ $inputClass }}" value="{{ $employee->gmail }}" />
                                     </li>
                                     <li class="{{ $liClass }}">
-                                        <label for="recipient-email_cantv" class="col-form-label">Correo
+                                        <label for="email_cantv" class="col-form-label">Correo
                                             Institucional:</label>
-                                        <input id="recipient-email_cantv" name="email_cantv" type="text"
+                                        <input id="email_cantv" name="email_cantv" type="text"
                                             class="{{ $inputClass }}" value="{{ $employee->email_cantv }}" />
                                     </li>
-                                    <label for="recipient-departament" class="col-form-label">Area UAI:</label>
+                                    <label for="uai" class="col-form-label">Area UAI:</label>
 
-                                    <select id="recipient-departament" name="uai_id" class="{{ $inputClass }}"
+                                    <select id="uai" name="uai" class="{{ $inputClass }}"
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
 
                                         @foreach ($uai as $departament)
