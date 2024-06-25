@@ -6,6 +6,7 @@
     </x-slot>
     <x-section-basic class="pb-5">
         <div class="m-16">
+
             @livewire('employee.registerForm')
         </div>
         <x-table>

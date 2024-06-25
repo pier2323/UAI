@@ -13,7 +13,7 @@
                         <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px"
                             class="border-slate-500">
                             <img alt="foto de perfil"
-                                style="width: 15vw"src="{{ "/storage/$employee->profile_photo" }}" />
+                                style="width: 15vw" src="{{ asset("storage/$employee->profile_photo")}}" />
                                
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">

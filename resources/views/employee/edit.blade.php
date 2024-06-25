@@ -1,8 +1,9 @@
 @php
     $inputClass =
-        "mb-6 border'2 border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500";
+    "mb-6 border'2 border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500";
     $liClass = 'flex flex-column justify-start items-start';
-@endphp
+    @endphp
+    <script defer src="/js/employee/registerFormScript/changeImage.js"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight">
@@ -17,7 +18,7 @@
                         class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
                         <div style="overflow:hidden ; border: 1px solid #777; border-radius: px; margin-bottom: 500px;"
                             class="border-slate-500">
-                            <img alt="foto de perfil" style="width: 15vw" src="{{ "$employee->profile_photo" }}" />
+                            <img alt="foto de perfil" style="width: 15vw" src="{{ asset("storage/$employee->profile_photo")}}" />
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
@@ -28,9 +29,23 @@
                                 </li>
 
                                 <form class="{{ $liClass }}"
-                                    action="{{ route('employee.update', $employee->id) }}" method="POST">
+                                    action="{{ route('employee.update', $employee->id) }}" enctype="multipart/form-data" method="POST">
                                     @method('PUT')
                                     @csrf
+                                    <div class="image">
+
+                                        <div id="zona-carga">
+                                            <img id="zona-carga-img" src="{{ asset("storage/$employee->profile_photo")}}" />
+                                        </div>
+                                        <label for="photo">click para subir una imagen</label>
+                                        <input
+                                        accept="image/*"
+                                        class="btn btn-primary mb-3"
+                                        id="photo"
+                                        name="photo"
+                                        type="file"
+                                        >
+                                    </div>
                                     <label for="job_title" class="col-form-label">Cargo:</label>
                                     <select id="job_title" name="job_title" type="text"
                                         class="{{ $inputClass }}"

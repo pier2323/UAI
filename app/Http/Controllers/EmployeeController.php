@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\JobTitle;
 use App\Models\Uai;
+use BaconQrCode\Renderer\Path\Path;
 use Illuminate\Http\Request;
 
 /**
@@ -58,25 +59,25 @@ class EmployeeController extends Controller
 
     public function update(Request $request, string $employee)
     {
-        /* dd($employee); */
+        
         $requestAll = $request->all();
         $employee = employee::findOrFail($employee);
         $employee->personal_id = $requestAll['personal_id'];
         $employee->phone = $requestAll['phone'];
         $employee->p00 = $requestAll['p00'];
         $employee->email_cantv = $requestAll['email_cantv'];
-        $employee->gmail = $requestAll['gmail'];
-
+        $employee->gmail = $requestAll['gmail'];    
         $employee->job_title_id = $requestAll['job_title'];
         $employee->uai_id = $requestAll['uai'];
-
-
-
-
-
-
-
+        if ($request->hasFile('photo')) {
+            $archivoFoto = $request->file('photo');
+            $photo = $request->photo->storeAs('public', "$request->p00.png");
+            $archivoFoto->move(public_path() . '/storage/', $photo);
+            $employee->phone = $photo;
+        }
+        $employee->update($request->all());
         $employee->save();
         return redirect()->to(route('employee.show', $employee->id));
+    
     }
 }

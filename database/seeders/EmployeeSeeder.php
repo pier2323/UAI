@@ -28,7 +28,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4126625907',
                 'gmail' => 'jenblukvanegas@gmail.com',
                 'email_cantv' => 'jvane01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155718.jpg',
+                'profile_photo' => '155718.jpg',
               ],
               [
                 'p00' => '155877',
@@ -42,7 +42,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4126625907',
                 'gmail' => 'kdales01.uai@gmail.com',
                 'email_cantv' => 'kdales01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155877.jpg',
+                'profile_photo' => '155877.jpg',
               ],
               [
                 'p00' => '210475',
@@ -56,7 +56,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4124905187',
                 'gmail' => 'leonardoaponte781@gmail.com',
                 'email_cantv' => 'lapont03@cantv.com.ve',
-                'profile_photo' => '/images/uai/210475.jpg',
+                'profile_photo' => '210475.jpg',
               ],
               [
                 'p00' => '156286',
@@ -70,7 +70,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4265161189',
                 'gmail' => 'mhgonzalez911@gmail.com',
                 'email_cantv' => 'mgonza130@cantv.com.ve',
-                'profile_photo' => '/images/uai/156286.jpg',
+                'profile_photo' => '156286.jpg',
               ],
               [
                 'p00' => '131466',
@@ -84,7 +84,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166616633',
                 'gmail' => 'mvarga04.uai@gmail.com',
                 'email_cantv' => 'mvarga04@cantv.com.ve',
-                'profile_photo' => '/images/uai/131466.jpg',
+                'profile_photo' => '131466.jpg',
               ],
               [
                 'p00' => '206620',
@@ -98,7 +98,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => null,
                 'gmail' => 'jolive02.uai@gmail.com',
                 'email_cantv' => 'jolive02@cantv.com.ve',
-                'profile_photo' => '/images/uai/206620.jpg',
+                'profile_photo' => '206620.jpg',
               ],
               [
                 'p00' => '124184',
@@ -112,7 +112,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4265103485',
                 'gmail' => 'kperei02.uai@gmail.com',
                 'email_cantv' => 'kperei02.uai@gmail.com',
-                'profile_photo' => '/images/uai/124184.jpg',
+                'profile_photo' => '124184.jpg',
               ],
               [
                 'p00' => '155919',	
@@ -126,7 +126,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4129245197',
                 'gmail' => null,
                 'email_cantv' => 'iuzcat01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155919.jpg',
+                'profile_photo' => '155919.jpg',
               ],
               [
                 'p00' => '156483',
@@ -140,7 +140,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4241357637',
                 'gmail' => 'faruiz01.uai@gmail.com',
                 'email_cantv' => 'fruiz01@cantv.com.ve',
-                'profile_photo' => '/images/uai/156483.jpg',
+                'profile_photo' => '156483.jpg',
               ],
               [
                 'p00' => '155918',
@@ -154,7 +154,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4125678269',
                 'gmail' => null,
                 'email_cantv' => 'iarias01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155918.jpg',
+                'profile_photo' => '155918.jpg',
               ],
               [
                 'p00' => '132484',
@@ -168,7 +168,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166114416',
                 'gmail' => null,
                 'email_cantv' => 'larias02@cantv.com.ve',
-                'profile_photo' => '/images/uai/132484.jpg',
+                'profile_photo' => '132484.jpg',
               ],
               [
                 'p00' => '155485',
@@ -182,7 +182,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4129953995',
                 'gmail' => null,
                 'email_cantv' => 'ysalas03@cantv.com.ve',
-                'profile_photo' => '/images/uai/155485.jpg',
+                'profile_photo' => '155485.jpg',
               ],
               [
                 'p00' => '150389',
@@ -196,7 +196,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4265338738',
                 'gmail' => 'jmejia12.uai@gmail.com',
                 'email_cantv' => 'jmejia12@cantv.com.ve',
-                'profile_photo' => '/images/uai/150389.jpg',
+                'profile_photo' => '150389.jpg',
               ],
               [
                 'p00' => '155501',
@@ -210,7 +210,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166531728',
                 'gmail' => 'eperez.uai@gmail.com',
                 'email_cantv' => 'eperez53@cantv.com.ve',
-                'profile_photo' => '/images/uai/155501.jpg',
+                'profile_photo' => '155501.jpg',
               ],
               [
                 'p00' => '206397',
@@ -224,7 +224,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166229474',
                 'gmail' => 'zorope.uai@gmail.com',
                 'email_cantv' => 'zorope@cantv.com.ve',
-                'profile_photo' => '/images/uai/206397.jpg',
+                'profile_photo' => '206397.jpg',
               ],[
                 'p00' => '146196',
                 'personal_id' => '10584414',
@@ -237,7 +237,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4142582181',
                 'gmail' => 'masorate01.uai@gmail.com',
                 'email_cantv' => 'msorat01@cantv.com.ve',
-                'profile_photo' => '/images/uai/146196.jpg',
+                'profile_photo' => '146196.jpg',
               ],
               [
                 'p00' => '155435',
@@ -251,7 +251,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4125771270',
                 'gmail' => 'ecumana01.uai@gmail.com',
                 'email_cantv' => 'ecuman01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155435.jpg',
+                'profile_photo' => '155435.jpg',
               ],
               [
                 'p00' => '149057',
@@ -265,7 +265,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4241950669',
                 'gmail' => 'lbarre04.uai@gmail.com',
                 'email_cantv' => 'lbarret04@cantv.com.ve',
-                'profile_photo' => '/images/uai/149057.jpg',
+                'profile_photo' => '149057.jpg',
               ],
               [
                 'p00' => '132129',
@@ -279,7 +279,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166209208',
                 'gmail' => 'svarga04.uai@gmail.com',
                 'email_cantv' => 'svarga04@cantv.com.ve',
-                'profile_photo' => '/images/uai/132129.jpg',
+                'profile_photo' => '132129.jpg',
               ],
               [
                 'p00' => '124502',
@@ -293,7 +293,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166327610',
                 'gmail' => 'jvazqu01.uai@gmail.com',
                 'email_cantv' => 'jvazqu01@cantv.com.ve',
-                'profile_photo' => '/images/uai/124502.jpg',
+                'profile_photo' => '124502.jpg',
               ],
               [
                 'p00' => '146236',
@@ -307,7 +307,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4163054088',
                 'gmail' => 'mariolivar.uai@gmail.com',
                 'email_cantv' => 'mfalco01@cantv.com.ve',
-                'profile_photo' => '/images/uai/146236.jpg',
+                'profile_photo' => '146236.jpg',
               ],
               [
                 'p00' => '155267',
@@ -321,7 +321,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4143090015',
                 'gmail' => 'fbetac.uai@gmail.com',
                 'email_cantv' => 'fbetan03@cantv.com.ve',
-                'profile_photo' => '/images/uai/155267.jpg',
+                'profile_photo' => '155267.jpg',
               ],
               [
                 'p00' => '149382',
@@ -335,7 +335,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4164583729',
                 'gmail' => 'ivonnerojas07.uai@gmail.com',
                 'email_cantv' => 'arojas28@cantv.com.ve',
-                'profile_photo' => '/images/uai/149382.jpg',
+                'profile_photo' => '149382.jpg',
               ],
               [
                 'p00' => '156499',
@@ -349,7 +349,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4164583729',
                 'gmail' => 'pbolec01.uai@gmail.com'	,
                 'email_cantv' => 'pbolec01@cantv.com.ve',
-                'profile_photo' => '/images/uai/156499.jpg',
+                'profile_photo' => '156499.jpg',
               ],
               [
                 'p00' => '156373',
@@ -363,7 +363,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4129915401',
                 'gmail' => 'gmoren02.uai@gmaill.com',
                 'email_cantv' => 'gmoren02@cantv.com.ve',
-                'profile_photo' => '/images/uai/156373.jpg',
+                'profile_photo' => '156373.jpg',
               ],
               [
                 'p00' => '134363',
@@ -377,7 +377,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4166337594',
                 'gmail' => 'jradas01.uai@gmail.com',
                 'email_cantv' => 'jradas01@cantv.com.ve',
-                'profile_photo' => '/images/uai/134363.jpg',
+                'profile_photo' => '134363.jpg',
               ],
               [
                 'p00' => '149070',
@@ -391,7 +391,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4149893742',
                 'gmail' => 'jville12.uai@gmail.com',
                 'email_cantv' => 'jville12@cantv.com.ve',
-                'profile_photo' => '/images/uai/149070.jpg',
+                'profile_photo' => '149070.jpg',
               ],
               [
                 'p00' => '154423',
@@ -405,7 +405,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4164022312',
                 'gmail' => 'irumbos.uai@gmail.com',
                 'email_cantv' => 'irumbo01@cantv.com.ve',
-                'profile_photo' => '/images/uai/154423.jpg',
+                'profile_photo' => '154423.jpg',
               ],
               [
                 'p00' => '150770',
@@ -433,7 +433,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4263188810',
                 'gmail' => 'jinfan03.uai@gmail.com',
                 'email_cantv' => 'jinfan03@cantv.com.ve',
-                'profile_photo' => '/images/uai/150753.jpg',
+                'profile_photo' => '150753.jpg',
               ],
               [
                 'p00' => '149073',
@@ -447,7 +447,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4262386802',
                 'gmail' => 'sflory01.uai@gmail.com',
                 'email_cantv' => 'sflory01@cantv.com.ve',
-                'profile_photo' => '/images/uai/149073.jpg',
+                'profile_photo' => '149073.jpg',
               ],
               [
                 'p00' => '155005',
@@ -461,7 +461,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4263188810',
                 'gmail' => 'rgome01.uai@gmail.com',
                 'email_cantv' => 'rgome01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155005.jpg',
+                'profile_photo' => '155005.jpg',
               ],
               [
                 'p00' => '147987',
@@ -475,7 +475,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4241264891',
                 'gmail' => 'mdemar02.uai@gmail.com',
                 'email_cantv' => 'mdemar01@cantv.com.ve',
-                'profile_photo' => '/images/uai/147987.jpg',
+                'profile_photo' => '147987.jpg',
               ],
               [
                 'p00' => '155892',
@@ -489,7 +489,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4148518981',
                 'gmail' => 'adrianaclinaresc@gmail.com',
                 'email_cantv' => 'alinar09@cantv.com.ve',
-                'profile_photo' => '/images/uai/155892.jpg',
+                'profile_photo' => '155892.jpg',
               ],
               [
                 'p00' => '155909',
@@ -503,7 +503,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4142683382',
                 'gmail' => 'rtorre26.uai@gmail.com',
                 'email_cantv' => 'rtorre26@cantv.com.ve',
-                'profile_photo' => '/images/uai/155909.jpg',
+                'profile_photo' => '155909.jpg',
               ],
               [
                 'p00' => '155901',
@@ -517,7 +517,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4144543386',
                 'gmail' => 'bzambr01.uai@gmail.com',
                 'email_cantv' => 'bzambr01@cantv.com.ve',
-                'profile_photo' => '/images/uai/155901.jpg',
+                'profile_photo' => '155901.jpg',
               ],
               [
                 'p00' => '156642',
@@ -531,7 +531,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4149100645',
                 'gmail' => 'barre04.uai@gmail.com',
                 'email_cantv' => 'barre04@cantv.com.ve',
-                'profile_photo' => '/images/uai/156642.jpg',
+                'profile_photo' => '156642.jpg',
               ],
               [
                 'p00' => '156560',
@@ -545,7 +545,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4143944955',
                 'gmail' => 'lramir17.uai@gmail.com',
                 'email_cantv' => 'lramir17@cantv.com.ve',
-                'profile_photo' => '/images/uai/156560.jpg',
+                'profile_photo' => '156560.jpg',
               ],
               [
                 'p00' => '126645',
@@ -559,7 +559,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4265320101',
                 'gmail' => 'olopez01.uai@gmail.com',
                 'email_cantv' => 'olopez01@cantv.com.ve',
-                'profile_photo' => '/images/uai/126645.jpg',
+                'profile_photo' => '126645.jpg',
               ],
               [
                 'p00' => '156646',
@@ -573,7 +573,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '4163848415',
                 'gmail' => 'dduran03.uai@gmail.com',
                 'email_cantv' => 'dduran03@cantv.com.ve',
-                'profile_photo' => '/images/uai/156646.jpg',
+                'profile_photo' => '156646.jpg',
               ],
         ];
 
