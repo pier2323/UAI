@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $employee->uai_id = $requestAll['uai'];
         if ($request->hasFile('photo')) {
             $archivoFoto = $request->file('photo');
-            $photo = $request->photo->storeAs('public', "$request->p00.png");
+            $photo = $request->photo->storeAs('public', "$request->p00.jpg");
             $archivoFoto->move(public_path() . '/storage/', $photo);
             $employee->phone = $photo;
         }
@@ -79,5 +79,10 @@ class EmployeeController extends Controller
         $employee->save();
         return redirect()->to(route('employee.show', $employee->id));
     
+        //  $photo = $request->photo->storeAs('public', "$request->p00.png");
+        // $photo = explode("/",$photo);
+        // $employee->profile_photo = $photo;
+        // $employee->save();
+        // return redirect()->to(route('employee.show', $employee->id));
     }
 }

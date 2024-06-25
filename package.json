@@ -19,6 +19,7 @@
         "alpinejs": "^3.13.8",
         "dayjs": "^1.11.11",
         "flatpickr": "^4.6.13",
-        "intl-tel-input": "^21.2.8"
+        "intl-tel-input": "^21.2.8",
+        "sweetalert2": "^11.12.0"
     }
 }

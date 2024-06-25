@@ -115,11 +115,11 @@
 				</div>
 				<div>
 					<div id="zona-carga"></div>
-					<label for="recipient-photo">click para subir una imagen</label>
+					<label for="photo">click para subir una imagen</label>
 					<input
 						accept="image/*"
 						class="btn btn-primary mb-3"
-						id="recipient-photo"
+						id="photo"
 						name="photo"
 						type="file"
 						wire:model="photo"

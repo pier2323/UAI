@@ -6,7 +6,7 @@ inputImagen.addEventListener("change", (e) => {
     const archivo = e.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-        const img = document.querySelector("#zona-carga-img");
+        const img = document.createElement('img');
         img.src = e.target.result;
         zonaCarga.innerHTML = "";
         zonaCarga.appendChild(img);

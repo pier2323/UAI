@@ -12,9 +12,11 @@
                         class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
                         <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px"
                             class="border-slate-500">
-                            <img alt="foto de perfil"
-                                style="width: 15vw" src="{{ asset("storage/$employee->profile_photo")}}" />
-                               
+                            <img alt="foto de perfil" style="width: 15vw"
+                            src="{{URL::asset("storage/$employee->profile_photo")}}"/>
+                         
+                             
+
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
@@ -44,8 +46,7 @@
                                     <p class="text-gray-600">Area UAI: {{ $employee->uai->name }}</p>
                                 </li>
                             </ul>
-
-
+                        
 
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
                                 <a href="{{ route('employee.edit', $employee->id) }}">
@@ -55,11 +56,12 @@
                                     </button>
                                 </a>
                                 <form action="{{ route('employee.delete', $employee->id) }}" method="POST"
-                                    >
+                                   >
+
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                       class="rounded-lg border-0 bg-white px-6
+                                    <button type="submit"  
+                                        class="rounded-lg border-0 bg-white px-6
                                         py-3 text-base text-slate-900 shadow-lg shadow-slate-100 transition
                                         hover:bg-blue-300 hover:text-slate-900 hover:shadow-blue-600 dark:bg-slate-700
                                         dark:text-slate-300 dark:shadow-sm dark:shadow-slate-800 dark:hover:bg-slate-600
@@ -74,5 +76,9 @@
             </div>
         </div>
     </div>
+
+
+
+  
 
 </x-app-layout>

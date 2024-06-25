@@ -27,8 +27,9 @@ class RegisterForm extends Component
 
     public function save()
     {
+        
         $this->personal_id = explode("-", $this->personal_id);
-        $photo = $this->photo->storeAs('public', "$this->p00.png");
+        $photo = $this->photo->storeAs('public', "$this->p00.jpg");
         $photo = explode("/",$photo);
         Employee::create([
             'personal_id' => $this->personal_id[1],

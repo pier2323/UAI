@@ -21,6 +21,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- * Styles library --}}
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="/css/intlTelInput.css">
     @livewireStyles
@@ -32,6 +34,7 @@
     <!-- DataTable -->
     <script defer src="/js/jquery-dataTables/jquery.dataTables.min.js"></script>
     <script defer src="/js/jquery-dataTables/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -49,9 +52,10 @@
     @stack('modals')
 
     @livewireScripts
-
     <x-footer></x-footer>
-    
+  
+  
+    @stack('js')
 </body>
 
 </html>
