@@ -9,9 +9,10 @@ function form() {
         secondSurname: null,
         markedSecondSurname: false,
         labelPhoneNumber: null,
-        value: "V-",
+        p00: null,
+        personalId: "V-",
         // * functions
-        transformedInput: (input) => input.replace(/\s/g, "").toUpperCase(),
+        transformedInput: (input) => input.replace(/[^a-zA-Z]/g, '').toUpperCase(),
         toggleMark: (marked) => {
             return {
                 marked: !marked,
@@ -19,13 +20,26 @@ function form() {
             };
         },
         updateValue: (value) => {
+
             // * Agregar "V-" al principio
-            if (!value.startsWith("V-") === true || value == "V") return "V-";
+            if (!value.startsWith("V-") === true)
+                return "V-";
 
             // * Limitar a 8 dígitos
-            if (value.length > 8) return value.slice(0, 10);
+            if (value.length > 8)
+                return value.slice(0, 10);
 
-            return value;
+            // * Eliminiar las letras y caracteres especiales 
+            return "V-" + value.replace(/[^0-9]/g, '');
+        },
+
+        updatep00: (p00) => {
+            // * Eliminiar las letras y caracteres especiales 
+
+            if (p00.length > 5)
+                return p00.slice(0, 6);
+
+            return p00.replace(/[^0-9]/g, '');
         },
     };
 }

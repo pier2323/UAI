@@ -18,9 +18,10 @@
             <x-slot name="content">
 
                 <div class="mb-3">
+					
                     <label class="{{ $label }}" for="recipient-p00">P00:</label>
                     <input class="{{ $input }}" id="recipient-p00" name="p00" placeholder="155718" required
-                        type="number" wire:model="p00" />
+					type="text" x-model="p00" x-on:input="p00= updatep00(p00)" wire:model="p00">
                 </div>
                 <div class="bg mb-3">
                     <label class="{{ $label }}" for="recipient-firstName">Primer Nombre:</label>
@@ -62,7 +63,7 @@
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-personal_id">Cédula:</label>
                     <input class="{{ $input }}" id="recipient-personal_id" name="personal_id" required
-                        type="text" x-model="value" x-on:input="value = updateValue(value)" wire:model="personal_id">
+                        type="text" x-model="personalId" x-on:input="personalId= updateValue(personalId)" wire:model="personal_id">
                 </div>
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-phoneNumber">Teléfono:</label>
@@ -88,9 +89,12 @@
 						for="recipient-departament"
 					>Coordinación o Gerencia de adscripción:</label>
 					<select wire:model.change="uai"
+					class="{{ $input }}"
+					x-on:click="uaiTried = true"
 					>
+					<option class="{{$input }}" x-bind:selected="uaiTried" x-bind:disabled="uaiTried">Elige una coordinación...</option>
 						@foreach ($uais as $uai)
-							<option  value="{{ $uai->id }}">{{ $uai->name }}</option>
+							<option class="{{$input}}" value="{{ $uai->id }}">{{ $uai->name }}</option>
 						@endforeach
 					</select>
 				</div>
@@ -105,12 +109,12 @@
 						name="job_title"
 						required
 						wire:model.change="job_title"
-
+						x-on:click="jobTitleTried = true"
 					>
 					
+					<option class="{{$input }}" x-bind:selected="jobTitleTried" x-bind:disabled="jobTitleTried">Elige un cargo...</option>
 						@foreach ($jobTitles as $jobTitle)
 							<option value="{{ $jobTitle->id }}">{{ $jobTitle->name }}</option>
-							
 						@endforeach
 					</select>
 				</div>
