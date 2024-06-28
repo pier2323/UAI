@@ -57,13 +57,12 @@
                         x-bind:required="markedSecondSurname" x-model="secondSurname"
                         x-on:input="secondSurname = transformedInput(secondSurname)" />
                 </div>
-				{{-- aqui falta el wire:model --}}
- 
+                {{-- aqui falta el wire:model --}}
+
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-personal_id">Cédula:</label>
-                    <input class="{{ $input }}" id="recipient-personal_id"
-                        name="personal_id" required type="text" x-model="value"
-                        x-on:input="value = updateValue(value)"  wire:model="personal_id">
+                    <input class="{{ $input }}" id="recipient-personal_id" name="personal_id" required
+                        type="text" x-model="value" x-on:input="value = updateValue(value)" wire:model="personal_id">
                 </div>
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-phoneNumber">Teléfono:</label>
@@ -89,7 +88,6 @@
 						for="recipient-departament"
 					>Coordinación o Gerencia de adscripción:</label>
 					<select wire:model.change="uai"
-					
 					>
 						@foreach ($uais as $uai)
 							<option  value="{{ $uai->id }}">{{ $uai->name }}</option>
@@ -107,9 +105,12 @@
 						name="job_title"
 						required
 						wire:model.change="job_title"
+
 					>
+					
 						@foreach ($jobTitles as $jobTitle)
 							<option value="{{ $jobTitle->id }}">{{ $jobTitle->name }}</option>
+							
 						@endforeach
 					</select>
 				</div>

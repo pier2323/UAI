@@ -55,8 +55,7 @@ Route::middleware([
         Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
         Route::put('/personal/editar/{personal}', 'update')->name('employee.update');
         Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
-        Route::delete('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
-        
+        Route::get('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
     });
 
     Route::controller(designationController::class)->group(function (): void {

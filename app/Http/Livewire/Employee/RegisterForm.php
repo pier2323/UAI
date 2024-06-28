@@ -13,7 +13,7 @@ class RegisterForm extends Component
     use WithFileUploads;
     public  $p00, $first_name, $second_name, $first_surname, $second_surname, $phone, $email_cantv, $gmail, $photo, $job_title ,$uai ,$personal_id
     ; 
-   
+
     public $isOpened = false;
     public $test;
     public $jobTitles;
@@ -32,6 +32,7 @@ class RegisterForm extends Component
         $photo = $this->photo->storeAs('public', "$this->p00.jpg");
         $photo = explode("/",$photo);
         Employee::create([
+            
             'personal_id' => $this->personal_id[1],
             'p00' => $this->p00,
             'first_name' => $this->first_name,
@@ -45,6 +46,8 @@ class RegisterForm extends Component
             'job_title_id' => $this->job_title,
             'uai_id' => $this->uai,
         ]);
+
+
         return $this->redirect(route('employee.index'));
     }
 

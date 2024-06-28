@@ -36,16 +36,14 @@ class EmployeeController extends Controller
             "employee" => Employee::with(relations: ['jobTitle', 'uai'])->find(id: $employee)
         ]);
     }
+
     public function destroy($id)
     {
-
-        $id = Employee::find($id);
-        $id->delete();
+        $employee = Employee::find($id);
+        $employee->delete();
         return redirect()->route('employee.index');
-
     }
-
-
+  
 
     public function edit($employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
