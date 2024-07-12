@@ -31,7 +31,7 @@ class RegisterForm extends Component
     public $email_cantv;
     #[validate('required|email', as: 'Correo Personal')]
     public $gmail;
-
+    #[Validate('required|image|mimes:jpg,png,|max:4096 ', as: 'Foto')]
     public $photo;
     #[validate('required', as: 'cargo')]
     public $job_title;
@@ -90,7 +90,7 @@ class RegisterForm extends Component
         $this->phone = "$code$number";
 
 
-
+      
         $photo = $this->photo->storeAs('public', "$this->p00.jpg");
         $photo = explode("/", $photo);
 

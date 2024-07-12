@@ -49,9 +49,9 @@
                     <td class="px-4 py-2"> {{ $employee->p00 }}</td>
                     <td class="px-4 py-2">
                         {{ $employee->first_name . ' ' . $employee->first_surname . ' ' . $employee->second_surname }}
-                    </td>
+         
                     <td class="px-4 py-2">{{ $employee->email_cantv }}</td>
-                    <td class="px-4 py-2">{{ $employee->persona_id }}</td>
+                    <td class="px-4 py-2">{{$employee->personal_id}}</td>
                     <td class="px-4 py-2">{{ $employee->phone }}</td>
                     <td class="px-4 py-2"><a href="{{ route('employee.show', $employee->id) }}"><img height="30"
                                 src="/images/template/ojo.png" width="30"></a></td>

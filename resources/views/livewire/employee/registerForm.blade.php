@@ -207,6 +207,9 @@
 					</select>
 				</div>
 				<div>
+                    @error('photo')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
 					<div id="zona-carga"></div>
 					<label for="photo">click para subir una imagen</label>
 					<input
@@ -243,14 +246,43 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="button" wire:click="limpiar">limpiar</button>
+            
+                     
+                     <x-button  style="background-color:rgb(234, 81, 81); margin-left: 160px; margin-right: 10px;" type="button" wire:click="limpiar">limpiar</x-button>
+                     <x-button  style="background-color: rgba(0, 255, 213, 0.795);  " type="button" wire:click="validar" > Validar </x-button>
+                 
+          
+                    {{-- todo All Erros --}}
+
+                 @if ($valido == 1)            
+                    <div class="bg-teal-100 border-t-4 mt-3 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                     <strong class="font-bold">Todo OK!</strong>
+                     <br>
+                        <span class="block sm:inline">Todos los campos del <strong>Personal Saliente</strong> han sido escritos correctamente.</span>
+                    </div>
+                @elseif ($valido == 2)
+                    <div class="bg-red-100 border mt-3 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">Error!</strong>
+                            <br>
+                        <ul>
+                             @foreach ($errors->all() as $error)
+                                <li>
+                                    <span class="block sm:inline">{{ $error }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                 @endif
+
 			</x-slot>
 			
+            
 			<x-slot name="footer">
 				<x-secondary-button 
-                wire:click="resetComponent" id="cancelar">cancelar</x-secondary-button>
+                wire:click="resetComponent"  style="margin-right: 10px;" id="cancelar">cancelar</x-secondary-button>
 				<x-button wire:submit>guardar</x-button>
 			</x-slot>
+            
 		</x-dialog-modal>
  
  
