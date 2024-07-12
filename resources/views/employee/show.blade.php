@@ -1,5 +1,9 @@
 <x-app-layout>
 
+    @php
+        $phone_code = substr($employee->phone, 0, 4);
+        $phone_number = substr($employee->phone, 4,7);
+    @endphp
 
 
     <x-slot name="header">
@@ -34,7 +38,7 @@
                                 <li class="flex items-end">
                                     <p class="text-gray-600">Cedula: {{ "$employee->personal_id" }}</p>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">Teléfono: +58{{ "$employee->phone" }}</p>
+                                    <p class="text-gray-600">Teléfono: {{ "$phone_code-$phone_number" }}</p>
                                 </li>
                                 <li class="flex items-end">
                                 <li class="text-gray-600">Correo electrónico: {{ "$employee->gmail" }}</li>

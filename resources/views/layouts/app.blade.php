@@ -21,8 +21,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- * Styles library --}}
-    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="/css/intlTelInput.css">
     @livewireStyles

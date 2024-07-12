@@ -9,6 +9,7 @@
             'mb-5 mt-2 flex h-10 w-full items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm';
         $title = 'Registro de personal';
     @endphp
+
     <x-button wire:click="$toggle('isOpened')">Registrar nuevo personal</x-button>
 
     <form wire:submit="save" enctype="multipart/form-data" method="POST" x-data="form()">
@@ -18,32 +19,66 @@
             <x-slot name="content">
 
                 <div class="mb-3">
-					
-                    <label class="{{ $label }}" for="recipient-p00">P00:</label>
-                    <input class="{{ $input }}" id="recipient-p00" name="p00" placeholder="155718" required
-					type="text" x-model="p00" x-on:input="p00= updatep00(p00)" wire:model="p00">
+                    @error('p00')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label class="{{ $label }}" for="recipient-p00">P00:</label>
+
+                        <div class="flex">
+
+                            <div class="flex h-10 items-center rounded-md border border-gray-300 p-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
+                                style="margin-top: 10px;">
+                                P00</div>
+
+                            <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
+                            <input id="recipient-p00" name="p00" class="{{ $input }}" id="recipient-p00"
+                                name="personal_id" placeholder="155718" id="recipient-p00" name="p00" type="text"
+                                x-model="p00" x-on:input="p00= updatep00(p00)" wire:model="p00">
+                        </div>
+                    </div>
+
                 </div>
-                <div class="bg mb-3">
-                    <label class="{{ $label }}" for="recipient-firstName">Primer Nombre:</label>
-                    <input class="{{ $input }}" id="recipient-firstName" wire:model="first_name"
-                        name="first_name" placeholder="JENBLUK" required type="text" x-model="firstName"
-                        x-on:input="firstName = transformedInput(firstName)" />
+                <div class="mb-3">
+                    @error('first_name')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+
+                    <div class="bg mb-3">
+                        <label class="{{ $label }}" for="recipient-firstName">Primer Nombre:</label>
+                        <input class="{{ $input }}" id="recipient-firstName" wire:model="first_name"
+                            name="first_name" placeholder="JENBLUK" type="text" x-model="firstName"
+                            x-on:input="firstName = transformedInput(firstName)" />
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="recipient-secondSurname-checkbox">No aplica</label>
                     <input id="recipient-secondSurname-checkbox" type="checkbox"
                         x-on:change="{marked: markedSecondName, inputValue: secondName} = toggleMark(markedSecondName)" />
                     <br>
+
+                    @error('second_name')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+
                     <label class="{{ $label }}" for="recipient-secondName">Segundo Nombre:</label>
                     <input wire:model="second_name" class="{{ $input }}" id="recipient-secondName"
                         name="second_name" type="text" x-bind:class="markedSecondName ? 'bg-gray-200' : ''"
                         x-bind:disabled="markedSecondName" x-bind:required="markedSecondName" x-model="secondName"
                         x-on:input="secondName = transformedInput(secondName)" />
                 </div>
+
+
+                @error('first_surname')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-firstSurname">Primer Apellido:</label>
                     <input wire:model="first_surname" class="{{ $input }}" id="recipient-firstSurname"
-                        name="first_surname" placeholder="VANEGAS" required type="text" x-model="firstSurname"
+                        name="first_surname" placeholder="VANEGAS" type="text" x-model="firstSurname"
                         x-on:input="firstSurname = transformedInput(firstSurname)" />
                 </div>
                 <div class="mb-3">
@@ -51,6 +86,11 @@
                     <input id="recipient-secondSurname-checkbox" type="checkbox"
                         x-on:change="{marked: markedSecondSurname, inputValue: secondSurname} = toggleMark(markedSecondSurname)" />
                     <br>
+
+                    @error('second_surname')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+
                     <label class="{{ $label }}" for="recipient-secondSurname">Segundo Apellido:</label>
                     <input wire:model="second_surname" class="{{ $input }}" id="recipient-secondSurname"
                         name="second_surname" placeholder="GARCÍA" type="text"
@@ -61,22 +101,62 @@
                 {{-- aqui falta el wire:model --}}
 
                 <div class="mb-3">
+                    @error('personal_id')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                     <label class="{{ $label }}" for="recipient-personal_id">Cédula:</label>
-                    <input class="{{ $input }}" id="recipient-personal_id" name="personal_id" required
-                        type="text" x-model="personalId" x-on:input="personalId= updateValue(personalId)" wire:model="personal_id">
+
+                    <div class="flex">
+
+                        <div class="flex h-10 items-center rounded-md border border-gray-300 p-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
+                            style="margin-top: 10px;">
+                            V</div>
+
+                        <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
+                        <input id="personal_id" name="personal_id" class="{{ $input }}" type="text"
+                            x-model="personalId" x-on:input="personalId= updateValue(personalId)"
+                            wire:model="personal_id">
+                    </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="{{ $label }}" for="recipient-phoneNumber">Teléfono:</label>
-                    <input wire:model="phone"
-                        class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        id="recipient-phoneNumber" name="phone" required type="tel" />
+                    @error('phone_number')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                    {{-- ! termidar de conbinar el 0412 con los demas numeros   --}}
+                    <div class="mb-3">
+                        <label class="{{ $label }}" for="phoner">Teléfono:</label>
+                        <div class="flex">
+                            <select
+                                class="flex h-10 items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
+                                name="phone_code" id="phone_code" style="margin-top: 10px;" wire:model="phone_code">
+                                <option value="0412">0412</option>
+                                <option value="0414">0414</option>
+                                <option value="0416">0416</option>
+                                <option value="0424">0424</option>
+                                <option value="0426">0426</option>
+                            </select>
+                            <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
+
+                            <input id="phoneNumber" class="{{ $input }}" name="phone_number" type="tel"
+                                x-model="phone" x-on:input="phone=updatephone(phone)" wire:model="phone_number">
+
+                        </div>
+                    </div>
                 </div>
+                @error('gmail')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-gmail">Correo UAI gmail:</label>
-                    <input wire:model="gmail" class="{{ $input }}" id="recipient-gmail" name="gmail"
-                        placeholder="jenblukvanegas@gmail.com" required type="email">
+                    <input wire:model="gmail" class="{{ $input }}" id="gmail" name="gmail"
+                        placeholder="jenblukvanegas@gmail.com"type="email">
                 </div>
                 <div class="mb-3">
+                    @error('email_cantv')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                     <label class="{{ $label }}" for="recipient-email_cantv">Correo Institucional:</label>
                     <input class="{{ $input }}" id="recipient-email_cantv" name="email_cantv"
                         placeholder="jvane01@cantv.com.ve" wire:model="email_cantv"
@@ -84,21 +164,27 @@
 					>
 				</div>
 				<div class="mb-3">
+                    @error('uai')
+                    <span class="text-red-500">{{ $message }}</span>
+                 @enderror
 					<label
-						class="{{ $label }}"
-						for="recipient-departament"
+                    class="{{ $label }}"
+                    for="recipient-departament"
 					>Coordinación o Gerencia de adscripción:</label>
 					<select wire:model.change="uai"
-					class="{{ $input }}"
-					x-on:click="uaiTried = true"
-					>
-					<option class="{{$input }}" x-bind:selected="uaiTried" x-bind:disabled="uaiTried">Elige una coordinación...</option>
+                    x-on:click="uaiTried = true"
+                    class="{{ $input }}"
+                    >
+					    <option class="{{ $input }}"  x-bind:selected="uaiTried"  x-bind:disabled="uaiTried">Elige una coordinación...</option>
 						@foreach ($uais as $uai)
-							<option class="{{$input}}" value="{{ $uai->id }}">{{ $uai->name }}</option>
+                        <option class="{{ $input }}" value="{{ $uai->id }}">{{ $uai->name }}</option>
 						@endforeach
-					</select>
+                    </select>
 				</div>
 				<div class="mb-3">
+                    @error('job_title')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
 					<label 
 						class="{{ $label }}"
 						for="recipient-job_title_id"
@@ -111,8 +197,10 @@
 						wire:model.change="job_title"
 						x-on:click="jobTitleTried = true"
 					>
-					
-					<option class="{{$input }}" x-bind:selected="jobTitleTried" x-bind:disabled="jobTitleTried">Elige un cargo...</option>
+                    @error('jobTitle')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+					<option class="{{ $input }}" x-bind:selected="jobTitleTried" x-bind:disabled="jobTitleTried">Elige un cargo...</option>
 						@foreach ($jobTitles as $jobTitle)
 							<option value="{{ $jobTitle->id }}">{{ $jobTitle->name }}</option>
 						@endforeach
@@ -148,27 +236,39 @@
 										<path
 											d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
 										/>
+                                        
 									</svg>
 								</span>
 							</div>
-						@enderror
-					</div>
-				</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <button type="button" wire:click="limpiar">limpiar</button>
 			</x-slot>
 			
 			<x-slot name="footer">
-				<x-secondary-button wire:click="resetComponent">cancelar</x-secondary-button>
-				<x-button>guardar</x-button>
+				<x-secondary-button 
+                wire:click="resetComponent" id="cancelar">cancelar</x-secondary-button>
+				<x-button wire:submit>guardar</x-button>
 			</x-slot>
 		</x-dialog-modal>
-	</form>
+ 
+ 
+
+
+
 
 	{{--  todo phone library *intlTelInput* --}}
-	<script src="/js/intlTelInput/intlTelInput.js"></script>
+
+
+
+
 
 	@foreach ($scripts as $script)
 		<script 
+  
 		@if ($script != 'alpine.js')
+    
 			type="module" @endif
 		src="/js/employee/registerFormScript/{{ $script }}">
                     </script>

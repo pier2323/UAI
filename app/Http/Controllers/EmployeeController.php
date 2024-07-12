@@ -6,7 +6,10 @@ use App\Models\Employee;
 use App\Models\JobTitle;
 use App\Models\Uai;
 use BaconQrCode\Renderer\Path\Path;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Livewire\Attributes\Validate;
+
 
 /**
  * Summary of PersonalUaiController
@@ -43,7 +46,7 @@ class EmployeeController extends Controller
         $employee->delete();
         return redirect()->route('employee.index');
     }
-  
+
 
     public function edit($employee): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
@@ -55,16 +58,56 @@ class EmployeeController extends Controller
     }
 
 
+
+
     public function update(Request $request, string $employee)
     {
-        
+
         $requestAll = $request->all();
-        $employee = employee::findOrFail($employee);
-        $employee->personal_id = $requestAll['personal_id'];
-        $employee->phone = $requestAll['phone'];
-        $employee->p00 = $requestAll['p00'];
+
+
+
+
+
+        $code = $requestAll['phone_code'];
+        $number = $requestAll['phone_number'];
+        $phone = "$code$number";
+       
+
+
+
+
+        $request->validate(
+            rules: [
+                'phone' => 'numeric|min:2',
+                'first_name' => ['alpha', 'min:3'],
+                'first_surname' => 'alpha|min:3',
+                'email_cantv' => 'email',
+                'email' => 'email',
+            ],
+            messages: [
+                'phone.min' => 'El numero de telefono debe tener al menos 2 digito',
+                'first_name.min' => 'El primer nombre debe tener al menos 3 caracteres',
+                'first_name.alpha' => 'El perimer nombre no debe contener numeros',
+                'first_surname.min' => 'El primer apellido debe ser mayor a 3 caracteres',
+                'first_surname.alpha' => 'El primer apellido no debe contener numeros',
+                'email_cantv.email' => 'El correo electronico no es valido',
+                'email.email' => 'El correo electronico no es valido',
+
+            ]
+        );
+      
+
+
+
+        $employee = Employee::findOrFail($employee);
+        $employee->phone = $phone;
+        $employee->first_name = $requestAll['first_name'];
+        $employee->second_name = $requestAll['second_name'];
+        $employee->first_surname = $requestAll['first_surname'];
+        $employee->second_surname = $requestAll['second_surname'];
         $employee->email_cantv = $requestAll['email_cantv'];
-        $employee->gmail = $requestAll['gmail'];    
+        $employee->gmail = $requestAll['gmail'];
         $employee->job_title_id = $requestAll['job_title'];
         $employee->uai_id = $requestAll['uai'];
         if ($request->hasFile('photo')) {
@@ -73,14 +116,11 @@ class EmployeeController extends Controller
             $archivoFoto->move(public_path() . '/storage/', $photo);
             $employee->phone = $photo;
         }
+
+
         $employee->update($request->all());
         $employee->save();
         return redirect()->to(route('employee.show', $employee->id));
-    
-        //  $photo = $request->photo->storeAs('public', "$request->p00.png");
-        // $photo = explode("/",$photo);
-        // $employee->profile_photo = $photo;
-        // $employee->save();
-        // return redirect()->to(route('employee.show', $employee->id));
     }
+
 }
