@@ -18,16 +18,17 @@ class RegisterForm extends Component
 
     #[Validate('numeric|required|unique:employee,p00|min:5', as: 'p00')]
     public $p00;
-    #[Validate('alpha|required|min:3|max:500', as: 'Primer Nombre')]
+    #[Validate('required|max:500', as: 'Primer Nombre')]
     public $first_name;
     #[Validate('max:500', as: 'Segundo Nombre')]
     public $second_name;
-    #[Validate('alpha|required| min:3|max:500', as: 'Primer Apellido ')]
+    #[Validate('alpha|required|max:500', as: 'Primer Apellido ')]
     public $first_surname;
     #[Validate('max:500', as: 'Segundo Apellido')]
     public $second_surname;
+
     public $phone;
-    #[validate('required|email|unique:employee,email_cantv', as: 'Correo Corporativo')]
+    #[validate('', as: 'Correo Corporativo')]
     public $email_cantv;
     #[validate('required|email', as: 'Correo Personal')]
     public $gmail;

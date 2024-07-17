@@ -6,9 +6,9 @@
 
 
 @php
-$phone_code = substr($employee->phone, 0, 4);
-$phone_number = substr($employee->phone, 4, 7);
-$codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
+    $phone_code = substr($employee->phone, 0, 4);
+    $phone_number = substr($employee->phone, 4, 7);
+    $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
 @endphp
 
 
@@ -27,8 +27,7 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
     firstSurname = '{{ $employee->first_surname }}'
     secondSurname = '{{ $employee->second_surname }}'
     phone = '{{ $phone_number }}';
-    p00 = '{{ $employee->p00 }}';"
-     {{-- ! fin  de las variables  --}} class="py-12">
+    p00 = '{{ $employee->p00 }}';" {{-- ! fin  de las variables  --}} class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2">
@@ -70,13 +69,12 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
                                         @enderror
 
                                         <div class="bg mb-3">
-                                            <label class="{{ $liClass }}" for="recipient-firstName"
-                                           >Primer
+                                            <label class="{{ $liClass }}" for="recipient-firstName">Primer
                                                 Nombre:</label>
                                             <input class="{{ $inputClass }}" id="recipient-firstName"
-                                                name="first_name"  data-attribute-name="Primer Nombre"type="text" x-model="firstName"
-                                                x-on:input="firstName = transformedInput(firstName)"
-                                                value="{{ $employee->first_name }}" >
+                                                name="first_name" data-attribute-name="Primer Nombre"type="text"
+                                                x-model="firstName" x-on:input="firstName = transformedInput(firstName)"
+                                                value="{{ $employee->first_name }}">
                                         </div>
                                     </div>
                                     @error('second_name')
@@ -122,6 +120,7 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
                                             x-on:input="secondSurname = transformedInput(secondSurname)"
                                             value="{{ $employee->first_surname }}" />
                                     </div>
+
                                     <div class="mb-3">
                                         @error('email_cantv')
                                             <span class="text-red-500">{{ $message }}</span>
@@ -133,19 +132,23 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
                                             value="{{ $employee->email_cantv }}">
                                     </div>
 
+                                    @error('gmail')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                     <li class="{{ $liClass }}">
                                         <label for="gmail" class="col-form-label">Correo
-                                            electrónico:</label>
+                                            Eletronico:</label>
                                         <input id="gmail" name="gmail" type="text" class="{{ $inputClass }}"
-                                            value="{{ $employee->gmail }}" />
+                                            wire:model="gmail" value="{{ $employee->gmail }}" />
                                     </li>
+
 
 
                                     <div class="mb-3">
                                         @error('phone')
                                             <span class="text-red-500">{{ $message }}</span>
                                         @enderror
-                                        {{-- ! termidar de conbinar el 0412 con los demas numeros   --}}
+
                                         <div class="mb-3">
                                             <label class="{{ $liClass }}" for="phoner">Teléfono:</label>
                                             <div class="flex">
@@ -154,22 +157,19 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
                                                     name="phone_code" id="phone_code" style="margin-top: 10px;">
 
                                                     @foreach ($codes as $code)
-                                                        <option 
-                                                            @if ($code === $phone_code)
-                                                                selected
-                                                            @endif
-                                                            value="{{ $code }}"
-                                                        >
-                                                        {{ $code }}
+                                                        <option @if ($code === $phone_code) selected @endif
+                                                            value="{{ $code }}">
+                                                            {{ $code }}
                                                         </option>
                                                     @endforeach
 
                                                 </select>
                                                 <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
 
-                                                <input id="phoneNumber" class="{{ $inputClass }}" name="phone_number"
-                                                    type="tel" value="" x-model="phone"
-                                                    x-on:input="phone=updatephone(phone)">
+                                                <input id="phoneNumber" class="{{ $inputClass }}"
+                                                    name="phone_number" type="tel" value=""
+                                                    x-model="phone" x-on:input="phone=updatephone(phone)"
+                                                    id="phone">
 
                                             </div>
                                         </div>
@@ -199,19 +199,19 @@ $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
                                     </select>
                             </ul>
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
-                                <button type="submit"
-                                    class="rounded-lg border-0 bg-slate-900 px-6 py-3 text-base text-white shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">Guardar</button>
+                                <x-button type="submit">Guardar</x-button>
 
                                 <a href="{{ route('employee.index') }}">
-                                    <button type="button"
-                                        class="rounded-lg border-0 bg-white px-6 py-3 text-base text-slate-900 shadow-lg shadow-slate-100 transition hover:bg-blue-300 hover:text-slate-900 hover:shadow-blue-600 dark:bg-slate-700 dark:text-slate-300 dark:shadow-sm dark:shadow-slate-800 dark:hover:bg-slate-600 sm:py-2">Atras</button>
+                                    <x-secondary-button wire:click="resetComponent" style="margin-right: 10px;"
+                                        id="cancelar">cancelar</x-secondary-button>
                                 </a>
+
                             </div>
-                            </form>
-                        </div>
                     </section>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>

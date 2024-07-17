@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Livewire\Attributes\Validate;
 
 
+
+
 /**
  * Summary of PersonalUaiController
  * * Controller of the Personal UAI Module
@@ -56,9 +58,7 @@ class EmployeeController extends Controller
             'uai' => Uai::all(),
         ]);
     }
-
-
-
+ 
 
     public function update(Request $request, string $employee)
     {
@@ -74,31 +74,32 @@ class EmployeeController extends Controller
         $phone = "$code$number";
        
 
-
-
-
+        
+        
+        
         $request->validate(
             rules: [
                 'phone' => 'numeric|min:2',
                 'first_name' => ['alpha', 'min:3'],
                 'first_surname' => 'alpha|min:3',
-                'email_cantv' => 'email',
-                'email' => 'email',
+                'gmail' => '|required|email',
             ],
             messages: [
                 'phone.min' => 'El numero de telefono debe tener al menos 2 digito',
-                'first_name.min' => 'El primer nombre debe tener al menos 3 caracteres',
-                'first_name.alpha' => 'El perimer nombre no debe contener numeros',
-                'first_surname.min' => 'El primer apellido debe ser mayor a 3 caracteres',
-                'first_surname.alpha' => 'El primer apellido no debe contener numeros',
-                'email_cantv.email' => 'El correo electronico no es valido',
-                'email.email' => 'El correo electronico no es valido',
+                'first_name.min' => 'El Primer Nombre debe tener al menos 3 caracteres',
+                'first_name.alpha' => 'El Primer Nombre solo debe tener letras',
+                'first_surname.min' => 'El Primer apellido debe ser mayor a 3 caracteres',
+                'first_surname.alpha' => 'El Primer  apellido no debe contener numeros',
+                'gmail.email' => 'El Correo Electronico no es Valido',
+              'gmail.required' =>'el Correo es Oblitgatorio ',
+
 
             ]
         );
       
 
 
+        
 
         $employee = Employee::findOrFail($employee);
         $employee->phone = $phone;

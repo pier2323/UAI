@@ -9,12 +9,11 @@
             'mb-5 mt-2 flex h-10 w-full items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm';
         $title = 'Registro de personal';
     @endphp
-
     <x-button wire:click="$toggle('isOpened')">Registrar nuevo personal</x-button>
-
     <form wire:submit="save" enctype="multipart/form-data" method="POST" x-data="form()">
         <x-dialog-modal id="employee-register-form" maxWidth="md" wire:model="isOpened">
             <x-slot name="title">{{ $title }}</x-slot>
+          
 
             <x-slot name="content">
 
@@ -35,7 +34,8 @@
                             <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
                             <input id="recipient-p00" name="p00" class="{{ $input }}" id="recipient-p00"
                                 name="personal_id" placeholder="155718" id="recipient-p00" name="p00" type="text"
-                                x-model="p00" x-on:input="p00= updatep00(p00)" wire:model="p00">
+                                x-model="$wire.p00" x-on:input="$wire.p00 = updatep00($wire.p00)" wire:model="p00"
+                                required>
                         </div>
                     </div>
 
@@ -48,16 +48,13 @@
                     <div class="bg mb-3">
                         <label class="{{ $label }}" for="recipient-firstName">Primer Nombre:</label>
                         <input class="{{ $input }}" id="recipient-firstName" wire:model="first_name"
-                            name="first_name" placeholder="JENBLUK" type="text" x-model="firstName"
-                            x-on:input="firstName = transformedInput(firstName)" />
+                            name="first_name" placeholder="JENBLUK" type="text" x-model="$wire.first_name"
+                            x-on:input="$wire.first_name = transformedInput($wire.first_name)" required />
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="recipient-secondSurname-checkbox">No aplica</label>
-                    <input id="recipient-secondSurname-checkbox" type="checkbox"
-                        x-on:change="{marked: markedSecondName, inputValue: secondName} = toggleMark(markedSecondName)" />
-                    <br>
+
 
                     @error('second_name')
                         <span class="text-red-500">{{ $message }}</span>
@@ -66,8 +63,9 @@
                     <label class="{{ $label }}" for="recipient-secondName">Segundo Nombre:</label>
                     <input wire:model="second_name" class="{{ $input }}" id="recipient-secondName"
                         name="second_name" type="text" x-bind:class="markedSecondName ? 'bg-gray-200' : ''"
-                        x-bind:disabled="markedSecondName" x-bind:required="markedSecondName" x-model="secondName"
-                        x-on:input="secondName = transformedInput(secondName)" />
+                        x-bind:disabled="markedSecondName" x-bind:required="markedSecondName"
+                        x-model="$wire.second_name"
+                        x-on:input="$wire.second_name = transformedInput($wire.second_name)" />
                 </div>
 
 
@@ -78,14 +76,11 @@
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-firstSurname">Primer Apellido:</label>
                     <input wire:model="first_surname" class="{{ $input }}" id="recipient-firstSurname"
-                        name="first_surname" placeholder="VANEGAS" type="text" x-model="firstSurname"
-                        x-on:input="firstSurname = transformedInput(firstSurname)" />
+                        name="first_surname" placeholder="VANEGAS" type="text" x-model="$wire.first_surname"
+                        x-on:input="$wire.first_surname = transformedInput($wire.first_surname)" required />
                 </div>
                 <div class="mb-3">
-                    <label for="recipient-secondSurname-checkbox">No aplica</label>
-                    <input id="recipient-secondSurname-checkbox" type="checkbox"
-                        x-on:change="{marked: markedSecondSurname, inputValue: secondSurname} = toggleMark(markedSecondSurname)" />
-                    <br>
+
 
                     @error('second_surname')
                         <span class="text-red-500">{{ $message }}</span>
@@ -95,8 +90,8 @@
                     <input wire:model="second_surname" class="{{ $input }}" id="recipient-secondSurname"
                         name="second_surname" placeholder="GARCÍA" type="text"
                         x-bind:class="markedSecondSurname ? 'bg-gray-200' : ''" x-bind:disabled="markedSecondSurname"
-                        x-bind:required="markedSecondSurname" x-model="secondSurname"
-                        x-on:input="secondSurname = transformedInput(secondSurname)" />
+                        x-bind:required="markedSecondSurname" x-model="$wire.second_surname"
+                        x-on:input="$wire.second_surname = transformedInput($wire.second_surname)" />
                 </div>
                 {{-- aqui falta el wire:model --}}
 
@@ -115,7 +110,7 @@
                         <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
                         <input id="personal_id" name="personal_id" class="{{ $input }}" type="text"
                             x-model="personalId" x-on:input="personalId= updateValue(personalId)"
-                            wire:model="personal_id">
+                            wire:model="personal_id" required>
                     </div>
                 </div>
 
@@ -127,19 +122,37 @@
                     <div class="mb-3">
                         <label class="{{ $label }}" for="phoner">Teléfono:</label>
                         <div class="flex">
-                            <select
-                                class="flex h-10 items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
+                        
+                                <select id="listaTelefonos" name="phone_number" class="flex h-10 items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
                                 name="phone_code" id="phone_code" style="margin-top: 10px;" wire:model="phone_code">
-                                <option value="0412">0412</option>
-                                <option value="0414">0414</option>
-                                <option value="0416">0416</option>
-                                <option value="0424">0424</option>
-                                <option value="0426">0426</option>
-                            </select>
+                                    <option value="">Seleccione</option>
+                                    <option value="0412">0412</option>
+                                    <option value="0414">0414</option>
+                                    <option value="0416">0416</option>
+                                    <option value="0424">0424</option>
+                                    <option value="0426">0426</option>
+                                  </select>
+                                  
+                                  <script>
+                                    const listaTelefonos = document.getElementById('listaTelefonos');
+                                    const opcionPredeterminada = listaTelefonos.querySelector('option[value=""]');
+                                  
+                                    listaTelefonos.addEventListener('click', function() {
+                                      if (this.value !== "") {
+                                        opcionPredeterminada.disabled = true;
+                                      } else {
+                                        opcionPredeterminada.disabled = false;
+                                      }
+                                    });
+                                  </script>
+                                  
+                                  
+                            
                             <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
 
                             <input id="phoneNumber" class="{{ $input }}" name="phone_number" type="tel"
-                                x-model="phone" x-on:input="phone=updatephone(phone)" wire:model="phone_number">
+                                x-model="phone" x-on:input="phone=updatephone(phone)" wire:model="phone_number"
+                                required>
 
                         </div>
                     </div>
@@ -151,7 +164,7 @@
                 <div class="mb-3">
                     <label class="{{ $label }}" for="recipient-gmail">Correo UAI gmail:</label>
                     <input wire:model="gmail" class="{{ $input }}" id="gmail" name="gmail"
-                        placeholder="jenblukvanegas@gmail.com"type="email">
+                        placeholder="jenblukvanegas@gmail.com"type="email" required>
                 </div>
                 <div class="mb-3">
                     @error('email_cantv')
@@ -174,8 +187,9 @@
 					<select wire:model.change="uai"
                     x-on:click="uaiTried = true"
                     class="{{ $input }}"
+                    required
                     >
-					    <option class="{{ $input }}"  x-bind:selected="uaiTried"  x-bind:disabled="uaiTried">Elige una coordinación...</option>
+					    <option class="{{ $input }}"  x-bind:selected="uaiTried"  x-bind:disabled="uaiTried" >Elige una coordinación...</option>
 						@foreach ($uais as $uai)
                         <option class="{{ $input }}" value="{{ $uai->id }}">{{ $uai->name }}</option>
 						@endforeach
@@ -224,7 +238,7 @@
 						@error('photo')
 							<div
 								class="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-								role="alert"
+								role="alert"required
 							>
 								<strong class="font-bold">Error!</strong>
 								<span class="block sm:inline">{{ $message }}</span>
@@ -249,7 +263,7 @@
             
                      
                      <x-button  style="background-color:rgb(234, 81, 81); margin-left: 160px; margin-right: 10px;" type="button" wire:click="limpiar">limpiar</x-button>
-                     <x-button  style="background-color: rgba(0, 255, 213, 0.795);  " type="button" wire:click="validar" > Validar </x-button>
+                     <x-button  style="background-color: rgba(1, 150, 125, 0.644);  " type="button" wire:click="validar" > Validar </x-button>
                  
           
                     {{-- todo All Erros --}}
@@ -258,7 +272,7 @@
                     <div class="bg-teal-100 border-t-4 mt-3 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
                      <strong class="font-bold">Todo OK!</strong>
                      <br>
-                        <span class="block sm:inline">Todos los campos del <strong>Personal Saliente</strong> han sido escritos correctamente.</span>
+                        <span class="block sm:inline">Todos los campos del <strong>Ingreso del Personal</strong> han sido escritos correctamente.</span>
                     </div>
                 @elseif ($valido == 2)
                     <div class="bg-red-100 border mt-3 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

@@ -30,41 +30,42 @@
                                     </h2>
                                 </li>
                                 <li class="flex items-end">
-                                    <p class="text-gray-600">Cargo: {{ $employee->jobTitle->name }}</p>
-                                </li>
-                                <li class="flex items-end">
                                     <p class="text-gray-600">P00: {{ "$employee->p00" }}</p>
                                 </li>
+
                                 <li class="flex items-end">
                                     <p class="text-gray-600">Cedula: {{ "$employee->personal_id" }}</p>
-                                <li class="flex items-end">
-                                    <p class="text-gray-600">Teléfono: {{ "$phone_code-$phone_number" }}</p>
-                                </li>
-                                <li class="flex items-end">
-                                <li class="text-gray-600">Correo electrónico: {{ "$employee->gmail" }}</li>
-                                </li>
-                                <li class="flex items-end">
-                                <li class="text-gray-600">Correo Institucional: {{ "$employee->email_cantv" }}</li>
-                                </li>
-                                <li class="flex items-end">
-                                    <p class="text-gray-600">Area UAI: {{ $employee->uai->name }}</p>
-                                </li>
-                            </ul>
-
+                                    <li class="flex items-end">
+                                        <p class="text-gray-600">Teléfono: {{ "$phone_code-$phone_number" }}</p>
+                                    </li>
+                                    <li class="flex items-end">
+                                        <li class="text-gray-600">Correo electrónico: {{ "$employee->gmail" }}</li>
+                                    </li>
+                                    <li class="flex items-end">
+                                        <li class="text-gray-600">Correo Institucional: {{ "$employee->email_cantv" }}</li>
+                                    </li>
+                                    <li class="flex items-end">
+                                        <p class="text-gray-600">Area UAI: {{ $employee->uai->name }}</p>
+                                    </li>
+                                    <li class="flex items-end">
+                                        <p class="text-gray-600">Cargo: {{ $employee->jobTitle->name }}</p>
+                                    </li>
+                                </ul>
+                                
 
                             {{-- botones para la edicion y eliminación --}}
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
                                 <a href="{{ route('employee.edit', $employee->id) }}">
-                                    <button
-                                        class="rounded-lg border-0 bg-slate-900 px-6 py-3 text-base text-white shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
+                                    <x-button
+                                        class="shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
                                         Editar
-                                    </button>
+                                    </x-button>
                                 </a>
                                 <a>
-                                    <button id="action1"
-                                        class=" rounded-lg border-0 btn btn-danger px-6 py-3 text-base text-white shadow-lg ">
+                                    <x-button id="action1"
+                                        style="background-color:rgb(234, 81, 81);">
                                         Eliminar
-                                    </button>
+                                    </x-button>
                                 </a>
                             </div>
                              {{--   fin botones para la edicion y eliminación --}}

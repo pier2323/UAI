@@ -13,8 +13,11 @@ function form() {
         p00: null,
         personalId: null,
         // * functions
-        transformedInput: (input) =>
-            input.replace(/[^a-zA-Z]/g, "").toUpperCase(),
+        transformedInput: (input) => {
+            input = input.replace(/[^a-zA-Z]/g, "").toUpperCase()
+            console.log(input)
+            return input
+        },
         toggleMark: (marked) => {
             return {
                 marked: !marked,
