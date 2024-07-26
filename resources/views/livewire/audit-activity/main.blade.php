@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @php
         $th = "colspan='1' rowspan=-'1' tabindex='0'";
     @endphp
@@ -27,7 +27,7 @@
                             class="centered sorting px-4 py-2" 
                             {{-- style="width: 189px"  --}}
                             {{$th}}
-                           
+                            
                         >
                             Objetivo
                         </th>
@@ -43,7 +43,7 @@
                             aria-label="Status" 
                             class="centered sorting_disabled px-4 py-2" 
                             {{$th}}
- 
+    
                         >
                             Fecha fin
                         </th>
@@ -64,7 +64,20 @@
                 </thead>
             </x-slot>
             @foreach ($auditActivities as $auditActivity)
-                 <tr wire:click='goTo(route: {{ route('auditActivity.show', $auditActivity->handoverDocument->id) }})' class="hover:bg-gray-100" x-data="{ link: '{{ route('auditActivity.index') }}', }">
+
+                @php
+                    $id = $auditActivity->id;
+                @endphp
+
+
+
+                <tr   
+                class="hover:bg-gray-100 cursor-pointer"
+                wire:key="{{ $auditActivity->id }}"
+                x-on:dblclick="$wire.goTo(
+                'auditActivity.show', 
+                {{ $id }})"
+                >
                     {{-- todo Codigo --}}
                     <td class="px-4 py-2">{{ $auditActivity->id }}</td> 
                     
@@ -81,13 +94,14 @@
                     @php
                         $employee = $auditActivity->employee->count() == 1 ? $auditActivity->employee: '';
                     @endphp
-
-                    <td class="px-4 py-2"></td> 
-                    {{-- todo status --}}
                     <td class="px-4 py-2">{{ $employee->uai->name ?? '' }}</td> 
+
+                    <td style='display:none'></td>
+
+                    {{-- todo status --}}
+                    {{-- <td class="px-4 py-2">{{ $employee->uai->name ?? '' }}</td>  --}}
                 </tr>
             @endforeach
         </x-table>
     </x-section-basic>
-
-</x-app-layout>
+</div>

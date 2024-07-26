@@ -17,12 +17,11 @@
     <link rel="stylesheet" href="/css/bootstrap/dataTables.bootstrap5.min.css" />
 
     {{-- * Scripts --}}
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- * Styles library --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/css/intlTelInput.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
     @livewireStyles
     {{-- * Bootstrap --}}
     <script defer src="/js/bootstrap/bootstrap.bundle.min.js"></script>

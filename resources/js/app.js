@@ -1,4 +1,4 @@
 import './bootstrap';
 
 
-import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input';

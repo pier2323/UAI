@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuditActivity;
+use App\Models\HandoverDocument;
 
 class AuditActivityController extends Controller
 {
@@ -11,8 +12,77 @@ class AuditActivityController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view(view: 'auditActivity.index', data: ["auditActivities" => AuditActivity::all()]);
+        return view(view: 'auditActivity.index', data: [
+            "auditActivities" => AuditActivity::with([
+                'handoverDocument' => [
+                    'employeeIncoming',
+                    'employeeOutgoing' => [
+                        'jobTitle',
+                    ],
+                ],
+                'employee' => [
+                    'uai'
+                ],
+                'typeAudit',
+            ])->get(),
+        ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     // public function create()
     // {

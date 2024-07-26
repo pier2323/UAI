@@ -11,6 +11,8 @@ return new class extends Migration
         Schema::create('handover_document', function(Blueprint $table) {
             $table->id();
             
+            $table->string('name')->nullable();
+            $table->date('cease')->nullable(); 
             $table->date('subscription')->nullable(); 
             $table->date('delivery_uai')->nullable(); 
 
