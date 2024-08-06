@@ -25,7 +25,7 @@ Route::middleware([
     Route::controller(Documentos::class)->group(function () {
         Route::get('/Leyes', 'leyes')->name('leyes');
         Route::get('/Reglamentos', 'reglamentos')->name('reglamentos');
-        Route::get('/Documentos', 'reglamentos')->name('documentoNormativo');
+        Route::get('/Documentos', 'Documentos')->name('documentoNormativo');
      
     });
 

@@ -35,7 +35,7 @@
                                 <li><a href="{{ route('documentoNormativo') }}">Documento Normativo</a></li>
                             </ul>
                         </li>
-                    
+
                         <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog"
                                     style="margin-right: 9px;"></i>
 
@@ -55,7 +55,7 @@
 
 
     <div class="mensaje_2 ">
-        <h3  style="margin-right: 360px;">Documento  Normativo</h3>
+        <h3 style="margin-right: 360px;">Documento Normativo</h3>
     </div>
 
 
@@ -95,6 +95,8 @@
                                             Revisión de Actas de Entrega <br> código PRO-1CF</p>
                                     </div>
                                     <div class="pd-cb"></div>
+                                    <img src="images/Qr/RevisiónActasEntrega.png" alt="aqui" style="width: 145px;margin-left: 850px;margin-top: -114px;">
+                                    <div class="pd-cb">
                                 </div>
                                 <div class="pd-filebox">
                                     <div class="pd-category">
@@ -118,27 +120,23 @@
                                                 href="/Normas/Actuacionescontrolfiscal.pdf"
                                                 download="PRO-218_Actuaciones de control fiscal.pdf ">Descargar</a>
                                         </div>
+                                        
                                     </div>
                                     <div class="pd-fdesc">
                                         <p>Procedimiento para las
                                             Actuaciones de Control Fiscal <br>código PRO-218 </p>
                                     </div>
-                                    <div class="pd-cb"></div>
+                                    <img src="images/Qr/Actuaciones de Control Fiscal.png" alt="aqui" style="width: 145px;margin-left: 850px;margin-top: -114px;">
+                                    <div class="pd-cb">
                                 </div>
-                                <form action="https://www.cnti.gob.ve/ti-libres-venezuela/marco-normativo/leyes.html"
-                                    method="post" name="adminForm">
-                                    <div class="pd-cb">&nbsp;</div>
-                                    <div class="pgcenter">
-                                        <div class="pagination"></div>
-                                    </div>
-                                    <input type="hidden" name="b5069c56bd849dfec3bc63e291994951" value="1" />
-                                </form>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <x-footer></x-footer>

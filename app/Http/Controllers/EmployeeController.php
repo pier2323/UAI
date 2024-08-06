@@ -97,12 +97,8 @@ class EmployeeController extends Controller
             ]
         );
       
-
-
-        
-
         $employee = Employee::findOrFail($employee);
-        $employee->phone = $phone;
+        $employee->phone = $phone;  
         $employee->first_name = $requestAll['first_name'];
         $employee->second_name = $requestAll['second_name'];
         $employee->first_surname = $requestAll['first_surname'];
@@ -111,11 +107,11 @@ class EmployeeController extends Controller
         $employee->gmail = $requestAll['gmail'];
         $employee->job_title_id = $requestAll['job_title'];
         $employee->uai_id = $requestAll['uai'];
+
         if ($request->hasFile('photo')) {
             $archivoFoto = $request->file('photo');
-            $photo = $request->photo->storeAs('public', "$request->p00.jpg");
+            $photo = $request->photo->storeAs('public', "$employee->p00.jpg");
             $archivoFoto->move(public_path() . '/storage/', $photo);
-            $employee->phone = $photo;
         }
 
 
