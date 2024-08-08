@@ -15,17 +15,17 @@ class TypeAuditSeeder extends Seeder
     {
         $typesAudit = 
         [
-            ['name' => 'acta de entrega', 'code' => 'ae'],
-            ['name' => 'auditoria de cumplimiento', 'code' => 'ac'],
-            ['name' => 'auditoria financiera', 'code' => 'af'],
-            ['name' => 'auditoria de inspeccion', 'code' => 'ains'],
-            ['name' => 'auditoria de inventario', 'code' => 'ainv'],
-            ['name' => 'auditoria de gestion', 'code' => 'ag'],
-            ['name' => 'auditoria de seguimiento', 'code' => 'ase'],
-            ['name' => 'auditoria de sistemas', 'code' => 'asi'],
-            ['name' => 'examen de la cuenta', 'code' => 'ec'],
-            ['name' => 'auditoria de proyeto', 'code' => 'ap'],
-            ['name' => 'auditoria de operativa', 'code' => 'ao']
+            ['name' => 'acta de entrega', 'code' => 'ae'],                 // * 1 uno   
+            ['name' => 'auditoria de cumplimiento', 'code' => 'ac'],       // * 2 dos   
+            ['name' => 'auditoria financiera', 'code' => 'af'],            // * 3 tres  
+            ['name' => 'auditoria de inspeccion', 'code' => 'ains'],       // * 4 cuatro
+            ['name' => 'auditoria de inventario', 'code' => 'ainv'],       // * 5 cinco 
+            ['name' => 'auditoria de gestion', 'code' => 'ag'],            // * 6 seis  
+            ['name' => 'auditoria de seguimiento', 'code' => 'as'],        // * 7 siete 
+            ['name' => 'auditoria de sistemas', 'code' => 'asi'],          // * 8 ocho  
+            ['name' => 'examen de la cuenta', 'code' => 'ec'],             // * 9 nueve 
+            ['name' => 'auditoria de proyeto', 'code' => 'ap'],            // * 10 diez 
+            ['name' => 'auditoria de operativa', 'code' => 'ao']           // * 11 once 
         ];
 
         foreach($typesAudit as $typeAudit)

@@ -6,6 +6,7 @@
     <x-slot name="description">
         {{ __('Add additional security to your account using two factor authentication.') }}
     </x-slot>
+
     <x-slot name="content">
         <h3 class="text-lg font-medium text-gray-900">
             @if ($this->enabled)
@@ -24,6 +25,7 @@
                 {{ __('When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.') }}
             </p>
         </div>
+
         @if ($this->enabled)
             @if ($showingQrCode)
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
@@ -35,6 +37,7 @@
                         @endif
                     </p>
                 </div>
+
                 <div class="mt-4 p-2 inline-block bg-white">
                     {!! $this->user->twoFactorQrCodeSvg() !!}
                 </div>
@@ -44,6 +47,7 @@
                         {{ __('Setup Key') }}: {{ decrypt($this->user->two_factor_secret) }}
                     </p>
                 </div>
+
                 @if ($showingConfirmation)
                     <div class="mt-4">
                         <x-label for="code" value="{{ __('Code') }}" />
@@ -56,6 +60,7 @@
                     </div>
                 @endif
             @endif
+
             @if ($showingRecoveryCodes)
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
@@ -70,6 +75,7 @@
                 </div>
             @endif
         @endif
+
         <div class="mt-5">
             @if (! $this->enabled)
                 <x-confirms-password wire:then="enableTwoFactorAuthentication">
@@ -97,6 +103,7 @@
                         </x-secondary-button>
                     </x-confirms-password>
                 @endif
+
                 @if ($showingConfirmation)
                     <x-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-secondary-button wire:loading.attr="disabled">
@@ -110,6 +117,7 @@
                         </x-danger-button>
                     </x-confirms-password>
                 @endif
+
             @endif
         </div>
     </x-slot>

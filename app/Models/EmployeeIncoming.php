@@ -11,7 +11,19 @@ class EmployeeIncoming extends Model
 
     protected $table = 'employee_incoming';
 
-    protected $fillable = [];
+    protected $fillable = [           
+        'p00', 
+        'first_name', 
+        'second_name', 
+        'first_surname', 
+        'profile_photo',
+        'second_surname', 
+        'job_title_id',
+        'phone',
+        'email_cantv', 
+        'gmail', 
+        'personal_id', 
+    ];
 
     public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

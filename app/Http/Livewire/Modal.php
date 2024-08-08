@@ -6,12 +6,8 @@ use Livewire\Component;
 
 class Modal extends Component
 {
-    public $id;
-    
-    public function mount($id)
-    {
-        $this->id = $id;
-    }
+    public $modal;
+    public $open;
 
     public function render()
     {

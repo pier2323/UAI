@@ -22,9 +22,9 @@
                 <template :key="index" x-for="(input, index) in Array.from({length: inputs})">
                     <div>
                         <select :id="'input-' + index" name="auditor[]">
-                            @foreach ($personal as $person)
-                                <option value="{{ $person->id }}">
-                                    {{ "$person->primer_nombre $person->primer_apellido" }}</option>
+                            @foreach ($employees as $employee)
+                                <option value="{{ $employee->id }}">
+                                    {{ "$employee->first_name $employee->first_surname" }}</option>
                             @endforeach
                         </select>
                         <select :id="'input-' + index" name="cargo[]">

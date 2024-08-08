@@ -26,6 +26,16 @@ class AuditActivity extends Model
         'type_audit',
     ];
 
+    public function typeAudit(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(related: TypeAudit::class);
+    }
+
+    public function uai(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(related: Uai::class);
+    }
+
     public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
         return $this->hasOne(related: HandoverDocument::class);

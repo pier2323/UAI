@@ -16,11 +16,18 @@ Route::middleware([
 
     Route::get(uri: '/dashboard', action: [MainController::class, '__invoke'])->name('dashboard');
 
-    Route::controller(AuditActivityController::class)->group(function () {
-        Route::get(uri: '/actuacion-fiscal', action: 'index')->name('auditActivity.index');
-        Route::get(uri: '/actuacion-fiscal/{id}', action: 'show')->name('auditActivity.show');
-        Route::post('/personal/almacenar', 'store')->name('employee.store');
-    });
+    // * auditActivity Routes 
+    Route::get(
+        uri: '/actuacion-fiscal', 
+        action: App\Http\Livewire\AuditActivity\Main::class
+    )->name('auditActivity.index');
+    
+    Route::get(
+        uri: '/actuacion-fiscal/{id}', 
+        action: App\Http\Livewire\AuditActivity\Show::class
+    )->name('auditActivity.show');
+
+
 
     Route::controller(Documentos::class)->group(function () {
         Route::get('/Leyes', 'leyes')->name('leyes');
@@ -41,13 +48,7 @@ Route::middleware([
     Route::get('/poa', function () {
         return view('poa.index');
     })->name('poa');
-    
 
-    // Route::controller(IndexController::class)->group(function (): void {
-    //     Route::get('/dashboard', 'index')->name('dashboard');
-    //     Route::get('/Plan de auditoria', 'action')->name('plan de auditoria');
-    //     Route::get('/Plan de auditoria/{id}', 'show')->name('action.show');
-    // });
 
     Route::controller(EmployeeController::class)->group(function (): void {
         Route::get('/personal', 'index')->name('employee.index');

@@ -17,39 +17,39 @@ class UaiSeeder extends Seeder
         [
             [
                 'name' => 'Despacho', 
-                'level' => 1, // 0
+                'level' => 1, // * 1 
             ],
             [
                 'name' => 'Control Posterior', 
-                'level' => 2, // 1
+                'level' => 2, // * 2 
             ],
             [
                 'name' => 'Determinacion de Responsabilidades', 
-                'level' => 2, // 2
+                'level' => 2, // * 3 
             ],
             [
                 'name' => 'Auditoria de Sitemas', 
-                'level' => 3, // 3
+                'level' => 3, // * 4 
             ],
             [
                 'name' => 'Auditoria de Gestion', 
-                'level' => 3, // 4
+                'level' => 3, // * 5 
             ],
             [
                 'name' => 'Auditoria de Seguimiento', 
-                'level' => 3, // 5
+                'level' => 3, // * 6 
             ],
             [
                 'name' => 'Auditoria Financiera', 
-                'level' => 3, // 6
+                'level' => 3, // * 7 
             ],
             [
                 'name' => 'Potestad Investigativa', 
-                'level' => 3, // 7
+                'level' => 3, // * 8 
             ],
             [
                 'name' => 'Planificacion y Control', 
-                'level' => 3, // 8
+                'level' => 3, // * 9 
             ]
         ];
 

@@ -10,7 +10,12 @@ return new class extends Migration
     {
         Schema::create('audit_activity', function(Blueprint $table) {
             $table->id();
-            $table->string('objective')->nullable();
+            $table->string('code');
+            $table->string('area')->nullable();
+            $table->string('description')->nullable();
+            $table->string('objective', 5000)->nullable();
+            $table->string('month_start')->nullable();
+            $table->string('month_end')->nullable();
             $table->date('planning_start')->nullable();
             $table->date('planning_end')->nullable();
             $table->date('execution_start')->nullable();
@@ -24,6 +29,13 @@ return new class extends Migration
 
             $table->unsignedBigInteger('type_audit_id')->nullable();
             $table->foreign('type_audit_id')->references('id')->on('type_audit');
+            
+            $table->unsignedBigInteger('uai_id')->nullable();
+            $table->foreign('uai_id')->references('id')->on('uai');
+            
+            $table->unsignedBigInteger('departament_id')->nullable();
+            $table->foreign('departament_id')->references('id')->on('departament');
+
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

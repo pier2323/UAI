@@ -11,7 +11,16 @@ class HandoverDocument extends Model
 
     protected $table = 'handover_document';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name', 
+        'target', 
+        'cease', 
+        'subscription', 
+        'delivery_uai', 
+        'employee_outgoing_id', 
+        'employee_incoming_id', 
+        'audit_activity_id', 
+    ];
 
     public function auditActivity(): \Illuminate\Database\Eloquent\Relations\belongsTo
     {
