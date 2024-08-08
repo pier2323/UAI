@@ -17,4 +17,9 @@ class Uai extends Model
     {
         return $this->hasMany(related: Employee::class);
     }
+
+    public function auditActivity(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(related: AuditActivity::class);
+    }
 }

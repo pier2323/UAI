@@ -72,7 +72,7 @@
 
 
                 <tr   
-                class="hover:bg-gray-100 cursor-pointer"
+                class="hover:bg-gray-100 cursor-pointer select-none active:bg-gray-300"
                 wire:key="{{ $auditActivity->id }}"
                 x-on:dblclick="$wire.goTo(
                 'auditActivity.show', 
@@ -82,19 +82,17 @@
                     <td class="px-4 py-2">{{ $auditActivity->id }}</td> 
                     
                     {{-- todo Objetivo --}}
-                    <td class="px-4 py-2">{{ $auditActivity->handoverDocument->target }}</td> 
+                    <td class="px-4 py-2">{{ $auditActivity->description }}</td> 
                     
                     {{-- todo Fecha inicio --}}
-                    <td class="px-4 py-2">{{ $auditActivity->planning_start }}</td> 
+                    <td class="px-4 py-2">{{ $auditActivity->month_start }}</td> 
                     
                     {{-- todo Fecha fin --}}
-                    <td class="px-4 py-2">{{ $auditActivity->planning_end }}</td>
+                    <td class="px-4 py-2">{{ $auditActivity->month_end }}</td>
                     
                     {{-- todo Area UAI --}}
-                    @php
-                        $employee = $auditActivity->employee->count() == 1 ? $auditActivity->employee: '';
-                    @endphp
-                    <td class="px-4 py-2">{{ $employee->uai->name ?? '' }}</td> 
+                  
+                    <td class="px-4 py-2">{{ $auditActivity->uai->name ?? '' }}</td> 
 
                     <td style='display:none'></td>
 

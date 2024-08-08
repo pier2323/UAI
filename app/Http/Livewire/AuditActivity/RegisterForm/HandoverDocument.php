@@ -11,7 +11,7 @@ class HandoverDocument extends Form
     // todo inputs variables 
     
     #[Validate('required|max:255', as: 'Nombre')]
-    public $name = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima nam est ipsum'; 
+    public $name = 'hola pier'; 
 
     #[Validate('required|max:255', as: 'Objetivo')]
     public $target = 'Pariatur minima nam est ipsum';

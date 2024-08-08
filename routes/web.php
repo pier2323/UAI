@@ -6,8 +6,6 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuditActivityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
-use App\Http\Livewire\AuditActivity\Main;
-use App\Http\Livewire\AuditActivity\Show;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,10 +16,18 @@ Route::middleware([
 
     Route::get(uri: '/dashboard', action: [MainController::class, '__invoke'])->name('dashboard');
 
-    Route::controller(AuditActivityController::class)->group(function () {
-        Route::get(uri: '/actuacion-fiscal', action: Main::class)->name('auditActivity.index');
-        Route::get(uri: '/actuacion-fiscal/{id}', action: Show::class)->name('auditActivity.show');
-    });
+    // * auditActivity Routes 
+    Route::get(
+        uri: '/actuacion-fiscal', 
+        action: App\Http\Livewire\AuditActivity\Main::class
+    )->name('auditActivity.index');
+    
+    Route::get(
+        uri: '/actuacion-fiscal/{id}', 
+        action: App\Http\Livewire\AuditActivity\Show::class
+    )->name('auditActivity.show');
+
+
 
     Route::controller(Documentos::class)->group(function () {
         Route::get('/Leyes', 'leyes')->name('leyes');

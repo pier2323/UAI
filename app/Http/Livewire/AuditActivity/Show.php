@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\AuditActivity;
 
+use App\Http\Livewire\AuditActivity\Show\Schedule;
 use App\Models\AuditActivity;
 use App\Models\Employee;
 use Livewire\Component;
@@ -9,27 +10,35 @@ use Livewire\Component;
 class Show extends Component
 {
     public $auditActivity;
-    public $employees;
-    public $employee;
-    public $fullName;
-    public $profile_photo;
-    public $hola;
-    public $cards = 0; 
+    public $employees = [];
+    public Schedule $schedule;
+
+    public function mount($id)
+    {
+        $this->auditActivity = AuditActivity::find($id);
+    }
 
     public function render()
     {
         return view('livewire.audit-activity.show');
     }
 
-    public function mount($id)
+    public function save()
     {
-        $this->cards = 0;
-        $this->auditActivity = AuditActivity::find($id);
-        $this->employees = Employee::all();
+        dd($this->schedule);
     }
 
-    public function query($id)
+    public function deleteCard($id)
     {
+       $employee = array_search($id ,$this->employees);
+        if ($employee !== false) {
+            array_splice($this->employees, $employee, 1);
+        }
+    }
+
+    public function addCard($id)
+    {
+        array_push($this->employees, $id);
         return Employee::with('jobTitle')->find($id);
     }
 }

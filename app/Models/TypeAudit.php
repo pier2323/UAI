@@ -12,4 +12,10 @@ class TypeAudit extends Model
     protected $table = 'type_audit';
 
     protected $fillable = [];
+
+
+    public function auditActivity(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(related: AuditActivity::class);
+    }
 }

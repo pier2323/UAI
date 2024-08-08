@@ -23,14 +23,14 @@ x-bind:id="'card-'+index"
     <div class="flex flex-col items-center pb-6">
 
         {{-- todo profile photo --}}
-        <img class="w-40 h-40 mb-3 rounded-full shadow-lg" :src="employees[index].profile_photo" alt="Bonnie image"/>
+        <img class="w-40 h-40 mb-3 rounded-full shadow-lg" :src="card.profile_photo" alt="Bonnie image"/>
 
         {{-- todo Full name --}}
 
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white" x-text='employees[index].first_name + " " + employees[index].first_surname'></h5>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white" x-text='card.first_name + " " + card.first_surname'></h5>
 
         {{-- todo job title --}}
-        <span class="text-sm text-gray-500 dark:text-gray-400" x-text="employees[index].job_title.name"></span>
+        <span class="text-sm text-gray-500 dark:text-gray-400" x-text="card.job_title.name"></span>
 
 
         {{-- <div class="flex mt-4 md:mt-6">

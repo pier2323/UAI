@@ -23,13 +23,8 @@ class Main extends Component
                     'jobTitle',
                 ],
             ],
-
-            'employee' => [
-                'uai'
-            ],
-
             'typeAudit',
-
+            'uai',
         ])->get();
     }
 
