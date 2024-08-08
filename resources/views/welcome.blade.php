@@ -43,9 +43,9 @@
                                     <li style="margin-left: 50px;margin-right: 50px;">
                                     <a href="#">Marco Normativo</a>
                                 <ul style="margin-left: 50px;margin-right: 50px;" class="menu-vertical">
-                                    <li><a href="{{ route('leyes') }}">Ley</a></li>
+                                   {{--  <li><a href="{{ route('leyes') }}">Ley</a></li>
                                     <li><a href="{{ route('reglamentos') }}">reglamentos</a></li>
-                                    <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li>
+                                    <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li> --}}
                                 </ul>
                                 </li>
                             </ul>
@@ -56,14 +56,14 @@
                                         @if (Route::has('login'))
                                             @auth
                                                 <a href="{{ url('/dashboard') }}"
-                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                                         Aplicación
                                                     </FONT>
                                                 </a>
                                             @else
                                                 <a href="{{ route('login') }}"
-                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                                         Inicio
                                                     </FONT>
@@ -71,7 +71,7 @@
                                                 <div class="div_1"></div>
                                                 @if (Route::has('register'))
                                                     <a href="{{ route('register') }}"
-                                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
                                                         style="margin-right: -100px;">
                                                         <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                                             Registro

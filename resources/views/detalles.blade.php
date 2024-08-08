@@ -10,7 +10,7 @@
                 <div class="px-4 py-2">
                     <section>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
-                            <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start"style="margin-left: 40px;">
+                            <ul class="mb-8 flex flex-col items-center space-y-1 sm:items-start"style="margin-left: 40px;">
                                 <li class="flex items-end">
                                     <h2 class="mt-4 text-2xl font-semibold">
 

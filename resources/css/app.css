@@ -5,3 +5,10 @@
 [x-cloak] {
     display: none;
 }
+
+.iti {
+    --iti-path-flags-1x: url('path/to/flags.png');
+    --iti-path-flags-2x: url('path/to/flags@2x.png');
+    --iti-path-globe-1x: url('path/to/globe.png');
+    --iti-path-globe-2x: url('path/to/globe@2x.png');
+  }
