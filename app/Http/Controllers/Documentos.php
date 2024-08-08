@@ -11,7 +11,10 @@ class Documentos extends Controller
         return view('leyes');
     }
 
-        public function Reglamentos()
+    
+   
+
+    public function Reglamentos()
     {
         return view('reglamentos');
     }

@@ -32,7 +32,7 @@ Route::middleware([
     Route::controller(Documentos::class)->group(function () {
         Route::get('/Leyes', 'leyes')->name('leyes');
         Route::get('/Reglamentos', 'reglamentos')->name('reglamentos');
-        Route::get('/Documentos', 'reglamentos')->name('documentoNormativo');
+        Route::get('/Documentos', 'Documentos')->name('documentoNormativo');
      
     });
 
@@ -52,11 +52,11 @@ Route::middleware([
 
     Route::controller(EmployeeController::class)->group(function (): void {
         Route::get('/personal', 'index')->name('employee.index');
-        Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
-        Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
         Route::post('/personal/almacenar', 'store')->name('employee.store');
+        Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
         Route::put('/personal/editar/{personal}', 'update')->name('employee.update');
-        Route::delete('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
+        Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
+        Route::get('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
     });
 
     Route::controller(designationController::class)->group(function (): void {

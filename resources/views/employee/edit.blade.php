@@ -1,23 +1,42 @@
 @php
     $inputClass =
-        "mb-6 border'2 border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500";
+        'mb-5 mt-2 flex h-10 w-full items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm';
     $liClass = 'flex flex-column justify-start items-start';
 @endphp
+
+
+@php
+    $phone_code = substr($employee->phone, 0, 4);
+    $phone_number = substr($employee->phone, 4, 7);
+    $codes = ['0412', '0414', '0416', '0424', '0426', '0212'];
+@endphp
+
+
+<script defer src="/js/employee/registerFormScript/changeImage.js"></script>
+<script src="/js/employee/registerFormScript/alpine.js"></script>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-    <div class="py-12">
+    {{-- ! inicializador de las variables  --}}
+    <div x-data="form" x-init="firstName = '{{ $employee->first_name }}'
+    secondName = '{{ $employee->second_name }}'
+    firstSurname = '{{ $employee->first_surname }}'
+    secondSurname = '{{ $employee->second_surname }}'
+    phone = '{{ $phone_number }}';
+    p00 = '{{ $employee->p00 }}';" {{-- ! fin  de las variables  --}} class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2">
                     <section
                         class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
-                        <div style="overflow:hidden ; border: 1px solid #777; border-radius: px; margin-bottom: 500px;"
+                        <div style="overflow:hidden ; border: 1px solid #777; border-radius: px; margin-bottom: 800px;"
                             class="border-slate-500">
-                            <img alt="foto de perfil" style="width: 15vw" src="{{ "$employee->profile_photo" }}" />
+                            <img alt="foto de perfil" style="width: 15vw"
+                                src="{{ asset("storage/$employee->profile_photo") }}" />
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
@@ -26,73 +45,173 @@
                                         {{ "$employee->first_name $employee->second_name $employee->first_surname $employee->second_surname" }}
                                     </h2>
                                 </li>
-
                                 <form class="{{ $liClass }}"
-                                    action="{{ route('employee.show', $employee->personal_id) }}" method="POST">
+                                    action="{{ route('employee.update', $employee->id) }}"
+                                    enctype="multipart/form-data" method="POST">
                                     @method('PUT')
                                     @csrf
-                                    <label for="recipient-cargo" class="col-form-label">Cargo:</label>
-                                     <select id="recipient-cargo" name="cargo_id" type="text"
+                                    <div class="image">
+
+                                        <div id="zona-carga">
+                                            <img id="zona-carga-img"
+                                                src="{{ asset("storage/$employee->profile_photo") }}" />
+                                        </div>
+                                        <label for="photo">click para subir una imagen</label>
+                                        <input accept="image/*" class="btn btn-primary mb-3" id="photo"
+                                            name="photo" type="file">
+                                    </div>
+
+
+
+                                    <div class="mb-3">
+                                        @error('first_name')
+                                            <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
+
+                                        <div class="bg mb-3">
+                                            <label class="{{ $liClass }}" for="recipient-firstName">Primer
+                                                Nombre:</label>
+                                            <input class="{{ $inputClass }}" id="recipient-firstName"
+                                                name="first_name" data-attribute-name="Primer Nombre"type="text"
+                                                x-model="firstName" x-on:input="firstName = transformedInput(firstName)"
+                                                value="{{ $employee->first_name }}">
+                                        </div>
+                                    </div>
+                                    @error('second_name')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+
+                                    <div class="mb-3">
+                                        <label class="{{ $liClass }}" for="recipient-secondName">Segundo
+                                            Nombre:</label>
+                                        <input class="{{ $inputClass }}" id="recipient-secondName" name="second_name"
+                                            type="text" x-model="secondName"
+                                            x-on:input="secondName = transformedInput(secondName)"
+                                            value="{{ $employee->second_name }}" />
+                                    </div>
+
+
+                                    @error('first_surname')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+
+                                    <div class="mb-3">
+                                        <label class="{{ $liClass }}" for="recipient-firstSurname">Primer
+                                            Apellido:</label>
+                                        <input class="{{ $inputClass }}" id="recipient-firstSurname"
+                                            name="first_surname" type="text" x-model="firstSurname"
+                                            x-on:input="firstSurname = transformedInput(firstSurname)"
+                                            value="{{ $employee->first_surname }}" />
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        @error('second_surname')
+                                            <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
+
+                                        <label class="{{ $liClass }}" for="recipient-secondSurname">Segundo
+                                            Apellido:</label>
+                                        <input class="{{ $inputClass }}" id="recipient-secondSurname"
+                                            name="second_surname" type="text"
+                                            x-bind:class="markedSecondSurname ? 'bg-gray-200' : ''"
+                                            x-bind:disabled="markedSecondSurname" x-bind:required="markedSecondSurname"
+                                            x-model="secondSurname"
+                                            x-on:input="secondSurname = transformedInput(secondSurname)"
+                                            value="{{ $employee->first_surname }}" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        @error('email_cantv')
+                                            <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
+                                        <label class="{{ $liClass }}" for="recipient-email_cantv">Correo
+                                            Institucional:</label>
+                                        <input class="{{ $inputClass }}" id="recipient-email_cantv"
+                                            name="email_cantv" wire:model="email_cantv" type="email"
+                                            value="{{ $employee->email_cantv }}">
+                                    </div>
+
+                                    @error('gmail')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                    <li class="{{ $liClass }}">
+                                        <label for="gmail" class="col-form-label">Correo
+                                            Eletronico:</label>
+                                        <input id="gmail" name="gmail" type="text" class="{{ $inputClass }}"
+                                            wire:model="gmail" value="{{ $employee->gmail }}" />
+                                    </li>
+
+
+
+                                    <div class="mb-3">
+                                        @error('phone')
+                                            <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
+
+                                        <div class="mb-3">
+                                            <label class="{{ $liClass }}" for="phoner">Teléfono:</label>
+                                            <div class="flex">
+                                                <select
+                                                    class="flex h-10 items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
+                                                    name="phone_code" id="phone_code" style="margin-top: 10px;">
+
+                                                    @foreach ($codes as $code)
+                                                        <option @if ($code === $phone_code) selected @endif
+                                                            value="{{ $code }}">
+                                                            {{ $code }}
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                                <p class="font-extrabold block p-2" style="margin-top: 10px">-</p>
+
+                                                <input id="phoneNumber" class="{{ $inputClass }}"
+                                                    name="phone_number" type="tel" value=""
+                                                    x-model="phone" x-on:input="phone=updatephone(phone)"
+                                                    id="phone">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <label for="uai" class="col-form-label" style="margin-right: 300px;">Area
+                                        UAI:</label>
+
+                                    <select id="uai" name="uai" class="{{ $inputClass }}"
+                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+
+                                        @foreach ($uai as $departament)
+                                            <option value="{{ $departament->id }}">{{ $departament->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <label for="job_title" class="col-form-label"
+                                        style="margin-right: 300px;">Cargo:</label>
+                                    <select id="job_title" name="job_title" type="text"
                                         class="{{ $inputClass }}"
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                         @foreach ($jobTitle as $cargo)
                                             <option value="{{ $cargo->id }}">{{ $cargo->name }}</option>
-                                        @endforeach 
-                                    </select>
-                                    <li class="{{ $liClass }}">
-                                        <div>
-
-                                        </div>
-                                        <label for="recipient-p00" class="col-form-label">P00:</label>
-                                        <input id="recipient-p00" name="p00" type="text"
-                                            class="{{ $inputClass }}" value="{{ $employee->p00 }}" />
-                                    </li>
-                                    <li class="{{ $liClass }}">
-                                        <label for="recipient-cedula" class="col-form-label">Cedula:</label>
-                                        <input id="recipient-cedula" name="cedula" type="text"
-                                            class="{{ $inputClass }}" value="{{ $employee->personal_id }}" />
-                                    </li>
-                                    <li class="{{ $liClass }}">
-                                        <label for="recipient-phoneNumber" class="col-form-label">Telefono:</label>
-                                        <input id="recipient-phoneNumber" name="telefono" type="text"
-                                            class="{{ $inputClass }}" value="{{ $employee->phone }}" />
-                                    </li>
-                                    <li class="{{ $liClass }}">
-                                        <label for="recipient-gmail" class="col-form-label">Correo
-                                            electrónico:</label>
-                                        <input id="recipient-gmail" name="gmail" type="text"
-                                            class="{{ $inputClass }}" value="{{ $employee->gmail }}" />
-                                    </li>
-                                    <li class="{{ $liClass }}">
-                                        <label for="recipient-email_cantv" class="col-form-label">Correo
-                                            Institucional:</label>
-                                        <input id="recipient-email_cantv" name="email_cantv" type="text"
-                                            class="{{ $inputClass }}" value="{{ $employee->email_cantv }}" />
-                                    </li>
-                                    <label for="recipient-departament" class="col-form-label">Area UAI:</label>
-
-                                    <select id="recipient-departament" name="uai_id" class="{{ $inputClass }}"
-                                        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-
-                                        @foreach ($uai as $departament)
-                      <option value="{{ $departament->id  }}">{{ $departament->name }}</option>
-                    @endforeach 
+                                        @endforeach
                                     </select>
                             </ul>
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
-                                <button type="submit"
-                                    class="rounded-lg border-0 bg-slate-900 px-6 py-3 text-base text-white shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">Guardar</button>
+                                <x-button type="submit">Guardar</x-button>
 
                                 <a href="{{ route('employee.index') }}">
-                                    <button type="button"
-                                        class="rounded-lg border-0 bg-white px-6 py-3 text-base text-slate-900 shadow-lg shadow-slate-100 transition hover:bg-blue-300 hover:text-slate-900 hover:shadow-blue-600 dark:bg-slate-700 dark:text-slate-300 dark:shadow-sm dark:shadow-slate-800 dark:hover:bg-slate-600 sm:py-2">Atras</button>
+                                    <x-secondary-button wire:click="resetComponent" style="margin-right: 10px;"
+                                        id="cancelar">cancelar</x-secondary-button>
                                 </a>
+
                             </div>
-                            </form>
-                        </div>
                     </section>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>

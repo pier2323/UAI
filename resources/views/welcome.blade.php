@@ -16,7 +16,8 @@
             <div class="nav_1" id="navbar2">
                 <!----------Logo CANTV Blanco-------------------->
                 <div class="nav_2">
-                    <img src="/images/template/cantv_blanco.png" width="140" height="65" id="navbar3 "style="margin-left: -90px;">
+                    <img src="/images/template/cantv_blanco.png" width="140" height="65"
+                        id="navbar3 "style="margin-left: -90px;">
                 </div>
                 <div class="nav_4">
                     <nav>
@@ -39,50 +40,42 @@
                                 </ul>
                             </li>
                             <ul class="menu-horizontal">
-                              
-                                    <li style="margin-left: 50px;margin-right: 50px;">
+
+                                <li style="margin-left: 50px;margin-right: 50px;">
                                     <a href="#">Marco Normativo</a>
-                                <ul style="margin-left: 50px;margin-right: 50px;" class="menu-vertical">
-                                   {{--  <li><a href="{{ route('leyes') }}">Ley</a></li>
-                                    <li><a href="{{ route('reglamentos') }}">reglamentos</a></li>
-                                    <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li> --}}
-                                </ul>
+                                    <ul style="margin-left: 50px;margin-right: 50px;" class="menu-vertical">
+                                        <li><a href="{{ route('leyes') }}">Ley</a></li>
+                                        <li><a href="{{ route('reglamentos') }}">reglamentos</a></li>
+                                        <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li>
+                                    </ul>
                                 </li>
                             </ul>
 
 
-                                <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog"
-                                            style="margin-right: 9px;"></i>
-                                        @if (Route::has('login'))
-                                            @auth
-                                                <a href="{{ url('/dashboard') }}"
-                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                                </FONT>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('login') }}"
+                                                class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                                <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                                    Inicio
+                                                </FONT>
+                                            </a>
+                                            <div class="div_1"></div>
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}"
+                                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                                    style="margin-right: -100px;">
                                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                                        Aplicación
+                                                        Registro
                                                     </FONT>
                                                 </a>
-                                            @else
-                                                <a href="{{ route('login') }}"
-                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
-                                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                                        Inicio
-                                                    </FONT>
-                                                </a>
-                                                <div class="div_1"></div>
-                                                @if (Route::has('register'))
-                                                    <a href="{{ route('register') }}"
-                                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
-                                                        style="margin-right: -100px;">
-                                                        <FONT class="mt-4 text-sm/relaxed " COLOR="white">
-                                                            Registro
-                                                        </FONT>
-                                                    </a>
-                                                @endif
-                                            @endauth
-                                        @endif
-                                </div>
+                                            @endif
+                                        @endauth
+                                    @endif
+                            </div>
 
-                            </ul>
+                        </ul>
                     </nav>
                 </div>
             </div>
@@ -186,11 +179,10 @@
                         <div class="novedades_b1">
 
                             <div class="novedades_b_11">
-                                <div style="margin-left: 15px;"> Lorem ipsum dolor sit amet consectetur adipisicing
-                                    elit. Reprehenderit illum deserunt laborum architecto assumenda amet ad id,
-                                    aliquam
-                                    obcaecati earum, a odit, quaerat facere. Asperiores, consequuntur. Expedita
-                                    distinctio ipsum eum!
+                                <div style="margin-left: 15px;"> Verificar, monitorear y supervisar la veracidad y
+                                    autenticidad de las operaciones administrativas, financieras, contables y de gestión
+                                    de la Empresa Cementera Socialista y sus filiales.
+
                                 </div>
                             </div>
                         </div>
