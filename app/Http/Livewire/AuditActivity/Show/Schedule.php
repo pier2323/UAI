@@ -6,18 +6,19 @@ use Livewire\Form;
 
 class Schedule extends Form
 {
-    public $planningEnd;
-    public $planningDays;
-    public $executionStart;
-    public $executionEnd;
-    public $executionDays;
-    public $preliminaryStar;
-    public $preliminaryEnd;
-    public $preliminaryDays;
-    public $downloadStart;
-    public $downloadEnd;
-    public $downloadDays;
-    public $definitiveStart;
-    public $definitiveEnd;
-    public $definitiveDays;
+    public $planning_days = '5';
+    public $executio_days = '10';
+    public $preliminary_days = '10';
+    public $download_days = '10';
+    public $definitive_days = '5';
+    public $planning_start;
+    public $planning_end;
+    public $execution_start;
+    public $execution_end;
+    public $preliminary_start;
+    public $preliminary_end;
+    public $download_start;
+    public $download_end;
+    public $definitive_start;
+    public $definitive_end;
 }

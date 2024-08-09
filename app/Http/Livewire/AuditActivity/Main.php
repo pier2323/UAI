@@ -25,7 +25,7 @@ class Main extends Component
             ],
             'typeAudit',
             'uai',
-        ])->get();
+        ])->orderBy('id', 'asc')->get();
     }
 
     public function goTo($route, $id)
