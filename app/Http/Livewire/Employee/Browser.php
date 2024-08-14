@@ -19,4 +19,10 @@ class Browser extends Component
     {
         return view('livewire.employee.browser');
     }
+
+    public function hydrate()
+    {
+        // ! it's needed a solution to omit this query 
+        $this->employees = Employee::with('uai')->get();
+    }
 }

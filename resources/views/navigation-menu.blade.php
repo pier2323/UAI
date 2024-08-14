@@ -13,21 +13,15 @@
                 <!-- Navigation Acta -->
                 <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex  ">
 
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" style="color: white;">
-                        <h1>Inicio</h1>
-                    </x-nav-link>
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate  style="color: white;"><h1>Inicio</h1></x-nav-link>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
     
-                        <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" style="color: white">
-                            Personal
-                        </x-nav-link>
+                        <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" wire:navigate style="color: white">Personal</x-nav-link>
                     </div>
                 </div>
                 <!-- Navigation Acta -->
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-nav-link href="{{ route('auditActivity.index') }}" :active="request()->routeIs('auditActivity*')" style="color: white">
-                        Actuaciones Fiscales
-                    </x-nav-link>
+                    <x-nav-link href="{{ route('auditActivity.index') }}" :active="request()->routeIs('auditActivity*')" wire:navigate style="color: white">Plan de Auditoria</x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
 

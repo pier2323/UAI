@@ -29,7 +29,9 @@
         <script defer src="/js/jquery-dataTables/jquery.min.js"></script>
         <!-- DataTable -->
         <script defer src="/js/jquery-dataTables/jquery.dataTables.min.js"></script>
-        <script defer src="/js/jquery-dataTables/dataTables.bootstrap5.min.js"></script>        <title>{{ $title ?? 'Page Title' }}</title>
+        <script defer src="/js/jquery-dataTables/dataTables.bootstrap5.min.js"></script>   
+        @stack('styles')     
+        <title>{{ $title ?? 'Page Title' }}</title>
     </head>
     <body>
         <x-banner />
@@ -46,7 +48,8 @@
         @stack('modals')
     
         @livewireScripts
-    
+        @stack('script')     
+
         <x-footer></x-footer>
     </body>
 </html>

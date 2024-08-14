@@ -11,6 +11,8 @@ return new class extends Migration
         Schema::create('audit_activity_employee', function (Blueprint $table) {
             $table->id();
 
+            $table->string('role');
+
             $table->unsignedBigInteger('audit_activity_id')->nullable(); 
             $table->foreign('audit_activity_id')->references('id')->on('audit_activity')->onDelete('cascade');
 
