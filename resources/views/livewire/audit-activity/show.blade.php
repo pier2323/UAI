@@ -4,6 +4,8 @@
         {{ session('status') }}
     </div>
     @endif --}}
+    @vite(['resources/js/hola.js'])
+
     <span role="headings" class="px-20 block">
         <h2 class="text-2xl font-bold mt-3 ml-4">{{ $auditActivity->objective }}</h2>
     </span>
@@ -11,11 +13,13 @@
     {{-- action="{{ route('designation.download') }}"  --}}
     {{-- method="POST"  --}}
     >
-        {{-- @include('livewire.audit-activity.show.audit-commission') --}}
+        @include('livewire.audit-activity.show.audit-commission')
         @include('livewire.audit-activity.show.schedule')
 
         <x-button>send</x-button>
     </form>
+
+    <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
 
     
 </div>

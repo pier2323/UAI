@@ -1,11 +1,18 @@
-<div x-on:open-browser.window="$wire.open = true;">
+<div x-on:open-browser.window="$wire.open = true;" class="absolute">
 
     <x-dialog-modal id='browser' maxWidth='2xl' wire:model='open'>
         <x-slot:title>Buscador</x-slot>
         <x-slot:content>
-            <div x-data="browser()" x-init="items = {{ $employees }}; pages = paginate(items, 4); allEmployees = items;">
+ 
+            <div x-data="browser()" x-init="init()">
 
-                <x-input x-model="search" placeholder="Buscar..." x-on:open-browser.window="filterEmployees($event.detail.employees)" x-on:delete-card.window="filterEmployees($event.detail.employees)"/>
+                {{-- todo browser input --}}
+                <x-input 
+                    placeholder="Buscar..." 
+                    x-model="search" 
+                    x-on:open-browser.window="filterEmployees($event.detail.employees)" 
+                    x-on:delete-card.window="filterEmployees($event.detail.employees)"
+                />
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
 
@@ -28,10 +35,13 @@
 
                             {{-- todo rows --}}
                             <template x-for="item in filteredItems" :key="item.id">    
-                                <tr class="border-b font-semibold hover:bg-gray-100 cursor-pointer select-none active:bg-gray-300" x-on:click="$dispatch('add-card', {id: item.id}); $wire.open = false; reset()">
-                                    <td class="px-6 py-3" scope="row"  x-text='item.p00'></td>
+                                <tr class="border-b font-semibold hover:bg-gray-100 cursor-pointer select-none active:bg-gray-300" 
+                                x-on:click="clickTableRows(item)">
+
+                                    <td class="px-6 py-3" scope="row" x-text='item.p00'></td>
                                     <td class="px-6 py-3" x-text="`${item.first_name} ${item.first_surname}`"></td>
                                     <td class="px-6 py-3" x-text="item.uai.name"></td>
+
                                 </tr>
                             </template>
 
@@ -74,6 +84,13 @@
                 pages: [],
                 page: 0,
                 items: '',
+                
+                init() {
+                    this.items = @js($employees); 
+                    this.pages = this.paginate(this.items, 4); 
+                    this.allEmployees = this.items;
+                },
+
                 get filteredItems() {
                     return (this.search !== "" ? this.items :this.pages[this.page]).filter(
                         item => {
@@ -81,7 +98,7 @@
                             return fullname.includes(this.search) 
                             || fullname.includes(this.search.toUpperCase()) 
                             || `${item.p00}`.includes(this.search) 
-                            || item.uai.name.includes(this.search)
+                            || item.uai.name.includes(this.search)                                
                         }
                     );
                 },
@@ -115,6 +132,12 @@
                     this.search = ''
                     this.page = 0
                 },
+
+                clickTableRows({ id }) {
+                    @this.open = false;
+                    @this.dispatch('add-card', {id: id});
+                    this.reset()
+                }
             }
         }
     </script>

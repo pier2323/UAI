@@ -1,5 +1,5 @@
 <div>
-  <form wire:submit.prevent="submitForm">
+  <form wire:submit="submitForm">
     <!-- Form fields here -->
 
     <button type="submit">Submit</button>

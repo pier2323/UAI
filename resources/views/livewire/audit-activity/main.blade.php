@@ -1,4 +1,6 @@
 <div>
+    @vite(['resources/js/hola.js'])
+
     @php
         $th = "colspan='1' rowspan=-'1' tabindex='0'";
     @endphp
