@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Models\PersonalUai;
@@ -30,7 +31,7 @@ class DesignationService
         $this->pathDocument = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
 
         // todo save the employee/auditors in "" 
-        $this->getAuditor($audit->employee()->with('jobTitle')->get());
+        $this->getAuditor($audit->employee()->orderBy('role', 'desc')->get());
 
         $lineJump = str_repeat(' ', 500);
 
@@ -60,7 +61,7 @@ class DesignationService
         $i = 0;
         foreach ($auditors as $auditor) {
             $letter = $this->letters[$i];
-            $jobTitle = $auditor->jobTitle->name;
+            $jobTitle = $auditor->pivot->role;
             array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname / $jobTitle ($letter)");
             $i++;
         }

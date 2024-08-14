@@ -48,6 +48,6 @@ class AuditActivity extends Model
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(related: Employee::class);
+        return $this->belongsToMany(related: Employee::class)->withPivot('role');
     }
 }

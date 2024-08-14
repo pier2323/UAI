@@ -16,7 +16,7 @@ class AuditActivitySeeder extends Seeder
         $rows =  [
             [
                 "code" => "UAI/GCP/ACR-COM 2024-001",
-                "description" => " Informe Definitivo 2019:PA:01 de fecha 06/11/2019, referido al Examen de la Cuenta 2017" ,
+                "description" => "Informe Definitivo 2019:PA:01 de fecha 06/11/2019, referido al Examen de la Cuenta 2017" ,
                 "type_audit_id" => 7,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -27,7 +27,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-002",
-                "description" => ' Informe Definitivo 2019:OA:02 de fecha 27/12/2019, referido a Presentación de Cauciones 2018" ',
+                "description" => 'Informe Definitivo 2019:OA:02 de fecha 27/12/2019, referido a Presentación de Cauciones 2018" ',
                 "type_audit_id" => 7,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -60,7 +60,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-005",
-                "description" => " Verificación acta de entrega de la Gerencia de Contrataciones Públicas  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Contrataciones Públicas  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -71,7 +71,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-006",
-                "description" => " Verificación acta de entrega de la Coordinación de Contrataciones Especiales  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Contrataciones Especiales  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -82,7 +82,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-007",
-                "description" => " Verificación acta de entrega de la Coordinación de Garantías",
+                "description" => "Verificación acta de entrega de la Coordinación de Garantías",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -93,7 +93,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-008",
-                "description" => " Verificación acta de entrega de la Gerencia de Mantenimiento Región Capital  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Mantenimiento Región Capital  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -104,7 +104,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-009",
-                "description" => " Verificación acta de entrega de la Coordinación Centro Operación Sistemas Energía  ",
+                "description" => "Verificación acta de entrega de la Coordinación Centro Operación Sistemas Energía  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -115,7 +115,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-010",
-                "description" => " Verificación acta de entrega de la Coordinación de Monitoreo y Control  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Monitoreo y Control  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -126,7 +126,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-011",
-                "description" => " Verificación acta de entrega de la Gerencia de Gestión de Procura  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Gestión de Procura  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -137,7 +137,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-012",
-                "description" => " Verificación acta de entrega de la Coordinación de Ventas Región Capital I  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Ventas Región Capital I  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -148,7 +148,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-013",
-                "description" => " Verificación acta de entrega de la Coordinación Riesgos y Cobranzas  ",
+                "description" => "Verificación acta de entrega de la Coordinación Riesgos y Cobranzas  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -159,7 +159,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-014",
-                "description" => " Verificación acta de entrega de la Coordinación Facturación y Analisis de Riesgo  ",
+                "description" => "Verificación acta de entrega de la Coordinación Facturación y Analisis de Riesgo  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -170,7 +170,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-015",
-                "description" => " Verificación acta de entrega de la Gerencia Servicios y Facilidades al Personal y Jubilado  ",
+                "description" => "Verificación acta de entrega de la Gerencia Servicios y Facilidades al Personal y Jubilado  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -181,7 +181,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-016",
-                "description" => " Verificación acta de entrega de la Gerencia de Canales  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Canales  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -192,7 +192,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-017",
-                "description" => " Verificación acta de entrega de la Coordinación Calidad de Canales  ",
+                "description" => "Verificación acta de entrega de la Coordinación Calidad de Canales  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -203,7 +203,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-018",
-                "description" => " Verificación acta de entrega de la Coordinación de Apoyo y Traslado  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Apoyo y Traslado  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " MAY ",
@@ -214,7 +214,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-019",
-                "description" => " Verificar el cumplimiento de la obligación de prestar caución, que tienen los servidores públicos de la Cantv, encargados de la recepción, custodia y manejo de fondos y bienes,  ",
+                "description" => "Verificar el cumplimiento de la obligación de prestar caución, que tienen los servidores públicos de la Cantv, encargados de la recepción, custodia y manejo de fondos y bienes,  ",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -225,7 +225,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-020",
-                "description" => " Evaluar los expedientes de las contrataciones de Bienes, Servicios y Obras realizadas por Cantv ",
+                "description" => "Evaluar los expedientes de las contrataciones de Bienes, Servicios y Obras realizadas por Cantv ",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -236,7 +236,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-021",
-                "description" => " Verificar la gestión del proceso de Bienes Públicos de Cantv ",
+                "description" => "Verificar la gestión del proceso de Bienes Públicos de Cantv ",
                 "type_audit_id" => 6,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -247,7 +247,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-022",
-                "description" => " Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Ejecutiva de Cantv",
+                "description" => "Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Ejecutiva de Cantv",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -258,7 +258,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-023",
-                "description" => " Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Prestación de Servicios de Cantv",
+                "description" => "Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Prestación de Servicios de Cantv",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -269,7 +269,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-024",
-                "description" => " Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Gestión Interna de Cantv",
+                "description" => "Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Gestión Interna de Cantv",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -280,7 +280,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-025",
-                "description" => " Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Tecnología e Infraestructura de Cantv",
+                "description" => "Verificar el grado de conocimiento de los documentos normativos aprobados de las Unidades de la Vicepresidencia Tecnología e Infraestructura de Cantv",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -291,7 +291,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-026",
-                "description" => " Verificar la razonabilidad del saldo de las cuentas por pagar de Cantv ",
+                "description" => "Verificar la razonabilidad del saldo de las cuentas por pagar de Cantv ",
                 "type_audit_id" => 3,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -302,7 +302,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-027",
-                "description" => " Verificar la razonabilidad del saldo de las cuentas por cobrar de Cantv ",
+                "description" => "Verificar la razonabilidad del saldo de las cuentas por cobrar de Cantv ",
                 "type_audit_id" => 3,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -313,7 +313,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-028",
-                "description" => " nspección de las Condiciones y Seguridad de las Instalaciones del Almacén de Cantv, ubicado en Valencia, Estado Carabobo ",
+                "description" => "Inspección de las Condiciones y Seguridad de las Instalaciones del Almacén de Cantv, ubicado en Valencia, Estado Carabobo ",
                 "type_audit_id" => 5,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -324,7 +324,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-029",
-                "description" => " Verificar las existencias de materiales y equipos, ubicados en el Almacen de Cantv, Valencia, Estado Carabobo ",
+                "description" => "Verificar las existencias de materiales y equipos, ubicados en el Almacen de Cantv, Valencia, Estado Carabobo ",
                 "type_audit_id" => 4,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -335,7 +335,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-030",
-                "description" => " Evaluar el registro de proveedores de Cantv ",
+                "description" => "Evaluar el registro de proveedores de Cantv ",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -346,7 +346,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-031",
-                "description" => " Evaluar la legalidad, sinceridad y exactitud en la administración y cierre de los contratos, suscritos entre Cantv y las empresas contratistas que intervinieron en el Proyecto Televisión Digital Abierta (TDA),  ",
+                "description" => "Evaluar la legalidad, sinceridad y exactitud en la administración y cierre de los contratos, suscritos entre Cantv y las empresas contratistas que intervinieron en el Proyecto Televisión Digital Abierta (TDA),  ",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -357,7 +357,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-032",
-                "description" => " Evaluar la adquisición, factibilidad y puesta en producción del Sistema de Información Geográfico (GIS),  ",
+                "description" => "Evaluar la adquisición, factibilidad y puesta en producción del Sistema de Información Geográfico (GIS),  ",
                 "type_audit_id" => 2,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -379,7 +379,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-034",
-                "description" => " Informe Definitivo 2021:PA:03 de fecha 14/12/2021, referido a Infraestructura del Sistema Automatizado de Averias SACAS, en el marco de la nueva normalidad",
+                "description" => "Informe Definitivo 2021:PA:03 de fecha 14/12/2021, referido a Infraestructura del Sistema Automatizado de Averias SACAS, en el marco de la nueva normalidad",
                 "type_audit_id" => 7,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -390,7 +390,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-035",
-                "description" => " Informe Definitivo 2021:AE:01 de fecha 29/06/2021, referido a Presentación de Cauciones 2019 hasta agosto 2020",
+                "description" => "Informe Definitivo 2021:AE:01 de fecha 29/06/2021, referido a Presentación de Cauciones 2019 hasta agosto 2020",
                 "type_audit_id" => 7,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -401,7 +401,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-036",
-                "description" => " Verificación acta de entrega de la Coordinación de Emergencias y Atención al Usuario  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Emergencias y Atención al Usuario  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -412,7 +412,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-037",
-                "description" => " Verificación acta de entrega de la Coordinación Certificación Seguridad de Productos  ",
+                "description" => "Verificación acta de entrega de la Coordinación Certificación Seguridad de Productos  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -423,7 +423,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-038",
-                "description" => " Verificación acta de entrega de la Coordinación Administración de Formación  ",
+                "description" => "Verificación acta de entrega de la Coordinación Administración de Formación  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -434,7 +434,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-039",
-                "description" => " Verificación acta de entrega de la Coordinación Asuntos Contenciosos  ",
+                "description" => "Verificación acta de entrega de la Coordinación Asuntos Contenciosos  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -445,7 +445,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-040",
-                "description" => " Verificación acta de entrega de la Coordinación de Relaciones con la Comunidad  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Relaciones con la Comunidad  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -456,7 +456,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-041",
-                "description" => " Verificación acta de entrega de la Coordinación de Información Interna  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Información Interna  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -467,7 +467,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-042",
-                "description" => " Verificación acta de entrega de la Gerencia de Planificación de Redes  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Planificación de Redes  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -478,7 +478,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-043",
-                "description" => " Verificación acta de entrega de la Coordinación de Seguimiento y Cierre de Contratos  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Seguimiento y Cierre de Contratos  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -489,7 +489,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-044",
-                "description" => " Verificación acta de entrega de la Gerencia de Planificación y Control  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Planificación y Control  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -500,7 +500,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-045",
-                "description" => " Verificación acta de entrega de la gerencia de Planificación Administración y Control de Gestión  ",
+                "description" => "Verificación acta de entrega de la gerencia de Planificación Administración y Control de Gestión  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -511,7 +511,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-046",
-                "description" => " Verificación acta de entrega de la Coordinación Planificación Presupuesto y Control de Gestión  ",
+                "description" => "Verificación acta de entrega de la Coordinación Planificación Presupuesto y Control de Gestión  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -522,7 +522,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-047",
-                "description" => " Verificación acta de entrega de la Gerencia Gestión Judicial  ",
+                "description" => "Verificación acta de entrega de la Gerencia Gestión Judicial  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -533,7 +533,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-048",
-                "description" => " Verificación acta de entrega de la Coordinación de Aseguramiento de la Calidad  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Aseguramiento de la Calidad  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -544,7 +544,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-049",
-                "description" => " Verificación acta de entrega de la Coordinación de Planificación y Control  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Planificación y Control  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -555,7 +555,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-050",
-                "description" => " Verificación acta de entrega de la Gerente Seguridad de la Operación y Servicios  ",
+                "description" => "Verificación acta de entrega de la Gerente Seguridad de la Operación y Servicios  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " AGO ",
@@ -566,7 +566,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-051",
-                "description" => " Evaluar la legalidad, exactitud y sinceridad de la cuenta de Gastos, Ingresos y Bienes, a los fines de su calificación ",
+                "description" => "Evaluar la legalidad, exactitud y sinceridad de la cuenta de Gastos, Ingresos y Bienes, a los fines de su calificación ",
                 "type_audit_id" => 9,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -588,7 +588,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-053",
-                "description" => " Verificación acta de entrega de la Gerencia Operación y Mantenimiento Region Andes  ",
+                "description" => "Verificación acta de entrega de la Gerencia Operación y Mantenimiento Region Andes  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -599,7 +599,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-054",
-                "description" => " Verificación acta de entrega de la Vicepresidencia de Tecnologia e Infraestructura  ",
+                "description" => "Verificación acta de entrega de la Vicepresidencia de Tecnologia e Infraestructura  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -610,7 +610,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-055",
-                "description" => " Verificación acta de entrega de la Coordinación de Asuntos Penales Regionales  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Asuntos Penales Regionales  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -621,7 +621,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-056",
-                "description" => " Verificación acta de entrega de la Gerencia de Seguimiento y Control de Sistemas  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Seguimiento y Control de Sistemas  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -632,7 +632,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-057",
-                "description" => " Verificación acta de entrega de la Vicepresidencia Ejecutiva  ",
+                "description" => "Verificación acta de entrega de la Vicepresidencia Ejecutiva  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -643,7 +643,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-058",
-                "description" => " Verificación acta de entrega de la Coordinación de Administracion y Control de Canales  ",
+                "description" => "Verificación acta de entrega de la Coordinación de Administracion y Control de Canales  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -654,7 +654,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-059",
-                "description" => " Verificación acta de entrega de la Gerencia Gestion de Procura  ",
+                "description" => "Verificación acta de entrega de la Gerencia Gestion de Procura  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",
@@ -665,7 +665,7 @@ class AuditActivitySeeder extends Seeder
             ],
             [
                 "code" => "UAI/GCP/ACR-COM 2024-060",
-                "description" => " Verificación acta de entrega de la Gerencia de Servicios y Ventas Fuerzas Productivas Región Centro  ",
+                "description" => "Verificación acta de entrega de la Gerencia de Servicios y Ventas Fuerzas Productivas Región Centro  ",
                 "type_audit_id" => 1,
                 "month_start" => "FEB",
                 "month_end" => " OCT ",

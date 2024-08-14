@@ -27,9 +27,8 @@ class Show extends Component
 
     public function save()
     {
-        // dd($this->employees);
-
         $format = 'd/m/Y';
+
         $dates = [
             'planning_start',
             'planning_end',
@@ -42,15 +41,27 @@ class Show extends Component
             'definitive_start',
             'definitive_end',
         ];
-
+        
+        // todo format dates 
         foreach ($this->schedule->only($dates) as $key => $value) {
             $carbon = Carbon::createFromFormat($format, $value);
             $this->schedule->{$key} = $carbon->format('Y-m-d');
         }
-
         
+        // todo update dates 
         $this->auditActivity->update($this->schedule->toArray());
-        $this->auditActivity->employee()->sync($this->employees);
+
+        // todo sync employees 
+        $this->auditActivity->employee()->detach();
+
+        foreach ($this->employees as $value) {
+            $key = $value['data']['id'];
+            $role = $value['role'] == 1 
+            ? 'Coordinador'
+            : 'Auditor';
+            
+            $this->auditActivity->employee()->attach([$key => ['role' => "$role"]]);
+        }
     }
 
     public function deleteCard($id)
@@ -70,5 +81,10 @@ class Show extends Component
     public function getDesignationDocument(DesignationService $designation)
     {
        return $designation->generate($this->auditActivity);
+    }
+
+    public function prepare($employees)
+    {
+        $this->employees = $employees;
     }
 }
