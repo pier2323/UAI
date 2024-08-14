@@ -5,8 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class HandoverDocument extends Model
 {
+
+    public function index()
+    {
+        return view('index');
+    }
+
     use HasFactory;
 
     protected $table = 'handover_document';

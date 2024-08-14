@@ -37,7 +37,7 @@
                             {{$th}}
 
                         >
-                            Fecha inicio
+                            Mes inicio
                         </th>
                         <th 
                             aria-label="Status" 
@@ -45,7 +45,7 @@
                             {{$th}}
     
                         >
-                            Fecha fin
+                            Mes fin
                         </th>
                         <th 
                             aria-label="Status" 

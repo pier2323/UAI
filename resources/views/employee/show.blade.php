@@ -119,6 +119,7 @@
         </div>
     </div>
     </div>
+  {{--   <p>{{ $auditActivity->objective }}</p> --}}
 
     @php
         $full = "$employee->first_name  $employee->second_name $employee->first_surname $employee->second_surname .";

@@ -6,6 +6,9 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuditActivityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
+use App\Http\Livewire\AuditActivity\RegisterForm\HandoverDocument;
+use app\Http\Livewire\Handovere\index;
+use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,10 +39,26 @@ Route::middleware([
      
     });
 
+
+
+
+
+    Route::get(
+        uri: '/acta-de-entrega', 
+        action: App\Http\Livewire\Handover::class
+    )->name('handover.index');
+
+    Route::get(
+        uri: '/acta-de-entrega/{id}', 
+        action: App\Http\Livewire\Handover\Show::class
+    )->name('handover.show');
+
+
+   
+   
+
     
-    Route::get('/Actuaciones', function () {
-        return view('actuaciones');
-    })->name('actuaciones');
+
 
     Route::get('/Detalles', function () {
         return view('detalles');

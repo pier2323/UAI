@@ -49,14 +49,20 @@
                                         <li><a href="{{ route('documentoNormativo') }}">DocumentoNormativo</a></li>
                                     </ul>
                                 </li>
-                            </ul>
-
-
-                                                </FONT>
+                        
+                                <div class="contacto_1"> <a class="pag_1"><i class="fas fa-blog"
+                                            style="margin-right: 9px; "></i>
+                                        @if (Route::has('login'))
+                                            @auth
+                                                <a href="{{ url('/dashboard') }}"
+                                                    class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                                    <FONT class="mt-4 text-sm/relaxed " COLOR="white">
+                                                        Inicio
+                                                    </FONT>
                                             </a>
                                         @else
                                             <a href="{{ route('login') }}"
-                                                class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                                class=" rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"  style="margin-bottom: 10px">
                                                 <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                                     Inicio
                                                 </FONT>
@@ -65,7 +71,8 @@
                                             @if (Route::has('register'))
                                                 <a href="{{ route('register') }}"
                                                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                                    style="margin-right: -100px;">
+                                                    style="margin-right: -100px; margin-bottom: 10px">
+
                                                     <FONT class="mt-4 text-sm/relaxed " COLOR="white">
                                                         Registro
                                                     </FONT>
