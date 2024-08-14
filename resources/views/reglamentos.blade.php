@@ -11,6 +11,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/ley.css" />
     <link rel="stylesheet" href="/css/bootstrap.ley.css" />
+    <script src="/js/Qr/qrcode.min.js"></script>
+    <script src="/js/Qr/qrcode.js"></script>
 
 </head>
 <div class="et_pb_bottom_inside_divider"></div>
@@ -101,6 +103,16 @@
                                             Caracas, 27 JUL. 2009</p>
                                     </div>
                                     <div class="pd-cb"></div>
+                                    <div id="codigo-qr"  style="display: block;margin-top: -100px;margin-left: 900px;"> </div>
+                                    <script>
+                                        const codigoQRDiv = document.getElementById('codigo-qr');
+                                        const codigoQR = new QRCode(codigoQRDiv, {
+                                            
+                                            text: 'http://www.inhrr.gob.ve/doc/ai_doc/Normas_Regular_la_Entrega_de_Cargos_Publicos.pdf', 
+                                            width: 128,
+                                            height: 128
+                                        });
+                                    </script>
                                 </div>
 
 

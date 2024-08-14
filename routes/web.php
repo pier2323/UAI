@@ -6,6 +6,9 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuditActivityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
+use App\Http\Livewire\AuditActivity\RegisterForm\HandoverDocument;
+use app\Http\Livewire\Handovere\index;
+use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,14 +35,30 @@ Route::middleware([
     Route::controller(Documentos::class)->group(function () {
         Route::get('/Leyes', 'leyes')->name('leyes');
         Route::get('/Reglamentos', 'reglamentos')->name('reglamentos');
-        Route::get('/Documentos', 'reglamentos')->name('documentoNormativo');
+        Route::get('/Documentos', 'Documentos')->name('documentoNormativo');
      
     });
 
+
+
+
+
+    Route::get(
+        uri: '/acta-de-entrega', 
+        action: App\Http\Livewire\Handover::class
+    )->name('handover.index');
+
+    Route::get(
+        uri: '/acta-de-entrega/{id}', 
+        action: App\Http\Livewire\Handover\Show::class
+    )->name('handover.show');
+
+
+   
+   
+
     
-    Route::get('/Actuaciones', function () {
-        return view('actuaciones');
-    })->name('actuaciones');
+
 
     Route::get('/Detalles', function () {
         return view('detalles');
@@ -52,11 +71,11 @@ Route::middleware([
 
     Route::controller(EmployeeController::class)->group(function (): void {
         Route::get('/personal', 'index')->name('employee.index');
-        Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
-        Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
         Route::post('/personal/almacenar', 'store')->name('employee.store');
+        Route::get('/personal/mostrar/{personal}', 'show')->name('employee.show');
         Route::put('/personal/editar/{personal}', 'update')->name('employee.update');
-        Route::delete('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
+        Route::get('/personal/editar/{personal}', 'edit')->name('employee.edit');
+        Route::get('/personal/eliminar/{personal}', 'destroy')->name('employee.delete');
     });
 
     Route::controller(designationController::class)->group(function (): void {

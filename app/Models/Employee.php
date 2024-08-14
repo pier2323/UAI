@@ -24,6 +24,7 @@ class Employee extends Model
         'personal_id',
         'job_title_id',
         'uai_id',
+    
     ];
 
     public function user()

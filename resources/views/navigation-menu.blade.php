@@ -7,7 +7,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <x-application-mark   class="block h-9 w-auto"/>
                     </a>
                 </div>
                 <!-- Navigation Acta -->
@@ -26,7 +26,14 @@
                 <!-- Navigation Personal -->
 
                 <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-nav-link href="{{ route('actuaciones') }}" :active="request()->routeIs('action*')" wire:navigate style="color: white">Acta</x-nav-link>
+                    <x-nav-link href="{{ route('poa') }}" :active="request()->routeIs('action*')" style="color: white">
+                        Plan de Auditoria
+                    </x-nav-link>
+                </div>
+                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
+                    <x-nav-link href="{{ route('handover.index') }}" :active="request()->routeIs('action*')" style="color: white">
+                       Acta fiscal
+                    </x-nav-link>
                 </div>
                 <!-- Navigation Personal -->
                

@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <link rel="shortcut icon" href="/images/template/sappl.png" />
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
