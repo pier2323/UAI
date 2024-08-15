@@ -92,7 +92,7 @@ class RegisterForm extends Component
 
 
       
-        $photo = $this->photo->storeAs('public', "$this->p00.jpg");
+        $photo = $this->photo->storeAs('public/employees/profile-photo', "$this->p00.jpg");
         $photo = explode("/", $photo);
 
 
@@ -106,7 +106,7 @@ class RegisterForm extends Component
             'phone' => $this->phone,
             'email_cantv' => $this->email_cantv,
             'gmail' => $this->gmail,
-            'profile_photo' => $photo[1],
+            'profile_photo' => "$this->p00.jpg",
             'job_title_id' => $this->job_title,
             'uai_id' => $this->uai,
         ]);

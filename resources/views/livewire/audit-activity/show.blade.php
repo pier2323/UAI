@@ -4,22 +4,19 @@
         {{ session('status') }}
     </div>
     @endif --}}
-    @vite(['resources/js/hola.js'])
+    @push('script') @vite(['resources/js/hola.js']) @endpush
 
-    <span role="headings" class="px-20 block">
-        <h2 class="text-2xl font-bold mt-3 ml-4">{{ $auditActivity->objective }}</h2>
-    </span>
-    <form wire:submit='save'
-    action="{{ route('designation.download') }}"  
-    {{-- method="POST"  --}}
-    >
+    {{-- todo headings --}}
+    <div role="headings"> @include('livewire.audit-activity.show.headings') </div>
+
+    {{-- todo planning form --}}
+    <form wire:submit='save'>
         @include('livewire.audit-activity.show.audit-commission')
-        @include('livewire.audit-activity.show.schedule')
+        @include('livewire.audit-activity.show.schedule') 
 
-        <x-button>send</x-button>
+        <x-button wire:submit x-on:click="$dispatch('saving')">send</x-button>
     </form>
 
     <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
 
-    
 </div>
