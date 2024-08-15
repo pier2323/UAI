@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('dashboard.index') }}
         </h2>
     </x-slot>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top: 0px">
@@ -34,7 +34,7 @@
                             height="100px"style="margin-left: 75px;margin-right: 80px;">
                     </div>
                 </a>
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('dashboard.index') }}">
                     <div class="iconoB">
                         <img src="/images/iconos/plan.png" width="84px" height="100px"
                             style="margin-left: 100px;margin-right: 80px;">

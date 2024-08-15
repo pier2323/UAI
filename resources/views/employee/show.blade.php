@@ -20,7 +20,7 @@
                         <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px"
                             class="border-slate-500">
                             <img alt="foto de perfil" style="width: 15vw"
-                                src="{{ URL::asset("storage/$employee->profile_photo") }}" />
+                                src="{{ URL::asset("storage/employees/profile-photo/$employee->profile_photo") }}" />
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
@@ -81,8 +81,8 @@
                                         </div>
 
                                         <div class="modal-footer py-1">
-                                            <form action="{{ route('employee.delete', $employee->id) }}"
-                                                method="GET">
+                                            <form action="{{ route('employee.delete', $employee->id) }}" method="POST">
+                                                @method('delete')
                                                 <button type="submit"
                                                class="rounded-lg border-0 btn btn-danger 0 py-1 text-base text-white shadow-lg ">
                                                     Eliminar 

@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Handover;
 
 use App\Models\AuditActivity;
 use Livewire\Component;
 
-class Handover extends Component
+class Main extends Component
 {
     public $employees = [];
     public $AuditActivity =[];
     public function render()
     {
-        return view('livewire.handover');
+        return view('livewire.handover.main');
     }
 
     public function mount()
     {
         $this->employees = \App\Models\Employee::all();
         $relations = ['employee', 'typeAudit', 'handoverDocument', 'uai'];
-        $this->AuditActivity = AuditActivity::with($relations)->get();
+        $this->AuditActivity = AuditActivity::with($relations)->where('type_audit_id', 1)->get();
 
     }
 

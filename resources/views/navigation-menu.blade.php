@@ -4,39 +4,43 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" >
         <div class="flex justify-between h-16 ">
             <div class="flex white">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-mark   class="block h-9 w-auto"/>
+
+                 <!-- Logo -->
+                 <div class="shrink-0 flex items-center">
+                    <a href="{{ route('dashboard.index') }}">
+                        <x-application-mark  class="block h-9 w-auto"/>
                     </a>
                 </div>
-                <!-- Navigation Acta -->
-                <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex  ">
 
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate  style="color: white;"><h1>Inicio</h1></x-nav-link>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-    
-                        <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee*')" wire:navigate style="color: white">Personal</x-nav-link>
+                @php
+                    $routes = [
+                        'dashboard' => 'Inicio',
+                        'employee' => 'Personal',
+                        'auditActivity' => 'Plan Operativo Anual',
+                        'handover' => 'Acta de Entrega',
+                    ];
+                @endphp
+
+                @foreach ($routes as $router => $name)
+
+                @php
+                    $route = route("$router.index");
+                    $routeIs = request()->routeIs("$router*");
+                @endphp           
+
+                    <!-- Route {{$route}} -->
+                    <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex  ">
+                        <x-nav-link 
+                            href="{{ $route }}" 
+                            :active="$routeIs" 
+                            style="color: white;"
+                            wire:navigate 
+                            >
+                                <h1>{{ $name }}</h1>
+                        </x-nav-link>
                     </div>
-                </div>
-                <!-- Navigation Acta -->
-                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-nav-link href="{{ route('auditActivity.index') }}" :active="request()->routeIs('auditActivity*')" wire:navigate style="color: white">Plan de Auditoria</x-nav-link>
-                </div>
-                <!-- Navigation Personal -->
-
-                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-nav-link href="{{ route('poa') }}" :active="request()->routeIs('action*')" style="color: white">
-                        Plan de Auditoria
-                    </x-nav-link>
-                </div>
-                <div class="h_w space-x-8 sm:-my-px sm:ms-10 sm:flex white">
-                    <x-nav-link href="{{ route('handover.index') }}" :active="request()->routeIs('action*')" style="color: white">
-                       Acta fiscal
-                    </x-nav-link>
-                </div>
-                <!-- Navigation Personal -->
-               
+                @endforeach
+                
             </div>
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
@@ -164,7 +168,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

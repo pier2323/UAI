@@ -62,21 +62,10 @@ class EmployeeController extends Controller
 
     public function update(Request $request, string $employee)
     {
-
         $requestAll = $request->all();
-
-
-
-
-
         $code = $requestAll['phone_code'];
         $number = $requestAll['phone_number'];
         $phone = "$code$number";
-       
-
-        
-        
-        
         $request->validate(
             rules: [
                 'phone' => 'numeric|min:2',
@@ -109,9 +98,7 @@ class EmployeeController extends Controller
         $employee->uai_id = $requestAll['uai'];
 
         if ($request->hasFile('photo')) {
-            $archivoFoto = $request->file('photo');
-            $photo = $request->photo->storeAs('public', "$employee->p00.jpg");
-            $archivoFoto->move(public_path() . '/storage/', $photo);
+            $request->photo->storeAs('public/employees/profile-photo', "$employee->p00.jpg");
         }
 
 
