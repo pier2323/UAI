@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire\AuditActivity;
 
-use App\Http\Livewire\AuditActivity\Show\Schedule;
+use App\Http\Livewire\Components\PlanningSchedule;
 use App\Models\AuditActivity;
 use App\Models\Employee;
 use App\Services\DesignationService;
-use Carbon\Carbon;
 use Livewire\Component;
 
 class Show extends Component
 {
     public $auditActivity;
     public $employees = [];
-    public Schedule $schedule;
 
     public function mount($id)
     {
@@ -27,29 +25,8 @@ class Show extends Component
 
     public function save()
     {
-        $format = 'd/m/Y';
-
-        $dates = [
-            'planning_start',
-            'planning_end',
-            'execution_start',
-            'execution_end',
-            'preliminary_start',
-            'preliminary_end',
-            'download_start',
-            'download_end',
-            'definitive_start',
-            'definitive_end',
-        ];
-        
-        // todo format dates 
-        foreach ($this->schedule->only($dates) as $key => $value) {
-            $carbon = Carbon::createFromFormat($format, $value);
-            $this->schedule->{$key} = $carbon->format('Y-m-d');
-        }
-        
-        // todo update dates 
-        $this->auditActivity->update($this->schedule->toArray());
+        // todo update dates in App\Http\Livewire\Components\PlanningSchedule 
+        $this->dispatch('saving')->to(PlanningSchedule::class);
 
         // todo sync employees 
         $this->auditActivity->employee()->detach();
@@ -64,17 +41,8 @@ class Show extends Component
         }
     }
 
-    public function deleteCard($id)
-    {
-       $employee = array_search($id ,$this->employees);
-        if ($employee !== false) {
-            array_splice($this->employees, $employee, 1);
-        }
-    }
-
     public function addCard($id)
     {
-        array_push($this->employees, $id);
         return Employee::with('jobTitle')->find($id);
     }
 

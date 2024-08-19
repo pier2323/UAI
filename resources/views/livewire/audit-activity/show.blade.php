@@ -4,15 +4,15 @@
         {{ session('status') }}
     </div>
     @endif --}}
-    @push('script') @vite(['resources/js/hola.js']) @endpush
 
     {{-- todo headings --}}
-    <div role="headings"> @include('livewire.audit-activity.show.headings') </div>
+    <div role="headings">   <livewire:Components.AuditActivityHeadings audit='{{$auditActivity->id}}' objective></div>
 
     {{-- todo planning form --}}
     <form wire:submit='save'>
         @include('livewire.audit-activity.show.audit-commission')
-        @include('livewire.audit-activity.show.schedule') 
+
+        <livewire:Components.PlanningSchedule auditActivity="{{ $auditActivity->id }}">
 
         <x-button wire:submit x-on:click="$dispatch('saving')">send</x-button>
     </form>
