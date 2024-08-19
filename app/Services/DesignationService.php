@@ -3,16 +3,11 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use App\Models\PersonalUai;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use PhpOffice\PhpWord\TemplateProcessor;
-// use Illuminate\Support\Facades\Date;
-// use PhpOffice\PhpWord\PhpWord;
-// use Illuminate\Support\Facades\Storage;
 
 class DesignationService
 {

@@ -16,8 +16,7 @@ Route::controller(Documentos::class)->group(function () {
 });
 
 // todo after login 
-Route::middleware([
-])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get(uri: '/dashboard', action: [MainController::class, '__invoke'])->name('dashboard.index');
 
     // todo auditActivity Routes 
