@@ -17,14 +17,12 @@
                                 <th scope="col" class="px-6 py-3 ">
                                     Código
                                 </th>
+                               
                                 <th style="padding-left: 111px;">
-                                    Objetivo
+                                    Descripción
                                 </th>
                                 <th scope="col" class="px-6 py-3 ">
                                     Código de la Actuación
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tipo de Auditoria
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Mes Inicio
@@ -42,6 +40,9 @@
                             </tr>
                         </thead>
 
+
+                        
+
                         <tbody>
 
                             {{-- todo rows --}}
@@ -53,10 +54,10 @@
                                     <td class="px-6 py-3" x-text="item.id "></td>
                                     <td class="px-6 py-3" x-text="item.description"></td>
                                     <td class="px-6 py-3" x-text="item.code"></td>
-                                    <td class="px-6 py-3" x-text="item.type_audit.code"></td>
                                     <td class="px-6 py-3" x-text="item.month_start "></td>
                                     <td class="px-6 py-3" x-text="item.month_end  "></td>
-                                    {{-- <td class="px-6 py-3" x-text=""></td> --}}
+                                    <td class="px-6 py-3" x-text="item.comision"></td>
+                                    <td class="px-6 py-3" x-text="item.uai.name"></td>
 
                                 </tr>
 
@@ -100,16 +101,31 @@
 
 
                 get filteredItems() {
-                    return (this.search !== "" ? this.items : this.pages[this.page])
-                        .filter(
-                            item => {
-                                return item.type_audit.code.includes(this.search) ||
-                                    item.objective.includes(this.search) ||
-                                    item.objective.includes(this.search.toUpperCase()) ||
-                                    item.objective.includes(this.capitalize(this.search)) ||
-                                    item.code.includes(this.search.toUpperCase())
-                            }
-                        )
+                    rows = (this.search !== "" ? this.items : this.pages[this.page]).filter(
+                        item => {
+                            return item.type_audit.code.includes(this.search) 
+                                ||item.uai.name.includes(this.search.toUpperCase())
+                                ||item.uai.name.includes(this.capitalize(this.search)) 
+                                ||item.objective.includes(this.search) 
+                                ||item.objective.includes(this.search.toUpperCase())
+                                ||item.objective.includes(this.capitalize(this.search)) 
+                                ||item.code.includes(this.search.toUpperCase())
+                                ||item.month_end.includes(this.search.toUpperCase())
+                                ||item.month_end.includes(this.capitalize(this.search)) 
+                        }
+                    )
+
+                    newProperty = [
+                        'pier',
+                        'mary'
+                    ];
+
+
+                    rows.forEach(row => {
+                        row.comision = `${newProperty[0]} ${newProperty[1]}`
+                    });
+
+                    return rows;
                 },
 
                 paginate(items = this.items, parts = 10) {
