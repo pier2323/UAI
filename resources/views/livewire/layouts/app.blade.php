@@ -44,10 +44,15 @@
                 {{ $slot }}
             </main>
         </div>
-    
+        
+        <div role="alert" class="fixed flex flex-col bottom-10 right-10">
+            @stack('alert')     
+        </div>
+        
         @stack('modals')
     
         @livewireScripts
+        
         @stack('script')     
 
         <x-footer></x-footer>

@@ -39,6 +39,8 @@ class Show extends Component
             
             $this->auditActivity->employee()->attach([$key => ['role' => "$role"]]);
         }
+
+        $this->dispatch('saved', message: 'guardado');
     }
 
     public function addCard($id)

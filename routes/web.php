@@ -28,5 +28,9 @@ Route::middleware(['auth'])->group(function () {
     // todo employee routes 
     include_once('employee.php');
 
+    Route::get(
+        uri: '/private/components', 
+        action:  App\Http\Livewire\Components\Main::class)
+        ->name('components.main');
 });
 
