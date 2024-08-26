@@ -1,10 +1,9 @@
-<article 
-    class="card group flex rounded-xl max-w-sm flex-col overflow-hidden border border-slate-500 bg-blue-800 text-slate-700 dark:border-slate-700 bg-blue-900 dark:text-slate-300">
+<article
+    class="card group flex rounded-xl max-w-sm flex-col overflow-hidden border border-slate-500 text-slate-700 dark:border-slate-700  dark:text-slate-300">
     <div class="h-5 overflow-hidden">
     </div>
     <div class="flex flex-col gap-4 p-6">
-        <h3 class="titulo "
-            aria-describedby="featureDescription"> {{ $titulo }}</h3>
+        <h3 class="titulo " aria-describedby="featureDescription"> {{ $titulo }}</h3>
         <p id="featureDescription" class="text-pretty text-sm">
             {{ $des }}
 
@@ -13,19 +12,19 @@
     </div>
 
     <style>
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgb(255, 0, 0);
-            transform: translateY(-5px);
-            background-color: #00438A;
-           
+        .card {
+            background: linear-gradient(to right, #002fff, #c471ed);
+            /* Degradado inicial */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease-in-out;
         }
 
-        .titulo {
-
-            text-transform: capitalize;
-            border-bottom: 2px solid black;
-            text-align: center; 
-
+        .card:hover {
+            background: linear-gradient(to left,  #002fff, #c471ed);
+            /* Degradado invertido */
         }
     </style>
 </article>
