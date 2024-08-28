@@ -18,6 +18,8 @@
         {{-- * Scripts --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/js/hola.js'])
+
     
         {{-- * Styles library --}}
         {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}

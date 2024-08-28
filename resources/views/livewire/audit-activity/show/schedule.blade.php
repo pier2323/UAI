@@ -7,14 +7,14 @@
 
     <div>
         <div>
-            <h3 class="font-semibold text-lg">Cronograma de la Actuacion Fiscal</h3>
+            <h3 class="text-lg font-semibold">Cronograma de la Actuacion Fiscal</h3>
             <hr>
         </div>
         <div>
             {{-- todo planning --}}
             <div>
                 <span>Planificacion:</span>
-                <div class="flex flex-row items-center justify-evenly bg-slate-300 h-20 w-3/6 border rounded-md px-2">
+                <div class="flex flex-row items-center w-3/6 h-20 px-2 border rounded-md justify-evenly bg-slate-300">
                     <x-input class="h-12" id="planningStart" placeholder="Inicio.." x-model="planningStart" wire:model='schedule.planning_start' readonly/> 
                     -
                     <x-input class="h-12" id="planningEnd" placeholder="Fin.." x-model="planningEnd" wire:model='schedule.planning_end' readonly/>
@@ -25,7 +25,7 @@
             {{-- todo execution --}}
             <div>
                 <span>Ejecucion:</span>
-                <div class="flex flex-row items-center justify-evenly bg-slate-300 h-20 w-3/6 border rounded-md px-2">
+                <div class="flex flex-row items-center w-3/6 h-20 px-2 border rounded-md justify-evenly bg-slate-300">
                     <x-input id="executionStart " placeholder="Inicio.." x-model="executionStart" wire:model='schedule.execution_start' readonly/>
                     -
                     <x-input id="executionEnd " placeholder="Fin.." x-model="executionEnd" wire:model='schedule.execution_end' readonly/>
@@ -37,7 +37,7 @@
             {{-- todo preliminary --}}
             <div>
                 <span>Informe Preliminar</span>
-                <div class="flex flex-row items-center justify-evenly bg-slate-300 h-20 w-3/6 border rounded-md px-2">
+                <div class="flex flex-row items-center w-3/6 h-20 px-2 border rounded-md justify-evenly bg-slate-300">
                     <x-input id="preliminaryStart " placeholder="Inicio.." x-model="preliminaryStart" wire:model='schedule.preliminary_start' readonly/>
                     -
                     <x-input id="preliminaryEnd " placeholder="Fin.." x-model="preliminaryEnd" wire:model='schedule.preliminary_end' readonly/>
@@ -48,7 +48,7 @@
             {{-- todo download --}}
             <div>
                 <span>Descargo:</span>
-                <div class="flex flex-row items-center justify-evenly bg-slate-300 h-20 w-3/6 border rounded-md px-2">
+                <div class="flex flex-row items-center w-3/6 h-20 px-2 border rounded-md justify-evenly bg-slate-300">
                     <x-input id="downloadStart " placeholder="Inicio.." x-model="downloadStart" wire:model='schedule.download_start' readonly/>
                     -
                     <x-input id="downloadEnd " placeholder="Fin.." x-model="downloadEnd" wire:model='schedule.download_end' readonly/>
@@ -59,7 +59,7 @@
             {{-- todo definitive --}}
             <div>
                 <span>Informe definitivo</span>
-                <div class="flex flex-row items-center justify-evenly bg-slate-300 h-20 w-3/6 border rounded-md px-2">
+                <div class="flex flex-row items-center w-3/6 h-20 px-2 border rounded-md justify-evenly bg-slate-300">
                     <x-input id="definitiveStart " placeholder="Inicio.." x-model="definitiveStart" wire:model='schedule.definitive_start' readonly/>
                     -
                     <x-input id="definitiveEnd " placeholder="Fin.." x-model="definitiveEnd" wire:model='schedule.definitive_end' readonly/>
