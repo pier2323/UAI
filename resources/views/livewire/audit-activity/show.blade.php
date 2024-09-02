@@ -1,20 +1,27 @@
 <div>
-    <x-notification on='saved'/>
+    {{-- <x-notification on='saved' message='{{session('status')}}' active/> --}}
+    <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
+
 
     {{-- todo headings --}}
-    <div role="headings">   <livewire:Components.AuditActivityHeadings audit='{{$auditActivity->id}}' objective></div>
+    <div role="headings">   <livewire:Components.AuditActivityHeadings audit='{{ $auditActivity->id }}' objective></div>
 
-    {{-- todo planning form --}}
     <form wire:submit='save'>
+    <x-section-basic class="flex">
+        {{-- todo planning form --}}
 
-        @include('livewire.audit-activity.show.audit-commission')
+                <livewire:Components.TableCardsEmployee auditActivity='{{ $auditActivity->id }}'>
+                    
+                <x-slot:article>
+                    <div class="ml-4">
+                        <livewire:Components.PlanningSchedule auditActivity="{{ $auditActivity->id }}">
+                    </div>
+                </x-slot>
 
-        <livewire:Components.PlanningSchedule auditActivity="{{ $auditActivity->id }}">
-
-        <x-button wire:submit x-on:click="$dispatch('saving')">send</x-button>
-
+                <x-slot:footer>
+                    <x-button class="ml-4" x-on:click="$dispatch('prepare')" wire:submit>Guardar</x-button>
+                </x-slot>
+        </x-section-basic>
     </form>
-        
-    <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
         
 </div>
