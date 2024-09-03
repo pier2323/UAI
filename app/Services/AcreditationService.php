@@ -59,8 +59,6 @@ final class AcreditationService
 
     private function setData(): void
     {
-        $code_acreditation = '';
-        $code_designation = '';
         $date_release_designation = '';
 
         $date_release = // todo make date in spanish example '4 de abril de 2001' 
@@ -70,8 +68,8 @@ final class AcreditationService
 
         $this->document->data = [
 
-            'code_acreditation' => $code_acreditation,
-            'code_designation' => $code_designation,
+            'code_audit_activity' => $this->auditActivity->code(),
+            'code_designation' => 'UAI/GCP/DES-COM' . $this->auditActivity->code(),
             'date_release_designation' => $date_release_designation,
 
             // todo checked 
@@ -82,8 +80,6 @@ final class AcreditationService
 
             'personal_id_auditors' => $this->fomatAuditorData('personalId'),
         ];
-
-        dd($this->document->data);
     }
 
     public function fomatAuditorData($key)

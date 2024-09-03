@@ -63,7 +63,7 @@ final class DesignationService
         $lineJump = str_repeat(' ', 500);
 
         $this->document->data = [
-            'año' => $this->document->date->year(),
+            'auditActivityCode' => $this->auditActivity->code(),
             'actuacionFiscal' => $this->auditActivity->id,
             'fechaInicio' => $this->document->date->format('j de F de Y'),
             'tituloActuacion' => $this->auditActivity->description,

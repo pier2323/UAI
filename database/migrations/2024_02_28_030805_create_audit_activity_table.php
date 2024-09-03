@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('audit_activity', function(Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('year', length: 4);
             $table->string('area')->nullable();
             $table->string('description')->nullable();
-            $table->string('objective', 5000)->nullable();
+            $table->string('objective', length: 5000)->nullable();
             $table->string('month_start')->nullable();
             $table->string('month_end')->nullable();
             $table->date('planning_start')->nullable();
