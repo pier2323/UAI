@@ -55,7 +55,7 @@ class PlanningSchedule extends Component
         }
         
         // todo update dates 
-        $this->auditActivity->update($this->toArray());
+        $this->auditActivity->update($this->all());
     }
 
 }

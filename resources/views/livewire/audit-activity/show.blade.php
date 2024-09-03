@@ -1,6 +1,7 @@
 <div>
     {{-- <x-notification on='saved' message='{{session('status')}}' active/> --}}
     <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
+    <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button>
 
 
     {{-- todo headings --}}

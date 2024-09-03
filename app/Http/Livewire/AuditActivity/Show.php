@@ -6,6 +6,7 @@ use App\Http\Livewire\Components\PlanningSchedule;
 use App\Http\Livewire\Components\TableCardsEmployee;
 use App\Models\AuditActivity;
 use App\Models\Employee;
+use App\Services\AcreditationService;
 use App\Services\DesignationService;
 use Livewire\Component;
 
@@ -37,8 +38,15 @@ class Show extends Component
         $this->dispatch('saved', message: 'guardado');
     }
 
-    public function getDesignationDocument(DesignationService $designation)
+    public function getDesignationDocument()
     {
-       return $designation->generate($this->auditActivity);
+        $designation = new DesignationService($this->auditActivity);
+        return $designation->download();
+    }
+
+    public function getAcreditationDocument()
+    {
+        $acreditation = new AcreditationService($this->auditActivity);
+        return $acreditation->download();
     }
 }
