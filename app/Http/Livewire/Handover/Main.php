@@ -9,6 +9,7 @@ class Main extends Component
 {
     public $employees = [];
     public $AuditActivity =[];
+     public $Audit=[];
     public function render()
     {
         return view('livewire.handover.main');
@@ -19,6 +20,8 @@ class Main extends Component
         $this->employees = \App\Models\Employee::all();
         $relations = ['employee', 'typeAudit', 'handoverDocument', 'uai'];
         $this->AuditActivity = AuditActivity::with($relations)->where('type_audit_id', 1)->get();
+        $this->Audit = AuditActivity::with('employee')->where('type_audit_id', '1')->get();
+            
 
     }
 
