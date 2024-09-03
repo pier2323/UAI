@@ -9,21 +9,23 @@ use Livewire\Form;
 class HandoverDocument extends Form
 {
     // todo inputs variables 
+    #[Validate('required|max:255', as: 'Codigo')]
+    public $code;
     
     #[Validate('required|max:255', as: 'Nombre')]
-    public $name = 'hola pier'; 
+    public $name; 
 
     #[Validate('required|max:255', as: 'Objetivo')]
-    public $target = 'Pariatur minima nam est ipsum';
+    public $target;
 
-    #[Validate('required|date', as: 'Fecha del Cese')]
-    public $cease = '12/12/2003';
+    #[Validate('required', as: 'Fecha del Cese')]
+    public $cease;
 
-    #[Validate('required|date', as: 'Fecha de suscripción')]
-    public $subscription = '12/12/2003';
+    #[Validate('required', as: 'Fecha de suscripción')]
+    public $subscription;
 
-    #[Validate('required|date', as: 'Fecha de recibo en la UAI')]
-    public $delivery_uai = '12/12/2003';
+    #[Validate('required', as: 'Fecha de recibo en la UAI')]
+    public $delivery_uai;
 
     // todo relations 
     public 
@@ -36,18 +38,13 @@ class HandoverDocument extends Form
 
     public function mount()
     {
-        $this->name = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima nam est ipsum'; 
-        $this->target = 'Pariatur minima nam est ipsum';
-        $this->cease = '12/12/2003';
-        $this->subscription = '12/12/2003';
-        $this->delivery_uai = '12/12/2003';
         $this->verified = 0;
     }
 
     protected function format(String $date)
     {
-        $date = Carbon::parse($date);
-        return $date->format('d-m-Y');
+        $date = Carbon::createFromFormat("d/m/Y" ,$date);
+        return $date->format('Y-m-d');
     }
 
     public function toFormatDate()

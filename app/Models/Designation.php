@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Designation extends Model
 {
     use HasFactory;
 
-    protected $table = 'designation';
-
     protected $fillable = [];
+
+    public function pivot():BelongsTo
+    {
+        return $this->belongsTo(AuditActivityEmployee::class);
+    }
 }

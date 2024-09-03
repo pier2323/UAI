@@ -16,8 +16,10 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@material-icons/svg": "^1.0.33",
         "alpinejs": "^3.13.8",
         "dayjs": "^1.11.11",
-        "flatpickr": "^4.6.13"
+        "flatpickr": "^4.6.13",
+        "moment": "^2.30.1"
     }
 }

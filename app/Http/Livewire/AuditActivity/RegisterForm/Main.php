@@ -11,6 +11,7 @@ use App\Models\AuditActivity,
     App\Models\Departament,
     Exception,
     Livewire\Component;
+use Carbon\Carbon;
 
 class Main extends Component
 {
@@ -18,6 +19,7 @@ class Main extends Component
     public Outgoing $outgoing;
     public Incoming $incoming;
     public HandoverDocument $handoverDocument;
+
     
     public $open, $errorMessage, $job_titles, $departaments;
 
@@ -33,15 +35,16 @@ class Main extends Component
         $this->departaments = Departament::all();
     }
 
-    public function save()
+    public function save(): void
     {
-        $this->handoverDocument->validate();
-        $this->outgoing->validate();
-        $this->incoming->validate();
+        if ($this->handleError()) { return; }
 
         // ? AuditActivity 
         $auditActivity = new AuditActivity();
         $auditActivity->type_audit_id = TypeAudit::where('name', $this->typeAudit)->first()->id;
+        $auditActivity->code = $this->handoverDocument->code;
+        $auditActivity->description = $this->handoverDocument->name;
+        $auditActivity->objective = $this->handoverDocument->target;
         $auditActivity->save();
 
         // ? Outgoing 
@@ -85,14 +88,14 @@ class Main extends Component
         ]));
 
         // ? HandoverDocument 
-        $this->handoverDocument->toFormatDate();
+        try { $copy = $this->copyDates(); $this->handoverDocument->toFormatDate(); } 
+        catch (\Throwable $th) { $this->getCopiedDate($copy); }
+
         $this->handoverDocument->employee_outgoing_id = $outgoing->id;
         $this->handoverDocument->employee_incoming_id = $incoming->id;
         $this->handoverDocument->audit_activity_id = $auditActivity->id;
 
-        $handoverDocument = HandoverDocumentModel::create($this->handoverDocument->only([
-            'name', 
-            'target', 
+        $handoverDocument = HandoverDocumentModel::create($this->handoverDocument->only([ 
             'cease', 
             'subscription', 
             'delivery_uai', 
@@ -101,9 +104,8 @@ class Main extends Component
             'audit_activity_id', 
         ]));
 
-        session()->flash(key: 'status', value: 'La nueva Acta de Entrega ha sido registrada correctamente');
+        $this->dispatch('saved', message: ' ¡Se ha guardado con exito!');
         $this->restartProperties();
-        $this->refresh();
     }
 
     public function queryError(String $option)
@@ -151,9 +153,19 @@ class Main extends Component
         $this->handoverDocument->validate();
         $this->handoverDocument->verified = 1;
     }
+
+    private function copyDates(): array
+    {
+        return [$this->handoverDocument->cease, $this->handoverDocument->subscription, $this->handoverDocument->delivery_uai];
+    }
+
+    private function getCopiedDate(array $copy): void
+    {
+        list($this->handoverDocument->cease, $this->handoverDocument->subscription, $this->handoverDocument->delivery_uai) = $copy;
+    }
         
     // ? Outgoing 
-    public function queryOutgoing ()
+    public function queryOutgoing()
     {
         $this->queryError('outgoing');
     }
@@ -186,5 +198,18 @@ class Main extends Component
         $this->incoming->verified = 2;
         $this->incoming->validate();
         $this->incoming->verified = 1;
+    }
+
+    private function handleError(): bool
+    {
+        try { $this->validate(); } 
+
+        catch (\Throwable $th) { 
+            $this->open = false;
+            $this->dispatch('error', bold: 'Error: ', message: $th->getMessage());
+            return true;
+        }
+
+        return false;
     }
 }

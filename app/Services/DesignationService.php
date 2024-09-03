@@ -3,59 +3,54 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
-use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use PhpOffice\PhpWord\TemplateProcessor;
 
-class DesignationService
+final class DesignationService
 {
-    public $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
-    public $month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    public $auditors = [];
-    public $templateFile = 'designationTemplate.docx';
-    public $nameDocument = 'designacion.docx';
-    public $pathDocument;
-    public $data = [];
-    public $formatDate = 'd/m/Y';
+    private const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+    private const NAME_TEMPLATE = 'designationTemplate.docx';
+    private const NAME_DOCUMENT = 'designacion.docx';
+    private array $auditors = [];
+    public WorkingPaper $document;
 
-    public function generate(AuditActivity $audit): BinaryFileResponse
+    public function __construct(
+        private readonly AuditActivity $auditActivity, 
+        public readonly string|null $nameDocument = null,
+        public readonly string|null $date = null,
+    ){
+        $this->document = new WorkingPaper (
+            templateFile: WorkingPaper::getTemplate(self::NAME_TEMPLATE), 
+            nameDocument: $nameDocument ?? self::NAME_DOCUMENT,
+            date: $date ?? now(),
+        );        
+    }
+    
+    public function download(): BinaryFileResponse
     {
-        // todo temporary file path 
-        $this->pathDocument = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
-
         // todo save the employee/auditors in "" 
-        $this->getAuditor($audit->employee()->orderBy('role', 'desc')->get());
-
-        $lineJump = str_repeat(' ', 500);
-
-        // todo get $day $month $year 
-        $dateNow = Carbon::now();
-        $actionStart = explode("/", $dateNow->format($this->formatDate));
-
-        $day = $actionStart[0];
-        $month = $this->month[$dateNow->month];
-        $year = $actionStart[2];
-
-
-        $dateStart = "$day de $month del $year";
+        $this->setAuditor($this->auditActivity->employee()->orderBy('role', 'desc')->get());
 
         // todo save all data 
-        $this->getData($audit, $dateStart, $year, $lineJump);
+        $this->setData();
+
+        // todo generate pathDocument 
+        $this->document->generatePathDocument();
 
         // todo generate document 
-        $this->create();
+        $this->document->create();
 
-        return Response::download($this->pathDocument, $this->nameDocument);
+        $pathDocumentToDownload = $this->document->getPathDocumentToDownload();
+
+        return $pathDocumentToDownload;
     }
 
 
-    public function getAuditor(Collection $auditors): void
+    private function setAuditor(Collection $auditors): void
     {
         $i = 0;
         foreach ($auditors as $auditor) {
-            $letter = $this->letters[$i];
+            $letter = self::LETTERS[$i];
             $jobTitle = $auditor->pivot->role;
             array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname / $jobTitle ($letter)");
             $i++;
@@ -63,46 +58,36 @@ class DesignationService
     }
     
 
-    public function getData($audit, $dateStart, $year, $lineJump): void
+    private function setData(): void
     {
-        $this->data = [
-            'año' => $year,
-            'actuacionFiscal' => $audit->id,
-            'fechaInicio' => $dateStart,
-            'tituloActuacion' => $audit->description,
+        $lineJump = str_repeat(' ', 500);
+
+        $this->document->data = [
+            'auditActivityCode' => $this->auditActivity->code(),
+            'actuacionFiscal' => $this->auditActivity->id,
+            'fechaInicio' => $this->document->date->format('j de F de Y'),
+            'tituloActuacion' => $this->auditActivity->description,
             'auditores' => implode($lineJump, $this->auditors),
 
             'diasPlanificacion' => 5,
-            'fechaPlanificacionInicio' => $audit->planning_start,
-            'fechaPlanificacionFin' => $audit->planning_end,
+            'fechaPlanificacionInicio' => $this->auditActivity->planning_start,
+            'fechaPlanificacionFin' => $this->auditActivity->planning_end,
 
             'diasEjecucion' => 10,
-            'fechaEjecucionInicio' => $audit->execution_start,
-            'fechaEjecucionFin' => $audit->execution_end,
+            'fechaEjecucionInicio' => $this->auditActivity->execution_start,
+            'fechaEjecucionFin' => $this->auditActivity->execution_end,
 
             'diasPreeliminar' => 10,
-            'fechaPreeliminarInicio' => $audit->preliminary_start,
-            'fechaPreeliminarFin' => $audit->preliminary_end,
+            'fechaPreeliminarInicio' => $this->auditActivity->preliminary_start,
+            'fechaPreeliminarFin' => $this->auditActivity->preliminary_end,
 
             'diasDescargo' => 10,
-            'fechaDescargoInicio' => $audit->download_start,
-            'fechaDescargoFin' => $audit->download_end,
+            'fechaDescargoInicio' => $this->auditActivity->download_start,
+            'fechaDescargoFin' => $this->auditActivity->download_end,
 
             'diasDefinitivo' => 5,
-            'fechaDefinitivoInicio' => $audit->definitive_start,
-            'fechaDefinitivoFin' => $audit->definitive_end,
+            'fechaDefinitivoInicio' => $this->auditActivity->definitive_start,
+            'fechaDefinitivoFin' => $this->auditActivity->definitive_end,
         ];
-    }
-
-    /**
-     * Summary of create
-     * @param array $data
-     * @return void
-     */
-    public function create(): void
-    {
-        $template = new TemplateProcessor($this->templateFile);
-        $template->setValues($this->data);
-        $template->saveAs($this->pathDocument);
     }
 }

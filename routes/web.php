@@ -16,7 +16,7 @@ Route::controller(Documentos::class)->group(function () {
 });
 
 // todo after login 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get(uri: '/dashboard', action: [MainController::class, '__invoke'])->name('dashboard.index');
 
     // todo auditActivity Routes 
@@ -28,5 +28,9 @@ Route::middleware(['auth'])->group(function () {
     // todo employee routes 
     include_once('employee.php');
 
+    Route::get(
+        uri: '/private/components', 
+        action:  App\Http\Livewire\Components\Main::class)
+        ->name('components.main');
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\AuditActivity;
+use App\Models\NotWorkingDays;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -14,11 +15,14 @@ class PlanningSchedule extends Component
     $planning_start, $execution_start, $preliminary_start, $download_start, $definitive_start,
     $planning_end, $execution_end, $preliminary_end, $download_end, $definitive_end;
 
+    public $excludeDays;
+
     public $auditActivity;
 
     public function mount(AuditActivity $auditActivity)
     {
         $this->auditActivity = $auditActivity;
+        $this->excludeDays = NotWorkingDays::pluck('day');
     }
 
     public function render()
@@ -51,7 +55,7 @@ class PlanningSchedule extends Component
         }
         
         // todo update dates 
-        $this->auditActivity->update($this->toArray());
+        $this->auditActivity->update($this->all());
     }
 
 }

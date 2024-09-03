@@ -18,6 +18,8 @@
         {{-- * Scripts --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/js/hola.js'])
+
     
         {{-- * Styles library --}}
         {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
@@ -44,10 +46,15 @@
                 {{ $slot }}
             </main>
         </div>
-    
+        
+        <div role="alert" class="fixed flex flex-col bottom-10 right-10">
+            @stack('alert')     
+        </div>
+        
         @stack('modals')
     
         @livewireScripts
+        
         @stack('script')     
 
         <x-footer></x-footer>
