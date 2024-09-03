@@ -5,7 +5,6 @@ namespace App\Http\Livewire\AuditActivity;
 use App\Http\Livewire\Components\PlanningSchedule;
 use App\Http\Livewire\Components\TableCardsEmployee;
 use App\Models\AuditActivity;
-use App\Models\Employee;
 use App\Services\AcreditationService;
 use App\Services\DesignationService;
 use Livewire\Component;

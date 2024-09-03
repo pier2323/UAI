@@ -28,9 +28,9 @@ class TableCardsEmployee extends Component
         // todo sync employees 
         $this->auditActivity->employee()->detach();
 
-        foreach ($this->employees as $value) {
-            $key = $value['data']['id'];
-            $role = $value['role'] == 1 
+        foreach ($this->employees as $employee) {
+            $key = $employee['data']['id'];
+            $role = $employee['role'] == 1 
             ? 'Coordinador'
             : 'Auditor';
             
