@@ -1,2 +1,0 @@
-En esta rama se anexaran nuevas funcionales del modulo de acreditacion, diseño y estilos
-atte. pier.
