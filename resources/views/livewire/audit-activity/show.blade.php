@@ -5,17 +5,17 @@
 
 
     {{-- todo headings --}}
-    <div role="headings">   <livewire:Components.AuditActivityHeadings audit='{{ $auditActivity->id }}' objective></div>
+    <div role="headings">   <livewire:Components.AuditActivityHeadings :audit='$auditActivity' objective></div>
 
     <form wire:submit='save'>
     <x-section-basic class="flex">
         {{-- todo planning form --}}
 
-                <livewire:Components.TableCardsEmployee auditActivity='{{ $auditActivity->id }}'>
+                <livewire:Components.TableCardsEmployee :auditActivity='$auditActivity'>
                     
                 <x-slot:article>
                     <div class="ml-4">
-                        <livewire:Components.PlanningSchedule auditActivity="{{ $auditActivity->id }}">
+                        <livewire:Components.PlanningSchedule :auditActivity="$auditActivity">
                     </div>
                 </x-slot>
 

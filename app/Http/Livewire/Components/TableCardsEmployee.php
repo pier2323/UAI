@@ -5,11 +5,16 @@ namespace App\Http\Livewire\Components;
 use App\Models\AuditActivity;
 use App\Models\Employee;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Renderless;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 
 class TableCardsEmployee extends Component
 {
+    #[Session]
     public $employees;
+    
+    #[Session]
     public $auditActivity;
 
     public function render()
@@ -22,7 +27,7 @@ class TableCardsEmployee extends Component
         $this->auditActivity = $auditActivity;
     }
 
-    #[On('saving')]
+    #[Renderless, On('saving')]
     public function save()
     {
         // todo sync employees 
@@ -38,11 +43,13 @@ class TableCardsEmployee extends Component
         }
     }
 
+    #[Renderless]
     public function addCard($id)
     {
         return Employee::with('jobTitle')->find($id);
     }
-
+    
+    #[Renderless]
     public function prepare($employees)
     {
         $this->employees = $employees;
