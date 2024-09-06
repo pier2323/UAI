@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Handover;
 
 use App\Models\AuditActivity;
 use Livewire\Component;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use \PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -128,6 +130,9 @@ class Show extends Component
         $hoja2->setCellValue('p11', "$cedula_recibe");
         $hoja2->setCellValue('T11', "$periodo_saliente_desde");
         $hoja2->setCellValue('B10', "$periodo_saliente_hasta");
+        $hoja2->setCellValue('C23', "   $auditor_a");
+        $hoja2->setCellValue('O23', "$auditor_b");
+
 
         $hoja3 = $spreadsheet->getSheetByName('HALLAZGOS');
         $hoja3->setCellValue('D7', "$unidad_entrega adscrita a la $unidad_adscrita");
@@ -142,11 +147,7 @@ class Show extends Component
         $hoja5->setCellValue('D1', "$code");
 
 
-
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-
-
-
 
         $Temfile = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
 
@@ -203,8 +204,10 @@ class Show extends Component
 
 
 
+        
     public function render()
     {
         return view('livewire.handover.show');
     }
+
 }
