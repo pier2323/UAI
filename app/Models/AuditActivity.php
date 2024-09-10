@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +31,8 @@ class AuditActivity extends Model
         'definitive_end',
         'type_audit',
     ];
+
+    // todo relations 
 
     public function typeAudit(): BelongsTo
     {
@@ -65,6 +69,17 @@ class AuditActivity extends Model
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 
+    // todo functions casts, accessor & mutators
+
+    protected function casts(): array
+    {
+        return [
+            'planning_start' => 'datetime:dd/mm/YYYY',
+        ];
+    }
+
+    // todo custom functions 
+
     public function code(): string
     {
         return $this->year . '-' . str_pad($this->id, 3, '0', STR_PAD_LEFT);
@@ -86,5 +101,10 @@ class AuditActivity extends Model
     {
         $decode =  $this->decode($code);
         return $query->where('id', 'like', "%$decode%");
+    }
+
+    private function formatLocalDateStringAttribute(string $date): string
+    {
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }
