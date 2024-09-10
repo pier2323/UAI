@@ -9,14 +9,13 @@ use Livewire\Component;
 class AuditActivityHeadings extends Component
 {
     #[Locked]
-    public $auditActivity;
+    public AuditActivity $auditActivity;
     
     #[Locked]
     public $objective;
 
-    public function mount(AuditActivity $audit, Bool $objective = false)
+    public function mount(Bool $objective = false)
     {
-        $this->auditActivity = $audit;
         $this->objective = $objective;
     }
 

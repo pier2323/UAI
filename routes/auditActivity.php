@@ -7,6 +7,6 @@ Route::get(
     )->name('auditActivity.index');
     
     Route::get(
-        uri: '/actuacion-fiscal/{id}', 
+        uri: '/actuacion-fiscal/{auditActivity}', 
         action: App\Http\Livewire\AuditActivity\Show::class
     )->name('auditActivity.show');
