@@ -1,28 +1,34 @@
 <div>
     {{-- <x-notification on='saved' message='{{session('status')}}' active/> --}}
-    <x-button wire:click='getDesignationDocument'>descargar designacion</x-button>
-    <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button>
+    @isset($designation) <x-button wire:click='getDesignationDocument'>descargar designacion</x-button> @endisset
+    @isset($acreditation) <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button> @endisset
+    @if(isset($designation) && !isset($acreditation)) <x-button class="ml-4" wire:click='accredit'>Acreditar</x-button> @endif
 
 
     {{-- todo headings --}}
-    <div role="headings">   <livewire:Components.AuditActivityHeadings audit='{{ $auditActivity->id }}' objective></div>
+    <div role="headings">   <livewire:Components.AuditActivityHeadings :$auditActivity objective></div>
 
-    <form wire:submit='save'>
+    <form wire:submit='designate'>
     <x-section-basic class="flex">
         {{-- todo planning form --}}
 
-                <livewire:Components.TableCardsEmployee auditActivity='{{ $auditActivity->id }}'>
+                <livewire:Components.TableCardsEmployee :$auditActivity :$designation :$acreditation>
                     
                 <x-slot:article>
                     <div class="ml-4">
-                        <livewire:Components.PlanningSchedule auditActivity="{{ $auditActivity->id }}">
+                        <livewire:Components.PlanningSchedule :$auditActivity :$designation :$acreditation>
                     </div>
                 </x-slot>
 
-                <x-slot:footer>
-                    <x-button class="ml-4" x-on:click="$dispatch('prepare')" wire:submit>Guardar</x-button>
-                </x-slot>
-        </x-section-basic>
-    </form>
+                @empty($designation)
+
+                    <x-slot:footer>
+                        <x-button class="ml-4" x-on:click="$dispatch('prepare')" wire:submit>Designar</x-button>
+                    </x-slot>
+                    
+                @endempty
+                
+            </x-section-basic>
+        </form>
         
 </div>

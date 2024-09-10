@@ -4,19 +4,18 @@ namespace App\Http\Livewire\AuditActivity;
 
 use App\Models\AuditActivity;
 use Livewire\Component;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class Main extends Component
 {
-    public $auditActivities;
+    use WithPagination, WithoutUrlPagination;
+
+    public string $query = '';
 
     public function render()
     {
-        return view('livewire.audit-activity.main');
-    }
-
-    public function mount()
-    {
-        $this->auditActivities = AuditActivity::with([
+        return view('livewire.audit-activity.main', ['auditActivities' => AuditActivity::with([
             'handoverDocument' => [
                 'employeeIncoming',
                 'employeeOutgoing' => [
@@ -24,13 +23,23 @@ class Main extends Component
                 ],
             ],
             'typeAudit',
-            'uai',
-        ])->orderBy('id', 'asc')->get();
+            'uai',])
+            ->whereDecode("$this->query")
+            ->orwhere('description','like', "%$this->query%")
+            ->orWhere('year','like', "%$this->query%")
+            ->orWhere('month_start','like', "%$this->query%")
+            ->orderBy('id', 'asc')
+            ->paginate(10)]);
+    }
+
+    public function search()
+    {
+
     }
 
     public function goTo($route, $id)
     {
-        $this->redirectRoute($route, ['id' => $id], navigate: true);
+        $this->redirectRoute($route, ['auditActivity' => $id], navigate: true);
     }
 
 }

@@ -14,13 +14,13 @@ class AuditActivityEmployee extends Model
 
     protected $fillable = [];
 
-    public function designations():HasMany
+    public function designation():HasMany
     {
-        return $this->hasMany(Designation::class);
+        return $this->hasMany(Designation::class, foreignKey: 'pivot_id', localKey: 'id');
     }
 
     public function acreditation():HasMany
     {
-        return $this->hasMany(Acreditation::class);
+        return $this->hasMany(Acreditation::class, foreignKey: 'pivot_id', localKey: 'id');
     }
 }
