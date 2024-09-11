@@ -50,4 +50,9 @@ class AuditActivity extends Model
     {
         return $this->belongsToMany(related: Employee::class)->withPivot('role');
     }
+
+    public function code(): string
+    {
+        return $this->year . '-' . str_pad($this->id, 3, '0', STR_PAD_LEFT);
+    }
 }

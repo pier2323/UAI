@@ -1,5 +1,10 @@
-<div>
-    @vite(['resources/js/hola.js'])
+ <div>
+    @push('script') 
+    @assets
+    @vite(['resources/js/hola.js']) 
+    @endassets
+    @endpush
+
 
     @php
         $th = "colspan='1' rowspan=-'1' tabindex='0'";
@@ -18,7 +23,7 @@
                         <th 
                             aria-controls="datatable_users"
                             aria-label="#: activate to sort column ascending" 
-                            class="code centered sorting sorting_desc px-4 py-2" 
+                            class="px-4 py-2 code centered sorting sorting_desc" 
                             aria-sort="descending"
                             {{$th}}
                         >
@@ -26,7 +31,7 @@
                         </th>
                         <th aria-controls="datatable_users"
                             aria-label="Name: activate to sort column ascending"
-                            class="centered sorting px-4 py-2" 
+                            class="px-4 py-2 centered sorting" 
                             {{-- style="width: 189px"  --}}
                             {{$th}}
                             
@@ -35,7 +40,7 @@
                         </th>
                         <th aria-controls="datatable_users"
                             aria-label="Company: activate to sort column ascending"
-                            class="centered sorting px-4 py-2" 
+                            class="px-4 py-2 centered sorting" 
                             {{$th}}
 
                         >
@@ -43,7 +48,7 @@
                         </th>
                         <th 
                             aria-label="Status" 
-                            class="centered sorting_disabled px-4 py-2" 
+                            class="px-4 py-2 centered sorting_disabled" 
                             {{$th}}
     
                         >
@@ -51,13 +56,13 @@
                         </th>
                         <th 
                             aria-label="Status" 
-                            class="centered sorting_disabled px-4 py-2" 
+                            class="px-4 py-2 centered sorting_disabled" 
                             {{$th}}
                         > Area UAI Encargada
                         </th>
                         {{-- <th 
                             aria-label="Status" 
-                            class="centered sorting_disabled px-4 py-2" 
+                            class="px-4 py-2 centered sorting_disabled" 
                             style="width: 60px"
                             {{$th}} 
                         > status
@@ -74,7 +79,7 @@
 
 
                 <tr   
-                class="hover:bg-gray-100 cursor-pointer select-none active:bg-gray-300"
+                class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300"
                 wire:key="{{ $auditActivity->id }}"
                 x-on:dblclick="$wire.goTo(
                 'auditActivity.show', 

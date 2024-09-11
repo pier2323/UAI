@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbcb6c4886de22b49414cacfb0cb7d64",
+    "content-hash": "f61e9766c6ed120f88b6c235c11a0242",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1153,6 +1153,38 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "iconify/json",
+            "version": "2.2.238",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iconify/icon-sets.git",
+                "reference": "537ed7516a8503ee08a5bcc2abc48c21d0b5f7ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iconify/icon-sets/zipball/537ed7516a8503ee08a5bcc2abc48c21d0b5f7ba",
+                "reference": "537ed7516a8503ee08a5bcc2abc48c21d0b5f7ba",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iconify\\IconsJSON\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Iconify icons collection in JSON format",
+            "homepage": "https://iconify.design/icon-sets/",
+            "support": {
+                "issues": "https://github.com/iconify/icon-sets/issues",
+                "source": "https://github.com/iconify/icon-sets/tree/2.2.238"
+            },
+            "time": "2024-08-17T06:17:48+00:00"
         },
         {
             "name": "laravel/fortify",
