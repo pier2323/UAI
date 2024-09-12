@@ -52,7 +52,51 @@ class Show extends Component
     public function programaDocumen()
     {
 
-        $code = $this->auditActivity->code;
+        $code = $this->auditActivity->code ();
+        $fecha_planificacion = $this->auditActivity->planning_start;
+        $hasta_plan= $this->auditActivity->planning_end;
+
+
+
+
+
+
+        dd([
+            'code' => '',
+            'fecha_progrma' => '',
+            'unidad_entrega' => '',
+            'unidad_adcripta' => '',
+            'articulo' => '',
+            'periodo_saliente' => '',
+            'nu_acreditacion' => '',
+            'nombre_saliente' => '',
+            'cedula_saliente' => '',
+            'cargo_saliente' => '',
+            'Fecha_acreditacion' => '',
+            'fecha_subcripcion' => '',
+            'dia_planificacion' => $fecha_planificacion,
+            'desde_plan' => '',
+            'hasta_plan' => '',
+            'dia_ejecucion' => '',
+            'desde_ejec' => '',
+            'hasta_ejec' => '',
+            'Resultado' => '',
+            'desde_r' => '',
+            'hasta_r' => '',
+            'dia_preliminar' => '',
+            'desde_p' => '',
+            'hasta_p' => '',
+            'desde_desc' => '',
+            'hasta_desc' => '',
+            'dia_definitivo' => '',
+            'desde_d' => '',
+            'hasta_d' => '',
+            'personal_des' => '',
+            'resultado' => '',
+        ]);
+
+
+
         $template = new \PhpOffice\PhpWord\TemplateProcessor(documentTemplate: 'programaTemplate.docx');
         $template->setValue(search: 'code', replace: " $code ");
 
@@ -69,9 +113,9 @@ class Show extends Component
         $template->setValue(search: 'cargo_saliente', replace: '1234567');
         $template->setValue(search: 'Fecha_acreditacion', replace: '12/06/2024');
         $template->setValue(search: 'fecha_subcripcion', replace: '12/06/2024');
-        $template->setValue(search: 'dia_planificacion', replace: '14/05/2004');
+        $template->setValue(search: 'dia_planificacion', replace: "$fecha_planificacion");
         $template->setValue(search: 'desde_plan', replace: '14/05/2004');
-        $template->setValue(search: 'hasta_plan', replace: '14/05/2004');
+        $template->setValue(search: 'hasta_plan', replace: "$hasta_plan");
         $template->setValue(search: 'dia_ejecucion', replace: '14/05/2004');
         $template->setValue(search: 'desde_ejec', replace: '14/05/2055');
         $template->setValue(search: 'hasta_ejec', replace: '14/05/2056');
