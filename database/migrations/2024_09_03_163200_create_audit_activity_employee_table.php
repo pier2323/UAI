@@ -19,11 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employee')->onDelete('cascade');
 
-            $table->unsignedBigInteger('designation_id');
-            $table->foreign('designation_id')->references('id')->on('designations')->onDelete('cascade');
+            // $table->unsignedBigInteger('designation_id');
+            // $table->foreign('designation_id')->references('id')->on('designations')->onDelete('cascade');
 
-            $table->unsignedBigInteger('acretitation_id')->nullable();
-            $table->foreign('acretitation_id')->references('id')->on('acreditations')->onDelete('cascade');
+            // $table->unsignedBigInteger('acretitation_id')->nullable();
+            // $table->foreign('acretitation_id')->references('id')->on('acreditations')->onDelete('cascade');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

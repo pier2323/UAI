@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Models\Acreditation;
 use App\Models\AuditActivity;
+use App\Models\Designation;
 use App\Models\NotWorkingDays;
 use Carbon\Carbon;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -15,13 +18,20 @@ class PlanningSchedule extends Component
     $planning_start, $execution_start, $preliminary_start, $download_start, $definitive_start,
     $planning_end, $execution_end, $preliminary_end, $download_end, $definitive_end;
 
+    #[Locked]
     public $excludeDays;
 
-    public $auditActivity;
+    #[Locked]
+    public AuditActivity $auditActivity;
+    public Designation|null $designation;
+    public Acreditation|null $acreditation;
 
-    public function mount(AuditActivity $auditActivity)
+    public function mount()
     {
-        $this->auditActivity = $auditActivity;
+        if (isset($this->designation)) {
+            foreach ($this->getProperty() as $property) $this->{$property} = $this->auditActivity->{$property};
+        }
+
         $this->excludeDays = NotWorkingDays::pluck('day');
     }
 
@@ -35,7 +45,21 @@ class PlanningSchedule extends Component
     {        
         $format = 'd/m/Y';
 
-        $dates = [
+        $dates = $this->getProperty();
+        
+        // todo format dates 
+        foreach ($this->only($dates) as $key => $value) {
+            $dateCarbon = Carbon::createFromFormat($format, $value);
+            $this->{$key} = $dateCarbon->format('Y-m-d');
+        }
+        
+        // todo update dates 
+        $this->auditActivity->update($this->all());
+    }
+
+    private function getProperty(): array 
+    {
+        return [
             'planning_start',
             'planning_end',
             'execution_start',
@@ -47,15 +71,6 @@ class PlanningSchedule extends Component
             'definitive_start',
             'definitive_end',
         ];
-        
-        // todo format dates 
-        foreach ($this->only($dates) as $key => $value) {
-            $dateCarbon = Carbon::createFromFormat($format, $value);
-            $this->{$key} = $dateCarbon->format('Y-m-d');
-        }
-        
-        // todo update dates 
-        $this->auditActivity->update($this->all());
     }
 
 }

@@ -3,16 +3,19 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\AuditActivity;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class AuditActivityHeadings extends Component
 {
-    public $auditActivity;
+    #[Locked]
+    public AuditActivity $auditActivity;
+    
+    #[Locked]
     public $objective;
 
-    public function mount(AuditActivity $audit, Bool $objective = false)
+    public function mount(Bool $objective = false)
     {
-        $this->auditActivity = $audit;
         $this->objective = $objective;
     }
 

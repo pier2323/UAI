@@ -21,10 +21,10 @@ x-bind:id="'card-'+index"
     <div class="flex flex-col items-center pb-2">
 
         {{-- todo profile photo --}}
-        <img class=" w-5/12 mb-3 rounded-full shadow-lg" :src="card.data.profile_photo" alt="Bonnie image"/>
+        <img class="w-5/12 mb-3 rounded-full shadow-lg " :src="'{{ Storage::url('public/employees/profile-photo/') }}' + card.data.profile_photo" alt="Bonnie image"/>
 
         {{-- todo Full name --}}
-        <h5 class=" text-base font-medium text-gray-900 dark:text-white text-center" x-text='card.data.first_name + " " + card.data.first_surname'></h5>
+        <h5 class="text-base font-medium text-center text-gray-900 dark:text-white" x-text='card.data.first_name + " " + card.data.first_surname'></h5>
 
         {{-- todo job title --}}
         <span class="text-sm text-gray-500 dark:text-gray-400 mt-0.5" x-text="card.data.job_title.name"></span>

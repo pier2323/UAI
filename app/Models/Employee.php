@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
 {
@@ -27,22 +31,32 @@ class Employee extends Model
     
     ];
 
-    public function user()
+    public function user(): HasOne
     {
-        return $this->hasOne(related: User::class)->onDelete('cascade');
+        return $this->hasOne(User::class)->onDelete('cascade');
     }
 
-    public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function jobTitle(): BelongsTo
     {
-        return $this->belongsTo(related: JobTitle::class);
+        return $this->belongsTo(JobTitle::class);
     }
 
-    public function uai(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function uai(): BelongsTo
     {
-        return $this->belongsTo(related: Uai::class);
+        return $this->belongsTo(Uai::class);
     }
-    public function auditActivity(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function auditActivity(): BelongsToMany
     {
-        return $this->belongsToMany(related: AuditActivity::class);
+        return $this->belongsToMany(AuditActivity::class);
+    }
+    
+    public function designation(): HasManyThrough
+    {
+        return $this->HasManyThrough(Designation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
+    }
+
+    public function acreditation(): HasManyThrough
+    {
+        return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 }
