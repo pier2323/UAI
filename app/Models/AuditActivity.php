@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,19 @@ class AuditActivity extends Model
         'definitive_start',
         'definitive_end',
         'type_audit',
+    ];
+
+    protected $dates = [
+        'planning_start',
+        'planning_end',
+        'execution_start',
+        'execution_end',
+        'preliminary_start',
+        'preliminary_end',
+        'download_start',
+        'download_end',
+        'definitive_start',
+        'definitive_end',
     ];
 
     // todo relations 
@@ -69,23 +83,40 @@ class AuditActivity extends Model
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 
-    // todo functions casts, accessor & mutators
+    // todo setting 
 
     protected function casts(): array
     {
         return [
-            'planning_start' => 'datetime:dd/mm/YYYY',
+            'planning_start' => 'date',
+            'planning_end' => 'date',
+            'execution_start' => 'date',
+            'execution_end' => 'date',
+            'preliminary_start' => 'date',
+            'preliminary_end' => 'date',
+            'download_start' => 'date',
+            'download_end' => 'date',
+            'definitive_start' => 'date',
+            'definitive_end' => 'date',
         ];
     }
 
-    // todo custom functions 
-
-    public function code(): string
+    protected function serializeDate(DateTimeInterface $date): string
     {
-        return $this->year . '-' . str_pad($this->id, 3, '0', STR_PAD_LEFT);
+        return $date->format('d/m/Y');
     }
 
-    public function decode(string $code): int|string
+    protected function code(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) 
+            => $attributes['year'] . '-' . str_pad($attributes['id'], 3, '0', STR_PAD_LEFT)
+        );
+    }
+    
+    // todo custom functions 
+
+    private function decode(string $code): int|string
     {
         $divisor = '-';
         

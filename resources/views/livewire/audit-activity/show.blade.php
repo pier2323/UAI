@@ -6,17 +6,17 @@
 
 
     {{-- todo headings --}}
-    <div role="headings">   <livewire:Components.AuditActivityHeadings :$auditActivity objective></div>
+    {{-- <div role="headings">   <livewire:Components.AuditActivityHeadings :$auditActivity objective></div> --}}
 
     <form wire:submit='designate'>
     <x-section-basic class="flex">
         {{-- todo planning form --}}
 
-                <livewire:Components.TableCardsEmployee :$auditActivity :$designation :$acreditation>
+                {{-- <livewire:Components.TableCardsEmployee :$auditActivity :$designation :$acreditation> --}}
                     
                 <x-slot:article>
                     <div class="ml-4">
-                        <livewire:Components.PlanningSchedule :$auditActivity :$designation :$acreditation>
+                        <livewire:Components.PlanningSchedule :audit="$auditActivity" :$designation :$acreditation>
                     </div>
                 </x-slot>
 

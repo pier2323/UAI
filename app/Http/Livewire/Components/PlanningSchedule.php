@@ -7,9 +7,21 @@ use App\Models\AuditActivity;
 use App\Models\Designation;
 use App\Models\NotWorkingDays;
 use Carbon\Carbon;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
+
+class Resource extends JsonResource {
+    public function __construct(private readonly AuditActivity $auditActivity){}
+
+    public function toArray()
+    {
+        return [
+            'date' => $this->auditActivity->planning_start
+        ];
+    }
+}
 
 class PlanningSchedule extends Component
 {
@@ -22,17 +34,21 @@ class PlanningSchedule extends Component
     public $excludeDays;
 
     #[Locked]
-    public AuditActivity $auditActivity;
+    public $auditActivity;
     public Designation|null $designation;
     public Acreditation|null $acreditation;
 
-    public function mount()
+    public function mount(AuditActivity $audit)
     {
-        if (isset($this->designation)) {
-            foreach ($this->getProperty() as $property) $this->{$property} = $this->auditActivity->{$property};
-        }
+        $this->auditActivity = new Resource($audit);
 
-        $this->excludeDays = NotWorkingDays::pluck('day');
+        dd($this->auditActivity->toArray());
+
+        // if (isset($this->designation)) {
+        //     foreach ($this->getProperty() as $property) $this->{$property} = $this->auditActivity->{$property};
+        // }
+
+        // $this->excludeDays = NotWorkingDays::pluck('day');
     }
 
     public function render()
