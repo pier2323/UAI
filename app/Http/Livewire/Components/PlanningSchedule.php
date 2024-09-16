@@ -26,8 +26,11 @@ class PlanningSchedule extends Component
 
     #[Locked]
     public AuditActivity $auditActivity;
+
     public Designation|null $designation;
+    
     public Acreditation|null $acreditation;
+
 
     public function mount()
     {
@@ -56,6 +59,8 @@ class PlanningSchedule extends Component
         
         // todo update dates 
         $this->auditActivity->update($this->all());
+
+        $this->mapModelProperties($this->auditActivity, $this->except($this->getPropertiesExcludes()));
     }
 
     private function getPropertiesForCarbon(): array 

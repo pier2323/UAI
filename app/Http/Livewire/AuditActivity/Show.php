@@ -40,7 +40,7 @@ class Show extends Component
             'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
         ]);
 
-        $this->dispatch('saved', message: \__('se ha designado la comision correctamente!'));
+        $this->dispatch('designation', message: \__('se ha designado la comision correctamente!'));
     }
 
     
@@ -51,7 +51,7 @@ class Show extends Component
             'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
         ]);
 
-        $this->dispatch('saved', message: 'se ha acreditado la comision correctamente!!');
+        $this->dispatch('saved', message: \__('se ha acreditado la comision correctamente!'));
     }
 
     #[Renderless]

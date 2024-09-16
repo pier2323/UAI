@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Acreditation;
 use App\Models\AuditActivity;
-use App\Models\AuditActivityEmployee;
 use App\Models\Designation;
 use App\Models\Employee;
 use Illuminate\Contracts\Support\Renderable;
@@ -19,7 +18,9 @@ class TableCardsEmployee extends Component
 
     #[Locked]
     public AuditActivity $auditActivity;
+
     public Designation|null $designation;
+
     public Acreditation|null $acreditation;
 
     public function render():Renderable

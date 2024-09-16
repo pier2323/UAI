@@ -1,5 +1,5 @@
 <div>
-    @push('alert') <x-notification on='saved'/> @endpush
+    @push('alert') <x-notification on='designation'/> @endpush
     
     @isset($designation) <x-button wire:click='getDesignationDocument'>descargar designacion</x-button> @endisset
     @isset($acreditation) <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button> @endisset
