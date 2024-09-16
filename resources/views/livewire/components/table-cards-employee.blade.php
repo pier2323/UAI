@@ -9,7 +9,7 @@
         <div class="w-full">
     
             {{-- todo cards --}}
-            <div class="grid items-center content-center grid-cols-3 p-2 auto-rows-fr gap-x-8 gap-y-5 min-h-56 min-w-96" x-data="card()" x-on:prepare.window='$wire.prepare(employees)'>
+            <div class="grid items-center content-center grid-cols-3 p-2 auto-rows-fr gap-x-8 gap-y-5 min-h-56 min-w-96" x-data="card()">
                 
                 {{-- todo x-for --}}
                 <template class="w-fit" x-for="(card, index) in employees" :key="'card-'+index">
@@ -66,9 +66,9 @@
         </div>
     </div>
     
-    @push('script')    
+        @script
         <script>
-            function card() {
+             Alpine.data('card', () => {
                 return {
                     employees: @js($employees),
     
@@ -90,15 +90,21 @@
                     clickAddCardButton() {
                         datas = this.employees.map( employees => employees.data );
                         @this.dispatch('open-browser', { employees: datas }); 
+                        this.updatedWire();
                     },
     
                     clickCloseButton(card) {
                         this.remove(card); 
-                        @this.dispatch('delete-card', { employees: this.employees }); 
-                    }
+                        @this.dispatch('delete-card', { employees: this.employees });
+                        this.updatedWire();
+                    },
+
+                    updatedWire() {
+                        $wire.employees = this.employees;
+                    },
                     
                 }
-        }
+        })
         </script>
-    @endpush
+        @endscript
 </div>

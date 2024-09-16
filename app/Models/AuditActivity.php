@@ -21,30 +21,37 @@ class AuditActivity extends Model
     protected $fillable = [
         'objetive',
         'planning_start',
-        'planning_end',
+        'planning_end',     
+        'planning_days',
         'execution_start',
-        'execution_end',
+        'execution_end',      
+        'execution_days',
         'preliminary_start',
-        'preliminary_end',
+        'preliminary_end',        
+        'preliminary_days',
         'download_start',
-        'download_end',
+        'download_end',     
+        'download_days',
         'definitive_start',
-        'definitive_end',
+        'definitive_end',       
+        'definitive_days',
         'type_audit',
     ];
 
     protected $dates = [
         'planning_start',
-        'planning_end',
+        'planning_end',    
         'execution_start',
-        'execution_end',
+        'execution_end',     
         'preliminary_start',
-        'preliminary_end',
+        'preliminary_end',       
         'download_start',
-        'download_end',
+        'download_end',    
         'definitive_start',
-        'definitive_end',
+        'definitive_end',      
     ];
+
+    
 
     // todo relations 
 
@@ -70,7 +77,7 @@ class AuditActivity extends Model
 
     public function employee(): BelongsToMany
     {
-        return $this->belongsToMany(related: Employee::class)->withPivot('role');
+        return $this->belongsToMany(related: Employee::class)->withPivot('role', 'id');
     }
 
     public function designation(): HasManyThrough
@@ -137,5 +144,15 @@ class AuditActivity extends Model
     private function formatLocalDateStringAttribute(string $date): string
     {
         return Carbon::parse($date)->format('d/m/Y');
+    }
+
+    public function isDesignated(): bool
+    {
+        return $this->designation()->first() ? true : false;
+    }
+
+    public function isAcredited(): bool
+    {
+        return $this->acreditation()->first() ? true : false;
     }
 }

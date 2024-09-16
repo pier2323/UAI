@@ -60,11 +60,4 @@ class Employee extends Model
     {
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
-
-    protected function firstName(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => 'hola',
-        );
-    }
 }
