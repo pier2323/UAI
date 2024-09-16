@@ -3,11 +3,9 @@
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
-
 use App\Http\Controllers\ExcelController;
 
-Route::post('/download-excel', [ExcelController::class, 'downloadExcel']);
-
+Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
 // todo before login 
 Route::get('/', function () {
     return view('welcome');

@@ -6,13 +6,12 @@ use App\Models\AuditActivity;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use \PhpOffice\PhpSpreadsheet\IOFactory;
-
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ExcelController extends Controller
 {
-   public $auditActivity;
+    public $auditActivity;
     public $employees = [];
 
     public $incoming = [];
@@ -22,29 +21,26 @@ class ExcelController extends Controller
     public function mount($id)
     {
         $relations = ['employee', 'typeAudit', 'handoverDocument', 'uai'];
-        $this->auditActivity = auditActivity::with($relations)->findOrFail($id);
+        $this->auditActivity = AuditActivity::with($relations)->findOrFail($id);
         $this->employees = \App\Models\Employee::all();
         $this->incoming = \App\Models\EmployeeIncoming::all();
         $this->outgoing = \App\Models\EmployeeOutgoing::all();
     }
- 
     public function downloadExcel(Request $request)
     {
-        $unidad_entrega = "gerencia control posterior";
-        $unidad_adscrita = "UAI";
-        $periodo_saliente_desde = "20/23/2020";
-        $periodo_saliente_hasta = "10/05/2020";
-        $nombre_saliente = "pier";
-        $cedula_saliente = "12345678";
-        $auditor_a = "geferson";
-        $auditor_b = "jose";
-        $nombre_recibe = "jose";
-        $cedula_recibe = "12345678";
+        $unidad_entrega = 'gerencia control posterior';
+        $unidad_adscrita = 'UAI';
+        $periodo_saliente_desde = '20/23/2020';
+        $periodo_saliente_hasta = '10/05/2020';
+        $nombre_saliente = 'pier';
+        $cedula_saliente = '12345678';
+        $auditor_a = 'geferson';
+        $auditor_b = 'jose';
+        $nombre_recibe = 'jose';
+        $cedula_recibe = '12345678';
         $periodo_desde = '16/08/2022';
         $periodo_hasta = '20/15/2025';
-        $cargo = "auditro";
-
-      
+        $cargo = 'auditro';
 
         $spreadsheet = IOFactory::load('cedulaTemplate.xlsm');
         $hoja1 = $spreadsheet->getSheetByName('ATRIBUTOS');
@@ -67,1147 +63,165 @@ class ExcelController extends Controller
         $hoja2->getColumnDimension('B')->setWidth(10);
         $hoja2->getColumnDimension('C')->setWidth(50);
 
+        $checkboxes = $request->input('checkboxes', []);
+        $uncheckedCheckboxes = $request->input('uncheckedCheckboxes', []);
 
-        // Agregar filas con los datos
-        $data = $request->all();
-        // Obtener los datos enviados por la solicitud AJAX
-        $uncheckedValues = json_decode($request->getContent(), true);
-        $checkboxCells = ['D' , 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N' , 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W' , 'X' , 'Y']; // Arreglo de columnas para las casillas de verificación
+        $hoja2 = $spreadsheet->getSheetByName('Cedula');
+
+        // Arreglo de columnas para las casillas de verificación
+        $checkboxCells = ['D', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
         $checkboxIndex = 0; // Índice para recorrer el arreglo de columnas
-        $currentRow = 40; // Inicializar la fila para las casillas de verificación
-        
-       
-        foreach ($data as $item) {
+        $currentRow = 90; // Inicializar la fila para las casillas de verificación
 
-            $value = $item['value'] ? 1 : 0; // Set value to 1 if true, 0 if false
-            $checkboxCell = $hoja2->getCell($checkboxCells[$checkboxIndex] . $currentRow);
-            $checkboxCell->setValue($value);
-            $checkboxCell->getWorksheet()->getCell($checkboxCell->getColumn() . $checkboxCell->getRow())->getStyle()->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $checkboxCell->getWorksheet()->getCell($checkboxCell->getColumn() . $checkboxCell->getRow())->getStyle()->getProtection()->setLocked(\PhpOffice\PhpSpreadsheet\Style\Protection::PROTECTION_UNPROTECTED);
-        
-            // Verificar si la celda actual está vacía o es 0
-            if (empty($value) || $value == 0) {
-                $nextColumn = $checkboxCells[$checkboxIndex + 1];
-                $checkboxCell = $hoja2->getCell($nextColumn . $currentRow);
-                $checkboxCell->setValue(1);
+        // Agregar datos al archivo Excel en las columnas especificadas
+        foreach ($checkboxes as $index => $checkbox) {
+            if (isset($checkboxCells[$checkboxIndex])) {
+                $hoja2->setCellValue($checkboxCells[$checkboxIndex] . $currentRow, $checkbox);
+                $checkboxIndex++;
             }
-        
-            $checkboxIndex++; // Incrementar el índice para la próxima columna
         }
+
         $hoja3 = $spreadsheet->getSheetByName('HALLAZGOS');
         $hoja3->setCellValue('D7', "$unidad_entrega adscrita a la $unidad_adscrita");
         $hoja3->setCellValue('B5', "  Actuación $periodo_desde a la $periodo_hasta");
         $hoja3->setCellValue('C9', "De la evaluación practicada al contenido del Acta de Entrega de la $unidad_entrega , correspondiente a la servidor(a) público(a) saliente, $nombre_saliente, titular de la cédula de identidad Nro.$cedula_saliente; se determinó lo siguiente:");
-    
-    
-        $currentRow = 40;
-        $contador = 1; // inicializar contador
-        
-        // Agregar datos a celdas específicas
-        foreach ($data as $item) {
-            switch ($item['id']) {
-                case 'inputcheckbox1':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja3->insertNewRowBefore($currentRow, 1);
-                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox2':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja3->insertNewRowBefore($currentRow, 1);
-                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox3':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja3->insertNewRowBefore($currentRow, 1);
-                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
+        $hoja3->setCellValue('C44', "$auditor_a");
+        $hoja3->setCellValue('E44', "$auditor_b");
 
-                    case 'inputcheckbox4':
-                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                            $hoja3->insertNewRowBefore($currentRow, 1);
-                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                            $contador++; // incrementar contador
-                            $currentRow++;
-                        }
-                        break;
-
-                        case 'inputcheckbox5':
-                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                $contador++; // incrementar contador
-                                $currentRow++;
-                            }
-                            break;
-
-                            case 'inputcheckbox6':
-                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                    $contador++; // incrementar contador
-                                    $currentRow++;
-                                }
-                                break;
-
-                                case 'inputcheckbox7':
-                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                        $contador++; // incrementar contador
-                                        $currentRow++;
-                                    }
-                                    break;
-
-                                    case 'inputcheckbox8':
-                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                            $hoja3->insertNewRowBefore($currentRow, 1);
-                                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                            $contador++; // incrementar contador
-                                            $currentRow++;
-                                        }
-                                        break;
-
-                                        case 'inputcheckbox9':
-                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                $contador++; // incrementar contador
-                                                $currentRow++;
-                                            }
-                                            break;
-
-                                            case 'inputcheckbox10':
-                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                    $contador++; // incrementar contador
-                                                    $currentRow++;
-                                                }
-                                                break;
-
-                                                case 'inputcheckbox11':
-                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                        $contador++; // incrementar contador
-                                                        $currentRow++;
-                                                    }
-                                                    break;
-
-                                                    case 'inputcheckbox12':
-                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                            $hoja3->insertNewRowBefore($currentRow, 1);
-                                                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                            $contador++; // incrementar contador
-                                                            $currentRow++;
-                                                        }
-                                                        break;
-                                                        case 'inputcheckbox13':
-                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                $contador++; // incrementar contador
-                                                                $currentRow++;
-                                                            }
-                                                            break;
-                                                            case 'inputcheckbox14':
-                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                    $contador++; // incrementar contador
-                                                                    $currentRow++;
-                                                                }
-                                                                break;
-                                                                case 'inputcheckbox15':
-                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                        $contador++; // incrementar contador
-                                                                        $currentRow++;
-                                                                    }
-                                                                    break;
-                                                                    case 'inputcheckbox16':
-                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                            $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                            $contador++; // incrementar contador
-                                                                            $currentRow++;
-                                                                        }
-                                                                        break;
-                                                                        case 'inputcheckbox17':
-                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                $contador++; // incrementar contador
-                                                                                $currentRow++;
-                                                                            }
-                                                                            break;
-                                                                            case 'inputcheckbox18':
-                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                    $contador++; // incrementar contador
-                                                                                    $currentRow++;
-                                                                                }
-                                                                                break;
-                                                                                case 'inputcheckbox19':
-                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                        $contador++; // incrementar contador
-                                                                                        $currentRow++;
-                                                                                    }
-                                                                                    break;
-                                                                                    case 'inputcheckbox20':
-                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                            $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                            $contador++; // incrementar contador
-                                                                                            $currentRow++;
-                                                                                        }
-                                                                                        break;
-                                                                                        case 'inputcheckbox21':
-                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                $contador++; // incrementar contador
-                                                                                                $currentRow++;
-                                                                                            }
-                                                                                            break;
-                                                                                            case 'inputcheckbox22':
-                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                    $contador++; // incrementar contador
-                                                                                                    $currentRow++;
-                                                                                                }
-                                                                                                break;
-                                                                                                case 'inputcheckbox23':
-                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                        $contador++; // incrementar contador
-                                                                                                        $currentRow++;
-                                                                                                    }
-                                                                                                    break;
-                                                                                                    case 'inputcheckbox24':
-                                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                            $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                            $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                            $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                            $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                            $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                            $contador++; // incrementar contador
-                                                                                                            $currentRow++;
-                                                                                                        }
-                                                                                                        break;
-                                                                                                        case 'inputcheckbox25':
-                                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                                $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                $contador++; // incrementar contador
-                                                                                                                $currentRow++;
-                                                                                                            }
-                                                                                                            break;
-                                                                                                            case 'inputcheckbox26':
-                                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                    $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                                    $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                    $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                    $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                    $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                    $contador++; // incrementar contador
-                                                                                                                    $currentRow++;
-                                                                                                                }
-                                                                                                                break;
-                                                                                                                case 'inputcheckbox27':
-                                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                        $hoja3->insertNewRowBefore($currentRow, 1);
-                                                                                                                        $hoja3->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                        $hoja3->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                        $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                        $hoja3->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                        $contador++; // incrementar contador
-                                                                                                                        $currentRow++;
-                                                                                                                    }
-                                                                                                                    break;
-                                                                                                                   
-                                                                                                                        
-                // Agrega más casos según sea necesario
+        // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+        foreach ($checkboxes as $index => $checkbox) {
+            if (isset($checkboxCells[$checkboxIndex])) {
+                 $hoja3->setCellValue($checkboxCells[$checkboxIndex] . $currentRow, $checkbox);
+                $checkboxIndex++;
             }
         }
+    
+        // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+        $checkboxIndex = 0;
+        $currentRow = 40; // Fila donde comenzarán los inputs adicionales
+        $counter = 1; // Inicializar el contador
+    
+        foreach ($uncheckedCheckboxes as $unchecked) {
+            if (isset($checkboxCells[$checkboxIndex])) {
+                // Desplazar hacia abajo el contenido existente
+                 $hoja3->insertNewRowBefore($currentRow, 1);
+    
+                // Combinar celdas desde la columna C hasta la columna L
+                 $hoja3->mergeCells("C{$currentRow}:H{$currentRow}");
+    
+                // Justificar y alinear el texto a la izquierda en la celda combinada
+                 $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                 $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+    
+                // Agregar el comentario en la columna C y poner en negritas
+                 $hoja3->setCellValue("C{$currentRow}", $unchecked);
+                 $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getFont()->setBold(true);
+                 $hoja3->getStyle("C{$currentRow}:H{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+    
+                // Agregar el contador en la columna B y poner en negritas
+                 $hoja3->setCellValue("B{$currentRow}", $counter);
+                 $hoja3->getStyle("B{$currentRow}")->getFont()->setBold(true);
+                 $hoja3->getStyle("B{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+    
+                $currentRow++;
+                $counter++;
+            }
+        }
+    
+
 
         $hoja4 = $spreadsheet->getSheetByName('informe de debilidades');
-        $currentRow = 10;
-        $contador = 1; // inicializar contador
-        // Agregar datos a celdas específicas
-        foreach ($data as $item) {
-            switch ($item['id']) {
-                case 'inputcheckbox1':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja4->insertNewRowBefore($currentRow, 1);
-                        $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                        $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                        $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox2':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja4->insertNewRowBefore($currentRow, 1);
-                        $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                        $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                        $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox3':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                         $hoja4->insertNewRowBefore($currentRow, 1);
-                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                    case 'inputcheckbox4':
-                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                             $hoja4->insertNewRowBefore($currentRow, 1);
-                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                            $contador++; // incrementar contador
-                            $currentRow++;
-                        }
-                        break;
-                        case 'inputcheckbox5':
-                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                $contador++; // incrementar contador
-                                $currentRow++;
-                            }
-                            break;
-                            case 'inputcheckbox6':
-                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                    $contador++; // incrementar contador
-                                    $currentRow++;
-                                }
-                                break;
-                                case 'inputcheckbox7':
-                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                        $contador++; // incrementar contador
-                                        $currentRow++;
-                                    }
-                                    break;
-                                    case 'inputcheckbo8':
-                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                             $hoja4->insertNewRowBefore($currentRow, 1);
-                                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                            $contador++; // incrementar contador
-                                            $currentRow++;
-                                        }
-                                        break;
-                                        case 'inputcheckbox9':
-                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                $contador++; // incrementar contador
-                                                $currentRow++;
-                                            }
-                                            break;
-                                            case 'inputcheckbox10':
-                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                    $contador++; // incrementar contador
-                                                    $currentRow++;
-                                                }
-                                                break;
-                                                case 'inputcheckbox11':
-                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                        $contador++; // incrementar contador
-                                                        $currentRow++;
-                                                    }
-                                                    break;
-                                                    case 'inputcheckbox12':
-                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                             $hoja4->insertNewRowBefore($currentRow, 1);
-                                                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                            $contador++; // incrementar contador
-                                                            $currentRow++;
-                                                        }
-                                                        break;
-                                                        case 'inputcheckbox13':
-                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                $contador++; // incrementar contador
-                                                                $currentRow++;
-                                                            }
-                                                            break;
-                                                            case 'inputcheckbox14':
-                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                    $contador++; // incrementar contador
-                                                                    $currentRow++;
-                                                                }
-                                                                break;
-                                                                case 'inputcheckbox15':
-                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                        $contador++; // incrementar contador
-                                                                        $currentRow++;
-                                                                    }
-                                                                    break;
-                                                                    case 'inputcheckbox16':
-                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                             $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                            $contador++; // incrementar contador
-                                                                            $currentRow++;
-                                                                        }
-                                                                        break;
-                                                                        
-                                                                        case 'inputcheckbox17':
-                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                $contador++; // incrementar contador
-                                                                                $currentRow++;
-                                                                            }
-                                                                            break;
-                                                                            case 'inputcheckbox18':
-                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                    $contador++; // incrementar contador
-                                                                                    $currentRow++;
-                                                                                }
-                                                                                break;
-                                                                                case 'inputcheckbox19':
-                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                        $contador++; // incrementar contador
-                                                                                        $currentRow++;
-                                                                                    }
-                                                                                    break;
-                                                                                    case 'inputcheckbox20':
-                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                             $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                            $contador++; // incrementar contador
-                                                                                            $currentRow++;
-                                                                                        }
-                                                                                        break;
-                                                                                        case 'inputcheckbox21':
-                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                $contador++; // incrementar contador
-                                                                                                $currentRow++;
-                                                                                            }
-                                                                                            break;
-                                                                                            case 'inputcheckbox22':
-                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                    $contador++; // incrementar contador
-                                                                                                    $currentRow++;
-                                                                                                }
-                                                                                                break;
-                                                                                                case 'inputcheckbox23':
-                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                        $contador++; // incrementar contador
-                                                                                                        $currentRow++;
-                                                                                                    }
-                                                                                                    break;
-                                                                                                    case 'inputcheckbox24':
-                                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                             $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                             $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                             $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                             $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                             $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                            $contador++; // incrementar contador
-                                                                                                            $currentRow++;
-                                                                                                        }
-                                                                                                        break;
-                                                                                                        case 'inputcheckbox25':
-                                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                 $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                                 $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                 $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                 $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                 $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                $contador++; // incrementar contador
-                                                                                                                $currentRow++;
-                                                                                                            }
-                                                                                                            break;
-                                                                                                            case 'inputcheckbox26':
-                                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                     $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                                     $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                     $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                     $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                     $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                    $contador++; // incrementar contador
-                                                                                                                    $currentRow++;
-                                                                                                                }
-                                                                                                                break;
-                                                                                                                case 'inputcheckbox27':
-                                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                         $hoja4->insertNewRowBefore($currentRow, 1);
-                                                                                                                         $hoja4->mergeCells("C{$currentRow}:H{$currentRow}"); // combinar celdas
-                                                                                                                         $hoja4->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                         $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // centrar texto
-                                                                                                                         $hoja4->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                        $contador++; // incrementar contador
-                                                                                                                        $currentRow++;
-                                                                                                                    }
-                                                                                                                    break;
-                                                                                        
-                // Agrega más casos según sea necesario
-            }
-        }
+
+  // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+  $checkboxIndex = 0;
+  $currentRow = 10; // Fila donde comenzarán los inputs adicionales
+  $counter = 1; // Inicializar el contador
+
+  foreach ($uncheckedCheckboxes as $unchecked) {
+      if (isset($checkboxCells[$checkboxIndex])) {
+          // Desplazar hacia abajo el contenido existente
+           $hoja4->insertNewRowBefore($currentRow, 1);
+
+          // Combinar celdas desde la columna C hasta la columna L
+           $hoja4->mergeCells("C{$currentRow}:H{$currentRow}");
+
+          // Justificar y alinear el texto a la izquierda en la celda combinada
+           $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+           $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+          // Agregar el comentario en la columna C y poner en negritas
+           $hoja4->setCellValue("C{$currentRow}", $unchecked);
+           $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getFont()->setBold(true);
+           $hoja4->getStyle("C{$currentRow}:H{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+
+          // Agregar el contador en la columna B y poner en negritas
+           $hoja4->setCellValue("B{$currentRow}", $counter);
+           $hoja4->getStyle("B{$currentRow}")->getFont()->setBold(true);
+           $hoja4->getStyle("B{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+
+          $currentRow++;
+          $counter++;
+      }
+  }
+
+
+
 
         $hoja5 = $spreadsheet->getSheetByName('desglose de hallazgos');
-      
-        $currentRow = 7;
-        $contador = 1; // inicializar contador
-        
-        // Agregar datos a celdas específicas
-        
-        foreach ($data as $item) {
-            
-            switch ($item['id']) {
-                case 'inputcheckbox1':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-            
-                        $hoja5->insertNewRowBefore($currentRow, 1);
-                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                        $style->getAlignment()->setWrapText(true); // justificar texto
-                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                        
-                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox2':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja5->insertNewRowBefore($currentRow, 1);
-                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                        $style->getAlignment()->setWrapText(true); // justificar texto
-                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                case 'inputcheckbox3':
-                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                        $hoja5->insertNewRowBefore($currentRow, 1);
-                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                        $style->getAlignment()->setWrapText(true); // justificar texto
-                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                        $contador++; // incrementar contador
-                        $currentRow++;
-                    }
-                    break;
-                    case 'inputcheckbox4':
-                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                            $hoja5->insertNewRowBefore($currentRow, 1);
-                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                            $style->getAlignment()->setWrapText(true); // justificar texto
-                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                            $contador++; // incrementar contador
-                            $currentRow++;
-                        }
-                        break;
-                        case 'inputcheckbox5':
-                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                $contador++; // incrementar contador
-                                $currentRow++;
-                            }
-                            break;
-                            case 'inputcheckbox6':
-                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                    $contador++; // incrementar contador
-                                    $currentRow++;
-                                }
-                                break;
-                                case 'inputcheckbox7':
-                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                        $contador++; // incrementar contador
-                                        $currentRow++;
-                                    }
-                                    break;
-                                    case 'inputcheckbox8':
-                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                            $hoja5->insertNewRowBefore($currentRow, 1);
-                                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                            $style->getAlignment()->setWrapText(true); // justificar texto
-                                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                            $contador++; // incrementar contador
-                                            $currentRow++;
-                                        }
-                                        break;
-                                        case 'inputcheckbox9':
-                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                $contador++; // incrementar contador
-                                                $currentRow++;
-                                            }
-                                            break;
-                                            case 'inputcheckbox10':
-                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                    $contador++; // incrementar contador
-                                                    $currentRow++;
-                                                }
-                                                break;
-                                                case 'inputcheckbox11':
-                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                        $contador++; // incrementar contador
-                                                        $currentRow++;
-                                                    }
-                                                    break;
-                                                    case 'inputcheckbox12':
-                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                            $hoja5->insertNewRowBefore($currentRow, 1);
-                                                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                            $style->getAlignment()->setWrapText(true); // justificar texto
-                                                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                            $contador++; // incrementar contador
-                                                            $currentRow++;
-                                                        }
-                                                        break;
-                                                        case 'inputcheckbox13':
-                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                $contador++; // incrementar contador
-                                                                $currentRow++;
-                                                            }
-                                                            break;
-                                                            case 'inputcheckbox14':
-                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                    $contador++; // incrementar contador
-                                                                    $currentRow++;
-                                                                }
-                                                                break;
-                                                                case 'inputcheckbox15':
-                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                        $contador++; // incrementar contador
-                                                                        $currentRow++;
-                                                                    }
-                                                                    break;
-                                                                    case 'inputcheckbox16':
-                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                            $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                            $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                            $contador++; // incrementar contador
-                                                                            $currentRow++;
-                                                                        }
-                                                                        break;
-                                                                        case 'inputcheckbox17':
-                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                $contador++; // incrementar contador
-                                                                                $currentRow++;
-                                                                            }
-                                                                            break;
-                                                                            case 'inputcheckbox18':
-                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                    $contador++; // incrementar contador
-                                                                                    $currentRow++;
-                                                                                }
-                                                                                break;
-                                                                                case 'inputcheckbox19':
-                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                        $contador++; // incrementar contador
-                                                                                        $currentRow++;
-                                                                                    }
-                                                                                    break;
-                                                                                    case 'inputcheckbox20':
-                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                            $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                            $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                            $contador++; // incrementar contador
-                                                                                            $currentRow++;
-                                                                                        }
-                                                                                        break;
-                                                                                        case 'inputcheckbox21':
-                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                $contador++; // incrementar contador
-                                                                                                $currentRow++;
-                                                                                            }
-                                                                                            break;
-                                                                                            case 'inputcheckbox22':
-                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                    $contador++; // incrementar contador
-                                                                                                    $currentRow++;
-                                                                                                }
-                                                                                                break;
-                                                                                                case 'inputcheckbox23':
-                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                        $contador++; // incrementar contador
-                                                                                                        $currentRow++;
-                                                                                                    }
-                                                                                                    break;
-                                                                                                    case 'inputcheckbox24':
-                                                                                                        if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                            $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                            $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                            $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                            $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                            $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                            $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                            $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                            $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                            $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                            $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                            $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                            $contador++; // incrementar contador
-                                                                                                            $currentRow++;
-                                                                                                        }
-                                                                                                        break;
-                                                                                                        case 'inputcheckbox25':
-                                                                                                            if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                                $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                                $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                                $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                                $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                                $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                                $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                                $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                                $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                                $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                $contador++; // incrementar contador
-                                                                                                                $currentRow++;
-                                                                                                            }
-                                                                                                            break;
-                                                                                                            case 'inputcheckbox26':
-                                                                                                                if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                    $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                                    $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                                    $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                    $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                                    $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                                    $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                                    $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                                    $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                                    $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                                    $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                                    $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                    $contador++; // incrementar contador
-                                                                                                                    $currentRow++;
-                                                                                                                }
-                                                                                                                break;
-                                                                                                                case 'inputcheckbox27':
-                                                                                                                    if ($item['value'] != '') { // verificar si el input checkbox está lleno
-                                                                                                                        $hoja5->insertNewRowBefore($currentRow, 1);
-                                                                                                                        $hoja5->mergeCells("C{$currentRow}:E{$currentRow}"); // combinar celdas
-                                                                                                                        $hoja5->setCellValue("C{$currentRow}", $item['value']); // establecer valor
-                                                                                                                        $style = $hoja5->getStyle("C{$currentRow}:E{$currentRow}"); // obtener estilo de la celda combinada
-                                                                                                                        $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // alinear texto a la izquierda
-                                                                                                                        $style->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); // centrar texto verticalmente
-                                                                                                                        $style->getAlignment()->setWrapText(true); // justificar texto
-                                                                                                                        $style->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); // establecer fondo blanco
-                                                                                                                        $style->getFill()->getStartColor()->setARGB('FFFFFF'); // establecer color blanco
-                                                                                                                        $style->getFont()->getColor()->setARGB('000000'); // establecer color de letra negro
-                                                                                                                        $hoja5->setCellValue("B{$currentRow}", $contador); // establecer contador en columna B
-                                                                                                                        $contador++; // incrementar contador
-                                                                                                                        $currentRow++;
-                                                                                                                    }
-                                                                                                                    break;
+        $hoja5->setCellValue('D16', "$cargo");
+        $hoja5->setCellValue(   'D16', "$cargo");
+        // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+      // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+    $checkboxIndex = 0;
+    $currentRow = 8; // Fila donde comenzarán los inputs adicionales
+    $counter = 1; // Inicializar el contador
 
-            }
+    foreach ($uncheckedCheckboxes as $unchecked) {
+        if (isset($checkboxCells[$checkboxIndex])) {
+            // Desplazar hacia abajo el contenido existente
+             $hoja5->insertNewRowBefore($currentRow, 1);
+
+            // Combinar celdas desde la columna C hasta la columna E
+             $hoja5->mergeCells("C{$currentRow}:E{$currentRow}");
+
+            // Justificar y alinear el texto a la izquierda en la celda combinada
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+            // Asegurar que el fondo sea blanco
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getFill()->getStartColor()->setARGB('FFFFFF');
+
+            // Ajustar el texto automáticamente
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getAlignment()->setWrapText(true);
+
+            // Agregar el comentario en la columna C y poner en negritas
+             $hoja5->setCellValue("C{$currentRow}", $unchecked);
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getFont()->setBold(true);
+             $hoja5->getStyle("C{$currentRow}:E{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+
+            // Agregar el contador en la columna B y poner en negritas
+             $hoja5->setCellValue("B{$currentRow}", $counter);
+             $hoja5->getStyle("B{$currentRow}")->getFont()->setBold(true);
+             $hoja5->getStyle("B{$currentRow}")->getFont()->setUnderline(false); // Quitar subrayado
+
+            $currentRow++;
+            $counter++;
         }
+    }
 
-        
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $Temfile = tempnam(sys_get_temp_dir(), prefix: 'PHPWord');
-        $writer->save($Temfile);
-        return response()->download($Temfile, name: 'Cedula.xlsx')->deleteFileAfterSend(shouldDelete: true);
-        
 
-}
+        // $hoja5->setCellValue(coordinate: 'D1', '');
+
+        // Enviar el archivo Excel al navegador
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Cedula.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . urlencode($filename) . '"');
+
+        $writer->save('php://output');
+        exit();
+    }
+
 }

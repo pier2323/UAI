@@ -56,11 +56,6 @@ class Show extends Component
         $fecha_planificacion = $this->auditActivity->planning_start;
         $hasta_plan= $this->auditActivity->planning_end;
 
-
-
-
-
-
         dd([
             'code' => '',
             'fecha_progrma' => '',
