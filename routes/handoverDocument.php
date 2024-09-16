@@ -11,3 +11,8 @@ Route::get(
     uri: '/acta-de-entrega/{id}', 
     action: App\Http\Livewire\Handover\Show::class
 )->name('handover.show');
+
+Route::get(
+    uri: '/revicion de actas ', 
+    action: App\Http\Livewire\Handover\Review::class
+)->name('handover.reviw');

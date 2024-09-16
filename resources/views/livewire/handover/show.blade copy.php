@@ -121,44 +121,24 @@
         <div class="checkbox-container">
             <div class="top-checkboxes">
                 <div class="left-checkboxes">
-                    <label><input type="checkbox" id="checkbox1" value="Checkbox 1" checked> El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad.</label>
-                    <label><input type="checkbox" id="checkbox2" value="Checkbox 2" checked> El acta esta debidamente certificada por el funcionario autorizada</label>
-                    <label><input type="checkbox" id="checkbox3" value="Checkbox 3" checked> El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega.</label>
-                    <label><input type="checkbox" id="checkbox4" value="Checkbox 4" checked> En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo.</label>
-                    <label><input type="checkbox" id="checkbox5" value="Checkbox 5" checked> Lugar de la suscripción del Acta.</label>
-                    <label><input type="checkbox" id="checkbox6" value="Checkbox 6" checked> Fecha de la suscripción del Acta.</label>
-                    <label><input type="checkbox" id="checkbox7" value="Checkbox 7" checked> Identificación del órgano, entidad, oficina o dependencia que se entrega.</label>
-                    <label><input type="checkbox" id="checkbox8" value="Checkbox 8" checked> Identificación de quien entrega.</label>
-                    <label><input type="checkbox" id="checkbox9" value="Checkbox 9" checked> Motivo de la entrega.</label>
-                    <label><input type="checkbox" id="checkbox10" value="Checkbox 10" checked> Mención expresa de que los anexos forman parte integrante del acta</label>
-                    <label><input type="checkbox" id="checkbox11" value="Checkbox 11" checked> Suscripción del acta de quien entrega.</label>
+                    <label><input type="checkbox" id="checkbox1" value="Checkbox 1" checked> Checkbox 1</label>
+                    <label><input type="checkbox" id="checkbox2" value="Checkbox 2" checked> Checkbox 2</label>
+                    <label><input type="checkbox" id="checkbox1" value="Checkbox 1" checked> Checkbox 1</label>
+                    <label><input type="checkbox" id="checkbox2" value="Checkbox 2" checked> Checkbox 2</label>
                 </div>
                 <div class="right-checkboxes">
-                    <label><input type="checkbox" id="checkbox12" value="Checkbox 12" checked> Suscripción del acta de quien recibe. </label>
-                    <label><input type="checkbox" id="checkbox13" value="Checkbox 13" checked> Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable.</label>
-                    <label><input type="checkbox" id="checkbox14" value="Checkbox 14" checked> Mención del número de cargos exigentes</label>
-                    <label><input type="checkbox" id="checkbox15" value="Checkbox 15" checked> Inventario de los bienes muebles e inmuebles. </label>
-                    <label><input type="checkbox" id="checkbox16" value="Checkbox 16" checked> Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente.</label>
-                    <label><input type="checkbox" id="checkbox17" value="Checkbox 17" checked> Indice general del archivo.</label>
-                    <label><input type="checkbox" id="checkbox18" value="Checkbox 18" checked>Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega.</label>
-                    <label><input type="checkbox" id="checkbox19" value="Checkbox 19" checked> Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable.</label>
-                    <label><input type="checkbox" id="checkbox20" value="Checkbox 20" checked> El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas.</label>
-                    <label><input type="checkbox" id="checkbox21" value="Checkbox 21" checked> El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label>
-                
-                
-                
-                
-                
+                    <label><input type="checkbox" id="checkbox5" value="Checkbox 5" checked> Checkbox 5</label>
+                    <label><input type="checkbox" id="checkbox6" value="Checkbox 6" checked> Checkbox 6</label>
+                    <label><input type="checkbox" id="checkbox5" value="Checkbox 5" checked> Checkbox 5</label>
+                    <label><input type="checkbox" id="checkbox6" value="Checkbox 6" checked> Checkbox 6</label>
                 </div>
             </div>
             <hr> <!-- Línea divisoria -->
             <div class="warm-section">
-                <label><input type="checkbox" id="checkbox23" value="Checkbox 23" checked> Monto de los fondos  y bienes asignados Presupuestariamente 
-                    a la respectiva unidad administradora.</label>
-                <label><input type="checkbox" id="checkbox24" value="Checkbox 24" checked> Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión.</label>
-                <label><input type="checkbox" id="checkbox25" value="Checkbox 25" checked> Estados bancarios actualizados y conciliados.</label>
-                <label><input type="checkbox" id="checkbox26" value="Checkbox 26" checked> Lista de comprobantes de gastos.</label>
-                <label><input type="checkbox" id="checkbox27" value="Checkbox 27" checked>  Cheques emitidos pendientes de cobro.</label>
+                <label><input type="checkbox" id="checkbox3" value="Checkbox 3" checked> Checkbox 3</label>
+                <label><input type="checkbox" id="checkbox4" value="Checkbox 4" checked> Checkbox 4</label>
+                <label><input type="checkbox" id="checkbox7" value="Checkbox 7" checked> Checkbox 7</label>
+                <label><input type="checkbox" id="checkbox8" value="Checkbox 8" checked> Checkbox 8</label>
             </div>
             <button id="openModal2">Open Modal 2</button>
         </div>
@@ -228,36 +208,7 @@
         'checkbox2': 'Texto por defecto para checkbox2',
         'checkbox3': 'Texto por defecto para checkbox3',
         'checkbox4': 'Texto por defecto para checkbox4',
-        'checkbox5': 'Texto por defecto para checkbox5',
-
-        'checkbox6': 'Texto por defecto para checkbox1',
-        'checkbox7': 'Texto por defecto para checkbox2',
-        'checkbox8': 'Texto por defecto para checkbox3',
-        'checkbox9': 'Texto por defecto para checkbox4',
-        'checkbox10': 'Texto por defecto para checkbox5',
-        
-        'checkbox12': 'Texto por defecto para checkbox1',
-        'checkbox12': 'Texto por defecto para checkbox2',
-        'checkbox13': 'Texto por defecto para checkbox3',
-        'checkbox14': 'Texto por defecto para checkbox4',
-        'checkbox15': 'Texto por defecto para checkbox5',
-
-        'checkbox16': 'Texto por defecto para checkbox1',
-        'checkbox17': 'Texto por defecto para checkbox2',
-        'checkbox18': 'Texto por defecto para checkbox3',
-        'checkbox19': 'Texto por defecto para checkbox4',
-        'checkbox20': 'Texto por defecto para checkbox5',
-        
-
-        'checkbox21': 'Texto por defecto para checkbox1',
-        'checkbox22': 'Texto por defecto para checkbox2',
-        'checkbox23': 'Texto por defecto para checkbox1',
-        'checkbox24': 'Texto por defecto para checkbox2',
-        'checkbox25': 'Texto por defecto para checkbox3',
-        'checkbox26': 'Texto por defecto para checkbox4',
-        'checkbox27': 'Texto por defecto para checkbox5',
-        
-   
+        'checkbox5': 'Texto por defecto para checkbox5'
     };
 
     checkboxes.forEach(checkbox => {
@@ -345,6 +296,7 @@ notification.style.zIndex = "9999"; // Agregar z-index para que se muestre encim
 notification.style.display = "block"; // Agregar display para que se muestre siempre
 // Agregar la notificación directamente al body
 document.body.appendChild(notification);
+
 // Agregar la transición de entrada
 notification.style.transition = "opacity 0.5s"; // Transición de opacidad durante 0.5 segundos
 setTimeout(() => {
