@@ -6,19 +6,16 @@
 )
 
 @php
-    $class = 'w-full h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700';
+    $class = 'flex flex-col items-center justify-center w-full h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700';
 @endphp
 
 
-<div 
-x-bind:id="'card-'+index" 
-{{ $attributes->merge(['class' => $class]) }}
->
+<div x-bind:id="'card-'+index" {{ $attributes->merge(['class' => $class]) }}>
 
     {{$slot}}
 
     {{-- todo content --}}
-    <div class="flex flex-col items-center pb-2">
+    <div class="flex flex-col items-center justify-center pb-2">
 
         {{-- todo profile photo --}}
         <img class="w-5/12 mb-3 rounded-full shadow-lg " :src="'{{ Storage::url('public/employees/profile-photo/') }}' + card.data.profile_photo" alt="Bonnie image"/>
@@ -30,4 +27,5 @@ x-bind:id="'card-'+index"
         <span class="text-sm text-gray-500 dark:text-gray-400 mt-0.5" x-text="card.data.job_title.name"></span>
 
     </div>
+    
 </div>

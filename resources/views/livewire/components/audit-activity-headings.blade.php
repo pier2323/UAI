@@ -37,7 +37,7 @@
                 </h1>
 
                 {{-- ? code --}}
-                <span class="text-xl text-slate-400" role="code">{{ $auditActivity->code() }}</span>
+                <span class="text-xl text-slate-400" role="code">{{ $auditActivity->code }}</span>
         </div>
 
         @if ($objective)

@@ -1,8 +1,14 @@
 <div>
-    {{-- <x-notification on='saved' message='{{session('status')}}' active/> --}}
+    @push('alert') <x-notification on='designation'/> @endpush
+    
     @isset($designation) <x-button wire:click='getDesignationDocument'>descargar designacion</x-button> @endisset
     @isset($acreditation) <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button> @endisset
-    @if(isset($designation) && !isset($acreditation)) <x-button class="ml-4" wire:click='accredit'>Acreditar</x-button> @endif
+
+    @if(isset($designation) && !isset($acreditation)) 
+    <form wire:submit="accredit">
+        <x-button type='submit' class="ml-4" wire:click='accredit' wire:loading.class.remove='opacity-50'>Acreditar</x-button> 
+    </form>
+    @endif
 
 
     {{-- todo headings --}}
@@ -13,7 +19,7 @@
         {{-- todo planning form --}}
 
                 <livewire:Components.TableCardsEmployee :$auditActivity :$designation :$acreditation>
-                    
+               
                 <x-slot:article>
                     <div class="ml-4">
                         <livewire:Components.PlanningSchedule :$auditActivity :$designation :$acreditation>
@@ -23,7 +29,7 @@
                 @empty($designation)
 
                     <x-slot:footer>
-                        <x-button class="ml-4" x-on:click="$dispatch('prepare')" wire:submit>Designar</x-button>
+                        <x-button type='submit' class="ml-4" wire:click="$dispatch('saving')">Designar</x-button>
                     </x-slot>
                     
                 @endempty

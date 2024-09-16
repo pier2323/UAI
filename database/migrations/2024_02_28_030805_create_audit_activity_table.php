@@ -16,16 +16,28 @@ return new class extends Migration
             $table->string('objective', length: 5000)->nullable();
             $table->string('month_start')->nullable();
             $table->string('month_end')->nullable();
-            $table->date('planning_start')->nullable();
-            $table->date('planning_end')->nullable();
-            $table->date('execution_start')->nullable();
-            $table->date('execution_end')->nullable();
-            $table->date('preliminary_start')->nullable();
-            $table->date('preliminary_end')->nullable();
-            $table->date('download_start')->nullable();
-            $table->date('download_end')->nullable();
-            $table->date('definitive_start')->nullable();
-            $table->date('definitive_end')->nullable();
+
+            { // todo planning 
+                $table->date('planning_start')->nullable();
+                $table->date('planning_end')->nullable();         
+                $table->integer('planning_days')->nullable();
+
+                $table->date('execution_start')->nullable();
+                $table->date('execution_end')->nullable();          
+                $table->integer('execution_days')->nullable();
+
+                $table->date('preliminary_start')->nullable();
+                $table->date('preliminary_end')->nullable();
+                $table->integer('preliminary_days')->nullable();
+
+                $table->date('download_start')->nullable();
+                $table->date('download_end')->nullable();         
+                $table->integer('download_days')->nullable();
+                
+                $table->date('definitive_start')->nullable();
+                $table->date('definitive_end')->nullable();           
+                $table->integer('definitive_days')->nullable();
+            }
 
             $table->unsignedBigInteger('type_audit_id')->nullable();
             $table->foreign('type_audit_id')->references('id')->on('type_audit');
