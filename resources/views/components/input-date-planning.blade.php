@@ -1,4 +1,5 @@
-@props(['idStart', 'idEnd', 'text', 'title', 'class' => 'mt-3'])
+@props(['idStart', 'idEnd', 'text', 'title', 'class' => 'mt-3', 'designation' => false])
+
 <div class="{{ $class }}">
     <span>{{ $title }}:</span>
     <div class="flex items-center justify-between w-fit">
@@ -24,7 +25,14 @@
             />
         </div>
         <div>
-            <span class="flex items-center justify-center p-2 ml-2 bg-blue-100 rounded-lg h-11 min-w-28" x-text="'Habiles: ' + {{ $text }}"></span>
+            <input 
+                class="p-1 ml-2 overflow-visible text-center bg-blue-100 rounded-lg  number-input-date-planning h-11 w-fit max-w-12 w-min-16" 
+                type="text"
+                x-on:input="$wire.{{ $idEnd }} = calculateDates($wire.{{ $idStart }}, {{ $text }})" 
+                x-model="{{ $text }}" 
+                placeholder="{{ \__('dias') }}"
+                @readonly($designation)
+            >
         </div>
     </div>
 </div>
