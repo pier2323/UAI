@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Acreditation;
 use App\Models\AuditActivity;
-use App\Models\AuditActivityEmployee;
 use App\Models\Designation;
 use App\Models\Employee;
 use Illuminate\Contracts\Support\Renderable;
@@ -19,7 +18,9 @@ class TableCardsEmployee extends Component
 
     #[Locked]
     public AuditActivity $auditActivity;
+
     public Designation|null $designation;
+
     public Acreditation|null $acreditation;
 
     public function render():Renderable
@@ -46,34 +47,21 @@ class TableCardsEmployee extends Component
     public function save():void
     {
         // todo sync employees 
-        $this->auditActivity->employee()->detach();
+
+        $employees = array();
 
         foreach ($this->employees as $employee) {
-            $key = $employee['data']['id'];
-            $role = $employee['role'] == 1 
-            ? 'Coordinador'
-            : 'Auditor';
-            
-            $this->auditActivity->employee()->attach([$key => [
-                'role' => "$role"]
-            ]);
+            $id = $employee['data']['id'];
+            $role = $employee['role'] == 1 ? 'Coordinador' : 'Auditor';
+            $employees[$id] = ['role' => $role];
         }
 
-        Designation::create([
-            'date_release' => $this->auditActivity->planning_start, 
-            'pivot_id' => AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->first()->id,
-        ]);
+        $this->auditActivity->employee()->sync($employees);
     }
 
     #[Renderless]
     public function addCard($id):Employee
     {
         return Employee::with('jobTitle')->find($id);
-    }
-    
-    #[Renderless]
-    public function prepare($employees):void
-    {
-        $this->employees = $employees;
     }
 }

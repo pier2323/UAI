@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -15,8 +16,8 @@ final class AcreditationService
 
     public function __construct(
         private readonly AuditActivity $auditActivity, 
-        public readonly string|null $nameDocument = null,
-        public readonly string|null $date = null,
+        public readonly ?string $nameDocument = null,
+        public readonly ?Carbon $date = null,
     ){
         $this->document = new WorkingPaper (
             templateFile: WorkingPaper::getTemplate(self::NAME_TEMPLATE), 
@@ -44,7 +45,6 @@ final class AcreditationService
         return $pathDocumentToDownload;
     }
 
-
     private function setAuditor(Collection $auditors): void
     {
         foreach ($auditors as $auditor)
@@ -54,12 +54,11 @@ final class AcreditationService
                 'fullname' => "$auditor->first_name $auditor->first_surname",
             ]);
         }
-    }
-    
+    }    
 
     private function setData(): void
     {
-        $date_release_designation = '';
+        $date_release_designation = $this->auditActivity->designation()->first()->date_release;
 
         $date_release = // todo make date in spanish example '4 de abril de 2001' 
         $this->document->date->format('j') ." de ". // todo '$day de'   
@@ -68,9 +67,9 @@ final class AcreditationService
 
         $this->document->data = [
 
-            'code_audit_activity' => $this->auditActivity->code(),
-            'code_designation' => 'UAI/GCP/DES-COM' . $this->auditActivity->code(),
-            'date_release_designation' => $date_release_designation,
+            'code_audit_activity' => $this->auditActivity->code,
+            'code_designation' => 'UAI/GCP/DES-COM ' . $this->auditActivity->code,
+            'date_release_designation' => $date_release_designation->format('d/m/Y'),
 
             // todo checked 
             'date_release' => $date_release,

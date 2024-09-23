@@ -6,6 +6,7 @@ use App\Models\Acreditation;
 use App\Models\AuditActivity;
 use App\Models\Designation;
 use App\Models\NotWorkingDays;
+use App\Traits\ModelPropertyMapper;
 use Carbon\Carbon;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -13,8 +14,10 @@ use Livewire\Component;
 
 class PlanningSchedule extends Component
 {
+    use ModelPropertyMapper;
+
     public 
-    $planning_days = '5', $execution_days = '10', $preliminary_days = '10', $download_days = '10', $definitive_days = '5',
+    $planning_days, $execution_days, $preliminary_days, $download_days, $definitive_days,
     $planning_start, $execution_start, $preliminary_start, $download_start, $definitive_start,
     $planning_end, $execution_end, $preliminary_end, $download_end, $definitive_end;
 
@@ -23,14 +26,15 @@ class PlanningSchedule extends Component
 
     #[Locked]
     public AuditActivity $auditActivity;
+
     public Designation|null $designation;
+    
     public Acreditation|null $acreditation;
+
 
     public function mount()
     {
-        if (isset($this->designation)) {
-            foreach ($this->getProperty() as $property) $this->{$property} = $this->auditActivity->{$property};
-        }
+        if (isset($this->designation)) $this->mapModelProperties($this->auditActivity, $this->except($this->getPropertiesExcludes()));
 
         $this->excludeDays = NotWorkingDays::pluck('day');
     }
@@ -42,11 +46,11 @@ class PlanningSchedule extends Component
 
     #[On('saving')]
     public function save()
-    {        
+    {
         $format = 'd/m/Y';
 
-        $dates = $this->getProperty();
-        
+        $dates = $this->getPropertiesForCarbon();
+
         // todo format dates 
         foreach ($this->only($dates) as $key => $value) {
             $dateCarbon = Carbon::createFromFormat($format, $value);
@@ -55,9 +59,11 @@ class PlanningSchedule extends Component
         
         // todo update dates 
         $this->auditActivity->update($this->all());
+
+        $this->mapModelProperties($this->auditActivity, $this->except($this->getPropertiesExcludes()));
     }
 
-    private function getProperty(): array 
+    private function getPropertiesForCarbon(): array 
     {
         return [
             'planning_start',
@@ -73,4 +79,13 @@ class PlanningSchedule extends Component
         ];
     }
 
+    private function getPropertiesExcludes(): array 
+    {
+        return [
+            'excludeDays',
+            'auditActivity',
+            'designation',
+            'acreditation',
+        ];
+    }
 }
