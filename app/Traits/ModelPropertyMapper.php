@@ -10,7 +10,6 @@ trait ModelPropertyMapper
     {
         $allProperties = $model->toArray();
         foreach ($properties as $property => $value) {
-            ds($properties);
             $this->{$property} = $allProperties[$property];
         }
     }

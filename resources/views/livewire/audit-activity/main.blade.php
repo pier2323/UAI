@@ -11,7 +11,7 @@
 
         {{-- todo browser --}}
         
-        <x-input class="ml-6" type="text" wire:model.live="query" placeholder='Buscar...' />
+        <x-input class="ml-6" type="search" wire:model.live="query" placeholder='Buscar...' />
 
         <table>  
 
@@ -25,13 +25,21 @@
             {{-- todo body --}}
             <tbody>
                 @foreach ($auditActivities as $auditActivity)
-                <tr class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" wire:key="{{ $auditActivity->id }}" x-on:dblclick="$wire.goTo('auditActivity.show', {{ $auditActivity->id }})">
+
+                <tr 
+                class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
+                wire:key="{{ $auditActivity->id }}" 
+                wire:dblclick="goTo('auditActivity.show', {{ $auditActivity->id }})"
+                wire:loading.attr="disabled"
+                >
                     <td class=" min-w-fit w-36 text-slate-600 {{ $td }}">{{ $auditActivity->code }}</td> 
                     <td class=" {{ $td }}">{{ $auditActivity->description }}</td> 
                     <td class=" {{ $td }}">{{ $auditActivity->month_start }}</td> 
                     <td class=" {{ $td }}">{{ $auditActivity->month_end }}</td>
-                    <td class=" {{ $td }}">{{ $auditActivity->uai->name ?? '' }}</td> 
+                    <td class=" {{ $td }}">{{ $auditActivity->uai->name ?? '' }}</td>
+
                 </tr>
+
                 @endforeach
             </tbody>
             
