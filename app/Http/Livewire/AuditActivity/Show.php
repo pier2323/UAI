@@ -7,7 +7,6 @@ use App\Models\AuditActivity;
 use App\Models\Designation;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class Show extends Component
