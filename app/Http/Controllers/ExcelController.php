@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AuditActivity;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+
 
 class ExcelController extends Controller
 {
