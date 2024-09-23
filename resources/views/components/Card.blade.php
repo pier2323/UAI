@@ -13,7 +13,7 @@
 
     <style>
         .card {
-            background: linear-gradient(to right, #002fff, #c471ed);
+            background: linear-gradient(to right, #1D4ED8, #c471ed);
             /* Degradado inicial */
             color: white;
             padding: 20px;
@@ -23,7 +23,7 @@
         }
 
         .card:hover {
-            background: linear-gradient(to left,  #002fff, #c471ed);
+            background: linear-gradient(to left,  #1D4ED8, #c471ed);
             /* Degradado invertido */
         }
     </style>

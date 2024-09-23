@@ -52,50 +52,11 @@ class Show extends Component
     public function programaDocumen()
     {
 
-        $code = $this->auditActivity->code ();
+        $code = $this->auditActivity->code;
         $fecha_planificacion = $this->auditActivity->planning_start;
         $hasta_plan= $this->auditActivity->planning_end;
 
-
-
-
-
-
-        dd([
-            'code' => '',
-            'fecha_progrma' => '',
-            'unidad_entrega' => '',
-            'unidad_adcripta' => '',
-            'articulo' => '',
-            'periodo_saliente' => '',
-            'nu_acreditacion' => '',
-            'nombre_saliente' => '',
-            'cedula_saliente' => '',
-            'cargo_saliente' => '',
-            'Fecha_acreditacion' => '',
-            'fecha_subcripcion' => '',
-            'dia_planificacion' => $fecha_planificacion,
-            'desde_plan' => '',
-            'hasta_plan' => '',
-            'dia_ejecucion' => '',
-            'desde_ejec' => '',
-            'hasta_ejec' => '',
-            'Resultado' => '',
-            'desde_r' => '',
-            'hasta_r' => '',
-            'dia_preliminar' => '',
-            'desde_p' => '',
-            'hasta_p' => '',
-            'desde_desc' => '',
-            'hasta_desc' => '',
-            'dia_definitivo' => '',
-            'desde_d' => '',
-            'hasta_d' => '',
-            'personal_des' => '',
-            'resultado' => '',
-        ]);
-
-
+   
 
         $template = new \PhpOffice\PhpWord\TemplateProcessor(documentTemplate: 'programaTemplate.docx');
         $template->setValue(search: 'code', replace: " $code ");

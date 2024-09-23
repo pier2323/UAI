@@ -36,7 +36,7 @@
                         <div style="overflow:hidden ; border: 1px solid #777; border-radius: px; margin-bottom: 800px;"
                             class="border-slate-500">
                             <img alt="foto de perfil" style="width: 15vw"
-                                src="{{ asset("storage/employees/profile-photo/$employee->profile_photo") }}" />
+                                src="{{ asset("storage/$employee->profile_photo") }}" />
                         </div>
                         <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
                             <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
@@ -54,7 +54,7 @@
 
                                         <div id="zona-carga">
                                             <img id="zona-carga-img"
-                                                src="{{ asset("storage/employees/profile-photo/$employee->profile_photo") }}" />
+                                                src="{{ asset("storage/$employee->profile_photo") }}" />
                                         </div>
                                         <label for="photo">click para subir una imagen</label>
                                         <input accept="image/*" class="btn btn-primary mb-3" id="photo"
