@@ -70,7 +70,7 @@ class ExcelController extends Controller
         // Arreglo de columnas para las casillas de verificación
         $checkboxCells = ['D', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
         $checkboxIndex = 0; // Índice para recorrer el arreglo de columnas
-        $currentRow = 15; // Inicializar la fila para las casillas de verificación
+        $currentRow = 90; // Inicializar la fila para las casillas de verificación
 
         // Agregar datos al archivo Excel en las columnas especificadas
         foreach ($checkboxes as $index => $checkbox) {

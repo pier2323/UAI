@@ -18,4 +18,13 @@ trait ModelPropertyMapper
     {
         $this->mapModelProperties($model, [$property]);
     }
+
+    private function mapModelPropertiesPier(Model $model, array $properties): void
+    {
+        $allProperties = $model->toArray();
+        foreach ($properties as $property) {
+            $this->{$property} = $allProperties[$property];
+        }
+    }
+
 }

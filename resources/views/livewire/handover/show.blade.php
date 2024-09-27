@@ -236,48 +236,66 @@
             transform: translateY(0);
         }
 
+            /* Estilos para el botón */
+            #newButton {
+            background-color: #6c5ce7; /* Color morado oscuro */
+            border: none;
+            border-radius: 20px; /* Borde redondeado */
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            }
+
+            #newButton:hover {
+            background-color: #3498db; /* Color azul */
+            }
+
+            /* Estilos para el mensaje */
+            #message {
+            display: none;
+            z-index: 1000; /* Mostrar el mensaje sobre todo */
+            }
 
 
 
-/* Estilos para el botón */
-#newButton {
-  background-color: #6c5ce7; /* Color morado oscuro */
-  border: none;
-  border-radius: 20px; /* Borde redondeado */
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
+            #message div {
+            transition: opacity 0.5s; /* Agregar transición para que el mensaje aparezca suavemente */
+            }
 
-#newButton:hover {
-  background-color: #3498db; /* Color azul */
-}
+            #message.show div {
+            opacity: 1;
+            }
+            #message.show {
+            display: block;
+            opacity: 1;
+            }
+        
+            .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
 
-/* Estilos para el mensaje */
-#message {
-  display: none;
-  z-index: 1000; /* Mostrar el mensaje sobre todo */
-}
+        .notification.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
+        .notification.hide {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
 
-
-#message div {
-  transition: opacity 0.5s; /* Agregar transición para que el mensaje aparezca suavemente */
-}
-
-#message.show div {
-  opacity: 1;
-}
-#message.show {
-  display: block;
-  opacity: 1;
-}
-
-    .close:hover {
-        color: #000;
-    }
-
-        </style>
+    </style>
 <!-- Primer Modal -->
 <div id="firstModal" class="modal">
     <div class="modal-content">
@@ -500,7 +518,8 @@
                 document.getElementById('downloadMessage').innerText = '';
             }, 8000); // 8000 ms = 8 segundos
         }
-    
+      
+
 </script>
     
 <!-- Agregar un botón oculto en el HTML, fuera del modal -->
@@ -596,6 +615,29 @@
             <x-button style="margin-top: 200px" wire:click='requeriDocumen'> Requerimiento</x-button>
             <x-button wire:click='programaDocumen'> Programa de trabajo</x-button>
             <x-button style="margin-left:340px" wire:click='CedulaDocumen'>Cedula de trabajo </x-button>
+
             <x-button wire:click='InformeDocumen'>Informe del Auditor </x-button>
+
+            @if (session('message'))
+        <div id="notification" class="notification">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.classList.add('show');
+
+                setTimeout(() => {
+                    notification.classList.add('hide');
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 500);
+                }, 3000); // Mostrar la notificación por 3 segundos
+            }
+        });
+        </script>
     </x-section-basic>
 </div>
