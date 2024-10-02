@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Handover;
 use App\Models\AuditActivity;
 use App\Models\Designation;
 use App\Models\Employees;
+use App\Services\CedulaExcelService;
 use App\Traits\ModelPropertyMapper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -76,6 +77,9 @@ class Show extends Component
         return Storage::path(self::PATH_DIRECTORY . "\\$nameDocument");
     }
 
-  
-
+    public function downloadWorkingCedula()
+    {
+        $document = new CedulaExcelService();
+        $document->downloadExcel();
+    }
 }

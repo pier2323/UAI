@@ -24,7 +24,8 @@ class HandoverDocument extends Model
         'delivery_uai', 
         'employee_outgoing_id', 
         'employee_incoming_id', 
-        'audit_activity_id', 
+        'audit_activity_id',
+        'hallazgo', 
     ];
 
     public function auditActivity(): \Illuminate\Database\Eloquent\Relations\belongsTo

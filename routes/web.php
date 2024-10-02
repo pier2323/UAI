@@ -4,10 +4,14 @@ use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\DataController;
+Route::get('/form', function () {
+    return view('form');
+});
 
-use App\Http\Controllers\DateController;
+Route::post('/save-data', [DataController::class, 'saveData'])->name('saveData');
 
-Route::get('/descargar-plantilla', [DateController::class, 'descargarPlantilla'])->name('descargarPlantilla');
+
 
 Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
 // todo before login 

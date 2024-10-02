@@ -46,17 +46,15 @@ final class RequeriDocumen
         $code = $this->auditActivity->code;
 
         $this->document->data = [
-            'code' => "$code", 
-            'unidad_entrega' => 'Cas', 
-            'unidad_adcripta' => 'Gerencia de Control Posteriro', 
-            'articulo' => 'el', 
-            'nombre_saliente' => 'pier', 
-            'cedula_saliente' => '1234567', 
-            'fecha_subcripcion' => '12/06/2024', 
-            'fecha_requerimiento' => '14/12/2024', 
-            'fecha_cese' => '25/04/2024', 
-            'fecha_designacion' => '25/45/225',
+            'code' =>'' , 
+            'unidad_entrega' => 'Gerencia General Seguridad Integral', 
+            'unidad_adcripta' => 'Presidencia', 
+            'articulo' => 'Ciudadano', 
+            'nombre_saliente' => 'Rubén Dario Sanabria Conteras', 
+            'cedula_saliente' => 'V-7.412.380', 
+            'fecha_subcripcion' => '11/03/2024', 
+            'fecha_requerimiento' => '02 de Octubre de 2024', 
+            'fecha_cese' => '01/08/2024', 
         ];
     }
-
 }

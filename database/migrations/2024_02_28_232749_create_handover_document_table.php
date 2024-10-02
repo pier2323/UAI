@@ -14,14 +14,15 @@ return new class extends Migration
             $table->date('cease')->nullable(); 
             $table->date('subscription')->nullable(); 
             $table->date('delivery_uai')->nullable(); 
+            $table->json('hallazgo');
 
-            $table->unsignedBigInteger('employee_outgoing_id'); 
+            $table->unsignedBigInteger('employee_outgoing_id')->nullable(); 
             $table->foreign('employee_outgoing_id')->references('id')->on('employee_outgoing');
             
-            $table->unsignedBigInteger('employee_incoming_id'); 
+            $table->unsignedBigInteger('employee_incoming_id')->nullable(); 
             $table->foreign('employee_incoming_id')->references('id')->on('employee_incoming');
 
-            $table->unsignedBigInteger('audit_activity_id')->unique();
+            $table->unsignedBigInteger('audit_activity_id')->unique()->nullable();
             $table->foreign('audit_activity_id')->references('id')->on('audit_activity');
 
             $table->timestamp('created_at')->useCurrent();

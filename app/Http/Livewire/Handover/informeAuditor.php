@@ -28,7 +28,7 @@ final class informeAuditor
         public readonly ?Carbon $date = null,
     ) {
         // Fecha fija
-        $fechaFija = Carbon::create(2023, 20, 26);
+        $fechaFija = Carbon::create(2025, 10 , 30);
         // Fecha actual
         $fechaActual = Carbon::now();
         // Diferencia en días
