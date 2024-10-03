@@ -3,11 +3,15 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
+use App\Traits\ModelPropertyMapper;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Database\Eloquent\Collection;
 
 final class DesignationService
 {
+    use ModelPropertyMapper;
+
     private const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
     private const NAME_TEMPLATE = 'designationTemplate.docx';
     private const NAME_DOCUMENT = 'designacion.docx';
@@ -16,14 +20,16 @@ final class DesignationService
 
     public function __construct(
         private readonly AuditActivity $auditActivity, 
-        public readonly string|null $nameDocument = null,
-        public readonly string|null $date = null,
+        public readonly ?string $nameDocument = null,
+        public readonly ?Carbon $date = null,
     ){
         $this->document = new WorkingPaper (
             templateFile: WorkingPaper::getTemplate(self::NAME_TEMPLATE), 
             nameDocument: $nameDocument ?? self::NAME_DOCUMENT,
             date: $date ?? now(),
-        );        
+        ); 
+        
+        $this->mapModelProperties($this->auditActivity, ($this->getPropertiesDates()));
     }
     
     public function download(): BinaryFileResponse
@@ -42,6 +48,7 @@ final class DesignationService
 
         $pathDocumentToDownload = $this->document->getPathDocumentToDownload();
 
+        dd($this->document->data);
         return $pathDocumentToDownload;
     }
 
@@ -60,34 +67,43 @@ final class DesignationService
 
     private function setData(): void
     {
+        $date_release = // todo make date in spanish example '4 de abril de 2001' 
+        $this->document->date->format('j') ." de ". // todo '$day de'   
+        $this->document->date->monthName ." de ".   // todo '$month de' 
+        $this->document->date->format('Y');   
+
         $lineJump = str_repeat(' ', 500);
 
         $this->document->data = [
-            'auditActivityCode' => $this->auditActivity->code(),
+            'auditActivityCode' => $this->auditActivity->code,
             'actuacionFiscal' => $this->auditActivity->id,
-            'fechaInicio' => $this->document->date->format('j de F de Y'),
+            'fechaInicio' => $date_release,
             'tituloActuacion' => $this->auditActivity->description,
             'auditores' => implode($lineJump, $this->auditors),
+        ];
 
-            'diasPlanificacion' => 5,
-            'fechaPlanificacionInicio' => $this->auditActivity->planning_start,
-            'fechaPlanificacionFin' => $this->auditActivity->planning_end,
+        foreach ($this->getPropertiesDates() as $property => $nameInDocument)
+        $this->document->data[$nameInDocument] = $this->{$property};
+    }
 
-            'diasEjecucion' => 10,
-            'fechaEjecucionInicio' => $this->auditActivity->execution_start,
-            'fechaEjecucionFin' => $this->auditActivity->execution_end,
-
-            'diasPreeliminar' => 10,
-            'fechaPreeliminarInicio' => $this->auditActivity->preliminary_start,
-            'fechaPreeliminarFin' => $this->auditActivity->preliminary_end,
-
-            'diasDescargo' => 10,
-            'fechaDescargoInicio' => $this->auditActivity->download_start,
-            'fechaDescargoFin' => $this->auditActivity->download_end,
-
-            'diasDefinitivo' => 5,
-            'fechaDefinitivoInicio' => $this->auditActivity->definitive_start,
-            'fechaDefinitivoFin' => $this->auditActivity->definitive_end,
+    private function getPropertiesDates(): array
+    {
+        return [
+            'planning_days' => 'diasPlanificacion',
+            'planning_start' => 'fechaPlanificacionInicio',
+            'planning_end' => 'fechaPlanificacionFin',
+            'execution_days' => 'diasEjecucion',
+            'execution_start' => 'fechaEjecucionInicio',
+            'execution_end' => 'fechaEjecucionFin',
+            'preliminary_days' => 'diasPreeliminar',
+            'preliminary_start' => 'fechaPreeliminarInicio',
+            'preliminary_end' => 'fechaPreeliminarFin',
+            'download_days' => 'diasDescargo',
+            'download_start' => 'fechaDescargoInicio',
+            'download_end' => 'fechaDescargoFin',
+            'definitive_days' => 'diasDefinitivo',
+            'definitive_start' => 'fechaDefinitivoInicio',
+            'definitive_end' => 'fechaDefinitivoFin',
         ];
     }
 }

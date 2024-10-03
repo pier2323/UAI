@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AuditActivity;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+
 
 class ExcelController extends Controller
 {
@@ -209,10 +208,6 @@ class ExcelController extends Controller
             $counter++;
         }
     }
-
-
-        // $hoja5->setCellValue(coordinate: 'D1', '');
-
         // Enviar el archivo Excel al navegador
         $writer = new Xlsx($spreadsheet);
         $filename = 'Cedula.xlsx';

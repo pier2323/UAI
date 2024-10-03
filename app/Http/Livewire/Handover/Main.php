@@ -3,35 +3,39 @@
 namespace App\Http\Livewire\Handover;
 
 use App\Models\AuditActivity;
+use App\Models\Designation;
 use Livewire\Component;
 
 class Main extends Component
 {
-    public $employees = [];
-    public $AuditActivity =[];
-     public $Audit=[];
+    public $query = '';
     public function render()
     {
-        return view('livewire.handover.main');
+        return view('livewire.handover.main', [
+            'designations' => Designation::with(
+                ['auditActivity' => function ($query) {
+                    $query->with([
+                        'handoverDocument' => [
+                            'employeeIncoming',
+                            'employeeOutgoing' => [
+                                'jobTitle',
+                            ],
+                        ],
+                        'typeAudit',
+                        'uai',])
+                        ->where('audit_activity.description','like', "%$this->query%")
+                        ->orWhere('audit_activity.year','like', "%$this->query%")
+                        ->orWhere('audit_activity.month_start','like', "%$this->query%")
+                        ->orderBy('audit_activity.id', 'asc')
+                        ->get();
+                }]
+            )->paginate(perPage: 10)
+        ]);
     }
 
-    public function mount()
+    public function goTo($route, $id)
     {
-        $this->employees = \App\Models\Employee::all();
-        $relations = ['employee', 'typeAudit', 'handoverDocument', 'uai'];
-        $this->AuditActivity = AuditActivity::with($relations)->where('type_audit_id', 1)->get();
-        $this->Audit = AuditActivity::with('employee')->where('type_audit_id', '1')->get();
-            
-
-    }
-
-    public function hola($id)
-    {
-        $route = route('handover.show', $id);
-        $this->redirect(
-            url: $route, 
-            navigate: true
-        );
+        $this->redirectRoute($route, ['designation' => $id], navigate: true);
     }
 
 }

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,17 +21,39 @@ class AuditActivity extends Model
     protected $fillable = [
         'objetive',
         'planning_start',
-        'planning_end',
+        'planning_end',     
+        'planning_days',
         'execution_start',
-        'execution_end',
+        'execution_end',      
+        'execution_days',
         'preliminary_start',
-        'preliminary_end',
+        'preliminary_end',        
+        'preliminary_days',
         'download_start',
-        'download_end',
+        'download_end',     
+        'download_days',
         'definitive_start',
-        'definitive_end',
+        'definitive_end',       
+        'definitive_days',
         'type_audit',
     ];
+
+    protected $dates = [
+        'planning_start',
+        'planning_end',    
+        'execution_start',
+        'execution_end',     
+        'preliminary_start',
+        'preliminary_end',       
+        'download_start',
+        'download_end',    
+        'definitive_start',
+        'definitive_end',      
+    ];
+
+    
+
+    // todo relations 
 
     public function typeAudit(): BelongsTo
     {
@@ -52,7 +77,7 @@ class AuditActivity extends Model
 
     public function employee(): BelongsToMany
     {
-        return $this->belongsToMany(related: Employee::class)->withPivot('role');
+        return $this->belongsToMany(related: Employee::class)->withPivot('role', 'id');
     }
 
     public function designation(): HasManyThrough
@@ -65,12 +90,40 @@ class AuditActivity extends Model
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 
-    public function code(): string
+    // todo setting 
+
+    protected function casts(): array
     {
-        return $this->year . '-' . str_pad($this->id, 3, '0', STR_PAD_LEFT);
+        return [
+            'planning_start' => 'date',
+            'planning_end' => 'date',
+            'execution_start' => 'date',
+            'execution_end' => 'date',
+            'preliminary_start' => 'date',
+            'preliminary_end' => 'date',
+            'download_start' => 'date',
+            'download_end' => 'date',
+            'definitive_start' => 'date',
+            'definitive_end' => 'date',
+        ];
     }
 
-    public function decode(string $code): int|string
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('d/m/Y');
+    }
+
+    protected function code(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) 
+            => $attributes['year'] . '-' . str_pad($attributes['id'], 3, '0', STR_PAD_LEFT)
+        );
+    }
+    
+    // todo custom functions 
+
+    private function decode(string $code): int|string
     {
         $divisor = '-';
         
@@ -86,5 +139,20 @@ class AuditActivity extends Model
     {
         $decode =  $this->decode($code);
         return $query->where('id', 'like', "%$decode%");
+    }
+
+    private function formatLocalDateStringAttribute(string $date): string
+    {
+        return Carbon::parse($date)->format('d/m/Y');
+    }
+
+    public function isDesignated(): bool
+    {
+        return $this->designation()->first() ? true : false;
+    }
+
+    public function isAcredited(): bool
+    {
+        return $this->acreditation()->first() ? true : false;
     }
 }

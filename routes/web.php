@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
 use App\Http\Controllers\ExcelController;
 
+use App\Http\Controllers\DateController;
+
+Route::get('/descargar-plantilla', [DateController::class, 'descargarPlantilla'])->name('descargarPlantilla');
+
 Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
 // todo before login 
 Route::get('/', function () {
