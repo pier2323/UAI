@@ -1,50 +1,50 @@
  <div>
     @push('script') @assets  @vite(['resources/js/hola.js']) @endassets @endpush
-    @php
-        $th = "colspan='1' rowspan=-'1' tabindex='0'";
-        $td = 'px-4 py-2';
-        $headerTitle = ['Código ', 'Objetivo', 'Mes inicio', 'Mes fin', 'Area UAI Encargada',]
-    @endphp
 
     <x-section-basic>
-        <div class="m-6"> <livewire:auditActivity.registerForm.main> </div>
+        <div class="m-4">
+            <livewire:AuditActivity.Add>
+        </div>
 
-        {{-- todo browser --}}
-        
-        <x-input class="ml-6" type="search" wire:model.live="query" placeholder='Buscar...' />
+        <div class="flex justify-between pr-10">
+            {{-- todo browser --}}
+            <x-input class="ml-6" type="search" wire:model.live="query" placeholder='Buscar...' />
+            <h3 role="table-title" class="text-2xl font-semibold">Plan Operativo Anual</h3>
+        </div>
 
-        <table>  
+        <style>
+            .table-grid-audit {
+                display: grid;
+                grid-template-columns: 1fr 5fr repeat(3, 1fr);
+                grid-column-gap: 1vw;
+                grid-row-gap: 4vh;
+            }
+        </style>
+        <ul class="justify-center mt-4 table-grid-audit">
 
             {{-- todo head --}}
-            <thead> 
-                @foreach ($headerTitle as $row)
-                    <th class="px-4 py-2 border-b border-b-slate-300" {{$th}}> {{ $row }} </th>
-                @endforeach
-            </thead>
+            @foreach (['Código ', 'Descripcion', 'Mes inicio', 'Mes fin', 'Area UAI Encargada',] as $row)
+                <li class="text-center border-b border-b-slate-300"> {{ $row }} </li>
+            @endforeach
 
             {{-- todo body --}}
-            <tbody>
-                @foreach ($auditActivities as $auditActivity)
-
-                <tr 
-                class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
-                wire:key="{{ $auditActivity->id }}" 
-                wire:dblclick="goTo('auditActivity.show', {{ $auditActivity->id }})"
-                wire:loading.attr="disabled"
-                >
-                    <td class=" min-w-fit w-36 text-slate-600 {{ $td }}">{{ $auditActivity->code }}</td> 
-                    <td class=" {{ $td }}">{{ $auditActivity->description }}</td> 
-                    <td class=" {{ $td }}">{{ $auditActivity->month_start }}</td> 
-                    <td class=" {{ $td }}">{{ $auditActivity->month_end }}</td>
-                    <td class=" {{ $td }}">{{ $auditActivity->uai->name ?? '' }}</td>
-
-                </tr>
-
-                @endforeach
-            </tbody>
+            @foreach ($auditActivities as $auditActivity)
+            <form style="grid-column: span 5" class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300"  wire:key="{{ $auditActivity->id }}" wire:submit="goTo({{ $auditActivity->id }})" 
+            >
+                <button class="items-center table-grid-audit" wire:loading.attr="disabled">
+                    <li>{{ $auditActivity->code }}</li> 
+                    <li class="text-start">{{ $auditActivity->description }}</li> 
+                    <li>{{ $auditActivity->month_start }}</li> 
+                    <li>{{ $auditActivity->month_end }}</li>
+                    <li>{{ $auditActivity->uai->name ?? '' }}</li>
+                </button>
+            </form>
+            @endforeach
             
-        </table>
+        </ul>
         {{ $auditActivities->links() }}
-
     </x-section-basic>
+
+
+    
 </div>
