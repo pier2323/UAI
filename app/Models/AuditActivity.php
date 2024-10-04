@@ -19,7 +19,11 @@ class AuditActivity extends Model
     protected $table = 'audit_activity';
 
     protected $fillable = [
-        'objetive',
+        'month_start',
+        'month_end',
+        'public_id',
+        'objective',
+        'description',
         'planning_start',
         'planning_end',     
         'planning_days',
@@ -35,7 +39,9 @@ class AuditActivity extends Model
         'definitive_start',
         'definitive_end',       
         'definitive_days',
-        'type_audit',
+        'type_audit_id',
+        'area_id',
+        'uai_id',
     ];
 
     protected $dates = [
@@ -58,6 +64,11 @@ class AuditActivity extends Model
     public function typeAudit(): BelongsTo
     {
         return $this->belongsTo(related: TypeAudit::class);
+    }
+
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(related: Area::class);
     }
 
     public function uai(): BelongsTo
@@ -117,7 +128,7 @@ class AuditActivity extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) 
-            => $attributes['year'] . '-' . str_pad($attributes['id'], 3, '0', STR_PAD_LEFT)
+            => $attributes['year'] . '-' . str_pad($attributes['public_id'], 3, '0', STR_PAD_LEFT)
         );
     }
     
@@ -138,7 +149,7 @@ class AuditActivity extends Model
     public function scopeWhereDecode($query, string $code)
     {
         $decode =  $this->decode($code);
-        return $query->where('id', 'like', "%$decode%");
+        return $query->where('public_id', 'like', "%$decode%");
     }
 
     private function formatLocalDateStringAttribute(string $date): string
