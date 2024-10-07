@@ -53,7 +53,7 @@ final class RequeriDocumen
             'nombre_saliente' => 'Rubén Dario Sanabria Conteras', 
             'cedula_saliente' => 'V-7.412.380', 
             'fecha_subcripcion' => '11/03/2024', 
-            'fecha_requerimiento' => '02 de Octubre de 2024', 
+            'fecha_requerimiento' => now()->format('d/m/Y'), 
             'fecha_cese' => '01/08/2024', 
         ];
     }

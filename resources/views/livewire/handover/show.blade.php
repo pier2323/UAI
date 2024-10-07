@@ -267,5 +267,14 @@
         <x-button style="margin-left:340px" wire:click='CedulaDocumen'>Cedula de trabajo </x-button>
         <x-button wire:click='InformeDocumen'>Informe del Auditor </x-button>
 
+
+        <title>Enviar Correo</title>
+    </head>
+    <body>
+        <form action="{{ url('/enviar-correo-zimbra') }}" method="GET" target="_blank">
+            <button type="submit">Enviar Correo</button>
+        </form>
+    </body>
+
     </x-section-basic>
 </div>

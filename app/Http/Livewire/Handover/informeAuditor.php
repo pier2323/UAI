@@ -72,6 +72,8 @@ final class informeAuditor
 
     private function setData(): void
     {
+        $checkboxes = session()->get('checkboxes');
+$uncheckedCheckboxes = session()->get('uncheckedCheckboxes');
         $designacion = $this->auditActivity->date_release;
         $code = $this->auditActivity->code;
         $this->document->data = [
@@ -96,6 +98,8 @@ final class informeAuditor
             'nombre_recibe' => '12/06/2024',
             'cedula_recibe' => '12/06/2024',
             'auditores_designados' => $this->getAuditorsString(),
+            
+           
         ];
     }
 

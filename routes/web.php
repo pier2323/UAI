@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\DataController;
-Route::get('/form', function () {
-    return view('form');
-});
+use App\Http\Controllers\ZimbraMailController;
+
+Route::get('/enviar-correo-zimbra', [ZimbraMailController::class, 'enviarCorreo']);
 
 Route::post('/save-data', [DataController::class, 'saveData'])->name('saveData');
 
