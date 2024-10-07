@@ -37,9 +37,9 @@ class Main extends Component
 
     }
 
-    public function goTo($route, $id)
+    public function goTo($id)
     {
-        $this->redirectRoute($route, ['auditActivity' => $id], navigate: true);
+        $this->redirectRoute('auditActivity.show', ['auditActivity' => $id], navigate: true);
     }
 
 }

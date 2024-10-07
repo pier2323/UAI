@@ -11,6 +11,6 @@
     {{-- todo Designation --}}
     <livewire:AuditActivity.Show.Designation :$auditActivity :$designation>
 
-    {{-- <livewire:AuditActivity.Show.RegisterFormHandoverDocument :$auditActivity> --}}
+    <livewire:AuditActivity.Show.RegisterFormHandoverDocument :$auditActivity>
 
 </div>
