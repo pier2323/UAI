@@ -13,6 +13,7 @@ use Livewire\Form;
 class HandoverDocument extends Form
 {
     const array properties = [ 
+        'start',
         'cease', 
         'subscription', 
         'delivery_uai', 
@@ -20,6 +21,10 @@ class HandoverDocument extends Form
         'employee_incoming_id', 
         'audit_activity_id', 
     ];
+
+    
+    #[Validate('required', 'date_format:d/m/Y',  as: 'Fecha de Inicio del Periodo')]
+    public string $start;
 
     #[Validate('required', 'date_format:d/m/Y',  as: 'Fecha del Cese')]
     public string $cease;
@@ -55,7 +60,7 @@ class HandoverDocument extends Form
 
     private function toFormatDate(): void
     {
-        foreach (['cease', 'subscription', 'delivery_uai'] as $date) {
+        foreach (['start', 'cease', 'subscription', 'delivery_uai'] as $date) {
             $this->{$date} = self::format(date: $this->{$date});
         }
     }

@@ -4,6 +4,7 @@
     'placeholder' => null, 
     'custom' => false, 
     'input' => 'transformedInput', 
+    'limit' => 6,
     'select' => false, 
     'readonly' => null
 ])
@@ -20,7 +21,7 @@
             class="flex h-10 w-full items-center rounded-md border @error($property) border-red-400 @else border-gray-300 @enderror pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm"
             type="text" 
             @if ($custom) {{$attributes['x-on:input']}}
-            @else x-on:input="$wire.{{ $property }} = {{$input}}($wire.{{ $property }}, 6)" @endif
+            @else x-on:input="$wire.{{ $property }} = {{$input}}($wire.{{ $property }}, {{ $limit }})" @endif
             x-model="$wire.{{ $property }}"
             wire:model="{{ $property }}"
             {{ $attributes['x-on:input'] }}

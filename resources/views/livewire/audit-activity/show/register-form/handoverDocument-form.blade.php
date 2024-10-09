@@ -9,14 +9,17 @@
         {{-- todo dates --}}
         <div class="flex flex-col">
 
+            {{-- todo Start --}}
+            <x-input-handover-date id='start' title="Fecha de Inicio del Periodo" />
+
             {{-- todo Cease --}}
-            <x-input-handover-date id='handoverDocument.cease' title="Fecha del Cese de Funciones" />
+            <x-input-handover-date id='cease' title="Fecha del Cese de Funciones" />
 
             {{-- todo Subscription --}}
-            <x-input-handover-date id='handoverDocument.subscription' title="Fecha de suscripción" />
+            <x-input-handover-date id='subscription' title="Fecha de suscripción" />
             
             {{-- todo Delivery UAI --}}
-            <x-input-handover-date id='handoverDocument.delivery_uai' title="Fecha de recibo en la UAI" />
+            <x-input-handover-date id='delivery_uai' title="Fecha de recibo en la UAI" />
 
         </div>
         
@@ -29,12 +32,14 @@
             return {
                 cease: '',
                 properties : [
+                    'start', 
                     'cease', 
                     'subscription', 
                     'delivery_uai'
                 ],
 
                 init() {
+                    // alert('hola')
                     const config = {
                         maxDate: "today",
                         dateFormat: "d/m/Y",

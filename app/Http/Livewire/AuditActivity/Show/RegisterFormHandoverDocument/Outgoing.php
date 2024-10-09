@@ -18,9 +18,10 @@ final class Outgoing extends Form
         'email_cantv', 
         'gmail', 
         'personal_id', 
+        'address',
 
         // ? relations 
-        'job_title_id', 
+        'job_title', 
         'departament_id', 
     ];
 
@@ -46,7 +47,7 @@ final class Outgoing extends Form
     #[Validate('required|max:5|min:3|', as: 'Codigo de Telefono')]
     public $phone_code;
 
-    #[Validate('email|unique:employee_outgoing|max:255', as: 'Correo Corporativo')]
+    #[Validate('email|unique:employee_outgoing|max:255|nullable', as: 'Correo Corporativo')]
     public $email_cantv;
 
     #[Validate('required|email|max:255', as: 'Correo Gmail')]
@@ -56,7 +57,10 @@ final class Outgoing extends Form
     public $personal_id;
 
     #[Validate('required', as: 'Cargo')]
-    public $job_title_id;
+    public $job_title;
+
+    #[Validate('required', as: 'Cargo')]
+    public $address;
 
     #[Validate('required', as: 'Unidad de Adscripcion')]
     public $departament_id;

@@ -16,13 +16,12 @@ return new class extends Migration
             $table->string('second_surname')->nullable();
             $table->string('gmail')->nullable();
             $table->string('email_cantv')->nullable();
+            $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('profile_photo')->nullable();
             $table->integer('p00')->unique();
             $table->integer('personal_id')->unique();
-        
-            $table->unsignedBigInteger('job_title_id');
-            $table->foreign('job_title_id')->references('id')->on('job_title');
+            $table->string('job_title');
 
             $table->unsignedBigInteger('departament_id');
             $table->foreign('departament_id')->references('id')->on('departament');

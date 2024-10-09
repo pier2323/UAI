@@ -19,7 +19,8 @@ class HandoverDocument extends Model
     protected $table = 'handover_document';
 
     protected $fillable = [
-        'cease', 
+        'start',
+        'cease',
         'subscription', 
         'delivery_uai', 
         'employee_outgoing_id', 
