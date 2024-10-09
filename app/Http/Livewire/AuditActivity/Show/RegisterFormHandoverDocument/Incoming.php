@@ -3,21 +3,32 @@
 namespace App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument;
 
 use App\Models\EmployeeIncoming;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class Incoming extends Form
 {
-    // todo inputs variables 
+    const array properties = [
+        'p00', 
+        'first_name', 
+        'second_name', 
+        'first_surname', 
+        'second_surname', 
+        'phone',
+        'email_cantv', 
+        'gmail', 
+        'personal_id', 
+        'job_title_id', 
+    ];
 
+    // todo inputs variables 
     #[Validate('required|unique:employee_incoming,p00|max:6|min:5', as: 'P00')]
     public $p00; 
 
     #[Validate('required|max:255|min:3', as: 'Primer Nombre')]
     public $first_name;
 
-    #[Validate('max:255|min:3', as: 'Segundo Nombre')]
+    #[Validate('max:255|min:3|nullable', as: 'Segundo Nombre')]
     public $second_name;
 
     #[Validate('required|max:255|min:3', as: 'Primer Apellido')]
@@ -60,18 +71,13 @@ class Incoming extends Form
 
     private function propertiesToSave(): array
     {
-        return $this->only([
-            'p00', 
-            'first_name', 
-            'second_name', 
-            'first_surname', 
-            'second_surname', 
-            'phone',
-            'email_cantv', 
-            'gmail', 
-            'personal_id', 
-            'job_title_id', 
-        ]);
+        return $this->only(self::properties);
+    }
+
+    public function load(EmployeeIncoming $incoming): void 
+    {
+        foreach(self::properties as $property) 
+        $this->{$property} = $incoming->$property;
     }
 
 }
