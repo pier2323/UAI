@@ -15,7 +15,7 @@
             </x-input-text-handover>
             
             {{-- todo Personal ID --}}
-            <x-input-text-handover property="outgoing.personal_id" title="Numero de Cedula" input="updateValue" :readonly="$modelsHandoverDocument">
+            <x-input-text-handover property="outgoing.personal_id" title="Numero de Cedula" input="updateValue" limit="8" :readonly="$modelsHandoverDocument">
                 <x-slot:prefix>
                     <div class="flex items-center h-10 p-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" >V</div>
                         
@@ -94,18 +94,8 @@
                 </x-input-text-handover>
             @endif
 
-
             {{-- todo Job title --}}
-            <x-input-text-handover property="outgoing.job_title_id" title="Cargo" select :readonly="$modelsHandoverDocument">
-
-                <x-slot name="options">
-                    <option selected style="display: none">Selecciona una opcion...</option>
-                    @foreach (isset($modelsHandoverDocument) 
-                    ? [$this->modelsHandoverDocument->employeeOutgoing()->first()->jobTitle()->first()]
-                    : $job_titles as $job_title) <option value="{{$job_title->id}}">{{$job_title->name}}</option> @endforeach
-                </x-slot>
-                    
-            </x-input-text-handover>
+            <x-input-text-handover property="outgoing.job_title" title="Cargo" :readonly="$modelsHandoverDocument" />
             
         </div>
 

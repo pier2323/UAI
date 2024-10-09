@@ -14,4 +14,5 @@
     @if($auditActivity->type_audit_id === 1) {{-- todo type_audit_id => 1 = Acta de Entrega --}}
     <livewire:AuditActivity.Show.RegisterFormHandoverDocument :$auditActivity :modelsHandoverDocument="$handoverDocument">
     @endif
+    
 </div>

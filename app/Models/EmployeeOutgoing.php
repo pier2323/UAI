@@ -22,16 +22,18 @@ class EmployeeOutgoing extends Model
         'email_cantv', 
         'gmail', 
         'personal_id', 
-
+        'job_title',
+        'address',
+        
         // ? relations 
         'departament_id', 
-        'job_title_id',
+        // 'job_title_id',
     ];
 
-    public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(related: JobTitle::class);
-    }
+    // public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    // {
+    //     return $this->belongsTo(related: JobTitle::class);
+    // }
 
     public function departament(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

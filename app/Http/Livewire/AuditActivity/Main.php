@@ -18,9 +18,7 @@ class Main extends Component
         return view('livewire.audit-activity.main', ['auditActivities' => AuditActivity::with([
             'handoverDocument' => [
                 'employeeIncoming',
-                'employeeOutgoing' => [
-                    'jobTitle',
-                ],
+                'employeeOutgoing',
             ],
             'typeAudit',
             'uai',])

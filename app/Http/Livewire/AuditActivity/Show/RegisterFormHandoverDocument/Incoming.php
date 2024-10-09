@@ -18,7 +18,8 @@ class Incoming extends Form
         'email_cantv', 
         'gmail', 
         'personal_id', 
-        'job_title_id', 
+        'job_title', 
+        'address',
     ];
 
     // todo inputs variables 
@@ -34,7 +35,7 @@ class Incoming extends Form
     #[Validate('required|max:255|min:3', as: 'Primer Apellido')]
     public $first_surname;
 
-    #[Validate('max:255|min:3', as: 'Segundo Nombre')]
+    #[Validate('max:255|min:3|nullable', as: 'Segundo Apellido')]
     public $second_surname;
 
     #[Validate('required|max:8|min:6', as: 'Numero de telefono')]
@@ -53,7 +54,10 @@ class Incoming extends Form
     public $personal_id;
 
     #[Validate('required', as: 'Cargo')]
-    public $job_title_id;
+    public $job_title;
+
+    #[Validate('required', as: 'Cargo')]
+    public $address;
 
     public $phone;
     public $errorMessage;

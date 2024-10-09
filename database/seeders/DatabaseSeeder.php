@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartamentSeeder::class);
         $this->call(UaiSeeder::class);
         $this->call(EmployeeSeeder::class);
-        $this->call(EmployeeOutgoingSeeder::class);
-        $this->call(EmployeeIncomingSeeder::class);
+        // $this->call(EmployeeOutgoingSeeder::class);
+        // $this->call(EmployeeIncomingSeeder::class);
         $this->call(TypeAuditSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(AuditActivitySeeder::class);

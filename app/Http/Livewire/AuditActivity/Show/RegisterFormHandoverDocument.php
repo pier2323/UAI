@@ -9,6 +9,7 @@ use App\Models\AuditActivity;
 use App\Models\Departament;
 use App\Models\HandoverDocument as ModelsHandoverDocument;
 use App\Models\JobTitle;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 enum ComponentName: string 
@@ -24,6 +25,8 @@ class RegisterFormHandoverDocument extends Component
     public Outgoing $outgoing;
     public Incoming $incoming;
     public HandoverDocument $handoverDocument;
+
+    #[Reactive]
     public ?ModelsHandoverDocument $modelsHandoverDocument;
 
     public $job_titles, $departaments;
@@ -41,7 +44,6 @@ class RegisterFormHandoverDocument extends Component
             $this->handoverDocument->load($this->modelsHandoverDocument);
             
         }
-        $this->job_titles = JobTitle::all();
         $this->departaments = Departament::all();
     }
 

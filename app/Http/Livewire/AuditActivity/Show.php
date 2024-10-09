@@ -8,6 +8,7 @@ use App\Models\Designation;
 use App\Models\HandoverDocument;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class Show extends Component
@@ -15,7 +16,9 @@ class Show extends Component
     #[Locked]
     public AuditActivity $auditActivity;
 
+    // #[Reactive]
     public ?HandoverDocument $handoverDocument;
+
     public ?Acreditation $acreditation;
     public ?Designation $designation;
     public bool $designated = false;
@@ -36,5 +39,4 @@ class Show extends Component
         if ($this->auditActivity->isAcredited()) $this->acreditation = $this->auditActivity->acreditation()->first();
         $this->handoverDocument = $this->auditActivity->handoverDocument()->first() ?? null;
     }
-    
 }
