@@ -7,8 +7,8 @@ use App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument\Incoming;
 use App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument\Outgoing;
 use App\Models\AuditActivity;
 use App\Models\Departament;
+use App\Models\HandoverDocument as ModelsHandoverDocument;
 use App\Models\JobTitle;
-use LaraDumps\LaraDumps\Livewire\Attributes\Ds;
 use Livewire\Component;
 
 enum ComponentName: string 
@@ -18,13 +18,13 @@ enum ComponentName: string
     case handoverDocument = 'handoverDocument';
 }
 
-#[Ds]
 class RegisterFormHandoverDocument extends Component
 {
     public AuditActivity $auditActivity;
     public Outgoing $outgoing;
     public Incoming $incoming;
     public HandoverDocument $handoverDocument;
+    public ?ModelsHandoverDocument $modelsHandoverDocument;
 
     public $job_titles, $departaments;
 
@@ -35,19 +35,31 @@ class RegisterFormHandoverDocument extends Component
 
     public function mount()
     {
+        if($this->modelsHandoverDocument) {
+            $this->outgoing->load($this->modelsHandoverDocument->employeeOutgoing()->first());
+            $this->incoming->load($this->modelsHandoverDocument->employeeIncoming()->first());
+            $this->handoverDocument->load($this->modelsHandoverDocument);
+            
+        }
         $this->job_titles = JobTitle::all();
         $this->departaments = Departament::all();
     }
 
     public function save(): void
     {
+        foreach([
+            ComponentName::handoverDocument, 
+            ComponentName::incoming, 
+            ComponentName::outgoing
+        ] as $component) $this->verify($component);
+
         $this->handoverDocument->save(
             $this->outgoing->save(),
             $this->incoming->save(),
             $this->auditActivity,
         );
 
-        $this->dispatch('saved', message: ' ¡Se ha guardado los datos con exito!');
+        $this->dispatch('saved', message: '¡Se ha guardado los datos con exito!');
     }
 
     public function verify(ComponentName $component): void

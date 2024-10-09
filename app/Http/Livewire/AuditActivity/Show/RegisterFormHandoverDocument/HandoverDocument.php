@@ -12,6 +12,15 @@ use Livewire\Form;
 
 class HandoverDocument extends Form
 {
+    const array properties = [ 
+        'cease', 
+        'subscription', 
+        'delivery_uai', 
+        'employee_outgoing_id', 
+        'employee_incoming_id', 
+        'audit_activity_id', 
+    ];
+
     #[Validate('required', 'date_format:d/m/Y',  as: 'Fecha del Cese')]
     public string $cease;
 
@@ -35,14 +44,7 @@ class HandoverDocument extends Form
 
         $this->toFormatDate();
 
-        return ModelsHandoverDocument::create($this->only([ 
-        'cease', 
-        'subscription', 
-        'delivery_uai', 
-        'employee_outgoing_id', 
-        'employee_incoming_id', 
-        'audit_activity_id', 
-        ]));
+        return ModelsHandoverDocument::create($this->propertiesToSave());
     }
 
     private static function format(String $date): string 
@@ -55,6 +57,18 @@ class HandoverDocument extends Form
     {
         foreach (['cease', 'subscription', 'delivery_uai'] as $date) {
             $this->{$date} = self::format(date: $this->{$date});
+        }
+    }
+
+    private function propertiesToSave(): array
+    {
+        return $this->only(self::properties);
+    }
+
+    public function load(ModelsHandoverDocument $incoming): void 
+    {
+        foreach(self::properties as $property) {
+            $this->{$property} = $incoming->$property;
         }
     }
 }

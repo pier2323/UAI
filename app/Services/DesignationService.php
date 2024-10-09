@@ -48,7 +48,6 @@ final class DesignationService
 
         $pathDocumentToDownload = $this->document->getPathDocumentToDownload();
 
-        dd($this->document->data);
         return $pathDocumentToDownload;
     }
 

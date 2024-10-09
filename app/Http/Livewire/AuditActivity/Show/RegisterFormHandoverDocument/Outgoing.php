@@ -8,6 +8,22 @@ use Livewire\Form;
 
 final class Outgoing extends Form
 {
+    const array properties = [
+        'p00', 
+        'first_name', 
+        'second_name', 
+        'first_surname', 
+        'second_surname', 
+        'phone',
+        'email_cantv', 
+        'gmail', 
+        'personal_id', 
+
+        // ? relations 
+        'job_title_id', 
+        'departament_id', 
+    ];
+
     // todo inputs variables 
     #[Validate('required|unique:employee_outgoing,p00|max:10|min:6', as: 'P00')]
     public $p00; 
@@ -45,7 +61,7 @@ final class Outgoing extends Form
     #[Validate('required', as: 'Unidad de Adscripcion')]
     public $departament_id;
 
-    private string $phone;
+    public string $phone = '';
 
     public bool $verified = false;
 
@@ -60,20 +76,12 @@ final class Outgoing extends Form
 
     private function propertiesToSave(): array
     {
-        return $this->only([
-            'p00', 
-            'first_name', 
-            'second_name', 
-            'first_surname', 
-            'second_surname', 
-            'phone',
-            'email_cantv', 
-            'gmail', 
-            'personal_id', 
+        return $this->only(self::properties);
+    }
 
-            // ? relations 
-            'job_title_id', 
-            'departament_id', 
-        ]);
+    public function load(EmployeeOutgoing $outgoing): void 
+    {
+        foreach(self::properties as $property) 
+        $this->{$property} = $outgoing->$property;
     }
 }
