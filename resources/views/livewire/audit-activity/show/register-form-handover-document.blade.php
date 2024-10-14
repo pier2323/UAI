@@ -1,37 +1,40 @@
- <div>
-
-    @php
-    $label = 'col-form-label';
-    $input = '';
-    $title = 'Registro de Acta de Entrega';
-    $phone = "flex h-10 items-center rounded-md border border-gray-300 pl-3 text-sm font-normal text-gray-600 focus:border focus:border-indigo-500 focus:outline-none shadow-sm";
-    @endphp
+ <div @isset($auditActivity) x-on:saved.window="await $wire.$parent.load()" @endisset>
     
     <form wire:submit='save'>
         <x-section-basic>
             <div class="mb-3">
-                <h3 class="text-3xl font-semibold">{{ \__("Acta de Entrega") }}</h3>
+                <div class="flex ">
+                    <h3 class="text-3xl font-semibold">{{ \__("Acta de Entrega") }}</h3>
+                    <h3 class="mx-2 text-3xl font-semibold"> {{ \__("-") }} </h3>
+                    @empty($modelsHandoverDocument) <h3 class="text-3xl font-semibold">{{ \__("Registro") }}</h3> @endempty
+                    @isset($modelsHandoverDocument) <h3 class="text-3xl font-semibold">{{ \__("Información") }}</h3> @endisset
+                </div>
                 <hr class="mt-2">
             </div>
-            <div class="flex items-center justify-evenly">
-                @include('livewire.audit-activity.show.register-form.handoverDocument-form')
-                <div id="handoverPersonal" class="flex flex-col overflow-scroll border-2 border-black rounded-lg" style="height: 80vh; scroll: thin;">
+            <div class="flex items-start justify-evenly">
+                <div class="w-96">
+                    @include('livewire.audit-activity.show.register-form.handoverDocument-form')
+                </div>
+                <div id="handoverPersonal">
                 
-                    <div class="mb-3">
-                        @include('livewire.audit-activity.show.register-form.outgoing-form')
-                    </div>
-                    
-                    <hr class="self-center w-11/12 bg-black rounded-lg min-h-0.5 "/>
+                    <x-card-handover :tabs="['Saliente' => 'outgoing', 'Entrante' => 'incoming']" default="outgoing">
+                        <x-slot name="outgoing">
+                            @include('livewire.audit-activity.show.register-form.outgoing-form')
+                        </x-slot>
+                        
 
-                    <div>
-                        @include('livewire.audit-activity.show.register-form.incoming-form')
-                    </div>
-                    
+                        <x-slot name="incoming" >
+                            @include('livewire.audit-activity.show.register-form.incoming-form')
+                        </x-slot>
+                    </x-card-handover>
+
                 </div>
             </div>
+            @empty($modelsHandoverDocument)
             <x-slot:footer>
                 <x-button class="ml-4" type="submit">{{ \__("Guardar") }}</x-button>
             </x-slot>
+            @endempty
         </x-section-basic>
     </form>
 

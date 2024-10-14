@@ -1,5 +1,6 @@
 <div role="designation">
-    @push('alert') <x-notification on='designation'/> @endpush
+    @isset($designation) @push('alert') <x-notification on='designation_download'/> @endpush @endisset
+    @empty($designation) @push('alert') <x-notification on='designation_designate'/> @endpush @endempty
 
     {{-- todo planning form --}}
     <form wire:submit="designate" onkeydown="return event.key != 'Enter';">

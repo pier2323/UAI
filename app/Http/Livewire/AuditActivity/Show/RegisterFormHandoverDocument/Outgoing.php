@@ -8,6 +8,21 @@ use Livewire\Form;
 
 final class Outgoing extends Form
 {
+    const array properties = [
+        'p00', 
+        'first_name', 
+        'second_name', 
+        'first_surname', 
+        'second_surname', 
+        'phone',
+        'email_cantv', 
+        'gmail', 
+        'personal_id', 
+        'address',
+        'departament', 
+        'job_title', 
+    ];
+
     // todo inputs variables 
     #[Validate('required|unique:employee_outgoing,p00|max:10|min:6', as: 'P00')]
     public $p00; 
@@ -30,7 +45,7 @@ final class Outgoing extends Form
     #[Validate('required|max:5|min:3|', as: 'Codigo de Telefono')]
     public $phone_code;
 
-    #[Validate('email|unique:employee_outgoing|max:255', as: 'Correo Corporativo')]
+    #[Validate('email|unique:employee_outgoing|max:255|nullable', as: 'Correo Corporativo')]
     public $email_cantv;
 
     #[Validate('required|email|max:255', as: 'Correo Gmail')]
@@ -40,12 +55,12 @@ final class Outgoing extends Form
     public $personal_id;
 
     #[Validate('required', as: 'Cargo')]
-    public $job_title_id;
+    public $job_title;
 
-    #[Validate('required', as: 'Unidad de Adscripcion')]
-    public $departament_id;
+    #[Validate('', as: 'Direccion')]
+    public $address;
 
-    private string $phone;
+    public string $phone = '';
 
     public bool $verified = false;
 
@@ -60,20 +75,12 @@ final class Outgoing extends Form
 
     private function propertiesToSave(): array
     {
-        return $this->only([
-            'p00', 
-            'first_name', 
-            'second_name', 
-            'first_surname', 
-            'second_surname', 
-            'phone',
-            'email_cantv', 
-            'gmail', 
-            'personal_id', 
+        return $this->only(self::properties);
+    }
 
-            // ? relations 
-            'job_title_id', 
-            'departament_id', 
-        ]);
+    public function load(EmployeeOutgoing $outgoing): void 
+    {
+        foreach(self::properties as $property) 
+        $this->{$property} = $outgoing->$property;
     }
 }

@@ -30,13 +30,14 @@ class Acreditation extends Component
             'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
         ]);
 
-        $this->dispatch('acreditation', message: \__('se ha acreditado la comision correctamente!'));
+        $this->dispatch('acreditation_download', message: \__('se ha acreditado la comision correctamente!'));
     }
     
     #[Renderless]
     public function getAcreditationDocument(): BinaryFileResponse
     {
         $acreditation = new AcreditationService($this->auditActivity, date: $this->acreditation->date_release);
+        $this->dispatch('acreditation_acredit', message: \__('se ha iniciado la descarga!'));
         return $acreditation->download();
     }
 }

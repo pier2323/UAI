@@ -18,9 +18,7 @@ class Main extends Component
         return view('livewire.audit-activity.main', ['auditActivities' => AuditActivity::with([
             'handoverDocument' => [
                 'employeeIncoming',
-                'employeeOutgoing' => [
-                    'jobTitle',
-                ],
+                'employeeOutgoing',
             ],
             'typeAudit',
             'uai',])
@@ -37,9 +35,9 @@ class Main extends Component
 
     }
 
-    public function goTo($id)
+    public function goTo(int $id)
     {
-        $this->redirectRoute('auditActivity.show', ['auditActivity' => $id], navigate: true);
+        $this->redirectRoute('auditActivity.show', ['public_id' => $id], navigate: true);
     }
 
 }

@@ -48,7 +48,6 @@ final class DesignationService
 
         $pathDocumentToDownload = $this->document->getPathDocumentToDownload();
 
-        dd($this->document->data);
         return $pathDocumentToDownload;
     }
 
@@ -78,7 +77,7 @@ final class DesignationService
             'auditActivityCode' => $this->auditActivity->code,
             'actuacionFiscal' => $this->auditActivity->id,
             'fechaInicio' => $date_release,
-            'tituloActuacion' => $this->auditActivity->description,
+            'objectiveAuditActivity' => $this->auditActivity->objective,
             'auditores' => implode($lineJump, $this->auditors),
         ];
 

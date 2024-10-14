@@ -17,12 +17,11 @@ return new class extends Migration
             $table->string('gmail')->nullable();
             $table->string('email_cantv')->nullable();
             $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->string('profile_photo')->nullable();
             $table->integer('p00')->unique();
             $table->integer('personal_id')->unique();
-            
-            $table->unsignedBigInteger('job_title_id');
-            $table->foreign('job_title_id')->references('id')->on('job_title');
+            $table->string('job_title');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\AuditActivity;
 use App\Models\Acreditation;
 use App\Models\AuditActivity;
 use App\Models\Designation;
+use App\Models\HandoverDocument;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -13,6 +14,8 @@ class Show extends Component
 {
     #[Locked]
     public AuditActivity $auditActivity;
+
+    public ?HandoverDocument $handoverDocument;
 
     public ?Acreditation $acreditation;
     public ?Designation $designation;
@@ -28,10 +31,17 @@ class Show extends Component
         return view('livewire.audit-activity.show');
     }
 
-    public function mount(): void
+    public function mount(int $public_id): void
     {
+        $this->auditActivity = AuditActivity::where('public_id', $public_id)->first();
         if ($this->auditActivity->isDesignated()) $this->designation = $this->auditActivity->designation()->first();
         if ($this->auditActivity->isAcredited()) $this->acreditation = $this->auditActivity->acreditation()->first();
+        $this->handoverDocument = $this->auditActivity->handoverDocument()->first() ?? null;
     }
     
+    public function load()
+    {
+        $this->handoverDocument = HandoverDocument::first() ?? null;
+        return $this->handoverDocument;
+    }
 }

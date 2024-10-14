@@ -11,10 +11,13 @@ return new class extends Migration
         Schema::create('handover_document', function(Blueprint $table) {
             $table->id();
             
-            $table->date('cease')->nullable(); 
-            $table->date('subscription')->nullable(); 
-            $table->date('delivery_uai')->nullable(); 
-            $table->json('hallazgo');
+            $table->date('start')->nullable();
+            $table->date('cease')->nullable();
+            $table->date('subscription')->nullable();
+            $table->date('delivery_uai')->nullable();
+            $table->string('departament_affiliation')->nullable();
+            $table->string('departament')->nullable();
+            $table->json('hallazgo')->nullable();
 
             $table->unsignedBigInteger('employee_outgoing_id')->nullable(); 
             $table->foreign('employee_outgoing_id')->references('id')->on('employee_outgoing');
