@@ -8,7 +8,7 @@
 
     <x-button x-on:click="$wire.open = true">{{\__("Nueva Actuacion Fiscal")}}</x-button>
 
-    <form wire:submit="save" x-data="auditActivityAddForm">
+    <form wire:submit="save" x-data>
     <x-dialog-modal wire:model="open" maxWidth="3xl" class="overflow-hidden">
         <x-slot:title>
             <div class="flex justify-between">
@@ -76,13 +76,30 @@
                 </div>
             </div>
 
+            @isset($handoverDocument)
+
+            <ul class="flex font-semibold border-b cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300">
+
+                <li class="px-6 py-3" scope="row" x-text="{{$handoverDocument->id}}"></li>
+                <li class="px-6 py-3" x-text="{{$handoverDocument->employee_outgoing->first_name . " " . $handoverDocument->employee_outgoing->first_surname}}"></li>
+                <li class="px-6 py-3" x-text="{{$handoverDocument->departament}}"></li>
+
+            </ul>
+            @endisset
             
         </x-slot>
         <x-slot:footer>
+            <div x-show="$wire.auditActivity.type_audit === '{{App\Models\typeAudit::find(1)->name}}'" class="mr-3" >
+                <x-secondary-button x-on:click="$wire.dispatch('open_browser_handover')">{{\__("Anexar datos del acta de entrega")}}</x-secondary-button>
+            </div>
             <x-button class="mr-3" type="submit">Guardar</x-button>
             <x-secondary-button type="button" wire:click='cancel'>Cancelar</x-secondary-button>
         </x-slot>
     </x-dialog-modal>
     </form>
+
+    @push('modals') <livewire:Component.HandoverBrowser> @endpush
+
+    <p x-on:add_handoverDocument.window="alert('hola')">hola</p>
    
 </div>

@@ -29,7 +29,7 @@
 
             {{-- todo body --}}
             @foreach ($auditActivities as $auditActivity)
-            <form style="grid-column: span 5" class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300"  wire:key="{{ $auditActivity->id }}" wire:submit="goTo({{ $auditActivity->id }})" 
+            <form style="grid-column: span 5" class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300"  wire:key="{{ $auditActivity->public_id }}" wire:submit="goTo({{ $auditActivity->public_id }})" 
             >
                 <button class="items-center table-grid-audit" wire:loading.attr="disabled">
                     <li>{{ $auditActivity->code }}</li> 
@@ -44,7 +44,5 @@
         </ul>
         {{ $auditActivities->links() }}
     </x-section-basic>
-
-
     
 </div>

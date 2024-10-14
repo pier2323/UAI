@@ -19,10 +19,8 @@ final class Outgoing extends Form
         'gmail', 
         'personal_id', 
         'address',
-
-        // ? relations 
+        'departament', 
         'job_title', 
-        'departament_id', 
     ];
 
     // todo inputs variables 
@@ -59,11 +57,8 @@ final class Outgoing extends Form
     #[Validate('required', as: 'Cargo')]
     public $job_title;
 
-    #[Validate('required', as: 'Cargo')]
+    #[Validate('', as: 'Direccion')]
     public $address;
-
-    #[Validate('required', as: 'Unidad de Adscripcion')]
-    public $departament_id;
 
     public string $phone = '';
 

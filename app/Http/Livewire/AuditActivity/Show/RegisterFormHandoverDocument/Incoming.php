@@ -56,7 +56,7 @@ class Incoming extends Form
     #[Validate('required', as: 'Cargo')]
     public $job_title;
 
-    #[Validate('required', as: 'Cargo')]
+    #[Validate('', as: 'Direccion')]
     public $address;
 
     public $phone;

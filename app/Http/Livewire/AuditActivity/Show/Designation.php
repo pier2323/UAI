@@ -26,13 +26,14 @@ class Designation extends Component
             'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
         ]);
 
-        $this->dispatch('designation', message: \__('se ha designado la comision correctamente!'));
+        $this->dispatch('designation_designate', message: \__('se ha designado la comision correctamente!'));
     }
 
     #[Renderless]
-    public function getDesignationDocument(): BinaryFileResponse
+    public function getDesignationDocument()
     {
         $designation = new DesignationService($this->auditActivity, date: $this->designation->date_release);
+        $this->dispatch('designation_download', message: \__('se ha iniciado la descarga!'));
         return $designation->download();
     }
 }

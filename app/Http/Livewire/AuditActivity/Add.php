@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\AuditActivity;
 
 use App\Models\AuditActivity;
+use App\Models\HandoverDocument;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Add extends Component
@@ -11,6 +13,7 @@ class Add extends Component
     public string $year;
 
     public AuditActivityForm $auditActivity;
+    public ?HandoverDocument $handoverDocument;
 
     public function mount():void
     {
@@ -26,7 +29,13 @@ class Add extends Component
     public function save():void
     {
         $this->auditActivity->validate();
-        \App\Models\AuditActivity::create($this->auditActivity->data());
+        $auditActivity = \App\Models\AuditActivity::create($this->auditActivity->data());
+
+        if(isset($this->handoverDocument)){
+            $this->handoverDocument->auditActivity_id = $auditActivity->id;
+            $this->handoverDocument->save();
+        };
+
         $this->cleanAttributes();
         $this->dispatch('add-audit-activity-save-ok', message: 'Se ha guardado la auditoria con exito!');
     }
@@ -41,5 +50,11 @@ class Add extends Component
     {        
         $this->auditActivity->reset();
         $this->open = false;
+    }
+
+    #[On('add_handoverDocument')]
+    public function attach($id)
+    {
+        $this->handoverDocument = HandoverDocument::find($id);
     }
 }
