@@ -23,9 +23,6 @@ return new class extends Migration
             $table->integer('personal_id')->unique();
             $table->string('job_title');
 
-            $table->unsignedBigInteger('departament_id');
-            $table->foreign('departament_id')->references('id')->on('departament');
-
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

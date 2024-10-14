@@ -1,5 +1,7 @@
 <div role="acreditation">
-    @push('alert') <x-notification on='acreditation'/> @endpush
+    @isset($designation) @push('alert') <x-notification on='acreditation_download'/> @endpush @endisset
+    @empty($designation) @push('alert') <x-notification on='acreditation_acredit'/> @endpush @endempty
+
     
     {{-- todo Modal Acreditation --}}
     @empty($acreditation)
@@ -37,10 +39,8 @@
     
     {{-- todo Download Acreditation --}}
     @isset($acreditation) <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button> @endisset
-
+    
     {{-- todo Acredit --}}
-    @empty($acreditation)
-    <x-button type='submit' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-button> 
-    @endempty
+    @empty($acreditation) <x-button type='submit' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-button> @endempty
 
 </div>

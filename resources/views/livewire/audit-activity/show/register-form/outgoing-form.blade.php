@@ -72,7 +72,7 @@
             @if (isset($modelsHandoverDocument)) 
                 <x-input-text-handover property="outgoing.phone" title="Telefono" :readonly="$modelsHandoverDocument"/>
             @else
-                <x-input-text-handover property="outgoing.phone_number" title="Telefono">
+                <x-input-text-handover property="outgoing.phone_number" title="Telefono"  input="updateValue" limit="7">
 
                     <x-slot:prefix>
                         <select 
@@ -81,6 +81,7 @@
                             id="phone_code" 
                             wire:model='outgoing.phone_code'
                         >
+                            <option selected style="display: none">0000</option>
                             <option value="0412">0412</option>
                             <option value="0414">0414</option>
                             <option value="0416">0416</option>
@@ -95,26 +96,16 @@
             @endif
 
             {{-- todo Job title --}}
-            <x-input-text-handover property="outgoing.job_title" title="Cargo" :readonly="$modelsHandoverDocument" />
+            <x-input-text-handover property="outgoing.job_title" title="Cargo" :readonly="$modelsHandoverDocument" custom/>
             
         </div>
 
-        {{-- todo Departament --}}
-        <x-input-text-handover property="outgoing.departament_id" title="Unidad de Adscripcion" select :readonly="$modelsHandoverDocument">
-
-            <x-slot name="options">
-
-                <option selected style="display: none">Selecciona una opcion...</option>
-                @foreach (isset($modelsHandoverDocument) 
-                ? [$this->modelsHandoverDocument->employeeOutgoing()->first()->departament()->first()]
-                : $departaments
-                as $departament)
-                    <option value="{{$departament->id}}">{{$departament->name}}</option> 
-                @endforeach
-                
-            </x-slot>
-
-        </x-input-text-handover>
+        {{-- todo Address --}}
+        <div class="mt-2 mb-4">  
+            <x-label for="outgoing.address">{{\__("Dirección")}}</x-label>
+            <textarea id="outgoing.address" wire:model="outgoing.address" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el la direccion del personal saliente..."></textarea>
+            <x-input-error for="outgoing.address" @readonly($modelsHandoverDocument)/>
+        </div>
 
     </div>
 

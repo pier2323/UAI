@@ -81,7 +81,7 @@ final class AcreditationService
         ];
     }
 
-    public function fomatAuditorData($key)
+    private function fomatAuditorData($key): string
     {
         $array = array_column(array: $this->auditors, column_key: $key);
 
@@ -99,7 +99,17 @@ final class AcreditationService
             offset: -1
         )[0];
 
-        return $allExceptLastOne . ' y ' . $lastOne;
+        // todo singular 
+        if($allExceptLastOne === "") 
+        return $key === 'fullname' 
+        ? "el ciudadano: " . $lastOne //todo fullname 
+        : "titular de la cédula de identidad: " . $lastOne; // todo personalId 
+
+        // todo plural 
+        else
+        return $key === 'fullname'
+        ? "los ciudadanos: " . $allExceptLastOne . ' y ' . $lastOne //todo fullname 
+        : "titulares de las cédulas de identidad " . $allExceptLastOne . ' y ' . $lastOne; // todo personalId 
     }
 
 }

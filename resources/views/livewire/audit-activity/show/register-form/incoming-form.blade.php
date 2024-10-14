@@ -71,9 +71,9 @@
             {{-- todo Phone --}}
 
             @if (isset($modelsHandoverDocument))
-                <x-input-text-handover property="incoming.phone" title="Telefono" :readonly="$modelsHandoverDocument"/>
+                <x-input-text-handover property="incoming.phone" title="Telefono" :readonly="$modelsHandoverDocument" />
             @else
-                <x-input-text-handover property="incoming.phone_number" title="Telefono">
+                <x-input-text-handover property="incoming.phone_number" title="Telefono" input="updateValue" limit="7">
 
                     <x-slot:prefix>
                         <select 
@@ -82,6 +82,7 @@
                             id="phone_code" 
                             wire:model='incoming.phone_code'
                         >
+                            <option selected style="display: none">0000</option>
                             <option value="0412">0412</option>
                             <option value="0414">0414</option>
                             <option value="0416">0416</option>
@@ -96,7 +97,7 @@
             @endif
 
             {{-- todo Job title --}}
-            <x-input-text-handover property="incoming.job_title" title="Cargo" :readonly="$modelsHandoverDocument" />
+            <x-input-text-handover property="incoming.job_title" title="Cargo" :readonly="$modelsHandoverDocument" custom />
 
         </div>
 

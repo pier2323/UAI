@@ -8,12 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class HandoverDocument extends Model
 {
-
-    public function index()
-    {
-        return view('index');
-    }
-
     use HasFactory;
 
     protected $table = 'handover_document';
@@ -23,6 +17,8 @@ class HandoverDocument extends Model
         'cease',
         'subscription', 
         'delivery_uai', 
+        'departament', 
+        'departament_affiliation', 
         'employee_outgoing_id', 
         'employee_incoming_id', 
         'audit_activity_id',
