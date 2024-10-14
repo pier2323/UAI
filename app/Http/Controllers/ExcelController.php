@@ -50,26 +50,29 @@ public function hallazasgo($request){
 
 
     public function downloadExcel(Request $request)
-    {
-        $unidad_entrega = 'gerencia control posterior';
-        $unidad_adscrita = 'UAI';
-         $periodo_saliente_desde = '20/23/2020';
-         $periodo_saliente_hasta = '10/05/2020';
-         $nombre_saliente = 'pier';
-         $cedula_saliente = '12345678';
-         $auditor_a = 'geferson';
-         $auditor_b = 'jose';
-         $nombre_recibe = 'jose';
-         $cedula_recibe = '12345678';
-         $periodo_desde = '16/08/2022';
-         $periodo_hasta = '20/15/2025';
-         $cargo = 'auditro';
 
+  
+    {
+        $cedula_recibe = '10.810.683';
+        $cedula_saliente =  '14.486.839';
+        $unidad_entrega = 'Gerencia General Operadores de Telecomunicaciones';
+        $unidad_adscrita = 'Vicepresidencia Prestación de Servicios';
+         $periodo_saliente_desde = '08/06/2023';
+         $periodo_saliente_hasta = '24/03/2024';
+         $nombre_saliente = 'Ingeborg Susana Herrer Poleo';
+         $cedula_saliente = 'C.I.'.$cedula_saliente;
+         $auditor_a = 'Freryda Betancourt Félix';
+         $auditor_b = 'Silvia Vargas O';
+         $nombre_recibe = 'Cladelmal Benítez Tovar';
+         $cedula_recibe = 'C.I.'.$cedula_recibe;
+         $cargo = 'Gerente General de Operaciones';
+         
          $spreadsheet = IOFactory::load('cedulaTemplate.xlsm');
          $hoja1 = $spreadsheet->getSheetByName('ATRIBUTOS');
-         $hoja1->setCellValue('A5', "ACTUACIÓN FISCAL SOBRE LA VERIFICACIÓN DE LA SINCERIDAD Y EXACTITUD DEL CONTENIDO DEL ACTA DE ENTREGA DE LA $unidad_entrega ADSCRITA A LA $unidad_adscrita CORRESPONDIENTE AL SERVIDOR(A) PÚBLICO(A) SALIENTE CIUDADANO(A) $nombre_saliente, TITULAR DE LA CÉDULA DE IDENTIDAD NRO. $cedula_saliente, DURANTE EL PERIODO DE GESTIÓN DEL $periodo_desde AL $periodo_hasta");
+         $hoja1->setCellValue('A5', "ACTUACIÓN FISCAL SOBRE LA VERIFICACIÓN DE LA SINCERIDAD Y EXACTITUD DEL CONTENIDO DEL ACTA DE ENTREGA DE LA $unidad_entrega ADSCRITA A LA $unidad_adscrita CORRESPONDIENTE AL SERVIDOR(A) PÚBLICO(A) SALIENTE CIUDADANO(A) $nombre_saliente, TITULAR DE LA CÉDULA DE IDENTIDAD NRO. $cedula_saliente, DURANTE EL PERIODO DE GESTIÓN DEL $periodo_saliente_desde AL  $periodo_saliente_hasta");
 
          $hoja2 = $spreadsheet->getSheetByName('CEDULA');
+         $hoja2->setCellValue('A6',  "Actuación $periodo_saliente_desde a la  $periodo_saliente_hasta");
          $hoja2->setCellValue('B10', "$unidad_entrega");
          $hoja2->setCellValue('D10', "$unidad_adscrita");
          $hoja2->setCellValue('K10', "$nombre_saliente");
@@ -77,7 +80,8 @@ public function hallazasgo($request){
          $hoja2->setCellValue('P10', "$nombre_recibe");
          $hoja2->setCellValue('P11', "$cedula_recibe");
          $hoja2->setCellValue('T11', "$periodo_saliente_desde");
-         $hoja2->setCellValue('B10', "$periodo_saliente_hasta");
+         $hoja2->setCellValue('V11', "$periodo_saliente_hasta");
+         $hoja2->setCellValue('B10', " $unidad_entrega");
          $hoja2->setCellValue('C23', "   $auditor_a");
          $hoja2->setCellValue('O23', "$auditor_b");
 
@@ -92,9 +96,9 @@ public function hallazasgo($request){
          $hoja2 = $spreadsheet->getSheetByName('Cedula');
 
          // Arreglo de columnas para las casillas de verificación
-         $checkboxCells = ['D', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
+         $checkboxCells = ['D','E', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
          $checkboxIndex = 0; // Índice para recorrer el arreglo de columnas
-         $currentRow = 90;  //Inicializar la fila para las casillas de verificación
+         $currentRow = 15;  //Inicializar la fila para las casillas de verificación
 
           //Agregar datos al archivo Excel en las columnas especificadas
          foreach ($checkboxes as $index => $checkbox) {
@@ -106,10 +110,9 @@ public function hallazasgo($request){
 
          $hoja3 = $spreadsheet->getSheetByName('HALLAZGOS');
          $hoja3->setCellValue('D7', "$unidad_entrega adscrita a la $unidad_adscrita");
-         $hoja3->setCellValue('B5', "  Actuación $periodo_desde a la $periodo_hasta");
+         $hoja3->setCellValue('B5', "  Actuación $periodo_saliente_desde a la  $periodo_saliente_hasta");
          $hoja3->setCellValue('C9', "De la evaluación practicada al contenido del Acta de Entrega de la $unidad_entrega , correspondiente a la servidor(a) público(a) saliente, $nombre_saliente, titular de la cédula de identidad Nro.$cedula_saliente; se determinó lo siguiente:");
-         $hoja3->setCellValue('C44', "$auditor_a");
-         $hoja3->setCellValue('E44', "$auditor_b");
+      
 
         //  Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
          foreach ($checkboxes as $index => $checkbox) {
@@ -152,7 +155,8 @@ public function hallazasgo($request){
          }
     
 
-
+         session()->put('checkboxes', $checkboxes);
+         session()->put('uncheckedCheckboxes', $uncheckedCheckboxes);
          $hoja4 = $spreadsheet->getSheetByName('informe de debilidades');
 
    // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
@@ -187,14 +191,12 @@ public function hallazasgo($request){
        }
    }
 
-
-
-
          $hoja5 = $spreadsheet->getSheetByName('desglose de hallazgos');
          $hoja5->setCellValue('D16', "$cargo");
-         $hoja5->setCellValue(   'D16', "$cargo");
+         $hoja5->setCellValue('B4', "Dirección, Unidad o Departamento:  $unidad_entrega adscrita a la  $unidad_adscrita ");
+    
          // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
-      //  Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
+
      $checkboxIndex = 0;
      $currentRow = 8;//  Fila donde comenzarán los inputs adicionales
      $counter = 1; // Inicializar el contador
@@ -234,16 +236,18 @@ public function hallazasgo($request){
      }
 //Enviar el archivo Excel al navegador
          $writer = new Xlsx($spreadsheet);
-         $filename = 'Cedula.xlsx';
+        
 
-         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-         header('Content-Disposition: attachment; filename="' . urlencode($filename) . '"');
-
-         $writer->save('php:output');
-        exit();
+         header('Content-Type: application/vnd.ms-excel');
+         header('Content-Disposition: attachment;filename="cedula.xls"');
+         header('Cache-Control: max-age=0');
+         
+         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+         $writer->save('php://output');
     }
 
 
+      
     
 
 }

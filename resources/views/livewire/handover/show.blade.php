@@ -6,8 +6,6 @@
 
 
 
-
-
         <!-- Primer Modal -->
         <div id="firstModal" class="modal">
             <div class="modal-content">
@@ -19,7 +17,6 @@
                             <label class="checkbox-label"><input type="checkbox" id="checkbox1" name="checkbox1" value=" El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad." checked> El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox2" name="checkbox2" value="El acta esta debidamente certificada por el funcionario autorizada" checked> El acta esta debidamente certificada por el funcionario autorizada </label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox3" name="checkbox3" value=" El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega." checked> El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox4" name="checkbox4" value=" En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo." checked> En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox5" name="checkbox5" value="Lugar de la suscripción del Acta." checked> Lugar de la suscripción del Acta.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox6" name="checkbox6" value="Fecha de la suscripción del Acta" checked> Fecha de la suscripción del Acta.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox7" name="checkbox7" value="Identificación del órgano, entidad, oficina o dependencia que se entrega." checked>Identificación del órgano, entidad, oficina o dependencia que se entrega..</label><br>
@@ -38,8 +35,8 @@
                             <label class="checkbox-label"><input type="checkbox" id="checkbox17"  name="checkbox17" value="Indice general del archivo." checked>Indice general del archivo.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox18"  name="checkbox18" value=" Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega." checked> Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega.</label><br>
                             <label class="checkbox-label"><input type="checkbox" id="checkbox19"  name="checkbox19" value=" El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas." checked> El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox20"  name="checkbox20" value="El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma." checked> El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox21" name="checkbox21" value="Monto de los fondos  y bienes asignados Presupuestariamente a la respectiva unidad administradora." checked> Monto de los fondos  y bienes asignados Presupuestariamente  a la respectiva unidad administradora.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox20" name="checkbox20" value="Monto de los fondos  y bienes asignados Presupuestariamente a la respectiva unidad administradora." checked> Monto de los fondos  y bienes asignados Presupuestariamente  a la respectiva unidad administradora.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox21"  name="checkbox21" value="El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma." checked> El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label><br>
                         </div>
                     </div>
                     <hr class="divider">
@@ -47,10 +44,11 @@
                         <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value="Estados bancarios actualizados y conciliados." checked> Estados bancarios actualizados y conciliados.</label>
                         <label class="checkbox-label"><input type="checkbox" id="checkbox23" name="checkbox23" value="Lista de comprobantes de gastos." checked>Lista de comprobantes de gastos.</label>
                         <label class="checkbox-label"><input type="checkbox" id="checkbox24" name="checkbox24" value="Cheques emitidos pendientes de cobro.." checked>Cheques emitidos pendientes de cobro.</label>
-                    
-                    
-                    
                     </div>
+                    <hr class="divider">
+                    <div class="additional-checkboxes">
+                    <label class="checkbox-label"><input type="checkbox" id="checkbox4" name="checkbox4" value=" En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo." checked> En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo.</label><br>
+                </div>
                 </form>
                 <div class="button-container">
                     <button class="btn-modern btn-primary" onclick="openSecondModal()">Siguiente</button>
@@ -264,7 +262,7 @@
 
         <x-button style="margin-top: 200px" wire:click='requeriDocumen'> Requerimiento</x-button>
         <x-button wire:click='programaDocumen'> Programa de trabajo</x-button>
-        <x-button style="margin-left:340px" wire:click='CedulaDocumen'>Cedula de trabajo </x-button>
+        <x-button style="margin-left:340px" wire:click='downloadExcel'>Cedula de trabajo </x-button>
         <x-button wire:click='InformeDocumen'>Informe del Auditor </x-button>
 
 

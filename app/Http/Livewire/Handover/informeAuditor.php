@@ -72,34 +72,29 @@ final class informeAuditor
 
     private function setData(): void
     {
-        $checkboxes = session()->get('checkboxes');
-$uncheckedCheckboxes = session()->get('uncheckedCheckboxes');
+       
         $designacion = $this->auditActivity->date_release;
         $code = $this->auditActivity->code;
         $this->document->data = [
-            'code' => $this->auditActivity->code,
+            'code' => '2024-067',
             'fecha_progrma' => now()->format('d/m/Y'),
-            'unidad_entrega' => 'Cas',
-            'unidad_adcripta' => 'Gerencia de Control Posteriro',
-            'articulo' => 'ciudadano',
-            'periodo_saliente' => '14/10/2024',
-            'nombre_saliente' => 'pier',
-            'cedula_saliente' => '1234567',
-            'cargo_saliente' => '1234567',
-            'Fecha_acreditacion' => '12/06/2024',
-            'fecha_subcripcion' => '12/06/2024',
-            'nu_acreditacion' => "UAI\\GCP\\DES $code",
-            'periodo_gestion' => '15/05/2025',
-            'periodo_gestiona' => '15/05/2025',
-            'codigo_desgisnacion' => "UAI\\GCP\\DES $code",
-            'fecha_designacion' => $designacion,
-            'periodo_desde' => '12/06/2024',
-            'periodo_hasta' => '12/06/2024',
-            'nombre_recibe' => '12/06/2024',
-            'cedula_recibe' => '12/06/2024',
-            'auditores_designados' => $this->getAuditorsString(),
-            
-           
+            'unidad_entrega' => 'Gerencia General Operadores de Telecomunicaciones ',
+            'unidad_adcripta' => 'Vicepresidencia Prestación de Servicios',
+            'articulo' => 'ciudadana',
+            'periodo_saliente' => '08/06/2023 hasta el 24/03/2024',
+            'nombre_saliente' => 'Ingeborg Susana Herrer Poleo',
+            'cedula_saliente' => '14.486.839',
+            'cargo_saliente' => 'Gerente General de Operaciones',
+            'Fecha_acreditacion' => '05/09/2024',
+            'fecha_subcripcion' => '25/03/2024',
+            'nu_acreditacion' => "UAI\\GCP\\ACR-COM 065 ",
+            'periodo_gestion' => '08/06/2023',
+            'periodo_gestiona' => '20/05/2025',
+            'codigo_desgisnacion' => "UAI\\GCP\\DES-COM 067",
+            'fecha_designacion' => '05/09/2024',
+            'nombre_recibe' => 'Amely josé Caraza Flores',
+            'cedula_recibe' => '10.810.683',
+            'auditores_designados' =>'Silvia Vargas O /Freryda Betancourt Félix',
         ];
     }
 
