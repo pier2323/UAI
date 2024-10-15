@@ -6,7 +6,7 @@
         <x-notification on="add-audit-activity-cancel-ok" theme="warning" />
     @endpush
 
-    <x-button x-on:click="$wire.open = true">{{\__("Nueva Actuacion Fiscal")}}</x-button>
+    <x-button class="m-4" x-on:click="$wire.open = true">{{\__("Nueva Actuacion Fiscal")}}</x-button>
 
     <form wire:submit="save" x-data>
     <x-dialog-modal wire:model="open" maxWidth="3xl" class="overflow-hidden">
@@ -16,15 +16,19 @@
                 <span class="text-2xl">
                     {{ \__("Actuacion Fiscal") }} 
                 </span>
-                
-                <div class="flex flex-col mb-2 w-fit">
-                    <x-input id="auditActivity.public_id" wire:model='auditActivity.public_id' type="number" 
-                    placeholder="Codigo: {{App\Models\AuditActivity::all()->last()->public_id + 1}}" />
-                    <x-input-error for="auditActivity.public_id" />
+                <div class="flex">
+                    <div class="flex flex-col mb-2 mr-2 w-fit">
+                        <x-input id="auditActivity.public_id" wire:model='auditActivity.public_id' type="number" 
+                        placeholder="Codigo: {{App\Models\AuditActivity::all()->last()->public_id + 1}}" />
+                        <x-input-error for="auditActivity.public_id" />
                     </div>
-                </x-slot>
+    
+                    <x-input-radio-button property="auditActivity.is_poa" title="POA"/>
+                </div>
 
-            </div>
+        </x-slot>
+
+        
         <x-slot:content>
 
             <div class="flex justify-between align-middle">
@@ -78,13 +82,15 @@
 
             @isset($handoverDocument)
 
+            <h5>Acta de entrega</h5>
             <ul class="flex font-semibold border-b cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300">
 
-                <li class="px-6 py-3" scope="row" x-text="{{$handoverDocument->id}}"></li>
-                <li class="px-6 py-3" x-text="{{$handoverDocument->employee_outgoing->first_name . " " . $handoverDocument->employee_outgoing->first_surname}}"></li>
-                <li class="px-6 py-3" x-text="{{$handoverDocument->departament}}"></li>
+                <li class="px-6 py-3 w-fit" scope="row" x-text="'{{$handoverDocument->id}}'"></li>
+                <li class="px-6 py-3 w-fit" x-text="'{{$handoverDocument->employeeOutgoing->first_name . " " . $handoverDocument->employeeOutgoing->first_surname}}'"></li>
+                <li class="px-6 py-3 w-fit" x-text="'{{$handoverDocument->departament}}'"></li>
 
             </ul>
+            
             @endisset
             
         </x-slot>
@@ -99,7 +105,5 @@
     </form>
 
     @push('modals') <livewire:Component.HandoverBrowser> @endpush
-
-    <p x-on:add_handoverDocument.window="alert('hola')">hola</p>
    
 </div>

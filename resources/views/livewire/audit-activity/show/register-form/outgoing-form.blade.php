@@ -103,8 +103,11 @@
         {{-- todo Address --}}
         <div class="mt-2 mb-4">  
             <x-label for="outgoing.address">{{\__("Dirección")}}</x-label>
-            <textarea id="outgoing.address" wire:model="outgoing.address" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el la direccion del personal saliente..."></textarea>
-            <x-input-error for="outgoing.address" @readonly($modelsHandoverDocument)/>
+            <textarea @readonly($modelsHandoverDocument)
+            id="outgoing.address" 
+            wire:model="outgoing.address" 
+            rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el la direccion del personal saliente..."></textarea>
+            <x-input-error for="outgoing.address"/>
         </div>
 
     </div>

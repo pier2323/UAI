@@ -39,7 +39,6 @@ class RegisterFormHandoverDocument extends Component
     public function mount()
     {
         if(isset($this->modelsHandoverDocument) && isset($this->auditActivity)) {
-            dd(isset($this->auditActivity));
             $this->outgoing->load($this->modelsHandoverDocument->employeeOutgoing()->first());
             $this->incoming->load($this->modelsHandoverDocument->employeeIncoming()->first());
             $this->handoverDocument->load($this->modelsHandoverDocument);
@@ -52,9 +51,9 @@ class RegisterFormHandoverDocument extends Component
         $this->iterator('verify');
 
         $this->handoverDocument->save(
-            $this->outgoing->save(),
-            $this->incoming->save(),
-            isset($this->auditActivity) ? $this->auditActivity : null,
+            outgoing: $this->outgoing->save(),
+            incoming: $this->incoming->save(),
+            auditActivity: isset($this->auditActivity) ? $this->auditActivity : null,
         );
 
         $this->iterator('restart');

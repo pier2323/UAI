@@ -10,14 +10,12 @@ use Livewire\Component;
 class Add extends Component
 {
     public bool $open;
-    public string $year;
 
     public AuditActivityForm $auditActivity;
     public ?HandoverDocument $handoverDocument;
 
     public function mount():void
     {
-        $this->year = AuditActivity::all()->last()->year;
         $this->auditActivity->public_id = \App\Models\AuditActivity::all()->last()->public_id + 1;
     }
     
@@ -31,8 +29,8 @@ class Add extends Component
         $this->auditActivity->validate();
         $auditActivity = \App\Models\AuditActivity::create($this->auditActivity->data());
 
-        if(isset($this->handoverDocument)){
-            $this->handoverDocument->auditActivity_id = $auditActivity->id;
+        if(isset($this->handoverDocument)) {
+            $this->handoverDocument->audit_activity_id = $auditActivity->id;
             $this->handoverDocument->save();
         };
 
@@ -49,12 +47,13 @@ class Add extends Component
     private function cleanAttributes(): void
     {        
         $this->auditActivity->reset();
+        $this->handoverDocument = null;
         $this->open = false;
     }
 
     #[On('add_handoverDocument')]
     public function attach($id)
     {
-        $this->handoverDocument = HandoverDocument::find($id);
+        $this->handoverDocument = HandoverDocument::with('employeeOutgoing')->find($id);
     }
 }
