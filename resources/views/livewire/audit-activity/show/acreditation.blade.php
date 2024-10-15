@@ -38,9 +38,9 @@
     @endempty
     
     {{-- todo Download Acreditation --}}
-    @isset($acreditation) <x-button wire:click='getAcreditationDocument'>descargar acreditacion</x-button> @endisset
+    @isset($acreditation) <x-secondary-button wire:click='getAcreditationDocument'>descargar acreditacion</x-secondary-button> @endisset
     
     {{-- todo Acredit --}}
-    @empty($acreditation) <x-button type='submit' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-button> @endempty
+    @empty($acreditation) <x-secondary-button type='submit' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-secondary-button> @endempty
 
 </div>

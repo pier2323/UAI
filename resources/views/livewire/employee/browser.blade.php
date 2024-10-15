@@ -4,7 +4,7 @@
         <x-slot:title>Buscador</x-slot>
         <x-slot:content>
  
-            <div x-data="browser()" x-init="init()">
+            <div x-data="browserEmployees()" x-init="init()">
 
                 {{-- todo browser input --}}
                 <x-input 
@@ -77,7 +77,7 @@
     </x-dialog-modal>
 
     <script>
-        function browser(){
+        function browserEmployees(){
             return {
                 allEmployees: [],
                 search: '',

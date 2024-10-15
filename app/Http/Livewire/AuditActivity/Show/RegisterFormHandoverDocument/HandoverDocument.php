@@ -27,7 +27,7 @@ class HandoverDocument extends Form
 
     
     #[Validate('nullable', 'date_format:d/m/Y',  as: 'Fecha de Inicio del Periodo')]
-    public string $start = '';
+    public $start = '';
 
     #[Validate('nullable', 'date_format:d/m/Y',  as: 'Fecha del Cese')]
     public string $cease = '';
@@ -44,9 +44,9 @@ class HandoverDocument extends Form
     #[Validate('nullable', as: 'Unidad de Adscripcion')]
     public $departament_affiliation = '';
 
-    public ?int $employee_outgoing_id;
-    public ?int $employee_incoming_id; 
-    public string|int|null $audit_activity_id;
+    public string|int $employee_outgoing_id = '';
+    public string|int $employee_incoming_id = ''; 
+    public string|int $audit_activity_id = '';
 
     public function save(
         EmployeeOutgoing $outgoing, 
@@ -56,16 +56,16 @@ class HandoverDocument extends Form
     {
         $this->validate();     
 
-        $this->employee_outgoing_id = $outgoing->id;
-        $this->employee_incoming_id = $incoming->id;
-
-        if(isset($auditActivity))
-        $this->audit_activity_id = $auditActivity->id;
+        $this->employee_outgoing_id = $outgoing->id ?? '';
+        $this->employee_incoming_id = $incoming->id ?? '';
         
         $this->toFormatDate();
 
-        if(isset($auditActivity))
-        return ModelsHandoverDocument::create($this->propertiesToSave());
+        if(isset($auditActivity) && $auditActivity !== '') {
+            dd('normal');
+            $this->audit_activity_id = $auditActivity->id;
+            return ModelsHandoverDocument::create($this->propertiesToSave());
+        }
 
         else {
             $propertiesToSave = $this->propertiesToSave(audit_activity: false);
@@ -73,7 +73,6 @@ class HandoverDocument extends Form
             
             return ModelsHandoverDocument::create($propertiesToSave);
         }
-
     }
 
     private static function format(String $date): string 
@@ -92,9 +91,9 @@ class HandoverDocument extends Form
     private function propertiesToSave(bool $audit_activity = true): array
     {
         if(!$audit_activity) {
-            return array_filter(self::properties, function($value) {
+            return $this->only(array_filter(self::properties, function($value) {
                 return $value !== 'audit_activity_id';
-            });
+            }));
         };
 
         return $this->only(self::properties);
