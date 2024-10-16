@@ -8,7 +8,7 @@ Route::get(
 )->name('handover.index');
 
 Route::get(
-    uri: '/acta-de-entrega/{designation}', 
+    uri: '/acta-de-entrega/{auditActivity}', 
     action: App\Http\Livewire\Handover\Show::class
 )->name('handover.show');
 

@@ -28,7 +28,7 @@
                 <tr 
                 class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
                 wire:key="{{ $designation->auditActivity->id }}" 
-                wire:dblclick="goTo('handover.show', {{ $designation->id }})"
+                wire:dblclick="goTo('handover.show', {{ $designation->auditActivity->public_id }})"
                 wire:loading.attr="disabled"
                 >
                     <td class=" min-w-fit w-36 text-slate-600 {{ $td }}">{{ $designation->auditActivity->code }}</td> 

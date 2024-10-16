@@ -10,8 +10,6 @@ use App\Traits\ModelPropertyMapper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-
-
 use \PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -20,7 +18,7 @@ class Show extends Component
     use ModelPropertyMapper;
     const PATH_DIRECTORY = 'templateDocument'; 
     public Designation $designation;
-    public $auditActivity;
+    public AuditActivity $auditActivity;
     public $employees = [];
 
     private array $auditors = [];
@@ -32,7 +30,6 @@ class Show extends Component
 
     public function mount()
     {
-        $this->auditActivity = $this->designation->auditActivity()->first();
         // dd($this->auditActivity);
 
         

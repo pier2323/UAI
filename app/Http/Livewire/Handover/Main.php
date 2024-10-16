@@ -33,9 +33,9 @@ class Main extends Component
         ]);
     }
 
-    public function goTo($route, $id)
+    public function goTo(string $route, int $id)
     {
-        $this->redirectRoute($route, ['designation' => $id], navigate: true);
+        $this->redirectRoute($route, ['auditActivity' => $id], navigate: true);
     }
 
 }
