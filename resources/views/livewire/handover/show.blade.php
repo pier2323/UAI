@@ -1,7 +1,129 @@
 <div>
     <x-section-basic>
         {{-- <x-button wire:click="downloadWorkingCedula">hola</x-butto> --}}
-        <link rel="stylesheet" href="/css/cedula.css">
+       
+            <link rel="stylesheet" href="/css/cedula.css">
+            <script src="/js/cedula.js"></script>
+    
+            <!-- Primer Modal -->
+            <div id="firstModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalAndReset('firstModal', 'checkboxForm')">&times;</span>
+                    <h4>Desmarque cada casilla según los hallazgos encontrados </h4>
+                    <form id="checkboxForm">
+                        <div class="checkbox-container">
+                            <div class="left-column">
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox1" name="checkbox1" value="(A) El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad." checked>(A)  El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox2" name="checkbox2" value="(B) El acta esta debidamente certificada por el funcionario autorizada" checked>(B) El acta esta debidamente certificada por el funcionario autorizada </label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox3" name="checkbox3" value="(C) El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega." checked>(C) El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox5" name="checkbox5" value="(E) Lugar de la suscripción del Acta." checked>(E) Lugar de la suscripción del Acta.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox6" name="checkbox6" value="(F) Fecha de la suscripción del Acta" checked>(F) Fecha de la suscripción del Acta.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox7" name="checkbox7" value="(G) Identificación del órgano, entidad, oficina o dependencia que se entrega." checked>(G) Identificación del órgano, entidad, oficina o dependencia que se entrega..</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox8" name="checkbox8" value="(H) Identificación de quien entrega" checked>(H) Identificación de quien entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox8" name="checkbox8" value="(I) Identificación de quien Recibe" checked>(I) Identificación de quien entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox9" name="checkbox9" value="(J) Motivo de la entrega" checked>(J) Motivo de la entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox10" name="checkbox10" value="(l) Mención expresa de que los anexos forman parte integrante del acta" checked> (l)Mención expresa de que los anexos forman parte integrante del acta.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox21"  name="checkbox21" value="(j) El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma." checked> (j) El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label><br>
+                           
+                            </div>
+                            <div class="right-column">
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox12"  name="checkbox12" value="(m) Suscripción del acta de quien entrega." checked>(a) Suscripción del acta de quien entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox13"  name="checkbox13" value="(n) Suscripción del acta de quien recibe." checked>(b) Suscripción del acta de quien recibe.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox14"  name="checkbox14" value="(a) Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable." checked>(c) Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox22"  name="checkbox22" value="(b) Mención del número de cargos exigentes." checked>(d) Mención del número de cargos exigentes.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox15"  name="checkbox15" value="(e) Inventario de los bienes muebles e inmuebles." checked>(e) Inventario de los bienes muebles e inmuebles..</label><br>
+                               
+                        
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox16"  name="checkbox16" value="(f) Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente." checked> (f) Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox17"  name="checkbox17" value="(g) Indice general del archivo." checked>(g) Indice general del archivo.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox18"  name="checkbox18" value="(h) Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega." checked> (h) Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega.</label><br>
+                                <label class="checkbox-label"><input type="checkbox" id="checkbox19"  name="checkbox19" value="(i) El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas." checked> (i) El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas.</label><br>
+                            </div>
+                        </div>
+                        <hr class="divider">
+                        <div class="additional-checkboxes">
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value="(c) Estados bancarios actualizados y conciliados." checked>(c) Estados bancarios actualizados y conciliados.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox23" name="checkbox23" value="(d) Lista de comprobantes de gastos." checked>(d) Lista de comprobantes de gastos.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox24" name="checkbox24" value="(e) Cheques emitidos pendientes de cobro.." checked>(e) Cheques emitidos pendientes de cobro.</label>
+                        </div>
+                        <hr class="divider">
+                        <div class="additional-checkboxes">
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value=" (b) Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión." checked>(b) Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox20" name="checkbox20" value=" (a) Monto de los fondos  y bienes asignados Presupuestariamente a la respectiva unidad administradora." checked> (a) Monto de los fondos  y bienes asignados Presupuestariamente  a la respectiva unidad administradora.</label>
+                    </div>
+    
+                    <hr class="divider">
+                        <div class="additional-checkboxes">
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox25" name="checkbox25" value=" Sin Hallazgo" checked>Sin Hallazgo</label>
+                    </div>
+    
+                    </form>
+                    <div class="button-container">
+                        <button class="btn-modern btn-primary" onclick="openSecondModal()">Siguiente</button>
+                        <button type="button" class="btn-modern btn-danger" onclick="closeAllModalsAndReset()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Botón para abrir el primer modal -->
+            <button class="btn btn-primary" onclick="openModal('firstModal')">Abrir Primer Modal</button>
+    
+            <!-- Segundo Modal -->
+            <div id="secondModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalAndReset('secondModal', 'secondForm')">&times;</span>
+                    <h4>Checkboxes no seleccionados</h4>
+                    <form id="secondForm" action="{{ route('download-excel') }}" method="POST" onsubmit="handleDownload(event)">
+                        @csrf
+                        <div id="uncheckedCheckboxesContainer" style="margin: 20px 0;"></div>
+                        <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga exel</x-button>
+                        <button type="button" class="btn-modern btn-danger" onclick="closeAllModalsAndReset()">Cerrar</button>
+                        <div id="downloadMessage" class="download-message"></div>
+                    </form>
+                    <div class="button-container"></div>
+                </div>
+            </div>
+    
+            <!-- Agregar un botón oculto en el HTML, fuera del modal -->
+            <button wire:click='InformeDocumen' id="newButton" style="display: none;" class="btn btn-primary">Descargar Informe del Auditor</button>
+         <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona todos los checkboxes excepto "Sin Hallazgo"
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkbox25)');
+        const sinHallazgoCheckbox = document.getElementById('checkbox25');
+        const sinHallazgoLabel = sinHallazgoCheckbox.parentNode;
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                // Verificar si todos los checkboxes están marcados
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                
+                if (allChecked) {
+                    // Mantener "Sin Hallazgo" activo y marcado
+                    sinHallazgoCheckbox.disabled = false;
+                    sinHallazgoCheckbox.checked = true;
+                    sinHallazgoLabel.style.color = 'black';
+                } else {
+                    // Bloquear y desmarcar "Sin Hallazgo" si al menos uno está desmarcado
+                    sinHallazgoCheckbox.disabled = true;
+                    sinHallazgoCheckbox.checked = false;
+                    sinHallazgoLabel.style.color = 'gray';
+                }
+            });
+        });
+
+        sinHallazgoCheckbox.addEventListener('change', function() {
+            if (!this.checked) {
+                // Bloquear y desmarcar "Sin Hallazgo" si se desmarca
+                this.disabled = true;
+                sinHallazgoLabel.style.color = 'gray';
+            }
+        });
+    });
+</script>
+        
+       
+            {{-- <link rel="stylesheet" href="/css/cedula.css">
         <script src="/js/cedula.js"></script>
 
 
@@ -9,46 +131,56 @@
         <!-- Primer Modal -->
         <div id="firstModal" class="modal">
             <div class="modal-content">
+                
                 <span class="close" onclick="closeModalAndReset('firstModal', 'checkboxForm')">&times;</span>
-                <h4>Selecciona los Checkboxes</h4>
+                <h4>Desmarque cada casilla sigun los hallazgos encontrados </h4>
                 <form id="checkboxForm">
                     <div class="checkbox-container">
                         <div class="left-column">
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox1" name="checkbox1" value=" El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad." checked> El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox2" name="checkbox2" value="El acta esta debidamente certificada por el funcionario autorizada" checked> El acta esta debidamente certificada por el funcionario autorizada </label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox3" name="checkbox3" value=" El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega." checked> El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox5" name="checkbox5" value="Lugar de la suscripción del Acta." checked> Lugar de la suscripción del Acta.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox6" name="checkbox6" value="Fecha de la suscripción del Acta" checked> Fecha de la suscripción del Acta.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox7" name="checkbox7" value="Identificación del órgano, entidad, oficina o dependencia que se entrega." checked>Identificación del órgano, entidad, oficina o dependencia que se entrega..</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox8" name="checkbox8" value=" Identificación de quien entrega" checked> Identificación de quien entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox9" name="checkbox9" value="Motivo de la entrega" checked> Motivo de la entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox10" name="checkbox10" value="Mención expresa de que los anexos forman parte integrante del acta" checked> Mención expresa de que los anexos forman parte integrante del acta.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox25" name="checkbox22" value="Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión." checked> Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión.</label>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox1" name="checkbox1" value="(A) El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad." checked>(A)  El acta se entrego en un plazo no superior de tres (3) días habiles, al funcionario entrante o al funcionario que designe la maxima autoridad.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox2" name="checkbox2" value="(B) El acta esta debidamente certificada por el funcionario autorizada" checked>(B) El acta esta debidamente certificada por el funcionario autorizada </label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox3" name="checkbox3" value="(C) El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega." checked>(C) El funcionario saliente elaboró, presentó y suscribió la respectiva acta de entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox5" name="checkbox5" value="(E) Lugar de la suscripción del Acta." checked>(E) Lugar de la suscripción del Acta.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox6" name="checkbox6" value="(F) Fecha de la suscripción del Acta" checked>(F) Fecha de la suscripción del Acta.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox7" name="checkbox7" value="(G) Identificación del órgano, entidad, oficina o dependencia que se entrega." checked>(G) Identificación del órgano, entidad, oficina o dependencia que se entrega..</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox8" name="checkbox8" value="(H) Identificación de quien entrega" checked>(H) Identificación de quien entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox8" name="checkbox8" value="(I) Identificación de quien Recibe" checked>(I) Identificación de quien entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox9" name="checkbox9" value="(J) Motivo de la entrega" checked>(J) Motivo de la entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox10" name="checkbox10" value="(l) Mención expresa de que los anexos forman parte integrante del acta" checked> (l)Mención expresa de que los anexos forman parte integrante del acta.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox21"  name="checkbox21" value="(j) El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma." checked> (j) El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label><br>
+                       
                         </div>
                         <div class="right-column">
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox12"  name="checkbox12" value="Suscripción del acta de quien entrega." checked> Suscripción del acta de quien entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox13"  name="checkbox13" value="Suscripción del acta de quien recibe." checked> Suscripción del acta de quien recibe.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox14"  name="checkbox14" value=" Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable." checked> Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox15"  name="checkbox15" value="Inventario de los bienes muebles e inmuebles." checked> Inventario de los bienes muebles e inmuebles..</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox12"  name="checkbox12" value="(m) Suscripción del acta de quien entrega." checked>(a) Suscripción del acta de quien entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox13"  name="checkbox13" value="(n) Suscripción del acta de quien recibe." checked>(b) Suscripción del acta de quien recibe.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox14"  name="checkbox14" value="(a) Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable." checked>(c) Estado de las cuentas que refleje la situación presupuestaria, financiera y patrimonial, cuando sea aplicable.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox22"  name="checkbox22" value="(b) Mención del número de cargos exigentes." checked>(d) Mención del número de cargos exigentes.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox15"  name="checkbox15" value="(e) Inventario de los bienes muebles e inmuebles." checked>(e) Inventario de los bienes muebles e inmuebles..</label><br>
+                           
                     
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox16"  name="checkbox16" value=" Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente." checked> Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox17"  name="checkbox17" value="Indice general del archivo." checked>Indice general del archivo.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox18"  name="checkbox18" value=" Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega." checked> Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox19"  name="checkbox19" value=" El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas." checked> El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas.</label><br>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox20" name="checkbox20" value="Monto de los fondos  y bienes asignados Presupuestariamente a la respectiva unidad administradora." checked> Monto de los fondos  y bienes asignados Presupuestariamente  a la respectiva unidad administradora.</label>
-                            <label class="checkbox-label"><input type="checkbox" id="checkbox21"  name="checkbox21" value="El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma." checked> El acta de entrega se recibio en la Unidad de Auditoria Interna dentro de los cinco (5) dias habiles siguientes a la fecha de suscripción de la misma.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox16"  name="checkbox16" value="(f) Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente." checked> (f) Situación de la ejecución del plan operativo de conformidad con los objetivos propuestos y las metas fijadas en el presupuesto correspondiente.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox17"  name="checkbox17" value="(g) Indice general del archivo." checked>(g) Indice general del archivo.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox18"  name="checkbox18" value="(h) Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega." checked> (h) Datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del funcionario o empleado que entrega.</label><br>
+                            <label class="checkbox-label"><input type="checkbox" id="checkbox19"  name="checkbox19" value="(i) El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas." checked> (i) El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas.</label><br>
                         </div>
                     </div>
                     <hr class="divider">
                     <div class="additional-checkboxes">
-                        <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value="Estados bancarios actualizados y conciliados." checked> Estados bancarios actualizados y conciliados.</label>
-                        <label class="checkbox-label"><input type="checkbox" id="checkbox23" name="checkbox23" value="Lista de comprobantes de gastos." checked>Lista de comprobantes de gastos.</label>
-                        <label class="checkbox-label"><input type="checkbox" id="checkbox24" name="checkbox24" value="Cheques emitidos pendientes de cobro.." checked>Cheques emitidos pendientes de cobro.</label>
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value="(c) Estados bancarios actualizados y conciliados." checked>(c) Estados bancarios actualizados y conciliados.</label>
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox23" name="checkbox23" value="(d) Lista de comprobantes de gastos." checked>(d) Lista de comprobantes de gastos.</label>
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox24" name="checkbox24" value="(e) Cheques emitidos pendientes de cobro.." checked>(e) Cheques emitidos pendientes de cobro.</label>
                     </div>
                     <hr class="divider">
                     <div class="additional-checkboxes">
-                    <label class="checkbox-label"><input type="checkbox" id="checkbox4" name="checkbox4" value=" En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo." checked> En caso de no recibir acta de entrega, el funcionario entrante levanto acta detallada indicando el estado en que se encuentran los asuntos, bienes y recursos asignados. Con dos testigos y el auditor interno del organismo.</label><br>
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox22" name="checkbox22" value=" (b) Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión." checked>(b) Saldo en efectivo de dichos fondos a la fecha de entrega de la gestión.</label>
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox20" name="checkbox20" value=" (a) Monto de los fondos  y bienes asignados Presupuestariamente a la respectiva unidad administradora." checked> (a) Monto de los fondos  y bienes asignados Presupuestariamente  a la respectiva unidad administradora.</label>
                 </div>
+
+                <hr class="divider">
+                    <div class="additional-checkboxes">
+                        <label class="checkbox-label"><input type="checkbox" id="checkbox25" name="checkbox25" value=" Sin Hallazgo" checked>Sin Hallazgo</label>
+                </div>
+
                 </form>
                 <div class="button-container">
                     <button class="btn-modern btn-primary" onclick="openSecondModal()">Siguiente</button>
@@ -76,7 +208,7 @@
                 <div class="button-container">
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Agregar un botón oculto en el HTML, fuera del modal -->
         <button  wire:click='InformeDocumen' id="newButton" style="display: none;" class="btn btn-primary">Descargar Informe del Auditor</button>
         

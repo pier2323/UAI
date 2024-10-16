@@ -79,12 +79,11 @@ final class ProgramaDocumen
     private function setData(): void
     {
         // $resultado = $this->auditActivity->preliminary_days+ 10 +$this->auditActivity->definitive_days;
-        $code = $this->auditActivity->code;
+        $code = $this->auditActivity->handoverDocument->audit_activity_id;
   
         $this->setMapperProperities();
    // Supongamos que estas son tus variables iniciales
-        $fecha_subcripcion = '20/05/2024';
-
+        $fecha_subcripcion = '10/05/2024';
         // Extraer el año con la base de datos asi 
         //$anio = substr($this->planning_end, 6, 4);
 
@@ -92,18 +91,17 @@ final class ProgramaDocumen
            $anio = substr($fecha_subcripcion, 6, 4);
         $this->document->data = [
             //'code' => $this->auditActivity->code,
-            'code' => '2024-067',
             'fecha_progrma' => now()->format('d/m/Y'),
             'unidad_entrega' => 'Gerencia General Operadores de Telecomunicaciones ',
-            'unidad_adcripta' => 'Vicepresidencia Prestación de Servicios',
+            'unidad_adcripta' => 'Vicepresidencia presidencia de Prestación de Servicio',
             'articulo' => 'ciudadana',
-            'periodo_saliente' => '08/06/2023 hasta el 24/03/2024',
-            'nombre_saliente' => 'Ingeborg Susana Herrer Poleo',
+            'periodo_saliente' => '04/10/2017 hasta el 12/08/2024',
+            'nombre_saliente' => 'Ingebor Susana Herrera Poleo',
             'cedula_saliente' => '14.486.839',
-            'cargo_saliente' => 'Gerente General de Operaciones ',
+            'cargo_saliente' => 'Gerencia General de Operadores de Telecomunicaciones',
             'Fecha_acreditacion' => '05/09/2024',
             'fecha_subcripcion' =>   $fecha_subcripcion,
-            'nu_acreditacion' => "UAI\\GCP\\DES-COM 2024-067",   //"UAI\\GCP\\DES\\-COM $code",
+            'nu_acreditacion' => "UAI\\GCP\\DES-COM 2024-068",   //"UAI\\GCP\\DES\\-COM $code",
             'dia_planificacion' =>"12",
             'desde_plan' => "05/09/2024", //$this->planning_start,
             'hasta_plan' =>   "20/09/2024",// $this->planning_end,
@@ -121,12 +119,13 @@ final class ProgramaDocumen
             'dia_definitivo' =>"5",  //$this->auditActivity->definitive_days,
             'desde_d' => "11/11/2024",// $this->definitive_start,
             'hasta_d' =>"15/11/2024", // $this->definitive_end,
-            'auditores_designados'=> "Silvia Vargas O /
-             Freryda Betancourt Félix",  //=>$this->getAuditorsString(),
+            'auditores_designados'=> "Silvia Vargas O /Ana Ivone Rojas ",  //=>$this->getAuditorsString(),
              'año'=>$anio,
 
         ];
+        
     }
+    
 
     private function setAuditor(Collection $auditors): void
     {

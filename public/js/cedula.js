@@ -24,6 +24,8 @@ const textosPorDefecto = {
     'checkbox19': 'Se constató que el Acta de Entrega y sus anexos fueron consignados ante la Unidad de Auditoría Interna en copias simples. Al respecto, las NREOEAPROD, en su artículo 21, establece:  “Artículo 21.- El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas. Una vez suscrita el acta, el original se archivará en el despacho de la máxima autoridad jerárquica del órgano o entidad, o en la oficina o dependencia que se entrega; una (1) copia certificada se entregará al servidor público que recibe; una (1) al servidor público que entrega; y una (1) a la unidad de auditoría interna del órgano o entidad, dentro de los cinco (5) días hábiles siguientes de la fecha de suscripción de la mencionada acta.”',
     'checkbox20': '',
     'checkbox21':'Artículo 21.- El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas. Una vez suscrita el acta, el original se archivará en el despacho de la máxima autoridad jerárquica del órgano o entidad, o en la oficina o dependencia que se entrega; una (1) copia certificada se entregará al servidor público que recibe; una (1) al servidor público que entrega; y una (1) a la unidad de auditoría interna del órgano o entidad, dentro de los cinco (5) días hábiles siguientes de la fecha de suscripción de la mencionada acta' ,
+    'checkbox22': 'Al cotejar el listado del personal adscrito a la "", con fecha de corte al "  y la suministrada por la Gerencia Atención y Desarrollo Gestión Humana , con la relación de personal inserta en el Acta de Entrega, se determinó la cantidad de  DESCRIBIR EL HALLAZGO XX  cargos vacantes no relacionado según el listado de Gestión Humana  Artículo 18.- “Los anexos del acta de entrega deberán incluir datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del servidor público que entrega. Es responsabilidad de quien entrega, la exactitud del acta y sus anexos tanto cualitativa como cuantitativamente.”',
+    
     
  
 
@@ -95,40 +97,51 @@ function showDownloadMessage(message) {
     }, 5000);
 }
 
+
 function openSecondModal() {
-const checkboxes = document.querySelectorAll('#checkboxForm input[type="checkbox"]');
-const uncheckedContainer = document.getElementById('uncheckedCheckboxesContainer');
-uncheckedContainer.innerHTML = '';
+    const checkboxes = document.querySelectorAll('#checkboxForm input[type="checkbox"]');
+    const uncheckedContainer = document.getElementById('uncheckedCheckboxesContainer');
+    uncheckedContainer.innerHTML = '';
 
-checkboxes.forEach((checkbox, index) => {
-    const inputHidden = document.createElement('input');
-    inputHidden.type = 'hidden';
-    inputHidden.name = `checkboxes[${index}]`;
-    inputHidden.value = checkbox.checked ? '0' : '1'; // Marcados son 0 y no marcados son 1
-    uncheckedContainer.appendChild(inputHidden);
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.id !== 'checkbox25') { // Excluir el checkbox de "Sin Hallazgo"
+            const inputHidden = document.createElement('input');
+            inputHidden.type = 'hidden';
+            inputHidden.name = `checkboxes[${index}]`;
+            inputHidden.value = checkbox.checked ? '0' : '1'; // Marcados son 0 y no marcados son 1
+            uncheckedContainer.appendChild(inputHidden);
 
-    if (!checkbox.checked) {
-        const div = document.createElement('div');
-        div.textContent = checkbox.value;
-        uncheckedContainer.appendChild(div);
+            if (!checkbox.checked) {
+                const div = document.createElement('div');
+                div.textContent = checkbox.value;
+                uncheckedContainer.appendChild(div);
 
-        const textarea = document.createElement('textarea');
-        textarea.name = `uncheckedCheckboxes[${index}]`;
-        textarea.placeholder = `Input for ${checkbox.value}`;
-        textarea.value = textosPorDefecto[checkbox.id] || ''; // Mensaje por defecto individual
-        uncheckedContainer.appendChild(textarea);
+                const textarea = document.createElement('textarea');
+                textarea.name = `uncheckedCheckboxes[${index}]`;
+                textarea.placeholder = `Input for ${checkbox.value}`;
+                textarea.value = textosPorDefecto[checkbox.id] || ''; // Mensaje por defecto individual
+                uncheckedContainer.appendChild(textarea);
+            }
+        }
+    });
+
+    // Verificar si el checkbox "Sin Hallazgo" está marcado
+    const sinHallazgoCheckbox = document.getElementById('checkbox25');
+    if (sinHallazgoCheckbox.checked) {
+        const sinHallazgoLabel = document.createElement('label');
+        sinHallazgoLabel.textContent = 'Sin Hallazgo:';
+        uncheckedContainer.appendChild(sinHallazgoLabel); // Agregar el nombre del checkbox
+
+        const sinHallazgoInput = document.createElement('textarea'); // Cambiar a textarea para mayor tamaño
+        sinHallazgoInput.name = 'sinHallazgo';
+        sinHallazgoInput.placeholder = 'Ingrese detalles sobre el hallazgo...';
+        sinHallazgoInput.value = 'Sin Hallazgo'; // Valor por defecto
+        sinHallazgoInput.style.width = '100%'; // Ajustar el ancho
+        sinHallazgoInput.style.height = '100px'; // Ajustar la altura
+        sinHallazgoInput.style.overflowY = 'scroll'; // Agregar scroll vertical
+        uncheckedContainer.appendChild(sinHallazgoInput);
     }
-});
 
-closeModal('firstModal');
-setTimeout(() => { openModal('secondModal'); }, 500); // Esperar la transición antes de abrir el segundo modal
+    closeModal('firstModal');
+    setTimeout(() => { openModal('secondModal'); }, 500); // Esperar la transición antes de abrir el segundo modal
 }
-
-function closeModalAndReset(modalId, formId) {
-    document.getElementById(modalId).style.display = 'none';
-    setTimeout(() => {
-        document.getElementById(formId).reset();
-        document.getElementById('downloadMessage').innerText = '';
-    }, 8000); // 8000 ms = 8 segundos
-}
-

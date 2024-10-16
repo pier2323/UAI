@@ -53,19 +53,19 @@ public function hallazasgo($request){
 
   
     {
-        $cedula_recibe = '10.810.683';
-        $cedula_saliente =  '14.486.839';
-        $unidad_entrega = 'Gerencia General Operadores de Telecomunicaciones';
-        $unidad_adscrita = 'Vicepresidencia Prestación de Servicios';
-         $periodo_saliente_desde = '08/06/2023';
-         $periodo_saliente_hasta = '24/03/2024';
-         $nombre_saliente = 'Ingeborg Susana Herrer Poleo';
+        $cedula_recibe = '16.525.105';
+        $cedula_saliente =  '17.286.980';
+        $unidad_entrega = 'Gerencia General  Mercado Masivos';
+        $unidad_adscrita = 'Gerente General de Proyecto Mayores';
+         $periodo_saliente_desde = '04/10/2017 ';
+         $periodo_saliente_hasta = ' 12/08/2024';
+         $nombre_saliente = 'Iván junior Gavranovic Sorman';
          $cedula_saliente = 'C.I.'.$cedula_saliente;
-         $auditor_a = 'Freryda Betancourt Félix';
+         $auditor_a = 'Ivonne Rojas';
          $auditor_b = 'Silvia Vargas O';
-         $nombre_recibe = 'Cladelmal Benítez Tovar';
+         $nombre_recibe = 'Ernesto Antonio Sandoval Martínes';
          $cedula_recibe = 'C.I.'.$cedula_recibe;
-         $cargo = 'Gerente General de Operaciones';
+         $cargo = 'Gerente General  de Proyecto Mayores';
          
          $spreadsheet = IOFactory::load('cedulaTemplate.xlsm');
          $hoja1 = $spreadsheet->getSheetByName('ATRIBUTOS');
@@ -98,7 +98,7 @@ public function hallazasgo($request){
          // Arreglo de columnas para las casillas de verificación
          $checkboxCells = ['D','E', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
          $checkboxIndex = 0; // Índice para recorrer el arreglo de columnas
-         $currentRow = 15;  //Inicializar la fila para las casillas de verificación
+         $currentRow = 27;  //Inicializar la fila para las casillas de verificación
 
           //Agregar datos al archivo Excel en las columnas especificadas
          foreach ($checkboxes as $index => $checkbox) {
@@ -108,6 +108,13 @@ public function hallazasgo($request){
              }
          }
 
+         $checkboxes = $request->input('checkboxes', []);
+         $uncheckedCheckboxes = $request->input('uncheckedCheckboxes', []);
+     
+         // Verificar si "Sin Hallazgo" está presente en la solicitud
+         if ($request->has('sinHallazgo')) {
+             $uncheckedCheckboxes[] = $request->input('sinHallazgo'); // Agregar "Sin Hallazgo" al arreglo
+         }
          $hoja3 = $spreadsheet->getSheetByName('HALLAZGOS');
          $hoja3->setCellValue('D7', "$unidad_entrega adscrita a la $unidad_adscrita");
          $hoja3->setCellValue('B5', "  Actuación $periodo_saliente_desde a la  $periodo_saliente_hasta");
@@ -115,10 +122,8 @@ public function hallazasgo($request){
       
 
         //  Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados
-         foreach ($checkboxes as $index => $checkbox) {
-             if (isset($checkboxCells[$checkboxIndex])) {
-                  $hoja3->setCellValue($checkboxCells[$checkboxIndex] . $currentRow, $checkbox);
-                 $checkboxIndex++;
+        foreach ($uncheckedCheckboxes as $unchecked) {
+            if (isset($checkboxCells[$checkboxIndex])) {
              }
          }
     

@@ -18,7 +18,7 @@ class Main extends Component
                         'handoverDocument' => [
                             'employeeIncoming',
                             'employeeOutgoing' => [
-                                'jobTitle',
+                                
                             ],
                         ],
                         'typeAudit',
