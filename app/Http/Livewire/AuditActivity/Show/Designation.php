@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\AuditActivity\Show;
 
 use App\Models\AuditActivity;
+use App\Models\Acreditation as ModelsAcreditation;
 use App\Models\Designation as ModelsDesignation;
 use App\Services\DesignationService;
 use Livewire\Attributes\Renderless;
@@ -13,6 +14,7 @@ class Designation extends Component
 {
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
+    public ?ModelsAcreditation $acreditation;
 
     public function render()
     {
@@ -30,7 +32,7 @@ class Designation extends Component
     }
 
     #[Renderless]
-    public function getDesignationDocument()
+    public function getDesignationDocument(): BinaryFileResponse
     {
         $designation = new DesignationService($this->auditActivity, date: $this->designation->date_release);
         $this->dispatch('designation_download', message: \__('se ha iniciado la descarga!'));

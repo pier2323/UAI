@@ -31,6 +31,9 @@ class AuditActivityForm extends Form
     #[Validate(['required'], as: 'Mes fin')]   
     public string $uai = '';
 
+    #[Validate(['boolean'], as: 'Poa')]   
+    public bool $is_poa = false;
+
     public function data(): array
     {
         return [
@@ -39,6 +42,7 @@ class AuditActivityForm extends Form
             'objective' => $this->objective,
             'month_start' => $this->month_start,
             'month_end' => $this->month_end,
+            'is_poa' => $this->is_poa,
             'area_id' => \App\Models\Area::where('name', $this->area)->first()->id,
             'type_audit_id' => \App\Models\TypeAudit::where('name', $this->type_audit)->first()->id,
             'uai_id' => \App\Models\Uai::where('name', $this->uai)->first()->id,

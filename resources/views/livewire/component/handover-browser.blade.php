@@ -94,7 +94,7 @@
                     },
     
                     get filteredItems() {
-                        return (this.search !== "" ? this.items :this.pages[this.page]).filter(
+                        return (this.search !== "" ? this.items :this.items).filter(
                             item => {
                                 fullname = `${item.employee_outgoing.first_name} ${item.employee_outgoing.first_surname}`
                                 return fullname.includes(this.search) 

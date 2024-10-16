@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('audit_activity', function(Blueprint $table) {
             $table->id();
             $table->integer('public_id')->nullable();
-            $table->boolean('isPoa')->nullable();
+            $table->boolean('is_poa')->nullable()->default(false);
             $table->string('year', length: 4)->default('2024');
             $table->string('description')->nullable();
             $table->string('objective', length: 5000)->nullable();
