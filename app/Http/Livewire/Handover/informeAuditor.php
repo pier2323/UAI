@@ -72,50 +72,58 @@ final class informeAuditor
 
     private function setData(): void
     {
-       
-        $designacion = $this->auditActivity->date_release;
-        $code = $this->auditActivity->code;
+        $resultado = $this->auditActivity->preliminary_days+ 10 +$this->auditActivity->definitive_days;
+        $code = $this->auditActivity->handoverDocument->audit_activity_id;
+        $this->setMapperProperities();
+   // Supongamos que estas son tus variables iniciales
+    $fecha_subcripcion = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
+      $periodo_inicial =date('d-m-Y', strtotime($this->auditActivity->handoverDocument->start));
+      $periodo_cease = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->cease));
+   // Extraer el año con datos estaticos 
+   $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
+   $full_name_Outgoing = "$employeeOutgoing->first_name " .(isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '')."$employeeOutgoing->first_surname" .(isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+   $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
+   $full_name_Incoming = "$employeeIncoming->first_name " .(isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '')."$employeeIncoming->first_surname" .(isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
+  
         $this->document->data = [
-            'code' => '2024-068',
-            'fecha_progrma' => now()->format('d/m/Y'),
-            'unidad_entrega' => 'Gerencia General Mercado Masivos ',
-            'unidad_adcripta' => 'Vicepresidencia presidencia de Prestación de Servicio',
-            'articulo' => 'ciudadano',
-            'periodo_saliente' => '04/10/2017 hasta el 12/08/2024',
-            'nombre_saliente' => 'Iván junior Gavranovic Sorman',
-            'cedula_saliente' => '17.286.980 ',
-            'cargo_saliente' => 'Gerente General de Proyecto Mayores',
-            'Fecha_acreditacion' => '05/09/2024',
-            'fecha_subcripcion' => '15/04/2024',
-            'nu_acreditacion' => "UAI\\GCP\\ACR-COM 068",
-            'periodo_gestion' => '18/08/2022',
-            'periodo_gestiona' => '10/04/2024',
-            'codigo_desgisnacion' => "UAI\\GCP\\DES-COM 068",
-            'fecha_designacion' => '05/09/2024',
-            'nombre_recibe' => 'Ernesto Antonio Sandoval Martínes',
-            'cedula_recibe' => '16.525.105',
-            'auditores_designados' =>'Silvia Vargas O /Ana Ivone Rojas ',
+            'code' => $this->auditActivity->code,
+            'fecha_progrma' =>  now()->format('d') . ' de ' . now()->translatedFormat('F') . ' de ' . now()->format('Y'),
+            'unidad_entrega' => $this->auditActivity->handoverDocument->departament,
+            'unidad_adcripta' =>  $this->auditActivity->handoverDocument->departament_affiliation,
+            'articulo' => 'ciudadana',
+            'periodo_saliente' => "$periodo_inicial hasta el $periodo_cease ",
+            'nombre_saliente' =>   $full_name_Outgoing,
+            'cedula_saliente' => $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,
+            'cargo_saliente' => $this->auditActivity->handoverDocument->job_title,
+            'Fecha_acreditacion' =>  $this->auditActivity->designation[0]->date_release,
+            'fecha_subcripcion' =>  $fecha_subcripcion,
+            'nu_acreditacion' =>  "UAI\\GCP\\DES\\ACRE-COM $code",
+            'codigo_desgisnacion' => "UAI\\GCP\\DES-COM $code",
+           'fecha_designacion' => date_format($this->auditActivity->designation[0]->date_release, 'd-m-Y'),
+            // 'nombre_recibe' => $full_name_Incoming,
+            // 'cedula_recibe' => $this->auditActivity->handoverDocument->employeeIncoming->job_title,
+            'auditores_designados' => $this->getAuditorsString(),
         ];
+  
     }
-
     private function setAuditor(Collection $auditors): void
     {
-        foreach ($auditors as $auditor) {
-            $jobTitle = $auditor->pivot->role;
-            array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname / $jobTitle");
+       foreach ($auditors as $auditor) {
+           
+            array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname ");
         }
     }
 
-    private function getAuditorsString(): string
-    {
+   private function getAuditorsString(): string
+   {
         return implode(
-            separator: ", ",
+            separator: "/ ", 
             array: $this->auditors
         );
-    }
+   }
 
-    private function setMapperProperities(): void
-    {
+
+    private function setMapperProperities(): void {
         $properties = [
             'planning_start',
             'planning_end',
@@ -128,11 +136,12 @@ final class informeAuditor
             'definitive_start',
             'definitive_end',
         ];
-
+    
         $this->mapModelPropertiesPier(
-            model: $this->auditActivity,
+            model: $this->auditActivity, 
             properties: $properties,
         );
     }
-}
-
+       
+    }
+    

@@ -1,10 +1,11 @@
 <div>
     <x-section-basic>
-        {{-- <x-button wire:click="downloadWorkingCedula">hola</x-butto> --}}
+         <x-button wire:click="downloadWorkingCedula">hola</x-butto> 
        
             <link rel="stylesheet" href="/css/cedula.css">
             <script src="/js/cedula.js"></script>
     
+            
             <!-- Primer Modal -->
             <div id="firstModal" class="modal">
                 <div class="modal-content">
@@ -120,11 +121,15 @@
             }
         });
     });
+    
 </script>
+        </div> 
+        <!-- Agregar un botón oculto en el HTML, fuera del modal -->
         <button  wire:click='InformeDocumen' id="newButton" style="display: none;" class="btn btn-primary">Descargar Informe del Auditor</button>
         
         <h2>Actas</h2>
-        
+        <h2> {{ $auditActivity->handoverDocument->employeeIncoming->first_name }}
+        </h2>
 
         {{-- <x-card-handover>
             <x-slot:titulo>Detalles del Acta</x-slot>
