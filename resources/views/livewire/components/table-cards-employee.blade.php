@@ -44,7 +44,7 @@
                 
                 @empty($designation)
                     {{-- todo card Add --}}
-                    @push('modals') <livewire:employee.browser /> @endpush
+                   @push('modals') <livewire:employee.browser /> @endpush
         
                     {{-- todo button add card --}}
                     <div x-show='!designation' class="w-1/2 bg-gray-200 border border-gray-200 rounded-full shadow justify-self-center h-1/2 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 active:bg-green-100"

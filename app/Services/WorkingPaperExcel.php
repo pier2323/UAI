@@ -30,7 +30,18 @@ final class WorkingPaperExcel
 
     public function download()
     {
-       
+        $writer = new Xlsx($this->template);
+        
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="cedula.xls"');
+        header('Cache-Control: max-age=0');
+        
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($this->template, 'Xls');
+        $writer->save('php://output');
+   
+
+
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . urlencode($this->nameDocument) . '"');
@@ -53,11 +64,12 @@ final class WorkingPaperExcel
     {
         $sheetsExcel = [];
 
+        
         foreach($this->sheets as $sheet)
         {
             $sheetsExcel[] =  $this->template->getSheetByName($sheet);
         }
-
+        
         $this->sheets = $sheetsExcel;
     }
 

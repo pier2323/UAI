@@ -18,7 +18,8 @@ class ZimbraMailController extends Controller
             'fecha_subcripcion' => '11/03/2024', 
             'fecha_requerimiento' => '02 de Octubre de 2024', 
             'fecha_cese' => '01/08/2024',
-           'fecha_designacion'  => '01/08/2024',
+            'fecha_designacion' => '10/08/2024',
+            
         ];
 
         // Texto con marcadores de posición
@@ -26,6 +27,7 @@ class ZimbraMailController extends Controller
         "saludos cordiales Por medio del presente, remito solicitud de requerimiento de la Comisión de Auditoría, para su conocimiento y fines.\n\n".
        " Para: Damian López Murga / Vicepresidencia Gestión Interna".
        " Stalin Agustin Da Silva Betancourt / Vicepresidencia Ejecutiva\n\n".
+       "UAI/GCP/SR-003 2024-066\n\n".
       "  De: Comisión de Auditoría\n\n".
       " Asunto: Solicitud de Requerimiento Nro. 1 - Actuación Fiscal: “Verificación de la sinceridad y exactitud del contenido del acta de entrega de la {unidad_entrega}, adscrita a la {unidad_adcripta} de la Cantv, correspondiente al servidor público saliente {articulo} {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, suscrita en fecha {fecha_subcripcion}\n\n".
    
@@ -46,24 +48,28 @@ class ZimbraMailController extends Controller
 "Sin más a que hacer referencia, y reiterándole la disposición de esta Unidad de Auditoría Interna para coadyuvar al logro de los objetivos institucionales, se despide.\n\n".
 
 "Att\n";
-   // Agregar el texto solicitado
-   $template .= "<span style='color: red; text-align: left;'>¡Trabajo en Equipo es Victoria Segura!</span>";
 
-   // Reemplazar los marcadores de posición con las variables
-   $bodyText = str_replace(
-       ['{articulo}', '{nombre_saliente}', '{cedula_saliente}', '{unidad_entrega}', '{unidad_adcripta}', '{fecha_subcripcion}', '{fecha_requerimiento}', '{fecha_cese}', '{code}' ,'{fecha_designacion} '],
-       [$data['articulo'], $data['nombre_saliente'], $data['cedula_saliente'], $data['unidad_entrega'], $data['unidad_adcripta'], $data['fecha_subcripcion'], $data['fecha_requerimiento'], $data['fecha_cese'], $data['code'],$data['fecha_designacion']],
-       $template
-   );
 
-   // Codificar el cuerpo del mensaje
-   $bodyText = rawurlencode($bodyText);
+                  
 
-   // Construir la URL de Zimbra
-   $zimbraComposeUrl = "https://correoweb.cantv.com.ve/?loginOp=logout/?app=mail&view=compose&body=" . $bodyText;
 
-   // Redirigir a la URL de Zimbra
-   header("Location: $zimbraComposeUrl");
-   exit();
+
+  // Reemplazar los marcadores de posición con las variables
+  $bodyText = str_replace(
+      ['{articulo}', '{nombre_saliente}', '{cedula_saliente}', '{unidad_entrega}', '{unidad_adcripta}', '{fecha_subcripcion}', '{fecha_requerimiento}', '{fecha_cese}', '{code}'],
+      [$data['articulo'], $data['nombre_saliente'], $data['cedula_saliente'], $data['unidad_entrega'], $data['unidad_adcripta'], $data['fecha_subcripcion'], $data['fecha_requerimiento'], $data['fecha_cese'], $data['code'],$data['fecha_designacion'] ],
+      $template
+  );
+
+  // Codificar el cuerpo del mensaje
+  $bodyText = urlencode($bodyText);
+
+  // Construir la URL de Zimbra
+  $zimbraComposeUrl = "https://correoweb.cantv.com.ve/?loginOp=logout/?app=mail&view=compose&body=" . htmlentities($bodyText);
+
+  // Redirigir a la URL de Zimbra
+  header("Location: $zimbraComposeUrl");
+  exit();
 }
+
 }

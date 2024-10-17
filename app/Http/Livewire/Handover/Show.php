@@ -10,8 +10,6 @@ use App\Traits\ModelPropertyMapper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-
-
 use \PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -30,16 +28,17 @@ class Show extends Component
 
     public $outgoing = [];
 
-    public function mount()
+    public function mount(int $auditActivity)
     {
-        $this->auditActivity = $this->designation->auditActivity()->first();
-        // dd($this->auditActivity);
-
-        
-
+        $this->auditActivity = auditActivity::with(['designation' , 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])->where('public_id' ,$auditActivity)->first();
+        //dd($this->auditActivity);
         $this->incoming = \App\Models\EmployeeIncoming::all();
         $this->outgoing = \App\Models\EmployeeOutgoing::all();
+        
     }
+    
+
+
     
     public function requeriDocumen(): BinaryFileResponse     
     {
@@ -81,5 +80,8 @@ class Show extends Component
     {
         $document = new CedulaExcelService();
         $document->downloadExcel();
+        dd('downloadWorkingCedula');
     }
+    
+    
 }

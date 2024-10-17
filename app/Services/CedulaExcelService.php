@@ -57,31 +57,6 @@ final class CedulaExcelService
 
         dd($this->document);
 
-
-
-        // // Establecer ancho de las columnas
-        // $hoja2->getColumnDimension('A')->setWidth(20);
-        // $hoja2->getColumnDimension('B')->setWidth(10);
-        // $hoja2->getColumnDimension('C')->setWidth(50);
-
-        // $checkboxes = $request->input('checkboxes', []);
-        // $uncheckedCheckboxes = $request->input('uncheckedCheckboxes', []);
-
-        // $hoja2 = $spreadsheet->getSheetByName('Cedula');
-
-        // // Arreglo de columnas para las casillas de verificación
-        // $checkboxCells = ['D', 'F', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z',];
-        // $checkboxIndex = 0; // Índice para recorrer el arreglo de columnas
-        // $currentRow = 90; // Inicializar la fila para las casillas de verificación
-
-        // // Agregar datos al archivo Excel en las columnas especificadas
-        // foreach ($checkboxes as $index => $checkbox) {
-        //     if (isset($checkboxCells[$checkboxIndex])) {
-        //         $hoja2->setCellValue($checkboxCells[$checkboxIndex] . $currentRow, $checkbox);
-        //         $checkboxIndex++;
-        //     }
-        // }
-
     }
 }
 

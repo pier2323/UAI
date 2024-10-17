@@ -9,11 +9,11 @@ use App\Http\Controllers\ZimbraMailController;
 
 Route::get('/enviar-correo-zimbra', [ZimbraMailController::class, 'enviarCorreo']);
 
+Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
+
 Route::post('/save-data', [DataController::class, 'saveData'])->name('saveData');
 
 
-
-Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
 // todo before login 
 Route::get('/', function () {
     return view('welcome');

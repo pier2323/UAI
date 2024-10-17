@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     container_name: postgres-db
-    image: postgres
+    image: postgres:16
     volumes:
       # - pokemon_post:/var/lib/postgresql/data
       - ./uai_post:/var/lib/postgresql/data
@@ -13,17 +13,6 @@ services:
       - POSTGRES_PASSWORD=123456
       - PGDATA=/var/lib/postgresql/data/pgdata
 
-  pgAdmin:
-    depends_on: 
-      - db
-    image: dpage/pgadmin4:6.17
-    volumes:
-      - ./pgAdmin:/var/lib/pgadmin
-    ports: 
-      - "8080:80"
-    environment:
-      - PGADMIN_DEFAULT_PASSWORD=123456
-      - PGADMIN_DEFAULT_EMAIL=superman@google.com
 
 # volumes:
 #   pokemon_post:

@@ -72,55 +72,58 @@ final class informeAuditor
 
     private function setData(): void
     {
-        $checkboxes = session()->get('checkboxes');
-$uncheckedCheckboxes = session()->get('uncheckedCheckboxes');
-        $designacion = $this->auditActivity->date_release;
-        $code = $this->auditActivity->code;
+        $resultado = $this->auditActivity->preliminary_days+ 10 +$this->auditActivity->definitive_days;
+        $code = $this->auditActivity->handoverDocument->audit_activity_id;
+        $this->setMapperProperities();
+   // Supongamos que estas son tus variables iniciales
+    $fecha_subcripcion = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
+      $periodo_inicial =date('d-m-Y', strtotime($this->auditActivity->handoverDocument->start));
+      $periodo_cease = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->cease));
+   // Extraer el año con datos estaticos 
+   $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
+   $full_name_Outgoing = "$employeeOutgoing->first_name " .(isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '')."$employeeOutgoing->first_surname" .(isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+   $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
+   $full_name_Incoming = "$employeeIncoming->first_name " .(isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '')."$employeeIncoming->first_surname" .(isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
+  
         $this->document->data = [
             'code' => $this->auditActivity->code,
-            'fecha_progrma' => now()->format('d/m/Y'),
-            'unidad_entrega' => 'Cas',
-            'unidad_adcripta' => 'Gerencia de Control Posteriro',
-            'articulo' => 'ciudadano',
-            'periodo_saliente' => '14/10/2024',
-            'nombre_saliente' => 'pier',
-            'cedula_saliente' => '1234567',
-            'cargo_saliente' => '1234567',
-            'Fecha_acreditacion' => '12/06/2024',
-            'fecha_subcripcion' => '12/06/2024',
-            'nu_acreditacion' => "UAI\\GCP\\DES $code",
-            'periodo_gestion' => '15/05/2025',
-            'periodo_gestiona' => '15/05/2025',
-            'codigo_desgisnacion' => "UAI\\GCP\\DES $code",
-            'fecha_designacion' => $designacion,
-            'periodo_desde' => '12/06/2024',
-            'periodo_hasta' => '12/06/2024',
-            'nombre_recibe' => '12/06/2024',
-            'cedula_recibe' => '12/06/2024',
+            'fecha_progrma' =>  now()->format('d') . ' de ' . now()->translatedFormat('F') . ' de ' . now()->format('Y'),
+            'unidad_entrega' => $this->auditActivity->handoverDocument->departament,
+            'unidad_adcripta' =>  $this->auditActivity->handoverDocument->departament_affiliation,
+            'articulo' => 'ciudadana',
+            'periodo_saliente' => "$periodo_inicial hasta el $periodo_cease ",
+            'nombre_saliente' =>   $full_name_Outgoing,
+            'cedula_saliente' => $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,
+            'cargo_saliente' => $this->auditActivity->handoverDocument->job_title,
+            'Fecha_acreditacion' =>  $this->auditActivity->designation[0]->date_release,
+            'fecha_subcripcion' =>  $fecha_subcripcion,
+            'nu_acreditacion' =>  "UAI\\GCP\\DES\\ACRE-COM $code",
+            'codigo_desgisnacion' => "UAI\\GCP\\DES-COM $code",
+           'fecha_designacion' => date_format($this->auditActivity->designation[0]->date_release, 'd-m-Y'),
+            // 'nombre_recibe' => $full_name_Incoming,
+            // 'cedula_recibe' => $this->auditActivity->handoverDocument->employeeIncoming->job_title,
             'auditores_designados' => $this->getAuditorsString(),
-            
-           
         ];
+  
     }
-
     private function setAuditor(Collection $auditors): void
     {
-        foreach ($auditors as $auditor) {
-            $jobTitle = $auditor->pivot->role;
-            array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname / $jobTitle");
+       foreach ($auditors as $auditor) {
+           
+            array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname ");
         }
     }
 
-    private function getAuditorsString(): string
-    {
+   private function getAuditorsString(): string
+   {
         return implode(
-            separator: ", ",
+            separator: "/ ", 
             array: $this->auditors
         );
-    }
+   }
 
-    private function setMapperProperities(): void
-    {
+
+    private function setMapperProperities(): void {
         $properties = [
             'planning_start',
             'planning_end',
@@ -133,11 +136,12 @@ $uncheckedCheckboxes = session()->get('uncheckedCheckboxes');
             'definitive_start',
             'definitive_end',
         ];
-
+    
         $this->mapModelPropertiesPier(
-            model: $this->auditActivity,
+            model: $this->auditActivity, 
             properties: $properties,
         );
     }
-}
-
+       
+    }
+    

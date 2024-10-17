@@ -124,12 +124,12 @@ class AuditActivity extends Model
         return $date->format('d/m/Y');
     }
 
-    protected function code(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) 
-            => $attributes['year'] . '-' . str_pad($attributes['public_id'], 3, '0', STR_PAD_LEFT)
-        );
+     protected function code(): Attribute
+     {
+         return Attribute::make(
+             get: fn (mixed $value, array $attributes) 
+             => $attributes['year'] . '-' . str_pad($attributes['public_id'], 3, '0', STR_PAD_LEFT)
+         );
     }
     
     // todo custom functions 
