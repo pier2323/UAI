@@ -36,7 +36,7 @@
                 <div class="flex">
 
                     <div class="mx-4">
-                        @isset($designation) <x-button wire:click='getDesignationDocument'>descargar designacion</x-button> @endisset
+                        @isset($designation) <x-button wire:click='getDesignationDocument'>descargar designación</x-button> @endisset
                         @empty($designation) <x-button type='submit' class="ml-4" wire:click="$dispatch('saving')">Designar</x-button> @endempty
                     </div>
                     

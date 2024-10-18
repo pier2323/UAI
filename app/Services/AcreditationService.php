@@ -47,11 +47,15 @@ final class AcreditationService
 
     private function setAuditor(Collection $auditors): void
     {
+        
         foreach ($auditors as $auditor)
         {
+            $names = ucwords(strtolower($auditor->first_name . " " . $auditor->second_name ?? ""), " ");
+            $surnames = ucwords(strtolower($auditor->first_surname . " " . $auditor->second_surname ?? ""), " ");
+
             array_push($this->auditors, [
                 'personalId' => 'V-' . $auditor->personal_id,
-                'fullname' => "$auditor->first_name $auditor->first_surname",
+                'fullname' => "$names $surnames",
             ]);
         }
     }    

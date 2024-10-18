@@ -58,19 +58,23 @@ final class ProgramaDocumen
     private function setData(): void
     {
         $resultado = $this->auditActivity->preliminary_days+ 10 +$this->auditActivity->definitive_days;
-        $code = $this->auditActivity->handoverDocument->audit_activity_id;
+        $code = $this->auditActivity->code;
         $this->setMapperProperities();
-   // Supongamos que estas son tus variables iniciales
-    $fecha_subcripcion = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
-      $periodo_inicial =date('d-m-Y', strtotime($this->auditActivity->handoverDocument->start));
-      $periodo_cease = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->cease));
-   // Extraer el año con datos estaticos 
-   $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
-   $full_name_Outgoing = "$employeeOutgoing->first_name " .(isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '')."$employeeOutgoing->first_surname" .(isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
-   $anio = substr($fecha_subcripcion, 6, 4);
+        // Supongamos que estas son tus variables iniciales
+        $fecha_subcripcion = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
+        $periodo_inicial =date('d-m-Y', strtotime($this->auditActivity->handoverDocument->start));
+        $periodo_cease = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->cease));
+        // Extraer el año con datos estaticos 
+        $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
+        $full_name_Outgoing = "$employeeOutgoing->first_name " .(isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '')."$employeeOutgoing->first_surname" .(isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+        $anio = substr($fecha_subcripcion, 6, 4);
 
-   //dd( $periodo_cease );
-             $this->document->data = [
+
+     
+
+        //dd( $periodo_cease );
+        $this->document->data = [
+
             'code' => $this->auditActivity->code,
             'fecha_progrma' => now()->format('d/m/Y'),
             'unidad_entrega' => $this->auditActivity->handoverDocument->departament,

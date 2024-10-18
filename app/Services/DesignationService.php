@@ -58,7 +58,9 @@ final class DesignationService
         foreach ($auditors as $auditor) {
             $letter = self::LETTERS[$i];
             $jobTitle = $auditor->pivot->role;
-            array_push($this->auditors, "$auditor->first_name $auditor->first_surname $auditor->second_surname / $jobTitle ($letter)");
+            $names = ucwords(strtolower($auditor->first_name . " " . $auditor->second_name ?? ""), " ");
+            $surnames = ucwords(strtolower($auditor->first_surname . " " . $auditor->second_surname ?? ""), " ");
+            array_push($this->auditors, "$names $surnames / $jobTitle ($letter)");
             $i++;
         }
     }

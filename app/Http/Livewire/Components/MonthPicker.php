@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MonthPicker extends Component
 {
-    public array $months = ['Enero', 'Frebrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    public array $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     public string $id = 'hola';
     public string $class = '';
     public string $alpine = '';

@@ -20,7 +20,7 @@
                 x-on:input="{{ $text }} = calculateDays($wire.{{ $idStart }}, $wire.{{ $idEnd }})"  
                 placeholder="Fin.." 
                 x-model="$wire.{{ $idEnd }}" 
-                wire:model='{{ $idEnd }}' 
+                wire:model='{{ $idEnd }}'
                 readonly
             />
         </div>

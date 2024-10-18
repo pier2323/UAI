@@ -62,7 +62,6 @@ class HandoverDocument extends Form
         $this->toFormatDate();
 
         if(isset($auditActivity) && $auditActivity !== '') {
-            dd('normal');
             $this->audit_activity_id = $auditActivity->id;
             return ModelsHandoverDocument::create($this->propertiesToSave());
         }
