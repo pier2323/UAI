@@ -19,6 +19,7 @@ class Show extends Component
     const PATH_DIRECTORY = 'templateDocument'; 
     public Designation $designation;
     public $auditActivity;
+    public $auditActivityWith;
     public $employees = [];
 
     private array $auditors = [];
@@ -31,14 +32,10 @@ class Show extends Component
     public function mount(int $auditActivity)
     {
         $this->auditActivity = auditActivity::with(['designation' , 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])->where('public_id' ,$auditActivity)->first();
-        //dd($this->auditActivity);
+        $this->auditActivityWith = $this->auditActivity;
         $this->incoming = \App\Models\EmployeeIncoming::all();
         $this->outgoing = \App\Models\EmployeeOutgoing::all();
-        
     }
-    
-
-
     
     public function requeriDocumen(): BinaryFileResponse     
     {

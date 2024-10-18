@@ -1,5 +1,5 @@
 <div x-data="selectArea()">
-    <label for="SelectArea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area de la Actuacion Fiscal</label>
+    <label for="SelectArea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Área de la Actuación Fiscal</label>
 
     <div x-show="isSelecting" class="flex w-full text-sm font-semibold text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
         
@@ -28,7 +28,7 @@
                     <x-input-error for="selected" />
                     <input id="SelectArea" readonly
                     class="cursor-pointer text-center select-none font-semibold bg-gray-50 border border-gray-300 w-full text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:bg-slate-200"
-                    wire:model='selected' placeholder="Selecciona un Area"/> 
+                    wire:model='selected' placeholder="Selecciona un Área"/> 
 
                 </div>
             </x-slot>

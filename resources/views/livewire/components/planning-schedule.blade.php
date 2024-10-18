@@ -7,7 +7,7 @@
     @endphp
 
     <div>
-        <h3 class="p-2 pl-5 text-lg font-semibold">Cronograma de la Actuacion Fiscal</h3>
+        <h3 class="p-2 pl-5 text-lg font-semibold">Cronograma de la Actuación Fiscal</h3>
         <hr>
     </div>
     <hr>
@@ -17,14 +17,14 @@
                 idStart='planning_start' 
                 idEnd='planning_end' 
                 text='$wire.planning_days'
-                title='Planificacion'
+                title='Planificación'
                 :designation="isset($designation)"
             />
             <x-input-date-planning
                 idStart='execution_start' 
                 idEnd='execution_end' 
                 text='$wire.execution_days' 
-                title='Ejecucion'
+                title='Ejecución'
                 :designation="isset($designation)"
             />
             <x-input-date-planning
@@ -122,7 +122,18 @@
                             const config = {
                                 // minDate: this.nextDay(),
                                 dateFormat: this.formatDate,
-                                disable: [this.filterByWeekDay]
+                                disable: [this.filterByWeekDay],
+                                locale: {
+                                    // firstDayOfWeek: 1,
+                                    weekdays: {
+                                    shorthand: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                                    longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],         
+                                    }, 
+                                    months: {
+                                    shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+                                    longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                    },
+                                },
                             }
 
                             const inputsDateId = [

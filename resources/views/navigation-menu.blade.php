@@ -16,9 +16,9 @@
                     $routes = [
                         'dashboard.index' => 'Inicio',
                         'employee.index' => 'Personal',
+                        'handoverDocument.register' => 'Registro del Acta de entrega',
                         'auditActivity.index' => 'Plan Operativo Anual',
                         'handover.index' => 'Acta de Entrega',
-                        'handoverDocument.register' => 'Registro del Acta de entrega',
                     ];
                 @endphp
 

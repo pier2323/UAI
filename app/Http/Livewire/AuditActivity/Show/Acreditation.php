@@ -30,7 +30,7 @@ class Acreditation extends Component
             'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
         ]);
 
-        $this->dispatch('acreditation_download', message: \__('se ha acreditado la comision correctamente!'));
+        $this->dispatch('acreditation_download', message: \__('se ha acreditado la comisión correctamente!'));
     }
     
     #[Renderless]

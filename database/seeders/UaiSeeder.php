@@ -24,23 +24,23 @@ class UaiSeeder extends Seeder
                 'level' => 2, // * 2 
             ],
             [
-                'name' => 'Determinacion de Responsabilidades', 
+                'name' => 'Determinación de Responsabilidades', 
                 'level' => 2, // * 3 
             ],
             [
-                'name' => 'Auditoria de Sitemas', 
+                'name' => 'Auditoría de Sistemas', 
                 'level' => 3, // * 4 
             ],
             [
-                'name' => 'Auditoria de Gestion', 
+                'name' => 'Auditoría de Gestión', 
                 'level' => 3, // * 5 
             ],
             [
-                'name' => 'Auditoria de Seguimiento', 
+                'name' => 'Auditoría de Seguimiento', 
                 'level' => 3, // * 6 
             ],
             [
-                'name' => 'Auditoria Financiera', 
+                'name' => 'Auditoría Financiera',
                 'level' => 3, // * 7 
             ],
             [
@@ -48,7 +48,7 @@ class UaiSeeder extends Seeder
                 'level' => 3, // * 8 
             ],
             [
-                'name' => 'Planificacion y Control', 
+                'name' => 'Planificación y Control', 
                 'level' => 3, // * 9 
             ]
         ];

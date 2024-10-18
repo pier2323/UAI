@@ -65,6 +65,17 @@
                     const config = {
                         maxDate: "today",
                         dateFormat: "d/m/Y",
+                        locale: {
+                            // firstDayOfWeek: 1,
+                            weekdays: {
+                            shorthand: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                            longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],         
+                            }, 
+                            months: {
+                            shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+                            longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                            },
+                        },
                     }
 
                     for (const property of this.properties) {

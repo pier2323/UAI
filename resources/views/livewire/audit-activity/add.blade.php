@@ -6,7 +6,7 @@
         <x-notification on="add-audit-activity-cancel-ok" theme="warning" />
     @endpush
 
-    <x-button class="m-4" x-on:click="$wire.open = true">{{\__("Nueva Actuacion Fiscal")}}</x-button>
+    <x-button class="m-4" x-on:click="$wire.open = true">{{\__("Nueva Actuación Fiscal")}}</x-button>
 
     <form wire:submit="save" x-data>
     <x-dialog-modal wire:model="open" maxWidth="3xl" class="overflow-hidden">
@@ -14,12 +14,12 @@
             <div class="flex justify-between">
 
                 <span class="text-2xl">
-                    {{ \__("Actuacion Fiscal") }} 
+                    {{ \__("Actuación Fiscal") }} 
                 </span>
                 <div class="flex">
                     <div class="flex flex-col mb-2 mr-2 w-fit">
                         <x-input id="auditActivity.public_id" wire:model='auditActivity.public_id' type="number" 
-                        placeholder="Codigo: {{App\Models\AuditActivity::all()->last()->public_id + 1}}" />
+                        placeholder="Código: {{App\Models\AuditActivity::all()->last()->public_id + 1}}" />
                         <x-input-error for="auditActivity.public_id" />
                     </div>
     
@@ -39,26 +39,26 @@
                 </div>
                 
                 <div>
-                    <livewire:Components.SelectSomething wire:model="auditActivity.type_audit" :items="App\Models\TypeAudit::select('name')->get()" id="auditActivity.type_audit" placeholder="Seleccione un tipo" title="Tipos de auditoria">
+                    <livewire:Components.SelectSomething wire:model="auditActivity.type_audit" :items="App\Models\TypeAudit::select('name')->get()" id="auditActivity.type_audit" placeholder="Seleccione un tipo" title="Tipos de auditoría">
                     <x-input-error for="auditActivity.type_audit" />
                 </div>
 
                 <div>
-                    <livewire:Components.SelectSomething wire:model="auditActivity.uai" :items="App\Models\Uai::select('name')->get()" id="auditActivity.uai" placeholder="Coordinaciones" title="Area de la UAI encargada">
+                    <livewire:Components.SelectSomething wire:model="auditActivity.uai" :items="App\Models\Uai::select('name')->get()" id="auditActivity.uai" placeholder="Coordinaciones" title="Área de la UAI encargada">
                     <x-input-error for="auditActivity.uai" />
                 </div>
 
             </div>
 
             <div class="w-full mb-2">
-                <x-label for="auditActivity.description">{{ \__("Descripcion") }}</x-label>
-                <x-input class="w-full" wire:model="auditActivity.description" placeholder="Ingrese aqui la descripcion de la Actuacion..." />
+                <x-label for="auditActivity.description">{{ \__("Descripción") }}</x-label>
+                <x-input class="w-full" wire:model="auditActivity.description" placeholder="Ingrese aquí la descripción de la Actuación Fiscal..." />
                 <x-input-error for="auditActivity.description" />
             </div>
 
             <div>  
                 <x-label for="auditActivity.objective">{{\__("Objetivo")}}</x-label>
-                <textarea id="auditActivity.objective" wire:model="auditActivity.objective" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el objetivo de la actucacion fiscal..." wire:model=""></textarea>
+                <textarea id="auditActivity.objective" wire:model="auditActivity.objective" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aquí el objetivo de la Actucación Fiscal..." wire:model=""></textarea>
                 <x-input-error for="auditActivity.objective" />
             </div>
 

@@ -6,7 +6,7 @@
 )
 
 @php
-    $class = 'flex flex-col items-center justify-center w-full h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700';
+    $class = 'flex flex-col items-center justify-center w-48 h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700';
 @endphp
 
 

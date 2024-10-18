@@ -15,6 +15,7 @@ class Designation extends Component
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
     public ?ModelsAcreditation $acreditation;
+    public bool $isEditing = false;
 
     public function render()
     {
@@ -34,7 +35,8 @@ class Designation extends Component
     #[Renderless]
     public function getDesignationDocument(): BinaryFileResponse
     {
-        $designation = new DesignationService($this->auditActivity, date: $this->designation->date_release);
+        $code = $this->auditActivity->code;
+        $designation = new DesignationService($this->auditActivity, date: $this->designation->date_release, nameDocument: "UAI-GCP-DES-COM $code.docx");
         $this->dispatch('designation_download', message: \__('se ha iniciado la descarga!'));
         return $designation->download();
     }
