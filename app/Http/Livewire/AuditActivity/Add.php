@@ -35,13 +35,13 @@ class Add extends Component
         };
 
         $this->cleanAttributes();
-        $this->dispatch('add-audit-activity-save-ok', message: 'Se ha guardado la auditoria con exito!');
+        $this->dispatch('add-audit-activity-save-ok', message: 'Se ha guardado la Actuación Fiscal con exito!');
     }
 
     public function cancel(): void
     {
         $this->cleanAttributes();
-        $this->dispatch('add-audit-activity-cancel-ok', message: 'Se ha cancelado la operacion!');
+        $this->dispatch('add-audit-activity-cancel-ok', message: 'Se ha cancelado la operación!');
     }
 
     private function cleanAttributes(): void

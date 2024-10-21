@@ -30,52 +30,51 @@
                 
                 <x-slot :name="$type">
 
-                    <div class="p-3">
-                        
-                        <div class="flex justify-between pr-10">
+                    <div x-data="auditActivityMain" class="w-full">
 
-                            {{-- todo browser --}}
-                            <x-input class="ml-6" type="search" x-model="$wire.query" placeholder='Buscar...' />
+                        <style>
+                            .table-alpine-grid-custom {
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
+                                row-gap: 2rem
+                            }
 
-                            <h3 role="table-title" class="text-2xl font-semibold">
+                            .rows-alpine-grid-custom {
+                                display: grid;
+                                grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
 
-                                @if($type == 'poa') Plan Operativo Anual
-                                @else No Planificadas
-                                @endif
-                            
-                            </h3>
-                        </div>
-                
-               
-                        <ul x-data="auditActivityMain" x-init="start(@js($auditActivities))" class="justify-center mt-4 table-grid-audit">
-                
-                            {{-- todo head --}}
-                            @foreach (['Código ', 'Descripcion', 'Mes inicio', 'Mes fin', 'Area UAI Encargada',] as $row)
-                                <li class="text-center border-b border-b-slate-300"> {{ $row }} </li>
-                            @endforeach
-                            
-                            {{-- todo body --}}
-                            <template x-for="auditActivity in filtered" :key="auditActivity.public_id">
-                                
-                                <li style="grid-column: span 5" class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
-                                x-on:click="$wire.goTo(auditActivity.public_id)">
+                                /* height: 100px; */
+                            }
 
-                                    <button class="items-center table-grid-audit">
-                                        <div x-text="auditActivity.code"></div> 
-                                        <div class="text-start" x-text="auditActivity.description"></div> 
-                                        <div x-text="auditActivity.month_start"></div> 
-                                        <div x-text="auditActivity.month_end"></div>
-                                        <div x-text="auditActivity.uai.name"></div>
-                                    </button>
+                            .cell-alpine-grid-custom {
+                                width: 100%;
+                                text-align: center;
+                            }
 
-                                </li>
-                                
-                            </template>
-                            
-                        </ul>
+                            .Descripción-description {
+                                width: 100%;
+                                /* text-align: start; */
+                                text-align: justify!important;
+                            }
+
+                        </style>
+
+                        <x-table-alpine name="tableAlpineMain" :data="$auditActivities" customTable
+                            :nameColumns="[
+                                'Código' => 'code', 
+                                'Descripción' => 'description', 
+                                'Mes inicio' => 'month_start', 
+                                'Mes fin' => 'month_end', 
+                                'Área UAI Encargada' => 'uai.name',
+                            ]"
+                            nameColumnId="public_id"
+                            eventRow="x-on:dblclick"
+                            x-on:dblclick="$wire.goTo(row.public_id)"
+                        />
 
                     </div>
-                    
+
                 </x-slot>
 
             @endforeach
@@ -86,21 +85,21 @@
         <script>
             Alpine.data('auditActivityMain', () => {
                 return {
-                    auditActivities: {},
 
-                    start(data) {
-                        this.auditActivities = data; 
-                    },
+                    filtered(query, auditActivities, pages, currentPage) {
+                        if (typeof (query !== "" ? auditActivities : pages[currentPage]) !== 'undefined') {
 
-                    get filtered() {
-                        return this.auditActivities.filter(
-                            auditActivity => {
-                                return auditActivity.code.includes($wire.query) 
-                                || auditActivity.description.includes($wire.query) 
-                                || auditActivity.uai.name.includes($wire.query)                                
-                            }
-                        );
+                            return (query !== "" ? auditActivities : pages[currentPage]).filter(
+                                auditActivity => {
+                                    return auditActivity.code.includes(query) 
+                                    || auditActivity.description.includes(query) 
+                                    || auditActivity.uai.name.includes(query)                                
+                                }
+                            );
+                            
+                        }
                     },
+                    
                 }
             })
         </script>

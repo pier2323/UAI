@@ -20,6 +20,7 @@ class Show extends Component
 
     public Designation $designation;
     public $auditActivity;
+    public $auditActivityWith;
     public $employees = [];
     public $diasRestantes;
     public $nonBusinessDays = [];
@@ -70,6 +71,7 @@ class Show extends Component
 }
     public function mount(int $auditActivity)
     {
+
         $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
             ->where('public_id', $auditActivity)
             ->first();
@@ -82,6 +84,11 @@ class Show extends Component
         // Calcular los días restantes y los días no hábiles
         $this->diasRestantes = $this->calculateDiasRestantes();
         $this->nonBusinessDays = $this->calculateNonBusinessDays();
+
+        $this->auditActivity = auditActivity::with(['designation' , 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])->where('public_id' ,$auditActivity)->first();
+        $this->auditActivityWith = $this->auditActivity;
+        $this->incoming = \App\Models\EmployeeIncoming::all();
+        $this->outgoing = \App\Models\EmployeeOutgoing::all();
     }
 
     // Método para calcular los días restantes (excluyendo sábados y domingos)
@@ -90,6 +97,7 @@ class Show extends Component
         $fechaHoy = \Carbon\Carbon::now(); // Obtener la fecha actual
         $diasRestantes = 0;
     
+
         if ($this->fechaInicio > $fechaHoy) {
             $this->diasExcedidos = 0;
             $this->mensajeExceso = "La fecha de inicio es futura. No se han contabilizado días.";
@@ -111,6 +119,11 @@ class Show extends Component
         }
     
         return $diasRestantes;
+    }
+    public function requeriDocumen(): BinaryFileResponse     
+    {
+        $requerimientoDocument = new RequeriDocumen($this->auditActivity);
+        return $requerimientoDocument->download();
     }
     // Método para calcular los días no hábiles (sábados y domingos)
     private function calculateNonBusinessDays()

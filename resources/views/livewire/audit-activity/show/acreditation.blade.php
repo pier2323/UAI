@@ -8,9 +8,8 @@
     
     @assets @vite(['resources/js/hola.js']) @endassets
     
-    <form 
-        x-data 
-        wire:submit='acredit' 
+    <div 
+        x-data
         x-init="
         flatpickr('#acreditationDateRelease', {
             dateFormat: 'd/m/Y',
@@ -28,19 +27,19 @@
                 </div>
             </x-slot>
             <x-slot:footer>
-                <x-button class="mr-4" type='submit'>{{ \__('Guardar') }}</x-button>
-                <x-secondary-button x-on:click="$wire.openModalAcreditation = false; $wire.accreditDateRelease = null ">{{ \__('Cancelar') }}</x-secondary-button>
+                <x-button class="mr-4" type="button" wire:click="acredit">{{ \__('Guardar') }}</x-button>
+                <x-secondary-button type="button" x-on:click="$wire.openModalAcreditation = false; $wire.accreditDateRelease = null ">{{ \__('Cancelar') }}</x-secondary-button>
             </x-slot>
         </x-dialog-modal>
 
-    </form>
+    </div>
     
     @endempty
     
     {{-- todo Download Acreditation --}}
-    @isset($acreditation) <x-secondary-button wire:click='getAcreditationDocument'>descargar acreditacion</x-secondary-button> @endisset
+    @isset($acreditation) <x-secondary-button type="button" wire:click='getAcreditationDocument'>descargar acreditacion</x-secondary-button> @endisset
     
     {{-- todo Acredit --}}
-    @empty($acreditation) <x-secondary-button type='submit' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-secondary-button> @endempty
+    @empty($acreditation) <x-secondary-button type='button' class="ml-4" x-on:click="$wire.openModalAcreditation = true"> {{ \__('Acreditar') }} </x-secondary-button> @endempty
 
 </div>
