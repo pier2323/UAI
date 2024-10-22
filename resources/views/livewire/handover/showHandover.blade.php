@@ -1,6 +1,8 @@
 <div>
+
+    <h1>hola mundo</h1>
     <x-section-basic>
-         <x-button wire:click="downloadWorkingCedula">hola</x-butto> 
+    {{-- <x-button wire:click="downloadWorkingCedula">hola</x-butto>  --}}
        
             <link rel="stylesheet" href="/css/cedula.css">
             <script src="/js/cedula.js"></script>
@@ -121,30 +123,33 @@
             }
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnRequerimiento = document.getElementById('requerimiento');
+        const emailForm = document.getElementById('emailForm');
+        const sendEmailButton = document.getElementById('sendEmailButton');
+
+        btnRequerimiento.addEventListener('click', function() {
+            // Mostrar el formulario de enviar correo con transición
+            emailForm.classList.add('show');
+        });
+
+        sendEmailButton.addEventListener('click', function() {
+            // Ocultar el formulario de enviar correo con transición
+            emailForm.classList.remove('show');
+        });
+    });
     
 </script>
-        </div> 
+
         <!-- Agregar un botón oculto en el HTML, fuera del modal -->
         <button  wire:click='InformeDocumen' id="newButton" style="display: none;" class="btn btn-primary">Descargar Informe del Auditor</button>
         
 
-        {{-- <x-card-handover>
-            <x-slot:titulo>Detalles del Acta</x-slot>
-            <x-slot:des>
-                <li> Codigo de la Actuación:<br> {{ $auditActivity->code }}</li>
-                <li> Descripcion :<br>{{ $auditActivity->description }} </li>
-                <li> Mes inicio: &nbsp; &nbsp;<br>{{ $auditActivity->month_start }}</li>
-                <li>Mes fin:<br>{{ $auditActivity->month_end }}</li>
-                <li>Area Encargada:<br>{{ $auditActivity->uai->name }}</li>
-                <li>Personal designado:<br>{{$auditActivity->first_name}} </li>
-                @foreach ($auditActivity->employee as $employee)
-                <p>{{ $employee->first_name }} {{ $employee->first_surname }}</p>
-                @endforeach
-            </x-slot>
-        </x-card-handover> --}}
-
-
-        <x-card-handover :tabs="['Actas', 'entrante', 'saliente']">
+        <h2>Ahola</h2>
+        <h2> {{ $auditActivity->handoverDocument->employeeIncoming->first_name }}
+        </h2>
+    <x-card-handover :tabs="['Actas', 'entrante', 'saliente']">
 
             <x-slot name='Actas'>
                 
@@ -209,8 +214,6 @@
                 </div> 
                 
             </x-slot>
-                
-
 
             <x-slot name='entrante'>
 
@@ -271,53 +274,101 @@
 
         </x-card-handover>
 
+<p>jakdshkjsahfdo ñoieqñyiroulifygweykufiulQIGEUOLVUCSHAJ</p>
+        <div>
+            @if ($mensajeExceso)
+                <h3>{{ $mensajeExceso }}</h3> <!-- Mostrar mensaje de exceso si existe -->
+                <h4>Días excedidos: {{ $diasExcedidos }}</h4> <!-- Mostrar cantidad de días excedidos -->
+            @else
+                <h3>Han Trascurrido  {{ $diasRestantes }} dias habiles de los 120</h3> <!-- Mostrar días restantes si no hay exceso -->
+            @endif
+        
+            <h4>Días no hábiles:</h4>
+            <ul>
+                @foreach ($nonBusinessDays as $day)
+                <li>{{ $day }}</li> <!-- Ya se imprimen en formato "día/mes/año" -->
+            @endforeach
+            </ul>
+        </div>
+<!-- Botón para abrir el requerimiento -->
+<x-button style="margin-top: 200px" wire:click='requeriDocumen' id="requerimiento"> Requerimiento</x-button>
+
+<!-- Formulario para enviar correo, inicialmente oculto -->
+<form action="{{ url('/enviar-correo-zimbra') }}" method="GET" target="_blank" id="emailForm" style="display: none;">
+    <x-button type="submit" id="sendEmailButton">Enviar Requerimiento </x-button>
+</form>
+
+<!-- Otros botones -->
+<x-button wire:click='programaDocumen'> Programa de trabajo</x-button>
+<x-button style="margin-left:340px" wire:click='downloadExcel'>Cedula de trabajo </x-button>
+<x-button wire:click='InformeDocumen'>Informe del Auditor </x-button>
 
 
+     <script>
+ const auditCode = "{{ $this->auditActivity->code }}"; // Asignar el código de auditoría a una variable de JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const requerimientoButton = document.getElementById('requerimiento');
+    const emailForm = document.getElementById('emailForm');
+    const sendEmailButton = document.getElementById('sendEmailButton');
+    const uniqueId = `requerimientoButtonState_${auditCode}`; // ID único para almacenar el estado basado en el código de auditoría
 
+    // Ocultar el formulario por defecto
+    emailForm.style.display = 'none';
 
-        <br>
-        {{-- <div style="margin-left: 400px; margin-top: -570px;">
-            <x-card-handover>
-                <x-slot:titulo>Detalles del entrante</x-slot>
-                <x-slot:des>
-                    <li> Nombre: <br></li>
-                    <li> Cedula: <br> </li>
-                    <li> P00: <br></li>
-                    <li> Cargo: <br></li>
-                    <li>telefono: <br></li>
-                    <li>Coreo eletronico: <br></li>
-                </x-slot>
-            </x-card-handover>
-        </div> --}}
-        {{-- <div style="margin-left: 800px; margin-top: -405px;">
-            <x-card-handover>
-                <x-slot:titulo>
-                    Detalles del Saliente
-                </x-slot>
-                <x-slot:des>
-                    <li> Nombre: <br></li>
-                    <li> Cedula: <br></li>
-                    <li> P00: <br></li>
-                    <li> Cargo: <br></li>
-                    <li>telefono: <br></li>
-                    <li>Coreo eletronico: <br></li>
-                </x-slot>
-            </x-card-handover>
-        </div> --}}
+    // Verificar el estado del botón "Requerimiento" en localStorage
+    const isRequerimientoDisabled = localStorage.getItem(uniqueId);
 
-        <x-button style="margin-top: 200px" wire:click='requeriDocumen'> Requerimiento</x-button>
-        <x-button wire:click='programaDocumen'> Programa de trabajo</x-button>
-        <x-button style="margin-left:340px" wire:click='downloadExcel'>Cedula de trabajo </x-button>
-        <x-button wire:click='InformeDocumen'>Informe del Auditor </x-button>
+    // Si el botón está deshabilitado, cambiar su estado
+    if (isRequerimientoDisabled === 'true') {
+        requerimientoButton.disabled = true;
+        requerimientoButton.innerText = 'Requerimiento Enviado'; // Cambiar el texto del botón
+        emailForm.style.display = 'block'; // Mostrar el formulario "Enviar Correo"
+    }
 
+    requerimientoButton.addEventListener('click', function() {
+        // Aquí puedes agregar la lógica para descargar el documento
+        descargarDocumento().then(() => {
+            // Desactivar el botón "Requerimiento"
+            requerimientoButton.disabled = true;
+            requerimientoButton.innerText = 'Requerimiento Enviado'; // Cambiar el texto del botón
+            localStorage.setItem(uniqueId, 'true'); // Guardar estado en localStorage
+            emailForm.style.display = 'block'; // Mostrar el formulario "Enviar Correo"
+            location.reload(); // Recargar la página después de la descarga
+        });
+    });
 
-        <title>Enviar Correo</title>
-    </head>
-    <body>
-        <form action="{{ url('/enviar-correo-zimbra') }}" method="GET" target="_blank">
-            <button type="submit">Enviar Correo</button>
-        </form>
-    </body>
+    // Evento para enviar el formulario
+    sendEmailButton.addEventListener('click', function() {
+        // Cambiar el texto del botón a "Enviando Requerimiento"
+        sendEmailButton.innerText = 'Enviando Requerimiento'; // Cambiar el texto del botón
+        // Aquí puedes agregar la lógica para enviar el correo
+    });
 
+    // Doble clic para ocultar el botón "Enviar Correo"
+    sendEmailButton.addEventListener('dblclick', function() {
+        emailForm.style.display = 'none'; // Ocultar el formulario "Enviar Correo"
+    });
+
+    // Agregar eventos para otros botones
+    document.querySelectorAll('x-button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Aquí puedes agregar la lógica para cada uno de los otros botones
+            location.reload(); // Recargar la página después de la descarga
+        });
+    });
+});
+
+// Función simulada para descargar el documento
+function descargarDocumento() {
+    return new Promise((resolve) => {
+        // Simulación de un retraso de descarga de 2 segundos
+        setTimeout(() => {
+            console.log("Documento de requerimiento descargado"); // Aquí puedes manejar la lógica real de descarga
+            resolve();
+        }, 2000);
+    });
+}
+
+       </script>
     </x-section-basic>
 </div>
