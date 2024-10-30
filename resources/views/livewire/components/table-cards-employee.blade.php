@@ -11,10 +11,14 @@
             {{-- todo cards --}}
             <div class="grid items-center content-center grid-cols-3 p-2 auto-rows-fr gap-x-8 gap-y-5 min-h-56 min-w-96"
             x-data="card()"
-            x-on:designation.window='designation = true'
-            x-on:cancel.window="updateAlpine()"
+
+            x-on:cancel.window="cancelEdit()"
             x-on:saving.window="updatedWire()"
+            x-on:saved.window="updatedWire()"
+            x-on:deleted.window="deleting()"
             >
+            {{-- <p x-text="$wire.isCreated"></p>
+            <p x-text="$wire.isEditing"></p> --}}
 
                 {{-- todo x-for --}}
                 <template class="w-fit"
@@ -25,7 +29,9 @@
 
                         {{-- todo one card --}}
                         <x-card-profile class="cards-profile">
-                            <div x-show='!designation && $wire.isEditing || !designation && !$wire.isDesignated' class="flex flex-row justify-between mb-1">
+
+                            <div x-show="isSelecting()"
+                            class="flex flex-row justify-between mb-1" >
 
                                 {{-- todo Select Role  --}}
                                 <select x-model='card.role' :id="'browser-card-select-' + index" name="role" class="block text-sm text-gray-900 border-0 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 w-fit">
@@ -42,6 +48,7 @@
                                 </button>
 
                             </div>
+
                         </x-card-profile>
                     </div>
 
@@ -50,20 +57,15 @@
                 {{-- todo card Add --}}
                 @push('modals') <livewire:employee.browser /> @endpush
 
-                @if(!isset($designation) || $isEditing)
-
-                    {{-- todo button add card --}}
-                    <div x-show='!designation' class="w-1/2 bg-gray-200 border border-gray-200 rounded-full shadow justify-self-center h-1/2 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 active:bg-green-100"
-                    x-on:click="clickAddCardButton()"
-                    x-on:add-card.window="resolve($wire.addCard($event.detail.id)); ">
-                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                        <svg class="w-full h-full" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 12H20M12 4V20" stroke="#ccc" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                @endif
-
+                {{-- todo button add card --}}
+                <div x-show='isSelecting()' class="w-1/2 bg-gray-200 border border-gray-200 rounded-full shadow justify-self-center h-1/2 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 active:bg-green-100"
+                x-on:click="clickAddCardButton()"
+                x-on:add-card.window="resolve($wire.addCard($event.detail.id)); ">
+                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <svg class="w-full h-full" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12H20M12 4V20" stroke="#ccc" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
 
             </div>
         </div>
@@ -74,7 +76,6 @@
              Alpine.data('card', () => {
                 return {
                     employees: {},
-                    designation: false,
 
                     remove(key) {
                         this.employees = this.employees.filter(employee => employee.data !== key.data)
@@ -104,13 +105,26 @@
                     },
 
                     updatedWire() {
-                        $wire.employees = this.employees;
-                        // $wire.showEmployees()
+                        $wire.$parent.updateTableEmployee(this.employees);
                     },
 
                     updateAlpine() {
                         this.employees = @js($employees);
                         this.employeesWithEdit = @js($employees);
+                    },
+
+                    isSelecting() {
+                        return !$wire.isCreated || $wire.isEditing;
+                    },
+
+                    cancelEdit() {
+                        $wire.employees = this.employeesWithEdit;
+                        this.updateAlpine()
+                    },
+
+                    deleting() {
+                        $wire.employees = [];
+                        this.employees = [];
                     },
 
                     init() {

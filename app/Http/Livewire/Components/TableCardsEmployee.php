@@ -8,6 +8,7 @@ use App\Models\Designation;
 use App\Models\Employee;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Modelable;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Renderless;
@@ -15,55 +16,21 @@ use Livewire\Component;
 
 class TableCardsEmployee extends Component
 {
-    public array $employees = array();
+    #[Modelable]
+    public array $employees;
 
     #[Reactive]
-    public bool $isEditing = false;
+    public bool $isEditing = true;
+
+    #[Reactive]
+    public bool $isCreated = false;
 
     #[Locked]
     public AuditActivity $auditActivity;
 
-    public Designation|null $designation;
-    public bool $isDesignated = false;
-
-    public Acreditation|null $acreditation;
-
     public function render():Renderable
     {
         return view('livewire.components.table-cards-employee');
-    }
-
-    public function mount():void
-    {
-        if (isset($this->designation)) {
-            foreach($this->auditActivity->employee()->get() as $employee) {
-
-                $this->isDesignated = true;
-
-                $employee->jobTitle->first();
-
-                array_push($this->employees, [
-                    'data' => $employee,
-                    'role' => $employee->pivot->role,
-                ]);
-            }
-        }
-    }
-
-    #[Renderless, On('saving')]
-    public function save():void
-    {
-        // todo sync employees
-
-        $employees = array();
-
-        foreach ($this->employees as $employee) {
-            $id = $employee['data']['id'];
-            $role = $employee['role'] == 1 ? 'Coordinador' : 'Auditor';
-            $employees[$id] = ['role' => $role];
-        }
-
-        $this->auditActivity->employee()->sync($employees);
     }
 
     #[Renderless]
@@ -75,6 +42,22 @@ class TableCardsEmployee extends Component
     #[On('cancelEdit')]
     public function cancelEdit(): void
     {
-        $this->mount();
+        $this->load();
+    }
+
+    public function load(): void
+    {
+        $employees = array();
+        foreach($this->auditActivity->employee()->get() as $employee) {
+
+            $employee->jobTitle->first();
+
+            array_push($employees, [
+                'data' => $employee,
+                'role' => $employee->pivot->role,
+            ]);
+        }
+
+        $this->employees = $employees;
     }
 }

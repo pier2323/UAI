@@ -16,11 +16,9 @@ return new class extends Migration
             $table->date('date_release');
             $table->string('path_document')->nullable();
 
-            $table->unsignedBigInteger('pivot_id');
-            $table->foreign('pivot_id')->references('id')->on('audit_activity_employee')->onDelete('cascade');
-
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

@@ -4,33 +4,36 @@
     <span>{{ $title }}:</span>
     <div class="flex items-center justify-between w-fit">
         <div class="flex flex-row">
-            <input
-                class="border-r-0 border-black h-11 w-28 rounded-s-xl focus:ring-0 "
+            <input type="text"
+                class="border-r-0 border-black h-11 w-28 rounded-s-xl focus:ring-0"
                 id="{{ $idStart }}"
                 placeholder="Inicio.."
-                x-on:input="{{ $text }} = calculateDays($wire.{{ $idStart }}, $wire.{{ $idEnd }})"
-                x-model="$wire.{{ $idStart }}"
-                wire:model='{{ $idStart }}'
+                x-on:input="{{ $text }} = calculateDays($wire.dates.{{ $idStart }}, $wire.dates.{{ $idEnd }})"
+                x-model="$wire.dates.{{ $idStart }}"
+                wire:model='dates.{{ $idStart }}'
                 readonly
-                />
-                <div class="flex items-center justify-center bg-white border-black border-y"><div class="w-4 h-0.5 bg-black"></div></div>
-                <input
+            />
+            <div class="flex items-center justify-center bg-white border-black border-y">
+                <div class="w-4 h-0.5 bg-black"></div>
+            </div>
+
+            <input type="text"
                 class="border-l-0 border-black h-11 w-28 rounded-e-xl focus:ring-0"
                 id="{{ $idEnd }}"
-                x-on:input="{{ $text }} = calculateDays($wire.{{ $idStart }}, $wire.{{ $idEnd }});
-                @isset($next)
+                x-on:input="{{ $text }} = calculateDays($wire.dates.{{ $idStart }}, $wire.dates.{{ $idEnd }});
+                @isset($dates->{$next})
 
-                $wire.{{$next}} = calculateDates($wire.{{$idEnd}}, 2)
+                    $wire.dates.{{$next}} = calculateDates($wire.dates.{{$idEnd}}, 2)
 
-                let momentNext = moment($wire.{{$next}}, 'DD/MM/YYYY').format('YYYY-MM-DD');
-                let date = new Date(`${momentNext}`)
-                date.setDate(date.getDate() + 1)
-                flatpickrs.{{$next}}.setDate(date)
+                    let momentNext = moment($wire.dates.{{$next}}, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                    let date = new Date(`${momentNext}`)
+                    date.setDate(date.getDate() + 1)
+                    flatpickrs.{{$next}}.setDate(date)
 
                 @endisset"
                 placeholder="Fin.."
-                x-model="$wire.{{ $idEnd }}"
-                wire:model='{{ $idEnd }}'
+                x-model="$wire.dates.{{ $idEnd }}"
+                wire:model='dates.{{ $idEnd }}'
                 readonly
             />
         </div>
@@ -38,11 +41,11 @@
             <input
                 class="p-1 ml-2 overflow-visible text-center bg-blue-100 rounded-lg number-input-date-planning h-11 w-fit max-w-12 w-min-16"
                 type="text"
-                x-on:input="$wire.{{ $idEnd }} = calculateDates($wire.{{ $idStart }}, {{ $text }})
+                x-on:input="$wire.dates.{{ $idEnd }} = calculateDates($wire.dates.{{ $idStart }}, {{ $text }})
                 @isset($next)
-                $wire.{{$next}} = calculateDates($wire.{{$idEnd}}, 2)
+                $wire.dates.{{$next}} = calculateDates($wire.dates.{{$idEnd}}, 2)
 
-                let momentNext = moment($wire.{{$next}}, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                let momentNext = moment($wire.dates.{{$next}}, 'DD/MM/YYYY').format('YYYY-MM-DD');
                 let date = new Date(`${momentNext}`)
                 date.setDate(date.getDate() + 1)
                 flatpickrs.{{$next}}.setDate(date)

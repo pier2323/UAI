@@ -19,7 +19,7 @@
             <x-input-date-planning
                 idStart='planning_start'
                 idEnd='planning_end'
-                text='$wire.planning_days'
+                text='$wire.dates.planning_days'
                 title='Planificación'
                 :designation="isset($designation) && !$isEditing"
                 next="execution_start"
@@ -27,7 +27,7 @@
             <x-input-date-planning
                 idStart='execution_start'
                 idEnd='execution_end'
-                text='$wire.execution_days'
+                text='$wire.dates.execution_days'
                 title='Ejecución'
                 :designation="isset($designation) && !$isEditing"
                 next="preliminary_start"
@@ -35,7 +35,7 @@
             <x-input-date-planning
                 idStart='preliminary_start'
                 idEnd='preliminary_end'
-                text='$wire.preliminary_days'
+                text='$wire.dates.preliminary_days'
                 title='Informe Preliminar'
                 :designation="isset($designation) && !$isEditing"
                 next="download_start"
@@ -43,7 +43,7 @@
             <x-input-date-planning
                 idStart='download_start'
                 idEnd='download_end'
-                text='$wire.download_days'
+                text='$wire.dates.download_days'
                 title='Descargo'
                 :designation="isset($designation) && !$isEditing"
                 next="definitive_start"
@@ -51,7 +51,7 @@
             <x-input-date-planning
                 idStart='definitive_start'
                 idEnd='definitive_end'
-                text='$wire.definitive_days'
+                text='$wire.dates.definitive_days'
                 title='Informe definitivo'
                 :designation="isset($designation) && !$isEditing"
             />

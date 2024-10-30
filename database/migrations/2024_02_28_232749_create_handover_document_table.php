@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('handover_document', function(Blueprint $table) {
             $table->id();
-            
+
             $table->date('start')->nullable();
             $table->date('cease')->nullable();
             $table->date('subscription')->nullable();
@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('departament_affiliation')->nullable();
             $table->string('departament')->nullable();
             $table->json('hallazgo')->nullable();
+            $table->softDeletes();
 
-            $table->unsignedBigInteger('employee_outgoing_id')->nullable(); 
+            $table->unsignedBigInteger('employee_outgoing_id')->nullable();
             $table->foreign('employee_outgoing_id')->references('id')->on('employee_outgoing');
-            
-            $table->unsignedBigInteger('employee_incoming_id')->nullable(); 
+
+            $table->unsignedBigInteger('employee_incoming_id')->nullable();
             $table->foreign('employee_incoming_id')->references('id')->on('employee_incoming');
 
             $table->unsignedBigInteger('audit_activity_id')->unique()->nullable();

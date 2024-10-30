@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employee', function(Blueprint $table){
-            $table->id();            
+            $table->id();
             $table->string('first_name');
             $table->string('second_name')->nullable();
             $table->string('first_surname');
@@ -20,15 +20,16 @@ return new class extends Migration
             $table->string('profile_photo')->nullable();
             $table->integer('p00')->unique();
             $table->integer('personal_id')->unique();
-        
+
             $table->unsignedBigInteger('job_title_id');
             $table->foreign('job_title_id')->references('id')->on('job_title');
-            
+
             $table->unsignedBigInteger('uai_id');
             $table->foreign('uai_id')->references('id')->on('uai');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AuditActivity extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
 
     protected $table = 'audit_activity';
 
@@ -25,19 +28,19 @@ class AuditActivity extends Model
         'objective',
         'description',
         'planning_start',
-        'planning_end',     
+        'planning_end',
         'planning_days',
         'execution_start',
-        'execution_end',      
+        'execution_end',
         'execution_days',
         'preliminary_start',
-        'preliminary_end',        
+        'preliminary_end',
         'preliminary_days',
         'download_start',
-        'download_end',     
+        'download_end',
         'download_days',
         'definitive_start',
-        'definitive_end',       
+        'definitive_end',
         'definitive_days',
         'type_audit_id',
         'area_id',
@@ -46,20 +49,20 @@ class AuditActivity extends Model
 
     protected $dates = [
         'planning_start',
-        'planning_end',    
+        'planning_end',
         'execution_start',
-        'execution_end',     
+        'execution_end',
         'preliminary_start',
-        'preliminary_end',       
+        'preliminary_end',
         'download_start',
-        'download_end',    
+        'download_end',
         'definitive_start',
-        'definitive_end',      
+        'definitive_end',
     ];
 
-    
 
-    // todo relations 
+
+    // todo relations
 
     public function typeAudit(): BelongsTo
     {
@@ -91,17 +94,15 @@ class AuditActivity extends Model
         return $this->belongsToMany(related: Employee::class)->withPivot('role', 'id');
     }
 
-    public function designation(): HasManyThrough
+    public function designation()
     {
-        return $this->HasManyThrough(Designation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 
-    public function acreditation(): HasManyThrough
+    public function acreditation()
     {
-        return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
 
-    // todo setting 
+    // todo setting
 
     protected function casts(): array
     {
@@ -127,17 +128,17 @@ class AuditActivity extends Model
      protected function code(): Attribute
      {
          return Attribute::make(
-             get: fn (mixed $value, array $attributes) 
+             get: fn (mixed $value, array $attributes)
              => $attributes['year'] . '-' . str_pad($attributes['public_id'], 3, '0', STR_PAD_LEFT)
          );
     }
-    
-    // todo custom functions 
+
+    // todo custom functions
 
     private function decode(string $code): int|string
     {
         $divisor = '-';
-        
+
         if($code !== '') {
             $id = strpos($code, $divisor)? explode($divisor, $code)[1] : $code;
             return intval($id);
@@ -157,13 +158,9 @@ class AuditActivity extends Model
         return Carbon::parse($date)->format('d/m/Y');
     }
 
-    public function isDesignated(): bool
-    {
-        return $this->designation()->first() ? true : false;
-    }
+    public function isDesignated()
+    {}
 
-    public function isAcredited(): bool
-    {
-        return $this->acreditation()->first() ? true : false;
-    }
+    public function isAcredited()
+    {}
 }
