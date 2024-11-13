@@ -63,4 +63,20 @@ class Employee extends Model
     {
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
     }
+
+    public function names(array $names = [
+        'first_name',
+        'second_name',
+        'first_surname',
+        'second_surname'
+    ]): string
+    {
+        $nameToReturn = array();
+        foreach ($names as $name) {
+            if ($this->{$name} === null) continue;
+            $nameToReturn[] = $this->{$name};
+        }
+
+        return implode(' ', $nameToReturn);
+    }
 }

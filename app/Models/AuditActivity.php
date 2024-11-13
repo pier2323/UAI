@@ -96,10 +96,12 @@ class AuditActivity extends Model
 
     public function designation()
     {
+        return AuditActivityEmployee::where('audit_activity_id', $this->id)->first()->designation();
     }
 
     public function acreditation()
     {
+        return AuditActivityEmployee::where('audit_activity_id', $this->id)->first()->acreditation();
     }
 
     // todo setting

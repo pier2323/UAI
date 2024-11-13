@@ -42,6 +42,12 @@ class PlanningSchedule extends Component
         $this->dates->save($this->auditActivity);
     }
 
+    #[On('deleted')]
+    public function delete(): void
+    {
+        $this->dates->delete($this->auditActivity);
+    }
+
     public function render()
     {
         return view('livewire.components.planning-schedule');

@@ -8,21 +8,16 @@ use Livewire\Form;
 
 final class TableCardsEmployeeForm extends Form
 {
+    #[Validate('required|array|between:2,20', as: 'Lista de Auditores')]
     public array $list = array();
 
     public bool $verified = false;
 
     public function save(AuditActivity $auditActivity, ?int $designation = null, ?int $acreditation = null): array
     {
-        // todo sync employees
+        $this->validate();
 
         $employees = array();
-
-        // foreach ($this->list as $employee) {
-        //     $employees[] = $employee['data']['first_name'];
-        // }
-
-        // dd($employees);
 
         foreach ($this->list as $employee) {
             $id = $employee['data']['id'];
@@ -58,5 +53,6 @@ final class TableCardsEmployeeForm extends Form
     public function update($data): void
     {
         $this->list = $data;
+        $this->auditorNumber = count($this->list) + 1;
     }
 }

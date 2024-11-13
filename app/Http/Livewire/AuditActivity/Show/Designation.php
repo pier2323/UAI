@@ -21,18 +21,24 @@ class Designation extends Component
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
     public ?ModelsAcreditation $acreditation;
+    public ?AuditActivityEmployee $pivot;
     public bool $isEditing = false;
     public bool $isDeleting = false;
     public bool $isCreated = false;
+    public bool $isAcredit = false;
+
 
     public function mount(): void
     {
         $this->isCreated = $this->isDesignated();
 
-        if ($this->isCreated) {
-            $this->tableEmployees->load($this->auditActivity);
-            $this->designation = $this->getDesignationModel();
-        }
+        if (!$this->isCreated) return;
+
+        $this->tableEmployees->load($this->auditActivity);
+        $this->pivot = $this->getPivot();
+        $this->designation = $this->getDesignationModel();
+        $this->acreditation = $this->getAcreditationModel();
+        $this->isAcredit = isset($this->acreditation) ? true : false;
     }
 
     public function render()
@@ -42,6 +48,8 @@ class Designation extends Component
 
     public function designate(): void
     {
+        $this->tableEmployees->validate();
+        $this->isCreated = true;
         $this->designation = $this->create();
 
        $this->tableEmployees->save(
@@ -95,12 +103,12 @@ class Designation extends Component
 
     public function delete()
     {
+        $this->dispatch('deleted');
         $this->auditActivity->employee()->detach();
         $this->designation = ModelsDesignation::make();
         $this->isCreated = false;
         $this->isDeleting = false;
         $this->tableEmployees->list = array();
-        $this->dispatch('deleted');
     }
 
     private function isDesignated(): bool
@@ -108,9 +116,19 @@ class Designation extends Component
         return $this->auditActivity->employee()->first() !== null ? true : false;
     }
 
+    private function getPivot(): AuditActivityEmployee
+    {
+        return AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->first();
+    }
+
     private function getDesignationModel(): ModelsDesignation
     {
-        return AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->first()->designation()->first();
+        return $this->pivot->designation()->first();
+    }
+
+    private function getAcreditationModel(): ModelsAcreditation|null
+    {
+        return $this->pivot->acreditation()->first();
     }
 
     public function updateTableEmployee($data): void

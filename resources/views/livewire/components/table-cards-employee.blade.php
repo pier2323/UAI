@@ -1,7 +1,11 @@
 <div class="">
+    {{-- @dump($errors)
+    <p x-text="typeof $wire.errors[0]"></p> --}}
     {{-- ? A good traveler has no fixed plans and is not intent upon arriving. --}}
 
-    <div class="flex flex-col flex-grow h-full px-3 pt-3 pb-5 align-middle border shadow w-fit">
+    <div
+    :class="typeof $wire.errors[0] !== 'undefined' ? 'border-red-400' : ''"
+    class="flex flex-col flex-grow h-full px-3 pt-3 pb-5 align-middle rounded-sd border-2 shadow w-fit">
         <h1 class="text-3xl font-bold dark:text-white">Comisión<small class="font-semibold text-gray-500 ms-2 dark:text-gray-400">de la Acta de Entrega</small></h1>
 
         <hr class="mb-4">
@@ -69,6 +73,8 @@
 
             </div>
         </div>
+
+        <x-errors-all :custom="$errors"/>
     </div>
 
         @script

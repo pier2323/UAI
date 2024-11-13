@@ -587,7 +587,7 @@ class EmployeeSeeder extends Seeder
                 'phone' => '04126115933',
                 'gmail' => 'mblan4.uai@gmail.com',
                 'email_cantv' => 'mblan4@cantv.com.ve',
-                'profile_photo' => '156646.jpg',
+                'profile_photo' => '113700.jpg',
               ],
         ];
 

@@ -66,10 +66,10 @@
             <div class="flex justify-between w-full px-10">
 
                 <livewire:Components.TableCardsEmployee :$auditActivity :$isEditing :$isCreated
-                wire:model.live="tableEmployees.list">
+                wire:model.live="tableEmployees.list" :errors="$errors->all()">
 
                 <div class="ml-4">
-                    {{-- <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated> --}}
+                    <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                             <x-button
                                 type='submit'
                                 class="ml-4"
-                                x-on:click="$dispatch('saving'); $wire.isCreated = true"
+                                x-on:click="$dispatch('saving')"
                             >
                                 Designar
                             </x-button>
@@ -104,9 +104,9 @@
                     </div>
 
                     <div class="mx-2">
-                        @if($isEditing)
+                        @if(!$isEditing && $isCreated)
                         {{-- todo Acreditation --}}
-                        <livewire:AuditActivity.Show.Acreditation :$auditActivity :$acreditation>
+                        <livewire:AuditActivity.Show.Acreditation :$auditActivity :$acreditation :$pivot>
                         @endif
                     </div>
 

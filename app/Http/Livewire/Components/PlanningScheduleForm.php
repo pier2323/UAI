@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\AuditActivity;
-use App\Models\Designation;
 use App\Traits\ModelPropertyMapper;
 use Carbon\Carbon;
 use Livewire\Attributes\Validate;
@@ -15,13 +14,55 @@ final class PlanningScheduleForm extends Form
 
     const string format = 'd/m/Y';
 
-    public
-    $planning_days, $execution_days, $preliminary_days, $download_days, $definitive_days,
-    $planning_start, $execution_start, $preliminary_start, $download_start, $definitive_start,
-    $planning_end, $execution_end, $preliminary_end, $download_end, $definitive_end;
+    #[Validate('required', as: "Dias de planificacion")]
+    public $planning_days;
+
+    #[Validate('required', as: "Dias de ejecución")]
+    public $execution_days;
+
+    #[Validate('required', as: "Dias del informe preliminar")]
+    public $preliminary_days;
+
+    #[Validate('required', as: "Dias de descargo")]
+    public $download_days;
+
+    #[Validate('required', as: "Dias del informe definitivo")]
+    public $definitive_days;
+
+    #[Validate('required', as: "Fecha de inicio de la planificación")]
+    public $planning_start;
+
+    #[Validate('required', as: "Fecha de inicio de la Ejecución")]
+    public $execution_start;
+
+    #[Validate('required', as: "Fecha de inicio del informe preliminar")]
+    public $preliminary_start;
+
+    #[Validate('required', as: "Fecha de inicio de descargo")]
+    public $download_start;
+
+    #[Validate('required', as: "Fecha de inicio del informe definitivo")]
+    public $definitive_start;
+
+    #[Validate('required', as: "Fecha de fin de la planificación")]
+    public $planning_end;
+
+    #[Validate('required', as: "Fecha de fin de la ejecución")]
+    public $execution_end;
+
+    #[Validate('required', as: "Fecha de fin del informe preliminar")]
+    public $preliminary_end;
+
+    #[Validate('required', as: "Fecha de fin de descargo")]
+    public $download_end;
+
+    #[Validate('required', as: "Fecha de fin del informe definitivo")]
+    public $definitive_end;
+
 
     public function save(AuditActivity $auditActivity)
     {
+        $this->validate();
         $dates = $this->getPropertiesForCarbon();
 
         // todo format dates
@@ -39,6 +80,13 @@ final class PlanningScheduleForm extends Form
     public function load(AuditActivity $auditActivity)
     {
         $this->mapModelProperties($auditActivity, $this->all());
+    }
+
+    public function delete(AuditActivity $auditActivity): void
+    {
+        $this->reset();
+
+        $auditActivity->update($this->all());
     }
 
     private function getPropertiesForCarbon(): array

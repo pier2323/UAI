@@ -16,9 +16,9 @@ class Add extends Component
 
     public function mount():void
     {
-        $this->auditActivity->public_id = \App\Models\AuditActivity::all()->last()->public_id + 1;
+        $this->auditActivity->public_id = AuditActivity::orderBy('public_id','asc')->get()->last()->public_id + 1;
     }
-    
+
     public function render()
     {
         return view('livewire.audit-activity.add');
@@ -27,7 +27,7 @@ class Add extends Component
     public function save():void
     {
         $this->auditActivity->validate();
-        $auditActivity = \App\Models\AuditActivity::create($this->auditActivity->data());
+        $auditActivity = AuditActivity::create($this->auditActivity->data());
 
         if(isset($this->handoverDocument)) {
             $this->handoverDocument->audit_activity_id = $auditActivity->id;
@@ -45,7 +45,7 @@ class Add extends Component
     }
 
     private function cleanAttributes(): void
-    {        
+    {
         $this->auditActivity->reset();
         $this->handoverDocument = null;
         $this->open = false;
@@ -55,5 +55,10 @@ class Add extends Component
     public function attach($id)
     {
         $this->handoverDocument = HandoverDocument::with('employeeOutgoing')->find($id);
+    }
+
+    public function loadInputs(): void
+    {
+        $this->auditActivity->objective = $this->auditActivity->getObjective($this->handoverDocument);
     }
 }

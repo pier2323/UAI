@@ -47,4 +47,20 @@ class EmployeeOutgoing extends Model
     {
         return $this->hasMany(related: HandoverDocument::class);
     }
+
+    public function names(array $names = [
+        'first_name',
+        'second_name',
+        'first_surname',
+        'second_name'
+    ]): string
+    {
+        $nameToReturn = array();
+        foreach ($names as $name) {
+            if ($this->{$name} === null) continue;
+            $nameToReturn[] = $this->{$name};
+        }
+
+        return implode(' ', $nameToReturn);
+    }
 }

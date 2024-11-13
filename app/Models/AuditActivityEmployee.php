@@ -26,8 +26,11 @@ class AuditActivityEmployee extends Model
         );
     }
 
-    public function acreditation():HasMany
+    public function acreditation(): BelongsTo
     {
-        return $this->hasMany(Acreditation::class, foreignKey: 'pivot_id', localKey: 'id');
+        return $this->belongsTo(
+            related: Acreditation::class,
+            foreignKey: 'acreditation_id'
+        );
     }
 }

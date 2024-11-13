@@ -20,6 +20,9 @@ class TableCardsEmployee extends Component
     public array $employees;
 
     #[Reactive]
+    public ?array $errors;
+
+    #[Reactive]
     public bool $isEditing = true;
 
     #[Reactive]

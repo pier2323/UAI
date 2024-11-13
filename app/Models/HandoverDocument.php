@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,6 +26,21 @@ class HandoverDocument extends Model
         'audit_activity_id',
         'hallazgo',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'start' => 'date',
+            'cease' => 'date',
+            'subscription' => 'date',
+            'delivery_uai' => 'date',
+        ];
+    }
+
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('d/m/Y');
+    }
 
     public function auditActivity(): \Illuminate\Database\Eloquent\Relations\belongsTo
     {
