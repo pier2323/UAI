@@ -5,13 +5,17 @@ namespace App\Http\Livewire\Handover;
 use App\Models\AuditActivity;
 use App\Models\Designation;
 use Livewire\Component;
+use Livewire\Attributes\Title;
+#[Title('Sap_UAI')] 
 
 class Main extends Component
 {
     public $query = '';
     public function render()
     {
+
         return view('livewire.handover.main', [
+           
             'designations' => Designation::with(
                 ['auditActivity' => function ($query) {
                     $query->with([
@@ -35,7 +39,10 @@ class Main extends Component
 
     public function goTo(string $route, int $id)
     {
+        // Redirigir a la ruta especificada
         $this->redirectRoute($route, ['auditActivity' => $id], navigate: true);
+        
+        
     }
 
 }

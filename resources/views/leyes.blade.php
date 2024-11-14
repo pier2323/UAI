@@ -12,6 +12,7 @@
     <script src="/js/Qr/qrcode.min.js"></script>
     <script src="/js/Qr/qrcode.js"></script>
 
+    
 </head>
 <div class="et_pb_bottom_inside_divider"></div>
 <div class="contenedor_nav ">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Handover;
 
-
 use App\Models\AuditActivity;
 use App\Services\WorkingPaper;
 use Carbon\Carbon;
@@ -19,9 +18,13 @@ final class RequeriDocumen
         public readonly ?string $nameDocument = null,
         public readonly ?Carbon $date = null,
     ){
+        // Obtener el departamento y limpiar el nombre para evitar caracteres no válidos
+        $departamento = preg_replace('/[\/:*?"<>|]/', '_', $this->auditActivity->handoverDocument->departament);
+
+        // Cambiar el nombre del documento al momento de crear el WorkingPaper
         $this->document = new WorkingPaper (
             templateFile: WorkingPaper::getTemplate(self::NAME_TEMPLATE), 
-            nameDocument: $nameDocument ?? self::NAME_DOCUMENT,
+            nameDocument: 'SR ' . $this->auditActivity->code . ' - ' . $departamento . '.docx', // Cambiar aquí
             date: $date ?? now()->locale('es_ES'),
         );
     }
@@ -40,21 +43,33 @@ final class RequeriDocumen
         return $this->document->getPathDocumentToDownload();
     }
 
-
     private function setData(): void
     {
+        $fecha_subcripcion = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->subscription));
+        $periodo_inicial = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->start));
+        $periodo_cease = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
+        
+        $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
+        $cargo_saliente = $this->auditActivity->handoverDocument->EmployeeOutgoing->job_title;
+        $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+        
+        $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
+        $full_name_Incoming = "$employeeIncoming->first_name " . (isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '') . "$employeeIncoming->first_surname" . (isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
+  
         $code = $this->auditActivity->code;
 
         $this->document->data = [
-            'code' =>'' , 
-            'unidad_entrega' => 'Gerencia General Seguridad Integral', 
-            'unidad_adcripta' => 'Presidencia', 
+            'code' => $this->auditActivity->code,
+            'codigo_desgisnacion' => "UAI\\GCP\\DES-COM $code",
+            'fecha_designacion' => date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'),
             'articulo' => 'Ciudadano', 
-            'nombre_saliente' => 'Rubén Dario Sanabria Conteras', 
-            'cedula_saliente' => 'V-7.412.380', 
-            'fecha_subcripcion' => '11/03/2024', 
+            'nombre_saliente' => $full_name_Outgoing,
+            'cedula_saliente' => preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id),
+            'fecha_subcripcion' => $fecha_subcripcion, 
             'fecha_requerimiento' => now()->format('d/m/Y'), 
-            'fecha_cese' => '01/08/2024', 
+            'fecha_cese' => $periodo_cease, 
+            'unidad_entrega' => $this->auditActivity->handoverDocument->departament,
+            'unidad_adcripta' => $this->auditActivity->handoverDocument->departament_affiliation,
         ];
     }
 }

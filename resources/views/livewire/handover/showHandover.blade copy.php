@@ -250,30 +250,191 @@ if ($diasHabilesDiferencia > 3) {
 });
             </script>
             <!-- Segundo Modal -->
-            <div id="secondModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModalAndReset('secondModal', 'reportForm')">&times;</span>
-                <h4>Checkboxes no seleccionados</h4>
-        
-                <!-- Formulario para descargar Informe -->
-
+    
+    
                 <form id="secondForm" action="{{ route('download-excel') }}" method="POST" onsubmit="handleDownload(event)">
                     <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
                     @csrf
                     <div id="uncheckedCheckboxesContainer" style="margin: 20px 0;"></div>
                     <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga exel</x-button>
                      <button type="button" class="btn-modern dynamic-button" wire:click="informeDocumen" id="downloadReportButton">Descargar Informe del Auditor</button>
+                    <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga exel</x-button>
                     <button type="button" class="btn-modern btn-danger" onclick="closeAllModalsAndReset()">Cerrar</button>
                     <div id="downloadMessage" class="download-message"></div>
-                    </form>
-                    <!-- Formulario para descargar documento Word si "Sin Hallazgo" está marcado -->
-                    <form id="sinHallazgoForm" action="{{ route('download-sin-hallazgo') }}" method="POST" style="display: none;">
-                     @csrf
-                    <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
-                      <button type="submit" class="btn-modern btn-success" id="downloadSinHallazgoButton">Descarga del AI Sin Hallazgo</button>
-                </form>
+</form>
+
+<!-- Formulario para descargar documento Word si "Sin Hallazgo" está marcado -->
+<form id="sinHallazgoForm" action="{{ route('download-sin-hallazgo') }}" method="POST" style="display: none;">
+    @csrf
+    <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
+    <button type="submit" class="btn-modern btn-success" id="downloadSinHallazgoButton">Descarga del AI Sin Hallazgo</button>
+</form>
 
 <script>
+    
+function openModal(modalId) {
+const modal = document.getElementById(modalId);
+modal.style.display = 'block';
+setTimeout(() => { modal.style.opacity = '1'; }, 10); // Para activar la transición
+}
+function closeAllModalsAndReset() {
+const modals = document.querySelectorAll('.modal');
+const forms = document.querySelectorAll('form');
+
+modals.forEach(modal => {
+    modal.style.opacity = '0';
+    setTimeout(() => { 
+        modal.style.display = 'none'; 
+    }, 500);
+});
+
+forms.forEach(form => {
+    form.reset();
+});
+}
+
+function closeModal(modalId) {
+const modal = document.getElementById(modalId);
+modal.style.opacity = '0';
+setTimeout(() => { modal.style.display = 'none'; }, 500); // Tiempo para la transición
+}
+
+function handleDownload() {
+    showDownloadMessage("Descarga iniciada");
+
+    // Simular una descarga de archivo
+    setTimeout(() => {
+        showDownloadMessage("Descarga finalizada");
+        document.getElementById('secondModal').style.display = 'none'; // Cerrar el modal después de la descarga
+        setTimeout(() => {
+            document.getElementById('secondForm').reset(); // Resetear el formulario después de un tiempo
+            document.getElementById('downloadMessage').innerText = '';
+        }, 6000); // 56000 ms = 56 segundos
+    }, 2000); // 10000 ms = 10 segundos
+
+
+    const newButton = document.getElementById('newButton');
+newButton.style.display = 'block';
+
+// Agregar evento de clic al botón
+newButton.addEventListener('click', () => {
+const message = document.getElementById('message');
+message.innerHTML = 'Descarga del informe del auditor';
+message.style.display = 'block';
+setTimeout(() => {
+message.style.display = 'none';
+}, 3000); // Ocultar el mensaje después de 3 segundos
+});
+}
+
+function showDownloadMessage(message) {
+    const downloadMessage = document.getElementById('downloadMessage');
+    downloadMessage.textContent = message;
+    downloadMessage.classList.add('show');
+
+    setTimeout(() => {
+        downloadMessage.classList.remove('show');
+    }, 5000);
+}
+
+
+function openSecondModal() {
+    const checkboxes = document.querySelectorAll('#checkboxForm input[type="checkbox"]');
+    const uncheckedContainer = document.getElementById('uncheckedCheckboxesContainer');
+    uncheckedContainer.innerHTML = '';
+
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.id !== 'checkbox25') { // Excluir el checkbox de "Sin Hallazgo"
+            const inputHidden = document.createElement('input');
+            inputHidden.type = 'hidden';
+            inputHidden.name = `checkboxes[${index}]`;
+            inputHidden.value = checkbox.checked ? '0' : '1'; // Marcados son 0 y no marcados son 1
+            uncheckedContainer.appendChild(inputHidden);
+
+            if (!checkbox.checked) {
+                const div = document.createElement('div');
+                div.textContent = checkbox.value;
+                uncheckedContainer.appendChild(div);
+
+                const textarea = document.createElement('textarea');
+                textarea.name = `uncheckedCheckboxes[${index}]`;
+                textarea.placeholder = `Input for ${checkbox.value}`;
+                textarea.value = textosPorDefecto[checkbox.id] || ''; // Mensaje por defecto individual
+                uncheckedContainer.appendChild(textarea);
+            }
+        }
+    });
+
+    // Verificar si el checkbox "Sin Hallazgo" está marcado
+    const sinHallazgoCheckbox = document.getElementById('checkbox25');
+    if (sinHallazgoCheckbox.checked) {
+        const sinHallazgoLabel = document.createElement('label');
+        sinHallazgoLabel.textContent = 'Sin Hallazgo:';
+        uncheckedContainer.appendChild(sinHallazgoLabel); // Agregar el nombre del checkbox
+
+        const sinHallazgoInput = document.createElement('textarea'); // Cambiar a textarea para mayor tamaño
+        sinHallazgoInput.name = 'sinHallazgo';
+        sinHallazgoInput.placeholder = 'Ingrese detalles sobre el hallazgo...';
+        sinHallazgoInput.value = 'Sin Hallazgo'; // Valor por defecto
+        sinHallazgoInput.style.width = '100%'; // Ajustar el ancho
+        sinHallazgoInput.style.height = '100px'; // Ajustar la altura
+        sinHallazgoInput.style.overflowY = 'scroll'; // Agregar scroll vertical
+        uncheckedContainer.appendChild(sinHallazgoInput);
+    }
+
+
+
+    
+    closeModal('firstModal');
+    setTimeout(() => { openModal('secondModal'); }, 500); // Esperar la transición antes de abrir el segundo modal
+}function openSecondModal() {
+    const checkboxes = document.querySelectorAll('#checkboxForm input[type="checkbox"]');
+    const uncheckedContainer = document.getElementById('uncheckedCheckboxesContainer');
+    uncheckedContainer.innerHTML = '';
+
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.id !== 'checkbox25') { // Excluir el checkbox de "Sin Hallazgo"
+            // Solo procesar checkboxes que están desmarcados
+            if (!checkbox.checked) {
+                const inputHidden = document.createElement('input');
+                inputHidden.type = 'hidden';
+                inputHidden.name = `checkboxes[${index}]`;
+                inputHidden.value = '1'; // Marcados son 0 y no marcados son 1
+                uncheckedContainer.appendChild(inputHidden);
+
+                const div = document.createElement('div');
+                div.textContent = checkbox.value;
+                uncheckedContainer.appendChild(div);
+
+                const textarea = document.createElement('textarea');
+                textarea.name = `uncheckedCheckboxes[${index}]`;
+                textarea.placeholder = `Input for ${checkbox.value}`;
+                textarea.value = textosPorDefecto[checkbox.id] || ''; // Mensaje por defecto individual
+                uncheckedContainer.appendChild(textarea);
+            }
+        }
+    });
+
+    // Verificar si el checkbox "Sin Hallazgo" está marcado
+    const sinHallazgoCheckbox = document.getElementById('checkbox25');
+    if (sinHallazgoCheckbox.checked) {
+        const sinHallazgoLabel = document.createElement('label');
+        sinHallazgoLabel.textContent = 'Sin Hallazgo:';
+        uncheckedContainer.appendChild(sinHallazgoLabel); // Agregar el nombre del checkbox
+
+        const sinHallazgoInput = document.createElement('textarea'); // Cambiar a textarea para mayor tamaño
+        sinHallazgoInput.name = 'sinHallazgo';
+        sinHallazgoInput.placeholder = 'Ingrese detalles sobre el hallazgo...';
+        sinHallazgoInput.value = 'Sin Hallazgo'; // Valor por defecto
+        sinHallazgoInput.style.width = '100%'; // Ajustar el ancho
+        sinHallazgoInput.style.height = '100px'; // Ajustar la altura
+        sinHallazgoInput.style.overflowY = 'scroll'; // Agregar scroll vertical
+        uncheckedContainer.appendChild(sinHallazgoInput);
+    }
+
+    closeModal('firstModal');
+    setTimeout(() => { openModal('secondModal'); }, 500); // Esperar la transición antes de abrir el segundo modal
+}
 document.addEventListener('DOMContentLoaded', function() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkboxSinHallazgo = document.getElementById('checkbox25');
@@ -308,7 +469,53 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-      
+        <script>
+
+
+         function handleDownloadReport(event) {
+            event.preventDefault(); // Prevenir el envío del formulario por defecto
+        
+            const formData = new FormData(document.getElementById('reportForm'));
+        
+            fetch('{{ route('download-report') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la descarga del Informe');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'InformeAuditoria.docx'; // Nombre del archivo a descargar
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                showDownloadMessage("Descarga del informe completada", 'downloadMessageReport');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showDownloadMessage("Error en la descarga del informe", 'downloadMessageReport');
+            });
+        }
+        
+        function showDownloadMessage(message, messageElementId) {
+            const messageElement = document.getElementById(messageElementId);
+            messageElement.textContent = message;
+            messageElement.style.display = 'block';
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000); // Ocultar el mensaje después de 3 segundos
+        }
+        </script>
              
    
 

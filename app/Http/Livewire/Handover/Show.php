@@ -9,6 +9,7 @@ use App\Services\CedulaExcelService;
 use App\Traits\ModelPropertyMapper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use \PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -31,9 +32,15 @@ class Show extends Component
     private $auditorsCollection;
     public $incoming = [];
     public $outgoing = [];
+
+    public $checkboxData = [];
     
     // Fecha de inicio para el cálculo
     public $fechaInicio;
+
+
+
+
     private $feriados = [
         '2024' => [
             '01/01', // Año nuevo
@@ -69,62 +76,73 @@ class Show extends Component
 
     return isset($this->feriados[$year]) && in_array($formattedDate, $this->feriados[$year]);
 }
-    public function mount(int $auditActivity)
-    {
+public function mount(int $auditActivity)
+{
+    $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
+        ->where('public_id', $auditActivity)
+        ->first();
 
-        $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
-            ->where('public_id', $auditActivity)
-            ->first();
+        $fechaInicio = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
+       $fechaFin = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->delivery_uai));
+    // Establecer la fecha de inicio a la fecha de suscripción más un día
+    $this->fechaInicio = \Carbon\Carbon::parse($this->auditActivity->handoverDocument->subscription)->addDay(); 
+    $this->incoming = \App\Models\EmployeeIncoming::all();
+    $this->outgoing = \App\Models\EmployeeOutgoing::all();
 
-        // Establecer la fecha de inicio a una fecha fija (10 de octubre de 2024)
-        $this->fechaInicio = \Carbon\Carbon::parse($this->auditActivity->handoverDocument->subscription); 
-        $this->incoming = \App\Models\EmployeeIncoming::all();
-        $this->outgoing = \App\Models\EmployeeOutgoing::all();
+    // Calcular los días restantes y los días no hábiles
+    $this->diasRestantes = $this->calculateDiasRestantes();
+    $this->nonBusinessDays = $this->calculateNonBusinessDays();
+}
 
-        // Calcular los días restantes y los días no hábiles
-        $this->diasRestantes = $this->calculateDiasRestantes();
-        $this->nonBusinessDays = $this->calculateNonBusinessDays();
+private function calculateDiasRestantes()
+{
+    $fechaHoy = \Carbon\Carbon::now(); // Obtener la fecha actual
+    $diasRestantes = 0;
 
-        $this->auditActivity = auditActivity::with(['designation' , 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])->where('public_id' ,$auditActivity)->first();
-        $this->auditActivityWith = $this->auditActivity;
-        $this->incoming = \App\Models\EmployeeIncoming::all();
-        $this->outgoing = \App\Models\EmployeeOutgoing::all();
+    if ($this->fechaInicio > $fechaHoy) {
+        $this->diasExcedidos = 0;
+        $this->mensajeExceso = "La fecha de inicio es futura. No se han contabilizado días.";
+        return 0;
     }
 
-    // Método para calcular los días restantes (excluyendo sábados y domingos)
-    private function calculateDiasRestantes()
-    {
-        $fechaHoy = \Carbon\Carbon::now(); // Obtener la fecha actual
-        $diasRestantes = 0;
-    
-
-        if ($this->fechaInicio > $fechaHoy) {
-            $this->diasExcedidos = 0;
-            $this->mensajeExceso = "La fecha de inicio es futura. No se han contabilizado días.";
-            return 0;
+    for ($date = $this->fechaInicio->copy(); $date <= $fechaHoy; $date->addDay()) {
+        if ($date->isWeekday() && !$this->isFeriado($date)) {
+            $diasRestantes++;
         }
-    
-        for ($date = $this->fechaInicio->copy(); $date <= $fechaHoy; $date->addDay()) {
-            if ($date->isWeekday() && !$this->isFeriado($date)) {
-                $diasRestantes++;
-            }
-        }
-    
-        if ($diasRestantes > 120) {
-            $this->diasExcedidos = $diasRestantes - 120;
-            $this->mensajeExceso = "Se está pasando de los 120 días por $this->diasExcedidos días.";
-        } else {
-            $this->diasExcedidos = 0;
-            $this->mensajeExceso = null;
-        }
-    
-        return $diasRestantes;
     }
+
+    if ($diasRestantes > 120) {
+        $this->diasExcedidos = $diasRestantes - 120;
+        $this->mensajeExceso = "Se está pasando de los 120 días por $this->diasExcedidos días.";
+    } else {
+        $this->diasExcedidos = 0;
+        $this->mensajeExceso = null;
+    }
+
+    return $diasRestantes;
+}
     public function requeriDocumen(): BinaryFileResponse     
     {
         $requerimientoDocument = new RequeriDocumen($this->auditActivity);
         return $requerimientoDocument->download();
     }
+
+  
+
+    public function informeDocumen(): BinaryFileResponse
+    {
+       
+        // Generar y devolver el documento
+        $requerInformeDocument = new informeAuditor($this->auditActivity);
+        return $requerInformeDocument->download();
+    }
+    public function programaDocumen(): BinaryFileResponse     
+    {
+        $requerInformeDocument = new  programaDocumen($this->auditActivity);
+        return  $requerInformeDocument->download();
+    }
+
+   
     // Método para calcular los días no hábiles (sábados y domingos)
     private function calculateNonBusinessDays()
     {
@@ -140,16 +158,26 @@ class Show extends Component
 
         return $nonBusinessDays; // Devuelve un array de días no hábiles
     }
-
+  
     // Métodos para descargar documentos...
-    
+    #[Title('Sap_UAI')]
     public function render()
     {
-        return view('livewire.handover.showHandover', [
+        
+           return view('livewire.handover.showHandover', [
             'mensajeExceso' => $this->mensajeExceso, // Pasar el mensaje a la vista
             'diasExcedidos' => $this->diasExcedidos, // Pasar los días excedidos a la vista
+            
+            
         ]);
+        
     }
+
+    public function saveAllCheckboxes()
+    {
+        dd($this->checkboxData);
+    }
+    
 
     // Otros métodos...
 }
