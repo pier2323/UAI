@@ -9,6 +9,7 @@ use App\Models\Employee;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -16,10 +17,14 @@ class TableCardsEmployee extends Component
 {
     public array $employees = array();
 
+    #[Reactive]
+    public bool $isEditing = false;
+
     #[Locked]
     public AuditActivity $auditActivity;
 
     public Designation|null $designation;
+    public bool $isDesignated = false;
 
     public Acreditation|null $acreditation;
 
@@ -32,11 +37,13 @@ class TableCardsEmployee extends Component
     {
         if (isset($this->designation)) {
             foreach($this->auditActivity->employee()->get() as $employee) {
-                
+
+                $this->isDesignated = true;
+
                 $employee->jobTitle->first();
 
                 array_push($this->employees, [
-                    'data' => $employee, 
+                    'data' => $employee,
                     'role' => $employee->pivot->role,
                 ]);
             }
@@ -46,7 +53,7 @@ class TableCardsEmployee extends Component
     #[Renderless, On('saving')]
     public function save():void
     {
-        // todo sync employees 
+        // todo sync employees
 
         $employees = array();
 
@@ -63,5 +70,11 @@ class TableCardsEmployee extends Component
     public function addCard($id):Employee
     {
         return Employee::with('jobTitle')->find($id);
+    }
+
+    #[On('cancelEdit')]
+    public function cancelEdit(): void
+    {
+        $this->mount();
     }
 }

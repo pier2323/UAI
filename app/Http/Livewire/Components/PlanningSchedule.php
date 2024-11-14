@@ -10,13 +10,19 @@ use App\Traits\ModelPropertyMapper;
 use Carbon\Carbon;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class PlanningSchedule extends Component
 {
     use ModelPropertyMapper;
 
-    public 
+    const string format = 'd/m/Y';
+
+    #[Reactive]
+    public bool $isEditing = false;
+
+    public
     $planning_days, $execution_days, $preliminary_days, $download_days, $definitive_days,
     $planning_start, $execution_start, $preliminary_start, $download_start, $definitive_start,
     $planning_end, $execution_end, $preliminary_end, $download_end, $definitive_end;
@@ -28,7 +34,7 @@ class PlanningSchedule extends Component
     public AuditActivity $auditActivity;
 
     public Designation|null $designation;
-    
+
     public Acreditation|null $acreditation;
 
 
@@ -47,23 +53,27 @@ class PlanningSchedule extends Component
     #[On('saving')]
     public function save()
     {
-        $format = 'd/m/Y';
-
         $dates = $this->getPropertiesForCarbon();
 
-        // todo format dates 
+        // todo format dates
         foreach ($this->only($dates) as $key => $value) {
-            $dateCarbon = Carbon::createFromFormat($format, $value);
+            $dateCarbon = Carbon::createFromFormat(self::format, $value);
             $this->{$key} = $dateCarbon->format('Y-m-d');
         }
-        
-        // todo update dates 
+
+        // todo update dates
         $this->auditActivity->update($this->all());
 
         $this->mapModelProperties($this->auditActivity, $this->except($this->getPropertiesExcludes()));
     }
 
-    private function getPropertiesForCarbon(): array 
+    #[On('cancelEdit')]
+    public function cancelEdit(): void
+    {
+        $this->mount();
+    }
+
+    private function getPropertiesForCarbon(): array
     {
         return [
             'planning_start',
@@ -79,13 +89,14 @@ class PlanningSchedule extends Component
         ];
     }
 
-    private function getPropertiesExcludes(): array 
+    private function getPropertiesExcludes(): array
     {
         return [
             'excludeDays',
             'auditActivity',
             'designation',
             'acreditation',
+            'isEditing',
         ];
     }
 }

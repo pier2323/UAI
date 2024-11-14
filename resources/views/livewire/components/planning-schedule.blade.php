@@ -11,14 +11,17 @@
         <hr>
     </div>
     <hr>
-    <div x-data="plannigSchedule" class="flex flex-col justify-between p-4 py-3 font-semibold">
+    <div x-data="plannigSchedule"
+    x-init="@if(!isset($designation) || $isEditing) start() @else destroy() @endif"
+    class="flex flex-col justify-between p-4 py-3 font-semibold"
+    >
         {{-- todo planning --}}
             <x-input-date-planning
                 idStart='planning_start'
                 idEnd='planning_end'
                 text='$wire.planning_days'
                 title='Planificación'
-                :designation="isset($designation)"
+                :designation="isset($designation) && !$isEditing"
                 next="execution_start"
             />
             <x-input-date-planning
@@ -26,7 +29,7 @@
                 idEnd='execution_end'
                 text='$wire.execution_days'
                 title='Ejecución'
-                :designation="isset($designation)"
+                :designation="isset($designation) && !$isEditing"
                 next="preliminary_start"
             />
             <x-input-date-planning
@@ -34,7 +37,7 @@
                 idEnd='preliminary_end'
                 text='$wire.preliminary_days'
                 title='Informe Preliminar'
-                :designation="isset($designation)"
+                :designation="isset($designation) && !$isEditing"
                 next="download_start"
             />
             <x-input-date-planning
@@ -42,7 +45,7 @@
                 idEnd='download_end'
                 text='$wire.download_days'
                 title='Descargo'
-                :designation="isset($designation)"
+                :designation="isset($designation) && !$isEditing"
                 next="definitive_start"
             />
             <x-input-date-planning
@@ -50,7 +53,7 @@
                 idEnd='definitive_end'
                 text='$wire.definitive_days'
                 title='Informe definitivo'
-                :designation="isset($designation)"
+                :designation="isset($designation) && !$isEditing"
             />
     </div>
     @script
@@ -127,8 +130,13 @@
                         return new Date(now.getTime() + oneDay);
                     },
 
-                    init() {
-                        @empty($designation)
+                    destroy() {
+                        Object.keys(this.flatpickrs).forEach(propiedad => {
+                            this.flatpickrs[propiedad].destroy();
+                        });
+                    },
+
+                    start() {
 
                             this.loadExcludeDays();
 
@@ -144,7 +152,7 @@
                                     },
                                     months: {
                                     shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
-                                    longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                    longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                                     },
                                 },
                             }
@@ -167,7 +175,6 @@
                                 return acc;
                             }, {});
 
-                        @endempty
                     },
                 }
             })
