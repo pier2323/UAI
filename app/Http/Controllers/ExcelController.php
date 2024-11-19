@@ -253,7 +253,7 @@ public function hallazasgo($request){
      }
 //Enviar el archivo Excel al navegador
        // Preparar el nombre del archivo para la descarga
-        $nombreArchivo = "cedula_{$unidad_entrega}_{$unidad_adscrita}.xls"; // Nombre del archivo que incluye el departamento
+        $nombreArchivo = "cedula_{$code}_{$unidad_adscrita}.xls"; // Nombre del archivo que incluye el departamento
 
         // Enviar el archivo Excel al navegador
         $writer = new Xlsx($spreadsheet);

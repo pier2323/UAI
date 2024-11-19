@@ -15,6 +15,13 @@ use App\Http\Controllers\ReportController;
 
 
 use App\Http\Controllers\DownloadSinHallazgoController;
+use App\Http\Controllers\DocumentController;
+
+Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+Route::post('/documents/upload', [DocumentController::class, 'upload'])->name('documents.upload');
+Route::get('/document/{filename}', [DocumentController::class, 'show']);
+Route::get('/documentos', [DocumentController::class, 'index'])->name('documentos.index');
+Route::post('/documentos/upload', [DocumentController::class, 'upload'])->name('upload.documents');
 
 Route::post('/download-sin-hallazgo', [DownloadSinHallazgoController::class, 'download'])->name('download-sin-hallazgo');
 Route::post('/download-report', [ReportController::class, 'downloadReport'])

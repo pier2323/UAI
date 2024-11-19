@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 
     .container {
@@ -294,6 +294,20 @@
                     </form>
                 </div>
             </div>
+            <h1>Subir Documento</h1>
+
+            @if(session('success'))
+                <div style="color: green;">
+                    {{ session('success') }}
+                </div>
+            @endif
+        
+            <form action="{{ route('documents.upload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" required>
+                <button type="submit">Subir</button>
+            </form>
+        
 
 <script>
     document.querySelectorAll('.dynamic-button').forEach(button => {

@@ -261,7 +261,7 @@ if ($diasHabilesDiferencia > 3) {
                     <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
                     @csrf
                     <div id="uncheckedCheckboxesContainer" style="margin: 20px 0;"></div>
-                    <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga exel</x-button>
+                    <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga Cedula </x-button>
                      <button type="button" class="btn-modern dynamic-button" wire:click="informeDocumen" id="downloadReportButton">Descargar Informe del Auditor</button>
                     <button type="button" class="btn-modern btn-danger" onclick="closeAllModalsAndReset()">Cerrar</button>
                     <div id="downloadMessage" class="download-message"></div>
@@ -308,9 +308,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-      
-             
-   
+<form action="{{ route('upload.documents') }}" method="POST" enctype="multipart/form-data">
+
 
             <style>
     .message {
