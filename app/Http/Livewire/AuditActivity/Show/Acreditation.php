@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AuditActivity\Show;
 
 use App\Models\Acreditation as ModelsAcreditation;
 use App\Models\AuditActivity;
+use App\Models\AuditActivityEmployee;
 use App\Services\AcreditationService;
 use Carbon\Carbon;
 use Livewire\Attributes\Renderless;
@@ -26,13 +27,19 @@ class Acreditation extends Component
     {
         $dateCarbon = Carbon::createFromFormat('d/m/Y', $this->accreditDateRelease);
         $this->acreditation = ModelsAcreditation::create([
-            'date_release' => $dateCarbon->format('Y-m-d'), 
-            'pivot_id' => $this->auditActivity->employee()->first()->pivot->id,
+            'date_release' => $dateCarbon->format('Y-m-d'),
         ]);
+
+        foreach (AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->get()
+        as $pivot)
+        {
+            $pivot->acreditation_id = $this->acreditation->id;
+            $pivot->save();
+        }
 
         $this->dispatch('acreditation_download', message: \__('se ha acreditado la comisión correctamente!'));
     }
-    
+
     #[Renderless]
     public function getAcreditationDocument(): BinaryFileResponse
     {

@@ -14,7 +14,7 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        $employees = 
+        $employees =
         [
             [
                 'p00' => '155718',
@@ -24,7 +24,7 @@ class EmployeeSeeder extends Seeder
                 'first_surname' => 'VANEGAS',
                 'second_surname' => 'GARCIA',
                 'job_title_id' => 9,
-                'uai_id' => 1,
+                'uai_id' => 9,
                 'phone' => '04126625907',
                 'gmail' => 'jenblukvanegas@gmail.com',
                 'email_cantv' => 'jvane01@cantv.com.ve',
@@ -37,8 +37,8 @@ class EmployeeSeeder extends Seeder
                 'second_name' => 'ENYERLI',
                 'first_surname' => 'DALESSANDRO',
                 'second_surname' => 'RODRIGUEZ',
-                'job_title_id' => 1,
-                'uai_id' => 1,
+                'job_title_id' => 5,
+                'uai_id' => 9,
                 'phone' => '04126625907',
                 'gmail' => 'kdales01.uai@gmail.com',
                 'email_cantv' => 'kdales01@cantv.com.ve',
@@ -51,8 +51,8 @@ class EmployeeSeeder extends Seeder
                 'second_name' => 'ALBERTO',
                 'first_surname' => 'APONTE',
                 'second_surname' => 'RAMOS',
-                'job_title_id' => 10,
-                'uai_id' => 1,		
+                'job_title_id' => 5,
+                'uai_id' => 9,
                 'phone' => '04124905187',
                 'gmail' => 'leonardoaponte781@gmail.com',
                 'email_cantv' => 'lapont03@cantv.com.ve',
@@ -66,7 +66,7 @@ class EmployeeSeeder extends Seeder
                 'first_surname' => 'GONZALEZ',
                 'second_surname' => 'CONTRERAS',
                 'job_title_id' => 11,
-                'uai_id' => 1,
+                'uai_id' => 9,
                 'phone' => '04265161189',
                 'gmail' => 'mhgonzalez911@gmail.com',
                 'email_cantv' => 'mgonza130@cantv.com.ve',
@@ -115,7 +115,7 @@ class EmployeeSeeder extends Seeder
                 'profile_photo' => '124184.jpg',
               ],
               [
-                'p00' => '155919',	
+                'p00' => '155919',
                 'personal_id' => '11195984',
                 'first_name' => 'INDIRA',
                 'second_name' => 'VIRGINIA',
@@ -555,7 +555,7 @@ class EmployeeSeeder extends Seeder
                 'first_surname' => 'LOPEZ',
                 'second_surname' => 'ALESSANDRINI',
                 'job_title_id' => 4,
-                'uai_id' => 1,
+                'uai_id' => 9,
                 'phone' => '04265320101',
                 'gmail' => 'olopez01.uai@gmail.com',
                 'email_cantv' => 'olopez01@cantv.com.ve',
@@ -575,9 +575,23 @@ class EmployeeSeeder extends Seeder
                 'email_cantv' => 'dduran03@cantv.com.ve',
                 'profile_photo' => '156646.jpg',
               ],
+              [
+                'p00' => '113700',
+                'personal_id' => '12292983',
+                'first_name' => 'MILANYELA ',
+                'second_name' => null,
+                'first_surname' => 'BLANCO',
+                'second_surname' => null,
+                'job_title_id' => 4,
+                'uai_id' => 6,
+                'phone' => '04126115933',
+                'gmail' => 'mblan4.uai@gmail.com',
+                'email_cantv' => 'mblan4@cantv.com.ve',
+                'profile_photo' => '113700.jpg',
+              ],
         ];
 
-        
+
         foreach($employees as $employee)
         {
             $employeeModel = new Employee();
@@ -587,7 +601,7 @@ class EmployeeSeeder extends Seeder
             $employeeModel->first_surname = $employee['first_surname'];
             $employeeModel->second_surname = $employee['second_surname'] != null ? $employee['second_surname'] : null;
             $employeeModel->phone = $employee['phone'];
-            $employeeModel->p00 = $employee['p00']; 
+            $employeeModel->p00 = $employee['p00'];
             $employeeModel->gmail = $employee['gmail'] != null ? $employee['gmail'] : null;
             $employeeModel->email_cantv = $employee['email_cantv'];
             $employeeModel->job_title_id = $employee['job_title_id'];

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('p00')->unique();
             $table->integer('personal_id')->unique();
             $table->string('job_title');
+            $table->softDeletes();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

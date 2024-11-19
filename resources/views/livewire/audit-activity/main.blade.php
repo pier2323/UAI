@@ -1,4 +1,5 @@
  <div>
+    <livewire:AuditActivity.Loader>
     @push('script') @assets  @vite(['resources/js/hola.js']) @endassets @endpush
 
     <style>
@@ -18,7 +19,7 @@
         <x-tabs :tabs="['Plan Operativo Anual' => 'poa', 'No Planificadas' => 'nopoa']" default="poa">
 
             @foreach ([
-                'poa' => $auditActivityPoa, 
+                'poa' => $auditActivityPoa,
                 'nopoa' => $auditActivityNoPoa,
             ] as $type => $auditActivities)
 
@@ -27,7 +28,7 @@
                 $auditActivity->code = $auditActivity->code
             @endphp
             @endforeach
-                
+
                 <x-slot :name="$type">
 
                     <div x-data="auditActivityMain" class="w-full">
@@ -62,10 +63,10 @@
 
                         <x-table-alpine name="tableAlpineMain" :data="$auditActivities" customTable
                             :nameColumns="[
-                                'Código' => 'code', 
-                                'Descripción' => 'description', 
-                                'Mes inicio' => 'month_start', 
-                                'Mes fin' => 'month_end', 
+                                'Código' => 'code',
+                                'Descripción' => 'description',
+                                'Mes inicio' => 'month_start',
+                                'Mes fin' => 'month_end',
                                 'Área UAI Encargada' => 'uai.name',
                             ]"
                             nameColumnId="public_id"
@@ -91,19 +92,18 @@
 
                             return (query !== "" ? auditActivities : pages[currentPage]).filter(
                                 auditActivity => {
-                                    return auditActivity.code.includes(query) 
-                                    || auditActivity.description.includes(query) 
-                                    || auditActivity.uai.name.includes(query)                                
+                                    return auditActivity.code.includes(query)
+                                    || auditActivity.description.includes(query)
+                                    || auditActivity.uai.name.includes(query)
                                 }
                             );
-                            
+
                         }
                     },
-                    
+
                 }
             })
         </script>
         @endscript
     </x-section-basic>
-    
 </div>

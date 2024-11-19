@@ -4,27 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmployeeIncoming extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
 
     protected $table = 'employee_incoming';
 
-    protected $fillable = [           
-        'p00', 
-        'first_name', 
-        'second_name', 
-        'first_surname', 
+    protected $fillable = [
+        'p00',
+        'first_name',
+        'second_name',
+        'first_surname',
         'profile_photo',
-        'second_surname', 
+        'second_surname',
         // 'job_title_id',
         'job_title',
         'address',
         'phone',
-        'email_cantv', 
-        'gmail', 
-        'personal_id', 
+        'email_cantv',
+        'gmail',
+        'personal_id',
     ];
 
     // public function jobTitle(): \Illuminate\Database\Eloquent\Relations\BelongsTo

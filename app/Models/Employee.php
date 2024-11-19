@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
 
     protected $table = 'employee';
 
@@ -29,7 +32,7 @@ class Employee extends Model
         'personal_id',
         'job_title_id',
         'uai_id',
-    
+
     ];
 
     public function user(): HasOne
@@ -50,7 +53,7 @@ class Employee extends Model
     {
         return $this->belongsToMany(AuditActivity::class);
     }
-    
+
     public function designation(): HasManyThrough
     {
         return $this->HasManyThrough(Designation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
@@ -59,5 +62,21 @@ class Employee extends Model
     public function acreditation(): HasManyThrough
     {
         return $this->HasManyThrough(Acreditation::class, AuditActivityEmployee::class, 'audit_activity_id', 'pivot_id', 'id', 'id');
+    }
+
+    public function names(array $names = [
+        'first_name',
+        'second_name',
+        'first_surname',
+        'second_surname'
+    ]): string
+    {
+        $nameToReturn = array();
+        foreach ($names as $name) {
+            if ($this->{$name} === null) continue;
+            $nameToReturn[] = $this->{$name};
+        }
+
+        return implode(' ', $nameToReturn);
     }
 }
