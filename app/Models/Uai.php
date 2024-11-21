@@ -11,7 +11,9 @@ class Uai extends Model
 
     protected $table = 'uai';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+    ];
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

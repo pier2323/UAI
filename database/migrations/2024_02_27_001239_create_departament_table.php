@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('departament', function(Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('level');
+            $table->integer('level')->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

@@ -9,7 +9,11 @@ $maxWidth = [
     'lg' => 'sm:max-w-lg',
     'xl' => 'sm:max-w-xl',
     '2xl' => 'sm:max-w-2xl',
-    '3xl' => 'max-w-2xl',
+    '3xl' => 'max-w-3xl',
+    '4xl' => 'max-w-4xl',
+    '5xl' => 'max-w-5xl',
+    '6xl' => 'max-w-6xl',
+    '7xl' => 'max-w-7xl',
 ][$maxWidth ?? '2xl'];
 @endphp
 
@@ -19,7 +23,7 @@ $maxWidth = [
     x-on:keydown.escape.window="show = false"
     x-show="show"
     id="{{ $id }}"
-    class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto jetstream-modal sm:px-0"
+    class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto jetstream-modal sm:px-0 max-w"
     style="display: none;"
 >
     <div x-show="show" class="fixed inset-0 transition-all transform" x-on:click="show = false" x-transition:enter="ease-out duration-300"

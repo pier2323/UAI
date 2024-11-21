@@ -7,7 +7,7 @@
     <livewire:AuditActivity.Show.Designation :$auditActivity>
 
     @if($auditActivity->type_audit_id === 1) {{-- todo type_audit_id => 1 = Acta de Entrega --}}
-    <livewire:Components.RegisterFormHandoverDocument :$auditActivity :modelsHandoverDocument="$handoverDocument">
+    <livewire:Components.RegisterFormHandoverDocument :$auditActivity :mod  elsHandoverDocument="$handoverDocument">
     @endif
 
 </div>
