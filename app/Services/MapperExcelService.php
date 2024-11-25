@@ -2,12 +2,7 @@
 
 namespace App\Services;
 
-use PhpOffice\Math\Element\Row;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row as WorksheetRow;
-use PhpOffice\PhpSpreadsheet\Worksheet\RowIterator;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpParser\Node\Stmt\Continue_;
 
 final class MapperExcelService
 {
@@ -26,47 +21,30 @@ final class MapperExcelService
 
     private $spreadsheet;
     private $worksheet;
-    private $maxDataRow;
-    private $maxDataColumn;
 
-    public function __construct(string $pathTempFile)
+    private static self $instance;
+    private static string $pathDocument;
+
+    private function __construct(string $pathTempFile)
     {
         $this->spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($pathTempFile);
         $this->worksheet = $this->spreadsheet->getActiveSheet();
-        $this->maxDataRow = $this->worksheet->getHighestDataRow();
-        $this->maxDataColumn = $this->worksheet->getHighestDataColumn();
     }
 
-    public function getData()
+    public function getData(): array
     {
-        $firstRow = 1;
-        $dataSorted = array();
-        $dataByRow = $this->getDataByRow();
-        foreach ($dataByRow as $row => $value) {
-            if ($row === $firstRow) continue;
-
-            $dataSorted['departament_id'] = $value[self::auditActivityProperties['departament_id']];
-            $dataSorted['type_audit_id'] = $value[self::auditActivityProperties['type_audit_id']];
-            $dataSorted['description'] = $value[self::auditActivityProperties['description']];
-            $dataSorted['month_start'] = $value[self::auditActivityProperties['month_start']];
-            $dataSorted['public_id'] = $value[self::auditActivityProperties['public_id']];
-            $dataSorted['objective'] = $value[self::auditActivityProperties['objective']];
-            $dataSorted['month_end'] = $value[self::auditActivityProperties['month_end']];
-            $dataSorted['area_id'] = $value[self::auditActivityProperties['area_id']];
-            $dataSorted['uai_id'] = $value[self::auditActivityProperties['uai_id']];
-
-        }
-
-        dd($dataSorted);
+        return $this->getDataByRow();
     }
 
     private function getDataByRow()
     {
         $arrayRow = array();
-        $rowIterator = $this->worksheet->getRowIterator(1, $this->maxDataRow);
+        $getHighestDataColumn = (integer) $this->worksheet->getHighestDataColumn();
+        $rowIterator = $this->worksheet->getRowIterator(1, $getHighestDataColumn);
 
         foreach ($rowIterator as $row) {
-            if ($row->isEmpty())  continue;// Ignore empty rows
+            if ($row->isEmpty() || $row->getRowIndex() === 1)  continue;// Ignore empty rows
+
             $arrayRow[$row->getRowIndex()] = $this->columnIterator($row);
         }
         return $arrayRow;
@@ -76,84 +54,35 @@ final class MapperExcelService
     {
         $columnIterator = $row->getCellIterator();
         $columnIterator->setIterateOnlyExistingCells(true);
+
         foreach ($columnIterator as $cell) {
-            if ($cell->getValue() === null) continue;
-            $cells[] = $cell->getValue();
+
+            switch ($cell->getColumn()) {
+                case 'A': $cells['public_id'] = $cell->getValue(); break;
+                case 'B': $cells['code'] = $cell->getValue(); break;
+                case 'C': $cells['description'] = $cell->getValue(); break;
+                case 'D': $cells['type_audit'] = $cell->getValue(); break;
+                case 'E': $cells['month_start'] = $cell->getValue(); break;
+                case 'F': $cells['month_end'] = $cell->getValue(); break;
+                case 'G': $cells['uai'] = $cell->getValue(); break;
+                case 'H': $cells['departament'] = $cell->getValue(); break;
+                case 'I': $cells['area'] = $cell->getValue(); break;
+                case 'J': $cells['objective'] = $cell->getValue(); break;
+
+            }
         }
+
         return $cells;
     }
 
-    public function operative()
+    public static function getInstance(?string $path): self
     {
-        $data = $this->spreadsheet->getActiveSheet()->toArray();
-        // var_dump($data);
+        if (empty(self::$instance))
 
-        // $userResponseData = [];
-        // $count = "0";
-        // foreach($data as $row)
-        // {
-        //     if($count > 0 && $row['0'] != '' && $row['1'] != '' && $row['2'] != '' && $row['3'] != '')
-        //     {
-        //         $user_id = $row['0'];
-        //         $first_name = $row['1'];
-        //         $last_name = $row['2'];
-        //         $email = $row['3'];
-        //         $phone = $row['4'];
+        self::$instance = new self($path ?? self::$pathDocument);
 
-        //         $myUserObj = [
-        //             'user_id' => $user_id,
-        //             'first_name' => $first_name,
-        //             'last_name' => $last_name,
-        //             'email' => $email,
-        //             'phone' => $phone
-        //         ];
-        //         array_push($userResponseData, $myUserObj);
-        //         $msg = true;
-        //     }
-        //     else
-        //     {
-        //         $count = "1";
-        //     }
-        // }
+        if (empty($path)) self::$pathDocument = $path;
 
-        // $usersArrayList = [
-        //     'users'=> $userResponseData
-        // ];
-        // $newJsonString = stripslashes(json_encode($usersArrayList));
-        // file_put_contents($jsonFilePath, $newJsonString);
-
-        // if(isset($msg))
-        // {
-        //     $_SESSION['message'] = "Excel Imported to JSON Successfully";
-        //     header('Location: index.php');
-        //     exit(0);
-        // }
-        // else
-        // {
-        //     $_SESSION['message'] = "Something Went Wrong!";
-        //     header('Location: index.php');
-        //     exit(0);
-        // }
-    }
-
-    public function uploadArchive($file_ext,  $allowed_ext)
-    {
-        // $jsonFilePath = "users.json";
-
-        // $fileName = $_FILES['import_file']['name'];
-        // $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
-
-        // $allowed_ext = ['xls','csv','xlsx'];
-
-        // if(in_array($file_ext, $allowed_ext)){
-        //     $this->operative();
-        // }
-
-        // else
-        // {
-        //     $_SESSION['message'] = "Invalid File";
-        //     header('Location: index.php');
-        //     exit(0);
-        // }
+        return self::$instance;
     }
 }

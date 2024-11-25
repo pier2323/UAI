@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\AuditActivity;
 
 use App\Dto\AuditActivityNew;
+use App\Models\AuditActivity;
 use App\Services\MapperExcelService;
+use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -11,27 +13,73 @@ class Loader extends Component
 {
     use WithFileUploads;
 
-    public AuditActivityNew $auditActivityNew;
-
-    public $spreadsheet;
+    public AuditActivityNew $auditActivity;
+    public array $auditActivities = array();
+    public bool $isLoad = false;
+    public $auditActivitiesNew = array();
 
     // #[Validate('max:1024')] // 1MB Max
     public $archive;
-    public bool $tableNewAuditActivity;
 
-    public function render()
+    public string $query = '';
+
+    public function render(): View
     {
         return view('livewire.audit-activity.loader');
     }
 
-    public function loadData(): void
+    public function save(): void
     {
-        // $this->spreadsheet[] = new MapperExcelService($this->archive->path());
-        // $this->tableNewAuditActivity = true;
+        foreach ($this->auditActivities as $auditActivity) {
+            $this->auditActivitiesNew[] = AuditActivity::create(self::format($auditActivity));
+        }
+
+        dd($this->auditActivitiesNew);
+    }
+
+    public function cancel(): void
+    {
+        $this->reset();
     }
 
     public function getData(): array
     {
-        return $this->spreadsheet[0]->getData();
+        $this->auditActivities = [];
+        foreach ($this->spreadsheet()->getData() as $new) {
+            $this->auditActivities[] = new AuditActivityNew(
+                public_id: $new['public_id'],
+                description: $new['description'],
+                objective: $new['objective'],
+                month_start: $new['month_start'],
+                month_end: $new['month_end'],
+                area: $new['area'],
+                type_audit: $new['type_audit'],
+                uai: $new['uai'],
+                departament: $new['departament'],
+            );
+        }
+
+        $this->isLoad = true;
+        return $this->auditActivities;
+    }
+
+    private static function format(AuditActivityNew $auditActivity)
+    {
+        foreach ([
+            'type_audit',
+            'departament',
+            // 'uai',
+            'area',
+        ] as $property)
+
+        if (is_array($auditActivity->{$property}))
+        $auditActivity->{$property . '_id'} = $auditActivity->{$property}['id'];
+
+        return $auditActivity->toArray();
+    }
+
+    private function spreadsheet(): object
+    {
+        return MapperExcelService::getInstance($this->archive->path());
     }
 }

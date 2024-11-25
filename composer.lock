@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "157aac0b841111584c49aac89db32321",
+    "content-hash": "d370ee619f4c420478f6b8a54d56f673",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1155,38 +1155,6 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-            "name": "iconify/json",
-            "version": "2.2.247",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iconify/icon-sets.git",
-                "reference": "ba571799cff9285392b14c64e3e7eedbec75791e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iconify/icon-sets/zipball/ba571799cff9285392b14c64e3e7eedbec75791e",
-                "reference": "ba571799cff9285392b14c64e3e7eedbec75791e",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Iconify\\IconsJSON\\": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Iconify icons collection in JSON format",
-            "homepage": "https://iconify.design/icon-sets/",
-            "support": {
-                "issues": "https://github.com/iconify/icon-sets/issues",
-                "source": "https://github.com/iconify/icon-sets/tree/2.2.247"
-            },
-            "time": "2024-09-11T05:18:18+00:00"
-        },
-        {
             "name": "laravel/fortify",
             "version": "v1.24.1",
             "source": {
@@ -2226,6 +2194,78 @@
                 }
             ],
             "time": "2024-08-19T11:52:18+00:00"
+        },
+        {
+            "name": "livewire/volt",
+            "version": "v1.6.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/volt.git",
+                "reference": "9efa7bd50a71ad166ac44ed9322d2c004e0ece5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/volt/zipball/9efa7bd50a71ad166ac44ed9322d2c004e0ece5f",
+                "reference": "9efa7bd50a71ad166ac44ed9322d2c004e0ece5f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.38.2|^11.0",
+                "livewire/livewire": "^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/folio": "^1.1",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^8.15.0|^9.0",
+                "pestphp/pest": "^2.9.5",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Livewire\\Volt\\VoltServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "Livewire\\Volt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Nuno Maduro",
+                    "email": "nuno@laravel.com"
+                }
+            ],
+            "description": "An elegantly crafted functional API for Laravel Livewire.",
+            "homepage": "https://github.com/livewire/volt",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "volt"
+            ],
+            "support": {
+                "issues": "https://github.com/livewire/volt/issues",
+                "source": "https://github.com/livewire/volt"
+            },
+            "time": "2024-11-12T14:51:01+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

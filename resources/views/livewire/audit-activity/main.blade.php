@@ -1,10 +1,12 @@
- <div>
-    <livewire:AuditActivity.Loader>
+ <div x-on:add-audit-activity-save-ok="$wire.refresh()">
+
+    <livewire:audit-activity.header :auditActivities="['no_poa' => $auditActivityNoPoa, 'poa' => $auditActivityPoa]">
+
     @push('script') @assets  @vite(['resources/js/hola.js']) @endassets @endpush
 
     <style>
         .table-grid-audit {
-            display: grid;
+            display: grid;1
             grid-template-columns: 1fr 5fr repeat(3, 1fr);
             grid-column-gap: 1vw;
             grid-row-gap: 4vh;
@@ -34,26 +36,26 @@
                     <div x-data="auditActivityMain" class="w-full">
 
                         <style>
-                            .table-alpine-grid-custom {
+                            .tableAlpineMain-header-grid-custom {
                                 width: 100%;
                                 display: grid;
                                 grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
                                 row-gap: 2rem
                             }
 
-                            .rows-alpine-grid-custom {
+                            .tableAlpineMain-rows-alpine-grid-custom {
                                 display: grid;
                                 grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
 
                                 /* height: 100px; */
                             }
 
-                            .cell-alpine-grid-custom {
+                            .tableAlpineMain-cell-alpine-grid-custom {
                                 width: 100%;
                                 text-align: center;
                             }
 
-                            .Descripción-description {
+                            .tableAlpineMain-Descripción-description {
                                 width: 100%;
                                 /* text-align: start; */
                                 text-align: justify!important;
@@ -61,7 +63,7 @@
 
                         </style>
 
-                        <x-table-alpine name="tableAlpineMain" :data="$auditActivities" customTable
+                        <x-table-alpine name="tableAlpineMain" :data="$auditActivities" customTable browser
                             :nameColumns="[
                                 'Código' => 'code',
                                 'Descripción' => 'description',

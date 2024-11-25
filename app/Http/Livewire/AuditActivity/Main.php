@@ -43,6 +43,12 @@ class Main extends Component
             ->get();
     }
 
+    public function refresh(): void
+    {
+        $this->mount();
+        $this->dispatch('refresh');
+    }
+
     public function render()
     {
         return view('livewire.audit-activity.main');

@@ -18,10 +18,7 @@ class AuditActivity extends Model
     use HasFactory;
     use SoftDeletes;
 
-
-    protected $table = 'audit_activity';
-
-    protected $fillable = [
+    const array properties = [
         'month_start',
         'month_end',
         'public_id',
@@ -45,7 +42,12 @@ class AuditActivity extends Model
         'type_audit_id',
         'area_id',
         'uai_id',
+        'departament_id',
     ];
+
+    protected $table = 'audit_activity';
+
+    protected $fillable = self::properties;
 
     protected $dates = [
         'planning_start',

@@ -2,6 +2,11 @@
 
 namespace App\Dto;
 
+use App\Models\Area;
+use App\Models\Departament;
+use App\Models\TypeAudit;
+use App\Models\Uai;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Wireable;
 
 final class AuditActivityNew implements Wireable
@@ -12,38 +17,53 @@ final class AuditActivityNew implements Wireable
         'objective',
         'month_start',
         'month_end',
-        'area_id',
-        'type_audit_id',
-        'uai_id',
-        'departament_id',
+        'area',
+        'type_audit',
+        'uai',
+        'departament',
     ];
 
-    public int $area_id;
-    public int $type_audit_id;
-    public int $uai_id;
-    public int $departament_id;
+    public null|string|array $area;
+    public array $type_audit;
+    public array $uai;
+    public array $departament;
 
     public function __construct (
-        public string $public_id,
+        public ?string $public_id,
         public string $description,
         public string $objective,
         public string $month_start,
         public string $month_end,
-        string $area_id,
-        string $type_audit_id,
-        string $uai_id,
-        string $departament_id,
+        null|string|array $area,
+        string|array $type_audit,
+        string|array $uai,
+        string|array $departament,
     )
     {
-        $this->area_id = $area_id;
-        $this->type_audit_id = $type_audit_id;
-        $this->uai_id = $uai_id;
-        $this->departament_id = $departament_id;
+        if(
+            is_array($area) || $area == '' &&
+            is_array($type_audit) &&
+            is_array($uai) &&
+            is_array($departament)
+        )
+        {
+            $this->init(
+            $area,
+            $type_audit,
+            $uai,
+            $departament);
+            return;
+        }
+
+        $this->type_audit = $this->getTypeAuditId($type_audit);
+        $this->area = isset($area) ? $this->getAreaId($area) : '';
+        $this->uai = $this->getUaiId($uai);
+        $this->departament = $this->getDepartamentId($departament);
     }
 
-    private function sort(): callable
+    public function toArray(): array
     {
-        return fn (array $result, string $property): array => $result[$property] = $this->{$property};
+        return get_object_vars($this);
     }
 
     public function toLivewire(): array
@@ -51,8 +71,64 @@ final class AuditActivityNew implements Wireable
         return array_reduce(self::properties, $this->sort(), []);
     }
 
-    public static function fromLivewire($value)
+    public static function fromLivewire($value): self
     {
-        return new static(...array_map(fn($property): array => $value[$property], self::properties));
+        $array = array();
+        foreach (self::properties as $property) $array[] = $value[$property];
+        return new static(...$array);
+    }
+
+    private function init(null|string|array $area, array $type_audit, array $uai, array $departament): void
+    {
+        $this->area = $area;
+        $this->type_audit = $type_audit;
+        $this->uai = $uai;
+        $this->departament = $departament;
+    }
+
+    private function sort(): callable
+    {
+        return function (array $carry, string $property) {
+            $carry[$property] = $this->{$property};
+            return $carry;
+        };
+    }
+
+    private function findOrCreate(string $model, string $filter, string $value): Model
+    {
+        return $model::where($filter, $value)->first() ?? $model::create([$filter => $value]);
+    }
+
+    private function getAreaId($name): array
+    {
+        $area = $this->findOrCreate(Area::class, 'name', $name);
+        return ['id' => $area->id, 'name' => $area->name];
+    }
+
+    private function getTypeAuditId($name): array
+    {
+        $typeAudit = $this->findOrCreate(TypeAudit::class, 'code', strtolower($name));
+        return ['id' => $typeAudit->id, 'name' => $typeAudit->name,];
+    }
+
+    private function getDepartamentId($name): array
+    {
+        $departament = $this->findOrCreate(Departament::class, 'name', strtolower($name));
+        return ['id' => $departament->id, 'name' => $departament->name,];
+    }
+
+    private function getUaiId($name): array
+    {
+        switch ($name) {
+            case 'CSA': $name = Uai::find(1); break;
+            case 'CAS': $name = Uai::find(4); break;
+            case 'CAG': $name = Uai::find(5); break;
+            case 'CAFYCN': $name = Uai::find(7); break;
+
+            default: break;
+        }
+
+        $uai = $this->findOrCreate(Uai::class, 'name', strtolower($name));
+        return ['id' => $uai->id, 'name' => $uai->name,];
     }
 }
