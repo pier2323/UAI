@@ -9,27 +9,33 @@ use App\Models\HandoverDocument;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Database\Eloquent\Collection;
+use App\Models\Employee;
 
 
 class ExcelController extends Controller
 {
+    
+    private array $auditors = [];
     public $auditActivity;
     public $employees = [];
 
     public $incoming = [];
 
     public $outgoing = [];
-
-    public function mount($id)
+    public $employee = [];
+ 
+    public function __construct(Request $request)
     {
-        $relations = ['employee', 'typeAudit', 'handoverDocument', 'uai'];
-        $this->auditActivity = AuditActivity::with($relations)->findOrFail($id);
-        $this->employees = \App\Models\Employee::all();
-        $this->incoming = \App\Models\EmployeeIncoming::all();
-        $this->outgoing = \App\Models\EmployeeOutgoing::all();
+        // Asegúrate de que el public_id esté presente en el request
+        $auditActivityId = $request->input('auditActivityId'); // Cambia esto al nombre correcto del input
+        if ($auditActivityId) {
+            $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
+                ->where('public_id', $auditActivityId)
+                ->first();
+
+        }
     }
-
-
 public function hallazasgo($request){
     $values = $request['checkboxes'];
     $texts = $request['uncheckedCheckboxes'];
@@ -50,22 +56,28 @@ public function hallazasgo($request){
 
 
     public function downloadExcel(Request $request)
-
-  
     {
-        $cedula_recibe = '16.525.105';
-        $cedula_saliente =  '17.286.980';
-        $unidad_entrega = 'Gerencia General  Mercado Masivos';
-        $unidad_adscrita = 'Gerente General de Proyecto Mayores';
-         $periodo_saliente_desde = '04/10/2017 ';
-         $periodo_saliente_hasta = ' 12/08/2024';
-         $nombre_saliente = 'Iván junior Gavranovic Sorman';
+        $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
+        $cargo_saliente = $this->auditActivity->handoverDocument->EmployeeOutgoing->job_title;
+        $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+        $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
+        $full_name_Incoming = "$employeeIncoming->first_name " . (isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '') . "$employeeIncoming->first_surname" . (isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
+      
+        $cedula_recibe  = preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->employeeIncoming->personal_id);
+        $code = $this->auditActivity->code;
+        $cedula_saliente =  preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,);
+        $unidad_entrega = $this->auditActivity->handoverDocument->departament;
+        $unidad_adscrita = $this->auditActivity->handoverDocument->departament_affiliation;
+        $periodo_saliente_desde = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->start));
+         $periodo_saliente_hasta= date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
+
+         $nombre_saliente = $full_name_Outgoing;
          $cedula_saliente = 'C.I.'.$cedula_saliente;
-         $auditor_a = 'Ivonne Rojas';
-         $auditor_b = 'Silvia Vargas O';
-         $nombre_recibe = 'Ernesto Antonio Sandoval Martínes';
+         $auditor_a =  $this->auditActivity->employee[0]->first_name . ' ' . $this->auditActivity->employee[0]->first_surname;
+         $auditor_b =  $this->auditActivity->employee[1]->first_name . ' ' . $this->auditActivity->employee[1]->first_surname;
+         $nombre_recibe =  $full_name_Incoming;
          $cedula_recibe = 'C.I.'.$cedula_recibe;
-         $cargo = 'Gerente General  de Proyecto Mayores';
+         $cargo =  $cargo_saliente ;
          
          $spreadsheet = IOFactory::load('cedulaTemplate.xlsm');
          $hoja1 = $spreadsheet->getSheetByName('ATRIBUTOS');
@@ -78,7 +90,7 @@ public function hallazasgo($request){
          $hoja2->setCellValue('K10', "$nombre_saliente");
          $hoja2->setCellValue('K11', "$cedula_saliente");
          $hoja2->setCellValue('P10', "$nombre_recibe");
-         $hoja2->setCellValue('P11', "$cedula_recibe");
+          $hoja2->setCellValue('P11', "$cedula_recibe");
          $hoja2->setCellValue('T11', "$periodo_saliente_desde");
          $hoja2->setCellValue('V11', "$periodo_saliente_hasta");
          $hoja2->setCellValue('B10', " $unidad_entrega");
@@ -240,19 +252,18 @@ public function hallazasgo($request){
          }
      }
 //Enviar el archivo Excel al navegador
-         $writer = new Xlsx($spreadsheet);
+       // Preparar el nombre del archivo para la descarga
+        $nombreArchivo = "cedula_{$code}_{$unidad_adscrita}.xls"; // Nombre del archivo que incluye el departamento
+
+        // Enviar el archivo Excel al navegador
+        $writer = new Xlsx($spreadsheet);
         
-
-         header('Content-Type: application/vnd.ms-excel');
-         header('Content-Disposition: attachment;filename="cedula.xls"');
-         header('Cache-Control: max-age=0');
-         
-         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-         $writer->save('php://output');
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=\"$nombreArchivo\"");
+        header('Cache-Control: max-age=0');
+        
+        // Guardar el archivo en la salida estándar
+        $writer->save('php://output');
+        exit; // Asegurarse de que no se envíe más contenido después del archivo
     }
-
-
-      
-    
-
 }

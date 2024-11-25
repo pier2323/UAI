@@ -1,3 +1,7 @@
+
+
+
+
 .modal {
     display: none;
     position: fixed;
@@ -282,3 +286,77 @@
         opacity: 0;
         transform: translateY(-20px);
     }
+    .modal-content {
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+   /* Contenedor de botones */
+.button-container {
+    display: flex; /* Usar flexbox para alinear los botones */
+    gap: 10px; /* Espacio entre botones */
+    margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilo general para todos los botones */
+.btn-modern {
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+/* Estilo para botones de éxito */
+.btn-success {
+    background-color: #28a745; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+/* Estilo para botones dinámicos */
+.dynamic-button {
+    background-color: #17a2b8; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+.dynamic-button:hover {
+    background-color: #138496; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+/* Estilo específico para el botón de Generar Excel */
+.btn-generate {
+    background-color: #ffc107; /* Color de fondo amarillo */
+    color: white; /* Color del texto */
+}
+
+.btn-generate:hover {
+    background-color: #e0a800; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+/* Estilo para botones de peligro */
+.btn-danger {
+    background-color: #dc3545; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+/* Estilo para botones deshabilitados */
+.btn[disabled], .btn:disabled {
+    background-color: #e0e0e0; /* Color de fondo */
+    color: #6c757d; /* Color del texto */
+    cursor: not-allowed; /* Cambiar cursor */
+}

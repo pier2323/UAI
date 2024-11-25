@@ -6,6 +6,29 @@ use App\Http\Controllers\Documentos;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ZimbraMailController;
+use App\Http\Controllers\CalendarController;
+
+use App\Http\Controllers\ReportController;
+
+// Otras rutas...
+
+
+
+use App\Http\Controllers\DownloadSinHallazgoController;
+use App\Http\Controllers\DocumentController;
+
+Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+Route::post('/documents/upload', [DocumentController::class, 'upload'])->name('documents.upload');
+Route::get('/document/{filename}', [DocumentController::class, 'show']);
+Route::get('/documentos', [DocumentController::class, 'index'])->name('documentos.index');
+Route::post('/documentos/upload', [DocumentController::class, 'upload'])->name('upload.documents');
+
+Route::post('/download-sin-hallazgo', [DownloadSinHallazgoController::class, 'download'])->name('download-sin-hallazgo');
+Route::post('/download-report', [ReportController::class, 'downloadReport'])
+    ->name('download-report')
+    ->middleware('auditActivity');
+
+Route::post('/calculate-date', [CalendarController::class, 'calculate'])->name('calculate.date');
 
 Route::get('/enviar-correo-zimbra', [ZimbraMailController::class, 'enviarCorreo']);
 
