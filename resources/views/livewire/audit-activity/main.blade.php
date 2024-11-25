@@ -1,10 +1,12 @@
- <div>
-    <livewire:AuditActivity.Loader>
+ <div x-on:add-audit-activity-save-ok="$wire.refresh()">
+
+    <livewire:audit-activity.header :auditActivities="['no_poa' => $auditActivityNoPoa, 'poa' => $auditActivityPoa]">
+
     @push('script') @assets  @vite(['resources/js/hola.js']) @endassets @endpush
 
     <style>
         .table-grid-audit {
-            display: grid;
+            display: grid;1
             grid-template-columns: 1fr 5fr repeat(3, 1fr);
             grid-column-gap: 1vw;
             grid-row-gap: 4vh;

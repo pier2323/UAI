@@ -1,8 +1,6 @@
 <div x-data>
     {{-- The best athlete wants his opponent at his best. --}}
 
-    <x-import name="resources/js/chart.js" />
-
     <form wire:submit="getData" class="m-5">
         <input class="bg-white" type="file" wire:model="archive" class="flex flex-col" />
         <x-secondary-button type="submit">Subir</x-secondary-button>

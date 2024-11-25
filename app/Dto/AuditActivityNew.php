@@ -96,7 +96,7 @@ final class AuditActivityNew implements Wireable
 
     private function findOrCreate(string $model, string $filter, string $value): Model
     {
-        return $model::where($filter, $value)->first() ?? $model::create(dd([$filter => $value]));
+        return $model::where($filter, $value)->first() ?? $model::create([$filter => $value]);
     }
 
     private function getAreaId($name): array
