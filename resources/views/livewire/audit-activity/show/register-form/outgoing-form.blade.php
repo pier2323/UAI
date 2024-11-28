@@ -9,20 +9,20 @@
             <x-input-text-handover property="outgoing.p00" title="P00" input="updateValue" :readonly="$modelsHandoverDocument">
                 <x-slot:prefix>
                     <div class="flex items-center h-10 p-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" >P00</div>
-                        
+
                     <p class="block p-2 font-extrabold">-</p>
                 </x-slot>
             </x-input-text-handover>
-            
+
             {{-- todo Personal ID --}}
             <x-input-text-handover property="outgoing.personal_id" title="Numero de Cedula" input="updateValue" limit="8" :readonly="$modelsHandoverDocument">
                 <x-slot:prefix>
                     <div class="flex items-center h-10 p-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" >V</div>
-                        
+
                     <p class="block p-2 font-extrabold">-</p>
                 </x-slot>
             </x-input-text-handover>
-            
+
         </div>
         <hr class="mb-4">
 
@@ -34,7 +34,7 @@
 
                 {{-- todo first_name --}}
                 <x-input-text-handover property="outgoing.first_name" title="Primer Nombre" :readonly="$modelsHandoverDocument"/>
-               
+
                 {{-- todo second_name --}}
                 <x-input-text-handover property="outgoing.second_name" title="Segundo Nombre" :readonly="$modelsHandoverDocument"/>
 
@@ -55,13 +55,13 @@
 
         {{-- todo emails --}}
         <div class="flex gap-4">
-            
+
             {{-- todo Gmail --}}
             <x-input-text-handover property="outgoing.gmail" title="Correo UAI gmail" custom/>
-            
+
             {{-- todo Email cantv --}}
             <x-input-text-handover property="outgoing.email_cantv" title="Correo Institucional" custom/>
-            
+
         </div>
 
         {{-- todo Phone & JobTitle --}}
@@ -69,16 +69,16 @@
 
 
             {{-- todo Phone --}}
-            @if (isset($modelsHandoverDocument)) 
+            @if (isset($modelsHandoverDocument))
                 <x-input-text-handover property="outgoing.phone" title="Telefono" :readonly="$modelsHandoverDocument"/>
             @else
                 <x-input-text-handover property="outgoing.phone_number" title="Telefono"  input="updateValue" limit="7">
 
                     <x-slot:prefix>
-                        <select 
-                            class="flex items-center h-10 pl-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" 
-                            name="phone_code" 
-                            id="phone_code" 
+                        <select
+                            class="flex items-center h-10 pl-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none"
+                            name="phone_code"
+                            id="phone_code"
                             wire:model='outgoing.phone_code'
                         >
                             <option selected style="display: none">0000</option>
@@ -88,24 +88,24 @@
                             <option value="0424">0424</option>
                             <option value="0426">0426</option>
                         </select>
-                            
+
                         <p class="block p-2 font-extrabold">-</p>
                     </x-slot>
-                    
+
                 </x-input-text-handover>
             @endif
 
             {{-- todo Job title --}}
             <x-input-text-handover property="outgoing.job_title" title="Cargo" :readonly="$modelsHandoverDocument" custom/>
-            
+
         </div>
 
         {{-- todo Address --}}
-        <div class="mt-2 mb-4">  
+        <div class="mt-2 mb-4">
             <x-label for="outgoing.address">{{\__("Dirección")}}</x-label>
             <textarea @readonly($modelsHandoverDocument)
-            id="outgoing.address" 
-            wire:model="outgoing.address" 
+            id="outgoing.address"
+            wire:model="outgoing.address"
             rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el la direccion del personal saliente..."></textarea>
             <x-input-error for="outgoing.address"/>
         </div>
@@ -113,7 +113,7 @@
     </div>
 
     @empty($modelsHandoverDocument)
-        
+
         {{-- todo All Erros --}}
         <div class="flex justify-center w-full mt-2">
             <x-button type='button' class="ml-1 bg-green-600" wire:click="verify('outgoing')">Verificar</x-button>
@@ -123,7 +123,7 @@
             <div class="px-4 py-3 mt-3 text-teal-900 bg-teal-100 border-t-4 border-teal-500 rounded-b shadow-md" role="alert">
                 <strong class="font-bold">Todo OK!</strong>
                 <br>
-                <span class="block sm:inline">Todos los campos del <strong>Personal Entrante</strong> han sido escritos correctamente.</span>
+                <span class="block sm:inline">Todos los campos del <strong>Personal Saliente</strong> han sido escritos correctamente.</span>
             </div>
         @endif
 
@@ -146,10 +146,10 @@
 </div>
 
 
-@push('script')  
+@push('script')
 @script
 <script>
-    
+
 Alpine.data('outgoing', () => {
     return {
         isOpened: false,
@@ -158,7 +158,7 @@ Alpine.data('outgoing', () => {
 
         // * functions
         transformedInput: (input) => input.replace(/\s/g, "").toUpperCase(),
-        
+
         toggleMark: (marked) => {
             return {
                 marked: !marked,

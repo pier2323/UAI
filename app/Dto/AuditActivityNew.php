@@ -21,6 +21,7 @@ final class AuditActivityNew implements Wireable
         'type_audit',
         'uai',
         'departament',
+        'year',
     ];
 
     public null|string|array $area;
@@ -38,6 +39,7 @@ final class AuditActivityNew implements Wireable
         string|array $type_audit,
         string|array $uai,
         string|array $departament,
+        public string $year,
     )
     {
         if(

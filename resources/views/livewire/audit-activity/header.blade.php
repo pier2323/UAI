@@ -12,7 +12,6 @@ new class extends Component
 
 <div >
     {{-- ? If you look to others for fulfillment, you will never truly be fulfilled. --}}
-    <livewire:AuditActivity.Loader>
 
     <div class="flex justify-between w-full px-52" role="graphs">
         <livewire:graphs.status-poa :$auditActivities>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\AuditActivity;
 
 use App\Models\AuditActivity;
+use App\Models\Year;
 use App\Services\MapperExcelService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
@@ -14,13 +15,15 @@ class Main extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
-    public string $query = '';
+    public Year $year;
 
     public Collection $auditActivityPoa;
     public Collection $auditActivityNoPoa;
 
-    public function mount(): void
+    public function mount(bool $refresh = false): void
     {
+        $this->year = Year::get();
+        // if ($refresh) dd($this->year);
         $this->auditActivityPoa = AuditActivity::with([
             'handoverDocument' => [
                 'employeeIncoming',
@@ -29,6 +32,7 @@ class Main extends Component
             'typeAudit',
             'uai',])
             ->where('is_poa', true)
+            ->where('year', $this->year->selected)
             ->orderBy('id', 'asc')
             ->get();
 
@@ -40,12 +44,13 @@ class Main extends Component
             'typeAudit',
             'uai',])
             ->where('is_poa', false)
+            ->where('year', $this->year->selected)
             ->get();
     }
 
     public function refresh(): void
     {
-        $this->mount();
+        $this->mount(true);
         $this->dispatch('refresh');
     }
 
