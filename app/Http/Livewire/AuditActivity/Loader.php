@@ -8,6 +8,7 @@ use App\Models\Year;
 use App\Services\MapperExcelService;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\Features\SupportEvents\Event;
 use Livewire\WithFileUploads;
 
 class Loader extends Component
@@ -31,14 +32,26 @@ class Loader extends Component
         return view('livewire.audit-activity.loader');
     }
 
-    public function save(): void
+    public function save(): Event
     {
-        foreach ($this->auditActivities as $auditActivity) {
-            $this->auditActivitiesNew[] = AuditActivity::create(self::format($auditActivity));
-        }
-
         Year::new();
-        $this->dispatch('saved-new-year');
+        foreach ($this->auditActivities as $auditActivity) 
+        $this->auditActivitiesNew[] = AuditActivity::create(self::format($auditActivity));
+        return $this->dispatch('saved-new-year');
+    }
+    
+    public function here()
+    {
+        
+        return $this->dispatch('saved-new-year');
+    }
+
+    #[\Livewire\Attributes\Js]
+    public function reload(): string
+    {
+        return <<<'JS'
+            location.reload();
+        JS;
     }
 
     public function cancel(): void
@@ -60,7 +73,8 @@ class Loader extends Component
                 type_audit: $new['type_audit'],
                 uai: $new['uai'],
                 departament: $new['departament'],
-                year: $this->getNewYear(),
+                year: $this->getYear(),
+                is_poa: true,
             );
         }
 
@@ -83,7 +97,7 @@ class Loader extends Component
         return $auditActivity->toArray();
     }
 
-    private function getNewYear(): int
+    private function getYear(): int
     {
         if(!isset($this->year))
         return $this->year = Year::newYear();

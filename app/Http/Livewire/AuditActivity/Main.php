@@ -15,7 +15,7 @@ class Main extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
-    public Year $year;
+    public ?Year $year;
 
     public Collection $auditActivityPoa;
     public Collection $auditActivityNoPoa;
@@ -32,7 +32,7 @@ class Main extends Component
             'typeAudit',
             'uai',])
             ->where('is_poa', true)
-            ->where('year', $this->year->selected)
+            ->where('year', $this->year?->selected)
             ->orderBy('id', 'asc')
             ->get();
 
@@ -44,7 +44,7 @@ class Main extends Component
             'typeAudit',
             'uai',])
             ->where('is_poa', false)
-            ->where('year', $this->year->selected)
+            ->where('year', $this->year?->selected)
             ->get();
     }
 
