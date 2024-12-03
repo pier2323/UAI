@@ -1,6 +1,6 @@
-<div x-data class="w-full">
-    {{-- The best athlete wants his opponent at his best. --}}
+<div x-data class="w-full" x-on:saved-new-year.window="$wire.reload()">
 
+    {{-- The best athlete wants his opponent at his best. --}}
     <form wire:submit="getData" x-data="{ loading: false }">
 
         {{-- progress-bar --}}

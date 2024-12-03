@@ -1,5 +1,11 @@
  <div x-on:add-audit-activity-save-ok.window="$wire.refresh()">
-    @php $active = $year->active !== 0; @endphp
+    @php 
+    if(isset($year)) 
+    $active = $year->active !== 0; 
+    
+    else 
+    $active = false;
+    @endphp
 
     @if ($active)
     <livewire:audit-activity.header :auditActivities="['no_poa' => $auditActivityNoPoa, 'poa' => $auditActivityPoa]">
@@ -19,7 +25,6 @@
 
     <x-section-basic>
     @if($active)
-
     @php
         $yearStatus = $year->active === $year->selected;
     @endphp
