@@ -1,14 +1,28 @@
-<div x-data>
+<div x-data class="w-full">
     {{-- The best athlete wants his opponent at his best. --}}
 
-    <form wire:submit="getData" class="m-5">
-        <input class="bg-white" type="file" wire:model="archive" class="flex flex-col" />
-        <x-secondary-button type="submit">Subir</x-secondary-button>
+    <form wire:submit="getData" x-data="{ loading: false }">
+
+        {{-- progress-bar --}}
+        <div x-show="loading" class="flex items-center justify-center w-full h-full">
+            <x-progress-bar name="loader-xlsx" target="archive" variable="loading"/>
+        </div>
+
+        {{-- content --}}
+        <div x-show="!loading"
+            x-on:livewire-upload-finish.window="loading = false"
+            x-on:livewire-upload-progress.window=""
+        >
+            <!-- File Input -->
+            <x-input-file-xlsx model="archive"/>
+
+            <!-- button submit -->
+            <x-secondary-button type="submit">Subir</x-secondary-button>
+        </div>
     </form>
 
-    <!-- if -->
-    @if ($isLoad)
-
+    {{-- modal --}}
+    @if($isLoad)
     <x-dialog-modal wire:model="isLoad" maxWidth="5xl" class="overflow-hidden">
         <x-slot name="title">
             <h3 class="text-2xl">Nueva Lista de Actuaciones | POA</h3>
@@ -65,6 +79,5 @@
 
         </x-slot>
     </x-dialog-modal>
-
     @endif
 </div>

@@ -19,6 +19,8 @@ class AuditActivity extends Model
     use SoftDeletes;
 
     const array properties = [
+        'year',
+        'is_poa',
         'month_start',
         'month_end',
         'public_id',

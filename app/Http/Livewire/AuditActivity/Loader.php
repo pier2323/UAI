@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AuditActivity;
 
 use App\Dto\AuditActivityNew;
 use App\Models\AuditActivity;
+use App\Models\Year;
 use App\Services\MapperExcelService;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -16,6 +17,8 @@ class Loader extends Component
     public AuditActivityNew $auditActivity;
     public array $auditActivities = array();
     public bool $isLoad = false;
+    public int $year;
+
     public $auditActivitiesNew = array();
 
     // #[Validate('max:1024')] // 1MB Max
@@ -34,7 +37,8 @@ class Loader extends Component
             $this->auditActivitiesNew[] = AuditActivity::create(self::format($auditActivity));
         }
 
-        dd($this->auditActivitiesNew);
+        Year::new();
+        $this->dispatch('saved-new-year');
     }
 
     public function cancel(): void
@@ -56,6 +60,7 @@ class Loader extends Component
                 type_audit: $new['type_audit'],
                 uai: $new['uai'],
                 departament: $new['departament'],
+                year: $this->getNewYear(),
             );
         }
 
@@ -76,6 +81,14 @@ class Loader extends Component
         $auditActivity->{$property . '_id'} = $auditActivity->{$property}['id'];
 
         return $auditActivity->toArray();
+    }
+
+    private function getNewYear(): int
+    {
+        if(!isset($this->year))
+        return $this->year = Year::newYear();
+
+        return $this->year;
     }
 
     private function spreadsheet(): object

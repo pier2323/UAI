@@ -1,4 +1,4 @@
-<div>
+<div role='add'>
     @assets @vite(['resources/js/hola.js']) @endassets
 
     @push('alert')
@@ -108,4 +108,4 @@
 
     @push('modals') <livewire:Component.HandoverBrowser> @endpush
 
-</div>
+</div></div>
