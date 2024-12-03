@@ -7,22 +7,30 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ZimbraMailController;
 use App\Http\Controllers\CalendarController;
-
 use App\Http\Controllers\ReportController;
-
-// Otras rutas...
-
-
-
 use App\Http\Controllers\DownloadSinHallazgoController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\TuControlador; // Asegúrate de usar el controlador correcto
+use App\Http\Controllers\UnionController; // Asegúrate de importar tu nuevo controlador
 
+// routes/web.php
+
+
+Route::get('/union', [UnionController::class, 'union'])->name('ruta.union');
+
+Route::get('/documento-ceco', [TuControlador::class, 'descargarCeco'])->name('documento.ceco');
+Route::get('/documento-no-ceco', [TuControlador::class, 'descargarNoCeco'])->name('documento.no.ceco');
+
+Route::post('/documents/check', [DocumentController::class, 'checkDocument'])->name('documents.check');
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
-Route::post('/documents/upload', [DocumentController::class, 'upload'])->name('documents.upload');
+Route::post('/documents/upload/', [DocumentController::class, 'upload'])->name('documents.upload');
 Route::get('/document/{filename}', [DocumentController::class, 'show']);
 Route::get('/documentos', [DocumentController::class, 'index'])->name('documentos.index');
 Route::post('/documentos/upload', [DocumentController::class, 'upload'])->name('upload.documents');
+Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+Route::post('/documents/save-text', [DocumentController::class, 'saveText'])->name('documents.save-text');
 
+Route::post('/generate-word', [DocumentController::class, 'generateWord']);
 Route::post('/download-sin-hallazgo', [DownloadSinHallazgoController::class, 'download'])->name('download-sin-hallazgo');
 Route::post('/download-report', [ReportController::class, 'downloadReport'])
     ->name('download-report')

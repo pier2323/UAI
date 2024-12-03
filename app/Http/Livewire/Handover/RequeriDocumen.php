@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Livewire\Handover;
-
+use App\Models\Designation;
 use App\Models\AuditActivity;
 use App\Services\WorkingPaper;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
+
 final class RequeriDocumen
 {
+    public $designation;
+
     private const NAME_TEMPLATE = 'requerimientoTemplate.docx';
     private const NAME_DOCUMENT = 'requerimiento.docx';
     public WorkingPaper $document;
@@ -55,13 +58,14 @@ final class RequeriDocumen
         
         $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
         $full_name_Incoming = "$employeeIncoming->first_name " . (isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '') . "$employeeIncoming->first_surname" . (isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
-  
+        $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
         $code = $this->auditActivity->code;
 
         $this->document->data = [
             'code' => $this->auditActivity->code,
             'codigo_desgisnacion' => "UAI\\GCP\\DES-COM $code",
-            'fecha_designacion' => date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'),
+            'fecha_designacion' =>$fechaDesignacion,
             'articulo' => 'Ciudadano', 
             'nombre_saliente' => $full_name_Outgoing,
             'cedula_saliente' => preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id),

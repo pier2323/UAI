@@ -7,9 +7,11 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use App\Models\AuditActivity;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Carbon\Carbon;
+use App\Models\Designation;
 
 class DownloadSinHallazgoController extends Controller
 {
+    public $Designation;
     private string $userMessage;
     private string $fechaVariable;
     private string $cadenaTexto;
@@ -38,6 +40,8 @@ class DownloadSinHallazgoController extends Controller
         $periodo_inicial = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->start));
         $periodo_cease = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
         $cargo_saliente = $this->auditActivity->handoverDocument->EmployeeOutgoing->job_title;
+        $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
 
         // Obtener nombres completos
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
@@ -65,7 +69,7 @@ class DownloadSinHallazgoController extends Controller
         $templateProcessor->setValue('fecha_subcripcion', $fecha_subcripcion);
         $templateProcessor->setValue('nu_acreditacion', "UAI\\GCP\\DES\\ACRE-COM {$this->auditActivity->code}");
         $templateProcessor->setValue('codigo_desgisnacion', "UAI\\GCP\\DES-COM {$this->auditActivity->code}");
-        $templateProcessor->setValue('fecha_designacion', date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'));
+        $templateProcessor->setValue('fecha_designacion',$fechaDesignacion);
           // Continuación del reemplazo de variables en la plantilla
      
   
@@ -137,12 +141,12 @@ $auditor_B = $this->auditActivity->employee[1]->first_name . ' ' . $this->auditA
         $templateProcessor->setValue('fecha_subcripcion', $fecha_subcripcion);
         $templateProcessor->setValue('nu_acreditacion', "UAI\\GCP\\DES\\ACRE-COM {$this->auditActivity->code}");
         $templateProcessor->setValue('codigo_desgisnacion', "UAI\\GCP\\DES-COM {$this->auditActivity->code}");
-        $templateProcessor->setValue('fecha_designacion', date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'));
+        $templateProcessor->setValue('fecha_designacion',$fechaDesignacion);
         $templateProcessor->setValue( 'cadena_texto_origenpoa', $this->cadenaTexto); // Usar la cadena de texto correspondiente
         $templateProcessor->setValue( 'fecha_variable', $this->fechaVariable); // Usar la cadena de texto correspondiente
 
         // Guardar el archivo modificado
-        $fileName = 'IA_Sin_OH_' . $this->auditActivity->code . '  ' . $this->auditActivity->handoverDocument->departament . '.docx';
+        $fileName = 'IA_Sin_OH_' . $this->auditActivity->code . ' - ' . $this->auditActivity->handoverDocument->departament. '.docx';
         $filePath = storage_path('app/public/' . $fileName);
         $templateProcessor->setValue('texto_base', $this->cadenaTexto); // Reemplazar el texto base en la plantilla
         $templateProcessor->saveAs($filePath);

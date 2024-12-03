@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Handover;
 
+use App\Http\Livewire\AuditActivity\Show\Designation as ShowDesignation;
+use App\Models\Designation;
 use App\Livewire\SaveData;
 use App\Models\AuditActivity;
 use App\Services\WorkingPaper;
@@ -17,7 +19,9 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 final class ProgramaDocumen
 {
-    
+    public $designation;
+
+
     use ModelPropertyMapper;
 
     private function countBusinessDays(Carbon $startDate, Carbon $endDate, array $holidays = []): int
@@ -49,6 +53,7 @@ final class ProgramaDocumen
      private string $userMessage;
     private string $fechaVariable;
     private string $cadenaTexto;
+
     
 
     public function __construct(
@@ -120,12 +125,17 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $this->setMapperProperities();
         $periodo_inicial = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->start));
         $periodo_cease = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
-        $Fecha_acreditacion = $this->auditActivity->designation[0]->date_release;
+      //  $Fecha_acreditacion = $this->auditActivity->designation[0]->date_release;
+      $Fecha_acreditacion =  $this->auditActivity->employee()->first()->pivot->acreditation_id_id;
+    
         // Extraer el año con datos estáticos 
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
         $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
         // Definición de variables comunes
-        $fechaDesignacion = date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'); // Cambiar a 'd/m/Y'
+
+        
+        $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
 
         $codigoDesignacion = "UAI\\GCP\\DES-COM $code";
         $nombreSaliente = $full_name_Outgoing;
@@ -234,6 +244,9 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $fecha_variable = $this->fechaVariable;
         $unidad_entregas = ucwords($this->auditActivity->handoverDocument->departament);
         $unidad_Adcritas = ucwords( $this->auditActivity->handoverDocument->departament_affiliation);
+    
+        $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
 
    
         //dd( $periodo_cease );
@@ -252,7 +265,7 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
             'nombre_saliente' =>   $full_name_Outgoing,
             'cedula_saliente' => preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,),
             'cargo_saliente' => $this->auditActivity->handoverDocument->job_title,
-            'Fecha_acreditacion' =>  date_format($this->auditActivity->designation[0]->date_release, 'd-m-Y'),
+            'Fecha_acreditacion' =>  $fechaDesignacion,
             'fecha_subcripcion' =>   $fecha_subcripcion,
             'nu_acreditacion' => "UAI\\GCP\\DES\\ACRE $code",
             'dia_planificacion' => $this->auditActivity->planning_days,

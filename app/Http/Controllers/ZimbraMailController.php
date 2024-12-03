@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AuditActivity;
 use App\Models\HandoverDocument;
+use App\Models\Designation;
 class ZimbraMailController extends Controller
 {
   public $auditActivity;
   public $employees = [];
 
+  public $designation;
   public $incoming = [];
 
   public $outgoing = [];
@@ -18,7 +20,7 @@ class ZimbraMailController extends Controller
         // Asegúrate de que el public_id esté presente en el request
         $auditActivityId = $request->input('auditActivityId'); // Cambia esto al nombre correcto del input
         if ($auditActivityId) {
-            $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
+            $this->auditActivity = AuditActivity::with([ 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
                 ->where('public_id', $auditActivityId)
                 ->first();
 
@@ -40,7 +42,8 @@ class ZimbraMailController extends Controller
       $cedula_saliente =  preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,);
       $unidad_entrega = $this->auditActivity->handoverDocument->departament;
       $unidad_adscrita = $this->auditActivity->handoverDocument->departament_affiliation;
-
+      $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+      $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
   
        $code = $this->auditActivity->code;
        $nombre_recibe =  $full_name_Incoming;
@@ -57,7 +60,7 @@ class ZimbraMailController extends Controller
             'fecha_subcripcion' => $fecha_subcripcion, 
             'fecha_requerimiento' =>  now()->format('d') . ' de ' . now()->translatedFormat('F') . ' de ' . now()->format('Y'),
             'fecha_cese' =>  $periodo_cease,
-            'fecha_designacion' => "UAI\\GCP\\DES-COM $code",
+            'fecha_designacion' =>  $fechaDesignacion,
             
         ];
         $espacio = str_repeat(' ', 4);
