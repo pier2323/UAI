@@ -2,7 +2,7 @@
 
     {{-- Stop trying to control. --}}
 
-    <x-secondary-button type="button" x-on:click="$wire.is_open = true">{{ $year->active }}</x-secondary-button>
+    <x-secondary-button type="button" x-on:click="$wire.is_open = true">{{ $year->selected }}</x-secondary-button>
 
     <form>
         <x-dialog-modal wire:model="is_open" maxWidth="2xl">
