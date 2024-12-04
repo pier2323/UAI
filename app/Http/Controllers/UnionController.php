@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\AuditActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class UnionController extends Controller
 {
@@ -37,40 +38,32 @@ class UnionController extends Controller
     
         // Buscar documentos que contengan "Tiene_ceco" sin importar mayúsculas y minúsculas
         $documentsTieneCeco = Document::where('audit_activity_id', $auditActivity->id)
-            ->whereRaw('LOWER(name) LIKE ?', ['%tiene_ceco%']) // Convertir a minúsculas para comparación
+            ->whereRaw('LOWER(name) LIKE ?', ['%tiene_ceco%'])
             ->get();
-    
-        // Función para extraer la carpeta y el nombre del archivo
-        $extractFileInfo = function($document) {
-            $pathInfo = pathinfo($document->path);
-            // Obtener solo la carpeta y el nombre del archivo
-            $folderName = $pathInfo['dirname']; // Carpeta completa
-            $fileName = $pathInfo['basename']; // Nombre del archivo completo
-    
-            // Combinar la carpeta y el nombre del archivo
-            $folderWithFile = str_replace('public/', '', $folderName) . '/' . $fileName;
-    
-            return [
-                'name' => $document->name,
-                'folder' => $folderWithFile, // Carpeta y nombre del archivo
-            ];
-        };
-    
+
         // Verificar si se encontraron documentos
-        if ($documentsIA->isNotEmpty() && $documentsTieneCeco->isNotEmpty()) {
-            return response()->json([
-                'message' => 'Se encontraron documentos diferentes: uno que contiene "IA-" y otro que contiene "tiene_ceco".',
-                'documents' => [
-                    'IA_documents' => $documentsIA->map($extractFileInfo),
-                    'Tiene_ceco_documents' => $documentsTieneCeco->map($extractFileInfo),
-                ],
-            ], 200);
-        } elseif ($documentsIA->isNotEmpty()) {
-            return response()->json(['message' => 'Se encontraron documentos que contienen "IA-", pero no se encontraron documentos que contengan "Tiene_ceco".'], 404);
-        } elseif ($documentsTieneCeco->isNotEmpty()) {
-            return response()->json(['message' => 'Se encontraron documentos que contienen "Tiene_ceco", pero no se encontraron documentos que contengan "IA-".'], 404);
-        } else {
-            return response()->json(['message' => 'No existe ningún documento que contenga "IA-" o "Tiene_ceco".'], 404);
+        if ($documentsIA->isEmpty() || $documentsTieneCeco->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron documentos suficientes para fusionar.'], 404);
         }
+
+        // Definir la ruta base
+        $basePath = 'C:\Users\pier\Desktop\UAI\public\storage\\';
+
+        // Cargar los documentos a fusionar
+        $templateProcessor1 = new TemplateProcessor($basePath . str_replace('public/', '', $documentsIA->first()->path)); // Construye la ruta para el primer documento
+        $templateProcessor2 = new TemplateProcessor($basePath . str_replace('public/', '', $documentsTieneCeco->first()->path)); // Construye la ruta para el segundo documento
+
+        // Combinar los documentos
+        $templateProcessor1->cloneBlock('todo', $templateProcessor2); // Asegúrate de que 'todo' sea un bloque definido en el documento 1
+
+        // Guardar el documento resultante
+        $outputPath = 'documento_final.docx'; // Ruta donde se guardará el documento final
+        $templateProcessor1->saveAs($outputPath);
+
+        // Retornar la respuesta con el archivo generado
+        return response()->json([
+            'message' => 'Documentos combinados exitosamente.',
+            'output_file' => url($outputPath), // Devuelve la URL del archivo generado
+        ], 200);
     }
 }
