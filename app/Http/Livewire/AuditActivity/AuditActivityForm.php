@@ -43,6 +43,7 @@ class AuditActivityForm extends Form
             'month_start' => $this->month_start,
             'month_end' => $this->month_end,
             'is_poa' => $this->is_poa,
+            'year' => \App\Models\Year::pluck('active')->first(),
             'area_id' => \App\Models\Area::where('name', $this->area)->first()->id,
             'type_audit_id' => \App\Models\TypeAudit::where('name', $this->type_audit)->first()->id,
             'uai_id' => \App\Models\Uai::where('name', $this->uai)->first()->id,

@@ -11,7 +11,9 @@ class Departament extends Model
 
     protected $table = 'departament';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+    ];
 
     public function employeeOutgoing(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

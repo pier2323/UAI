@@ -14,7 +14,7 @@ class Audit extends Model
     public function auditActivity(): \Illuminate\Database\Eloquent\Relations\belongsTo
     {
         return $this->belongsTo(
-            related: AuditActivity::class, 
+            related: AuditActivity::class,
             foreignKey: 'audit_activity_id'
         );
     }

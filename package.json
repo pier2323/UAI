@@ -8,6 +8,7 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.7",
         "@tailwindcss/typography": "^0.5.10",
+        "alpinejs-tash": "^1.1.1",
         "autoprefixer": "^10.4.16",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
@@ -18,6 +19,7 @@
     "dependencies": {
         "@material-icons/svg": "^1.0.33",
         "alpinejs": "^3.13.8",
+        "chart.js": "^4.4.6",
         "dayjs": "^1.11.11",
         "flatpickr": "^4.6.13",
         "moment": "^2.30.1"
