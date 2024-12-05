@@ -17,11 +17,10 @@ class CreateDocumentsTable extends Migration
             $table->id(); // Crea una columna 'id' como clave primaria
             $table->string('name'); // Nombre del documento
             $table->string('path'); // Ruta del documento
-            $table->unsignedBigInteger('audit_activity_id')->nullable()->after('id'); // Agregar la columna
-            $table->timestamps(); // Timestamps para created_at y updated_at
-
-            // Definir la clave foránea
+            $table->unsignedBigInteger('audit_activity_id'); // Agregar la columna
             $table->foreign('audit_activity_id')->references('id')->on('audit_activity')->onDelete('cascade');
+
+            $table->timestamps(); // Timestamps para created_at y updated_at
         });
     }
 

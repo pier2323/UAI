@@ -11,12 +11,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Employee;
+use App\Models\Designation;
 
 
 class ExcelController extends Controller
 {
     
     private array $auditors = [];
+  public $designation;
+
     public $auditActivity;
     public $employees = [];
 
@@ -30,7 +33,7 @@ class ExcelController extends Controller
         // Asegúrate de que el public_id esté presente en el request
         $auditActivityId = $request->input('auditActivityId'); // Cambia esto al nombre correcto del input
         if ($auditActivityId) {
-            $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
+            $this->auditActivity = AuditActivity::with([ 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
                 ->where('public_id', $auditActivityId)
                 ->first();
 
@@ -73,8 +76,40 @@ public function hallazasgo($request){
 
          $nombre_saliente = $full_name_Outgoing;
          $cedula_saliente = 'C.I.'.$cedula_saliente;
-         $auditor_a =  $this->auditActivity->employee[0]->first_name . ' ' . $this->auditActivity->employee[0]->first_surname;
-         $auditor_b =  $this->auditActivity->employee[1]->first_name . ' ' . $this->auditActivity->employee[1]->first_surname;
+         $coordinador = null;
+         $coordinador = null;
+         foreach ($this->auditActivity->employee as $employee) {
+             if ($employee->pivot->role === 'Coordinador') {
+                 $coordinador = $employee;
+                 break; // Salir del bucle una vez que se encuentra el coordinador
+             }
+         }
+     
+         // Verificar si se encontró un coordinador
+         if ($coordinador) {
+             $auditor_a = $coordinador->first_name . ' ' . $coordinador->first_surname;
+         } else {
+             // Manejar el caso en que no se encuentre un coordinador
+          
+         }
+     
+         // Filtrar el empleado con el rol de "Auditor"
+         $auditor = null;
+         foreach ($this->auditActivity->employee as $employee) {
+             if ($employee->pivot->role === 'Auditor') {
+                 $auditor = $employee;
+                 break; // Salir del bucle una vez que se encuentra el auditor
+             }
+         }
+     
+         // Verificar si se encontró un auditor
+         if ($auditor) {
+             $auditor_b = $auditor->first_name . ' ' . $auditor->first_surname;
+         } else {
+             // Manejar el caso en que no se encuentre un auditor
+            
+         }
+     
          $nombre_recibe =  $full_name_Incoming;
          $cedula_recibe = 'C.I.'.$cedula_recibe;
          $cargo =  $cargo_saliente ;
@@ -94,8 +129,8 @@ public function hallazasgo($request){
          $hoja2->setCellValue('T11', "$periodo_saliente_desde");
          $hoja2->setCellValue('V11', "$periodo_saliente_hasta");
          $hoja2->setCellValue('B10', " $unidad_entrega");
-         $hoja2->setCellValue('C23', "   $auditor_a");
-         $hoja2->setCellValue('O23', "$auditor_b");
+         $hoja2->setCellValue('O23', "   $auditor_a");
+         $hoja2->setCellValue('C23', "$auditor_b");
 
          // Establecer ancho de las columnas
          $hoja2->getColumnDimension('A')->setWidth(20);

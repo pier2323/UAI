@@ -8,10 +8,14 @@ use App\Traits\ModelPropertyMapper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Models\Designation;
 
 
 final class informeAuditor
 {
+    public $designation;
+    public $auditActivities;
+
     use ModelPropertyMapper;
 
     private function countBusinessDays(Carbon $startDate, Carbon $endDate, array $holidays = []): int
@@ -44,6 +48,7 @@ final class informeAuditor
     private string $userMessage;
     private string $fechaVariable;
     private string $cadenaTexto;
+
     private bool $sinHallazgoChecked = false; // Estado del checkbox "Sin Hallazgo"
     public function __construct(
         private readonly AuditActivity $auditActivity,
@@ -115,12 +120,13 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $this->setMapperProperities();
         $periodo_inicial = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->start));
         $periodo_cease = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
-        $Fecha_acreditacion = $this->auditActivity->designation[0]->date_release;
+       
         // Extraer el año con datos estáticos 
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
         $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
         // Definición de variables comunes
-        $fechaDesignacion = date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'); // Cambiar a 'd/m/Y'
+      $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
 
         $codigoDesignacion = "UAI\\GCP\\DES-COM $code";
         $nombreSaliente = $full_name_Outgoing;
@@ -137,7 +143,7 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
                 $this->userMessage = "La diferencia de días es mayor a 120 y es POA. Se descargará la plantilla POA mayor a 120 días.";
                 $this->fechaVariable = "De acuerdo con los requisitos establecidos en las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), se efectuó análisis al Acta de Entrega elaborada por {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, {cargo_saliente} (Saliente); así como, a los anexos correspondientes, determinándose las observaciones y hallazgos que se detallan a continuación: ";
 
-                $textoBase= "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de  designación {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
+                $textoBase= "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de  designación {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
 
             } else {
                   // Verdadero  menos 120 dias 
@@ -145,7 +151,7 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
                 $this->userMessage = "La diferencia de días es menor o igual a 120 y es POA. Se descargará la plantilla POA menor a 120 días.";
                 $this->fechaVariable = '';
 
-               $textoBase= "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023,, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de  designación {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
+               $textoBase= "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023,, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de  designación {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
             }
             
               //  false poa mayor a 120 dia 
@@ -154,14 +160,14 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
                 $templateFile = self::NAME_TEMPLATE;
                 $this->userMessage = "La diferencia de días es mayor a 120. Se descargará la plantilla principal.";
                 $this->fechaVariable = "De acuerdo con los requisitos establecidos en las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), se efectuó análisis al Acta de Entrega elaborada por {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, {cargo_saliente} (Saliente); así como, a los anexos correspondientes, determinándose las observaciones y hallazgos que se detallan a continuación: ";
-               $textoBase= "En el marco de lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación  {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V'{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
+               $textoBase= "En el marco de lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación  {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V'{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
                
                // false  menos 120 dias 
             } else {
                 $templateFile = self::NAME_TEMPLATE;
                 $this->userMessage = "La diferencia de días es menor o igual a 120. Se descargará la plantilla alternativa.";
                 $this->fechaVariable = '';
-                $textoBase = "En el marco de lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación  {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V'{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
+                $textoBase = "En el marco de lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación  {codigo_desgisnacion} de fecha el {fechaDesignacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro.39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V'{cedula_saliente}, durante el periodo de gestión {periofdo_saliente}.";
                 
             }
             
@@ -236,8 +242,9 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
         $full_name_Incoming = "$employeeIncoming->first_name " . (isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '') . "$employeeIncoming->first_surname" . (isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
         $fecha_variable = $this->fechaVariable;
+        $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
+        $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
        
-   
 
             $this->document->data = [
                 'code' => $this->auditActivity->code,
@@ -249,11 +256,11 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
                 'nombre_saliente' => $full_name_Outgoing,
                'cedula_saliente' => preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,),
                'cargo_saliente' => $cargo_saliente,
-                'Fecha_acreditacion' => $this->auditActivity->designation[0]->date_release,
+                'Fecha_acreditacion' => $fechaDesignacion,
                 'fecha_subcripcion' => $fecha_subcripcion,
                 'nu_acreditacion' => "UAI\\GCP\\DES\\ACRE-COM $code",
                 'codigo_desgisnacion' => "UAI\\GCP\\DES-COM $code",
-                'fecha_designacion' => date_format($this->auditActivity->designation[0]->date_release, 'd/m/Y'),
+                'fecha_designacion' =>  $fechaDesignacion,
                 'nombre_recibe' => $full_name_Incoming,
                 'cedula_recibe' => preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->employeeIncoming->personal_id),
                 'auditores_designados' => $this->getAuditorsString(),

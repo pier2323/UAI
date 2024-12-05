@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\models\Document;
 
 class AuditActivity extends Model
 {
@@ -68,6 +70,11 @@ class AuditActivity extends Model
 
     // todo relations
 
+
+    public function documents(): HasMany
+{
+    return $this->hasMany(Document::class, 'audit_activity_id');
+}
     public function typeAudit(): BelongsTo
     {
         return $this->belongsTo(related: TypeAudit::class);
@@ -95,8 +102,9 @@ class AuditActivity extends Model
 
     public function employee(): BelongsToMany
     {
-        return $this->belongsToMany(related: Employee::class)->withPivot('role', 'id');
+        return $this->belongsToMany(related: Employee::class)->withPivot('role', 'designation_id', 'acreditation_id','id');
     }
+    
 
     public function designation()
     {

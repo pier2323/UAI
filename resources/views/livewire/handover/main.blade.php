@@ -3,49 +3,89 @@
     @php
         $th = "colspan='1' rowspan=-'1' tabindex='0'";
         $td = 'px-4 py-2';
-        $headerTitle = ['Código ', 'Objetivo', 'Mes inicio', 'Mes fin', 'Area UAI Encargada',]
-    @endphp
+        $headerTitle = [ 'Código' => 'code',
+                                'Descripción' => 'description',
+                                'Mes inicio' => 'month_start',
+                                'Mes fin' => 'month_end',
+                                'Área UAI Encargada' => 'uai.name',]
 
+    @endphp
+  
     {{-- @dd(json_encode($designations)) --}}
 
-    <x-section-basic>
+    <style>
+        .table-alpine-grid-custom {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
+            row-gap: 2rem
+        }
 
-        <x-input class="ml-6" type="search" wire:model.live="query" placeholder='Buscar...' />
+        .rows-alpine-grid-custom {
+            display: grid;
+            grid-template-columns: 1fr 5fr 1fr 1fr 2fr;
 
-        <table>  
+            /* height: 100px; */
+        }
 
-            {{-- todo head --}}
-            <thead> 
-                @foreach ($headerTitle as $row)
-                    <th class="px-4 py-2 border-b border-b-slate-300" {{$th}}> {{ $row }} </th>
-                @endforeach
-            </thead>
+        .cell-alpine-grid-custom {
+            width: 100%;
+            text-align: center;
+        }
 
-            {{-- todo body --}}
-            <tbody>
-                @foreach ($designations as $designation)
+        .Descripción-description {
+            width: 100%;
+            /* text-align: start; */
+            text-align: justify!important;
+        }
 
-                <tr 
-                class="cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
-                wire:key="{{ $designation->auditActivity->id }}" 
-                wire:dblclick="goTo('handover.show', {{ $designation->auditActivity->public_id }})"
-                wire:loading.attr="disabled"
-                >
-                    <td class=" min-w-fit w-36 text-slate-600 {{ $td }}">{{ $designation->auditActivity->code }}</td> 
-                    <td class=" {{ $td }}">{{ $designation->auditActivity->description }}</td> 
-                    <td class=" {{ $td }}">{{ $designation->auditActivity->month_start }}</td> 
-                    <td class=" {{ $td }}">{{ $designation->auditActivity->month_end }}</td>
-                    <td class=" {{ $td }}">{{ $designation->auditActivity->uai->name ?? '' }}</td>
+    </style>
 
-                </tr>
+    <div x-data="handover">
 
-                @endforeach
-            </tbody>
+        <x-section-basic>
+
+            <x-table-alpine name="tableHandover" :data="$auditActivity" customTable
+            :nameColumns="[
+                'Código' => 'code',
+                'Descripción' => 'description',
+                'Mes inicio' => 'month_start',
+                'Mes fin' => 'month_end',
+                'Área UAI Encargada' => 'uai.name',
+            ]"
+            nameColumnId="public_id"
+            eventRow="x-on:dblclick"
+            x-on:dblclick="$wire.goTo(row.public_id)"
+        />
             
-        </table>
-        {{ $designations->links() }}
+        </x-section-basic>
 
-    </x-section-basic>
+    </div>
+
+
+    @script
+    <script>
+        Alpine.data('handover', () => {
+            return {
+                filtered(query, auditActivities, pages, currentPage) {
+                        if (typeof (query !== "" ? auditActivities : pages[currentPage]) !== 'undefined') {
+
+                            return (query !== "" ? auditActivities : pages[currentPage]).filter(
+                                auditActivity => {
+                                    console.log(auditActivity.description.includes(query))
+                                    return true
+                                    // auditActivity.code.includes(query)
+                                    // auditActivity.description.includes(query)
+                                    // || auditActivity.uai.name.includes(query)
+                                }
+                            );
+
+                        }
+                    },
+            }
+        })
+    </script>
+    @endscript
 
 </div>
 

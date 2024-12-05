@@ -76,10 +76,10 @@ class Show extends Component
 
     return isset($this->feriados[$year]) && in_array($formattedDate, $this->feriados[$year]);
 }
-public function mount(int $auditActivity)
+public function mount(int $public_id): void
 {
-    $this->auditActivity = AuditActivity::with(['designation', 'acreditation', 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
-        ->where('public_id', $auditActivity)
+    $this->auditActivity = AuditActivity::with([ 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
+        ->where('public_id', $public_id)
         ->first();
 
         $fechaInicio = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
@@ -138,8 +138,8 @@ private function calculateDiasRestantes()
     }
     public function programaDocumen(): BinaryFileResponse     
     {
-        $requerInformeDocument = new  programaDocumen($this->auditActivity);
-        return  $requerInformeDocument->download();
+        $requerprogramaDocument = new  programaDocumen($this->auditActivity);
+        return  $requerprogramaDocument->download();
     }
 
    
