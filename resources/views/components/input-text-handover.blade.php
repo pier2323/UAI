@@ -25,7 +25,7 @@
             x-model="$wire.{{ $property }}"
             wire:model="{{ $property }}"
             {{ $attributes['x-on:input'] }}
-            @readonly(isset($readonly))
+            @readonly(isset($readonly) or auth()->user()->cannot('handoverDocument.register'))
         >
 
         @else
@@ -35,7 +35,7 @@
                 placeholder="{{ $placeholder }}"
                 wire:model="{{ $property }}"
                 name="{{ $property }}"
-                @if ($custom) {{$attributes['x-on:input']}} @endif 
+                @if ($custom) {{$attributes['x-on:input']}} @endif
             >
                 {{$options}}
             </select>

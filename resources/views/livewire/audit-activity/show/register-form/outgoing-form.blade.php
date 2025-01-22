@@ -69,8 +69,9 @@
 
 
             {{-- todo Phone --}}
-            @if (isset($modelsHandoverDocument))
+            @if (isset($modelsHandoverDocument) or auth()->user()->cannot('handoverDocument.register'))
                 <x-input-text-handover property="outgoing.phone" title="Telefono" :readonly="$modelsHandoverDocument"/>
+                
             @else
                 <x-input-text-handover property="outgoing.phone_number" title="Telefono"  input="updateValue" limit="7">
 
@@ -103,7 +104,7 @@
         {{-- todo Address --}}
         <div class="mt-2 mb-4">
             <x-label for="outgoing.address">{{\__("Dirección")}}</x-label>
-            <textarea @readonly($modelsHandoverDocument)
+            <textarea @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
             id="outgoing.address"
             wire:model="outgoing.address"
             rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el la direccion del personal saliente..."></textarea>
@@ -111,8 +112,7 @@
         </div>
 
     </div>
-
-    @empty($modelsHandoverDocument)
+    @if(empty($modelsHandoverDocument) and auth()->user()->can('handoverDocument.register'))
 
         {{-- todo All Erros --}}
         <div class="flex justify-center w-full mt-2">
@@ -141,7 +141,7 @@
             </div>
         @endif
 
-    @endempty
+    @endif
 
 </div>
 

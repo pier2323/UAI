@@ -14,32 +14,32 @@
 
                 @php
                     $routes = [
-                        'dashboard.index' => 'Inicio',
-                        'employee.index' => 'Personal',
-                        'handoverDocument.register' => 'Registro del Acta de entrega',
-                        'auditActivity.index' => 'Plan Operativo Anual',
-                        'handover.index' => 'Acta de Entrega',
+                        'dashboard.index' => ['name' => 'Inicio', 'hasPermission' => false],
+                        'employee.index' => ['name' => 'Personal', 'hasPermission' => false],
+                        'handoverDocument.register' => ['name' => 'Registro del Acta de entrega', 'hasPermission' => true],
+                        'auditActivity.index' => ['name' => 'Plan Operativo Anual', 'hasPermission' => false],
+                        'handover.index' => ['name' => 'Acta de Entrega', 'hasPermission' => false],
                     ];
                 @endphp
 
-                @foreach ($routes as $router => $name)
-
-                @php
-                    $route = route("$router");
-                    $routeIs = request()->routeIs("$router*");
-                @endphp           
-
-                    <!-- Route {{$route}} -->
-                    <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex ">
-                        <x-nav-link 
-                            href="{{ $route }}" 
-                            :active="$routeIs" 
-                            style="color: white;"
-                            wire:navigate 
+                @foreach ($routes as $router => $value)
+                    @php
+                        $route = route("$router");
+                        $routeIs = request()->routeIs("$router*");
+                    @endphp
+                    @can($value['hasPermission'] ? $router : null)
+                        <!-- Route {{$route}} -->
+                        <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                            <x-nav-link 
+                                href="{{ $route }}" 
+                                :active="$routeIs" 
+                                style="color: white;"
+                                wire:navigate 
                             >
-                                <h1>{{ $name }}</h1>
-                        </x-nav-link>
-                    </div>
+                                <span>{{ $value['name'] }}</span>
+                            </x-nav-link>
+                        </div>
+                    @endcan
                 @endforeach
                 
             </div>

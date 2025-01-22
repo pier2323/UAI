@@ -12,17 +12,26 @@ use Livewire\WithPagination;
 
 /**
  *  todo Este componente de Livewire gestiona la visualización y la interacción con los datos de Actuaciones fiscales para un año específico dentro de la aplicación. Permite a los usuarios filtrar y visualizar las Actuaciones Fiscales en función de si están asociadas a un Plan Operativo Anal (POA) o no.
- * @param ?Year $year // ? el modelo que contiene los datos del año fiscal 
- * @param Collection $auditActivityPoa // ? Coleccion Eloquent que tiene los datos del Model AuditActivity filtrados por su columna 'is_poa' con valor true 
- * @param Collection $auditActivityNoPoa // ? Coleccion Eloquent que tiene los datos del Model AuditActivity filtrados por su columna 'is_poa' con valor false 
  */
 class Main extends Component
 {
     use WithPagination, WithoutUrlPagination;
-
+    /**
+     * ? el modelo que contiene los datos del año fiscal 
+     * @var ?Year $year 
+     */
     public ?Year $year;
-
+    
+    /**
+     * ? Coleccion Eloquent que tiene los datos del Model AuditActivity filtrados por su columna 'is_poa' con valor true 
+     * @var Collection $auditActivityPoa 
+     */
     public Collection $auditActivityPoa;
+
+    /**
+     * ? Coleccion Eloquent que tiene los datos del Model AuditActivity filtrados por su columna 'is_poa' con valor false 
+     * @var Collection $auditActivityNoPoa 
+     */
     public Collection $auditActivityNoPoa;
 
     /**
@@ -72,7 +81,7 @@ class Main extends Component
     }
 
     /**
-     * todo redicciona al ruta auditActivity.show/{public_id} 
+     * todo redicciona a la ruta auditActivity.show/{public_id} 
      * @param integer $id // ?el public_id de la Actuación fiscal seleccionada
      * @return void
      */

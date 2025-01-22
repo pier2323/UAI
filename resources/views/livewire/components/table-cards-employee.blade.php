@@ -1,11 +1,9 @@
 <div class="">
-    {{-- @dump($errors)
-    <p x-text="typeof $wire.errors[0]"></p> --}}
     {{-- ? A good traveler has no fixed plans and is not intent upon arriving. --}}
 
-    <div
-    :class="typeof $wire.errors[0] !== 'undefined' ? 'border-red-400' : ''"
-    class="flex flex-col flex-grow h-full px-3 pt-3 pb-5 align-middle rounded-sd border-2 shadow w-fit">
+    <div :class="typeof $wire.errors[0] !== 'undefined' ? 'border-red-400' : ''"
+    class="flex flex-col flex-grow h-full px-3 pt-3 pb-5 align-middle border-2 shadow rounded-sd w-fit"
+    >
         <h1 class="text-3xl font-bold dark:text-white">Comisión<small class="font-semibold text-gray-500 ms-2 dark:text-gray-400">de la Acta de Entrega</small></h1>
 
         <hr class="mb-4">
@@ -58,18 +56,22 @@
 
                 </template>
 
-                {{-- todo card Add --}}
-                @push('modals') <livewire:employee.browser /> @endpush
+                @can('auditActivity.show.designationAcreditation')
+                    {{-- todo card Add --}}
+                    @push('modals') <livewire:employee.browser /> @endpush
+                @endcan
 
-                {{-- todo button add card --}}
-                <div x-show='isSelecting()' class="w-1/2 bg-gray-200 border border-gray-200 rounded-full shadow justify-self-center h-1/2 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 active:bg-green-100"
-                x-on:click="clickAddCardButton()"
-                x-on:add-card.window="resolve($wire.addCard($event.detail.id)); ">
-                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                    <svg class="w-full h-full" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 12H20M12 4V20" stroke="#ccc" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
+                @can('auditActivity.show.designationAcreditation')
+                    {{-- todo button add card --}}
+                    <div x-show='isSelecting()' class="w-1/2 bg-gray-200 border border-gray-200 rounded-full shadow justify-self-center h-1/2 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 active:bg-green-100"
+                    x-on:click="clickAddCardButton()"
+                    x-on:add-card.window="resolve($wire.addCard($event.detail.id)); ">
+                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                        <svg class="w-full h-full" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12H20M12 4V20" stroke="#ccc" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                @endcan
 
             </div>
         </div>

@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             $user->email = $employee->email_cantv;
             $user->password = $password;
             $user->employee_id = $employee->id;
+            $user->assignRole($employee->role);
             $user->save();
         }
     }

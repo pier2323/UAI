@@ -70,8 +70,9 @@
 
             {{-- todo Phone --}}
 
-            @if (isset($modelsHandoverDocument))
+            @if (isset($modelsHandoverDocument) or auth()->user()->cannot('handoverDocument.register'))
                 <x-input-text-handover property="incoming.phone" title="Telefono" :readonly="$modelsHandoverDocument" />
+                
             @else
                 <x-input-text-handover property="incoming.phone_number" title="Telefono" input="updateValue" limit="7">
 
@@ -103,7 +104,7 @@
 
     </div>
 
-    @empty($modelsHandoverDocument)
+    @if(empty($modelsHandoverDocument) and auth()->user()->can('handoverDocument.register'))
         
         {{-- todo All Erros --}}
         <div class="flex justify-center w-full mt-2">
@@ -132,12 +133,10 @@
             </div>
         @endif
 
-    @endempty
+    @endif
 
 </div>
 
-
-@push('script')  
 @script
 <script>
     
@@ -167,4 +166,3 @@ Alpine.data('incoming', () => {
 
 </script>
 @endscript
-@endpush

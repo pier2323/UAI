@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('profile_photo')->nullable();
             $table->integer('p00')->unique();
             $table->integer('personal_id')->unique();
-
+            $table->string('role');
+            
             $table->unsignedBigInteger('job_title_id');
             $table->foreign('job_title_id')->references('id')->on('job_title');
 

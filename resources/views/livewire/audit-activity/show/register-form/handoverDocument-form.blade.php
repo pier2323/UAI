@@ -32,14 +32,27 @@
             {{-- todo Departament --}}
             <div class="mt-2">  
                 <x-label for="handoverDocument.departament">{{\__("Unidad que Entrega")}}</x-label>
-                <textarea id="handoverDocument.departament" wire:model="handoverDocument.departament" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el nombre completo de la Unidad que Entrega..." @readonly($modelsHandoverDocument)></textarea>
+                <textarea id="handoverDocument.departament" wire:model="handoverDocument.departament" rows="2" 
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                @cannot('handoverDocument.register') 
+                    bg-slate-200 
+                @endcannot
+                " placeholder="Escribe aqui el nombre completo de la Unidad que Entrega..." @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))></textarea>
                 <x-input-error for="handoverDocument.departament" />
             </div>
 
             {{-- todo Departament Affiliation --}}
             <div class="mt-2">  
                 <x-label for="handoverDocument.departament_affiliation">{{\__("Unidad de adscripcion")}}</x-label>
-                <textarea id="handoverDocument.departament_affiliation" wire:model="handoverDocument.departament_affiliation" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Escribe aqui el nombre completo de la Unidad de Adscripcion" @readonly($modelsHandoverDocument)></textarea>
+                <textarea id="handoverDocument.departament_affiliation" rows="2" 
+                wire:model="handoverDocument.departament_affiliation" 
+                placeholder="Escribe aqui el nombre completo de la Unidad de Adscripcion" 
+                @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
+                @cannot('handoverDocument.register') 
+                    bg-slate-200
+                @endcannot
+                "></textarea>
                 <x-input-error for="handoverDocument.departament_affiliation" />
             </div>
 
@@ -78,9 +91,11 @@
                         },
                     }
 
+                    @can('handoverDocument.register')
                     for (const property of this.properties) {
                         flatpickr(`#${property}`, config);
                     }
+                    @endcan
                 },
             }
         })

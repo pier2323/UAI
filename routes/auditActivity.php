@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Middleware\HasPermission;
 use Illuminate\Support\Facades\Route;
 
 Route::get(
@@ -14,4 +16,6 @@ Route::get(
 Route::get(
     uri: '/acta-de-entrega/registro', 
     action: App\Http\Livewire\Handover\Register::class
-)->name('handoverDocument.register');
+)
+->middleware(HasPermission::class)
+->name('handoverDocument.register');

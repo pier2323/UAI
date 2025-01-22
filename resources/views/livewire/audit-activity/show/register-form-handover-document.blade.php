@@ -1,13 +1,22 @@
  <div @isset($auditActivity) x-on:saved.window="await $wire.$parent.load()" @endisset>
     
-    <form wire:submit='save'>
+    <form 
+        @can('handoverDocument.register')
+            wire:submit='save'
+        @endcan
+    >
         <x-section-basic>
             <div class="mb-3">
                 <div class="flex ">
                     <h3 class="text-3xl font-semibold">{{ \__("Acta de Entrega") }}</h3>
                     <h3 class="mx-2 text-3xl font-semibold"> {{ \__("-") }} </h3>
-                    @empty($modelsHandoverDocument) <h3 class="text-3xl font-semibold">{{ \__("Registro") }}</h3> @endempty
-                    @isset($modelsHandoverDocument) <h3 class="text-3xl font-semibold">{{ \__("Información") }}</h3> @endisset
+                    @if(empty($modelsHandoverDocument) and auth()->user()->can('handoverDocument.register'))
+                        <h3 class="text-3xl font-semibold">{{ \__("Registro") }}</h3> 
+
+                    @else
+                        <h3 class="text-3xl font-semibold">{{ \__("Información") }}</h3>
+
+                    @endif
                 </div>
                 <hr class="mt-2">
             </div>
@@ -32,7 +41,9 @@
             </div>
             @empty($modelsHandoverDocument)
             <x-slot:footer>
-                <x-button class="ml-4" type="submit">{{ \__("Guardar") }}</x-button>
+                @can('handoverDocument.register')
+                    <x-button class="ml-4" type="submit">{{ \__("Guardar") }}</x-button>
+                @endcan
             </x-slot>
             @endempty
         </x-section-basic>
