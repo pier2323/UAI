@@ -20,7 +20,7 @@ class DescargaMemoController extends Controller
         }
 
         // Define la ruta del archivo DOCX
-        $filePath = 'templateDocument/hola.docx'; // Asegúrate de que la ruta sea correcta
+        $filePath = 'templateDocument/memo.docx'; // Asegúrate de que la ruta sea correcta
 
         // Verifica si el archivo DOCX existe
         if (!Storage::exists($filePath)) {
@@ -117,7 +117,7 @@ class DescargaMemoController extends Controller
                $templateProcessor->saveAs($tempFilePath);
        
                // Devuelve el archivo modificado como respuesta de descarga
-               return response()->download($tempFilePath, 'hola_modificado.docx')->deleteFileAfterSend(true);
+               return response()->download($tempFilePath, 'memo_ISEG.docx')->deleteFileAfterSend(true);
            }
         
            // Función para obtener el nombre del mes en español
