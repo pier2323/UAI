@@ -94,7 +94,7 @@ class DownloadSinHallazgoController extends Controller
                   $textoBase = "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación {codigo_desgisnacion} de fecha el {fecha_designacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periodo_saliente}.";
               } else {
                 $this->userMessage = "La diferencia de días es menor o igual a 120 y es POA. Se descargará la plantilla POA menor a 120 días.";
-                $this->fechaVariable = 'hola';
+                $this->fechaVariable = '';
                 $textoBase = "En el marco de la formulación del Plan Operativo Anual 2024, aprobado por la Superintendencia Nacional de Auditoría Interna (SUNAI), mediante Oficio SUNAI-23-DS-936 de fecha 5/12/2023, de acuerdo a lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación {codigo_desgisnacion} de fecha el {fecha_designacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periodo_saliente}.";
             }
         } else {
@@ -105,7 +105,7 @@ class DownloadSinHallazgoController extends Controller
          
             } else {
                 $this->userMessage = "La diferencia de días es menor o igual a 120. Se descargará la plantilla alternativa.";
-                $this->fechaVariable = 'como';
+                $this->fechaVariable = '';
                 $textoBase = "En el marco de lo establecido en el artículo 41 de la Ley Orgánica de la Contraloría General de la República y del Sistema Nacional de Control Fiscal, publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 6013 Extraordinario de fecha 23 de diciembre de 2010, y de conformidad con las instrucciones contenidas en memorando de designación {codigo_desgisnacion} de fecha el {fecha_designacion}, en concordancia con el artículo 23 de las Normas para Regular la Entrega de los Órganos y Entidades de la Administración Pública y de sus Respectivas Oficinas o Dependencias (NREOEAPROD), publicada en la Gaceta Oficial de la República Bolivariana de Venezuela Nro. 39.229 de fecha 28/07/2009, se procedió a verificar la sinceridad y exactitud del contenido del Acta de Entrega de la {unidad_entrega}, correspondiente a la Servidora Pública Saliente ciudadana {nombre_saliente}, titular de la cédula de identidad V-{cedula_saliente}, durante el periodo de gestión {periodo_saliente}.";
             }
         }
@@ -159,35 +159,33 @@ $auditor_B = $this->auditActivity->employee[1]->first_name . ' ' . $this->auditA
     {
         $holidays = [
             // Días festivos de 2024
-            '2024-01-01', // Año Nuevo
-            '2024-02-12', // Carnaval
-            '2024-02-13', // Carnaval
-            '2024-03-28', // Jueves Santo
-            '2024-03-29', // Viernes Santo
-            '2024-04-19', // Declaración de Independencia
-            '2024-05-01', // Día del Trabajador
-            '2024-06-24', // Día de la Batalla de Carabobo
-            '2024-07-05', // Día de la Independencia
-            '2024-07-24', // Natalicio de Simón Bolívar
-            '2024-07-28', // Telecomunicador
-            '2024-12-24', // Navidad
-            '2024-12-25', // Navidad
-            '2024-12-31', // Fin de Año
+            '2024-01-01', '2024-02-12', '2024-02-13', '2024-03-28', '2024-03-29', 
+            '2024-04-19', '2024-05-01', '2024-06-24', '2024-07-05', '2024-07-24', 
+            '2024-07-28', '2024-12-24', '2024-12-25', '2024-12-31',
             // Días festivos de 2025
-            '2025-01-01', // Año Nuevo
-            '2025-03-03', // Lunes Carnaval
-            '2025-03-04', // Martes Carnaval
-            '2025-04-17', // Jueves Santo
-            '2025-04-18', // Viernes Santo
-            '2025-04-19', // Declaración de Independencia
-            '2025-05-01', // Día del Trabajador
-            '2025-06-24', // Día de la Batalla de Carabobo
-            '2025-07-05', // Día de la Independencia
-            '2025-07-24', // Natalicio de Simón Bolívar
-            '2025-07-28', // Telecomunicador
-            '2025-12-24', // Navidad
-            '2025-12-25', // Navidad
-            '2025-12-31', // Fin de Año
+            '2025-01-01', '2025-03-03', '2025-03-04', '2025-04-17', '2025-04-18', 
+            '2025-04-19', '2025-05-01', '2025-06-24', '2025-07-05', '2025-07-24', 
+            '2025-07-28', '2025-12-24', '2025-12-25', '2025-12-31',
+            // Días festivos de 2026
+            '2026-01-01', '2026-02-16', '2026-02-17', '2026-04-02', '2026-04-03', 
+            '2026-04-19', '2026-05-01', '2026-06-24', '2026-07-05', '2026-07-24', 
+            '2026-07-28', '2026-12-24', '2026-12-25', '2026-12-31',
+            // Días festivos de 2027
+            '2027-01-01', '2027-02-08', '2027-02-09', '2027-03-25', '2027-03-26', 
+            '2027-04-19', '2027-05-01', '2027-06-24', '2027-07-05', '2027-07-24', 
+            '2027-07-28', '2027-12-24', '2027-12-25', '2027-12-31',
+            // Días festivos de 2028
+            '2028-01-01', '2028-02-28', '2028-02-29', '2028-04-13', '2028-04-14', 
+            '2028-04-19', '2028-05-01', '2028-06-24', '2028-07-05', '2028-07-24', 
+            '2028-07-28', '2028-12-24', '2028-12-25', '2028-12-31',
+            // Días festivos de 2029
+            '2029-01-01', '2029-02-12', '2029-02-13', '2029-03-29', '2029-03-30', 
+            '2029-04-19', '2029-05-01', '2029-06-24', '2029-07-05', '2029-07-24', 
+            '2029-07-28', '2029-12-24', '2029-12-25', '2029-12-31',
+            // Días festivos de 2030
+            '2030-01-01', '2030-03-04', '2030-03-05', '2030-04-18', '2030-04-19', 
+            '2030-04-19', '2030-05-01', '2030-06-24', '2030-07-05', '2030-07-24', 
+            '2030-07-28', '2030-12-24', '2030-12-25', '2030-12-31',
         ];
 
         $currentDate = $startDate->copy();

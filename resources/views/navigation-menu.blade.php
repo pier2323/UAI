@@ -19,11 +19,11 @@
                         'handoverDocument.register' => 'Registro del Acta de entrega',
                         'auditActivity.index' => 'Plan Operativo Anual',
                         'handover.index' => 'Acta de Entrega',
+                        'memo_ofico.index' => 'Memo y Oficio',
                     ];
                 @endphp
 
                 @foreach ($routes as $router => $name)
-
                 @php
                     $route = route("$router");
                     $routeIs = request()->routeIs("$router*");

@@ -1,12 +1,6 @@
 <div class="document-viewer">
     <h1 class="text-center">Documentos Subidos</h1>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
     @if($files->isEmpty())
         <p class="text-center">No hay documentos subidos para esta actividad.</p>
     @else
@@ -52,7 +46,6 @@
             </tbody>
         </table>
   
-        
         <div class="text-center mt-3">
             <hr>
             <div class="d-flex justify-content-center">
@@ -66,56 +59,55 @@
         <!-- Mensaje de descarga -->
         <div id="download-message" class="message" style="display: none;"></div>
 
-
         <script>
-         function showMessage(message) {
-        const messageContainer = document.getElementById('download-message');
-        messageContainer.textContent = message;
-        messageContainer.style.display = 'block';
-        messageContainer.classList.add('fade-in');
+            function showMessage(message) {
+                const messageContainer = document.getElementById('download-message');
+                messageContainer.textContent = message;
+                messageContainer.style.display = 'block';
+                messageContainer.classList.add('fade-in');
 
-        // Ocultar el mensaje después de 6 segundos
-        setTimeout(() => {
-            messageContainer.classList.remove('fade-in');
-            messageContainer.classList.add('fade-out');
-            // Esperar a que termine la animación antes de ocultar el mensaje completamente
-            setTimeout(() => {
-                messageContainer.style.display = 'none';
-                messageContainer.classList.remove('fade-out');
-            }, 500); // Tiempo de la animación
-        }, 6000); // Tiempo de espera antes de comenzar la animación de salida
-    }
+                // Ocultar el mensaje después de 6 segundos
+                setTimeout(() => {
+                    messageContainer.classList.remove('fade-in');
+                    messageContainer.classList.add('fade-out');
+                                       // Esperar a que termine la animación antes de ocultar el mensaje completamente
+                                       setTimeout(() => {
+                        messageContainer.style.display = 'none';
+                        messageContainer.classList.remove('fade-out');
+                    }, 500); // Tiempo de la animación
+                }, 6000); // Tiempo de espera antes de comenzar la animación de salida
+            }
 
-    // Agregar evento para mostrar mensaje de eliminación exitosa
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteForms = document.querySelectorAll('form[action*="documents.destroy"]');
-        deleteForms.forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(form);
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showMessage('Documento eliminado');
-                    } else {
-                        showMessage('Error al eliminar el documento');
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    showMessage('Error al eliminar el documento');
+            // Agregar evento para mostrar mensaje de eliminación exitosa
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteForms = document.querySelectorAll('form[action*="documents.destroy"]');
+                deleteForms.forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        const formData = new FormData(form);
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                showMessage('Documento eliminado');
+                            } else {
+                                showMessage('Error al eliminar el documento');
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            showMessage('Error al eliminar el documento');
+                        });
+                    });
                 });
             });
-        });
-    });
         </script>
 
         <style>
-             .message {
+            .message {
                 position: fixed; /* Fijo en la pantalla */
                 left: 20px; /* A la izquierda */
                 bottom: 20px; /* Espacio desde la parte inferior */
@@ -136,27 +128,27 @@
                 transform: translateY(-20px); /* Mover hacia arriba */
             }
             .btn-zip {
-    background-color: #007bff; /* Color de fondo del botón ZIP */
-    color: white; /* Color del texto en el botón ZIP */
-    padding: 8px 16px; /* Ajustar el padding para el tamaño del botón */
-    border: none; /* Sin borde */
-    border-radius: 4px; /* Bordes redondeados */
-    font-size: 14px; /* Tamaño de fuente */
-    display: flex; /* Usar flexbox para alinear el icono y el texto */
-    align-items: center; /* Centrar verticalmente el contenido */
-    transition: background-color 0.3s, transform 0.3s; /* Añadir transición */
-}
+                background-color: #007bff; /* Color de fondo del botón ZIP */
+                color: white; /* Color del texto en el botón ZIP */
+                padding: 8px 16px; /* Ajustar el padding para el tamaño del botón */
+                border: none; /* Sin borde */
+                border-radius: 4px; /* Bordes redondeados */
+                font-size: 14px; /* Tamaño de fuente */
+                display: flex; /* Usar flexbox para alinear el icono y el texto */
+                align-items: center; /* Centrar verticalmente el contenido */
+                transition: background-color 0.3s, transform 0.3s; /* Añadir transición */
+            }
 
-.btn-zip:hover {
-    background-color: #0056b3; /* Color de fondo al hacer hover para el botón ZIP */
-    transform: scale(1.05); /* Efecto de aumento al hacer hover */
-}
+            .btn-zip:hover {
+                background-color: #0056b3; /* Color de fondo al hacer hover para el botón ZIP */
+                transform: scale(1.05); /* Efecto de aumento al hacer hover */
+            }
 
-.zip-icon {
-    width: 20px; /* Ajustar el tamaño del ícono ZIP */
-    height: 20px; /* Ajustar el tamaño del ícono ZIP */
-    margin-right: 5px; /* Espacio entre el icono y el texto */
-}
+            .zip-icon {
+                width: 20px; /* Ajustar el tamaño del ícono ZIP */
+                height: 20px; /* Ajustar el tamaño del ícono ZIP */
+                margin-right: 5px; /* Espacio entre el icono y el texto */
+            }
             .button-group {
                 display: flex; /* Usar flexbox para alinear los botones verticalmente */
                 flex-direction: column; /* Alinear los botones en una columna */
@@ -184,8 +176,8 @@
 
             .btn-danger {
                 background-color: #dc3545; /* Color de fondo del botón rojo */
-                color: white; /* Color del
-                                color: white; /* Color del texto en el botón rojo */
+                color: white;
+                                /* Color del texto en el botón rojo */
             }
 
 .btn-danger:hover {
@@ -237,6 +229,14 @@
 hr {
     margin: 20px 0; /* Espaciado vertical de la línea divisoria */
     border: 1px solid #ccc; /* Color y estilo de la línea divisoria */
+}
+
+/* Estilo para el nombre del documento */
+.document-name {
+    max-width: 200px; /* Ajusta el ancho máximo según sea necesario */
+    white-space: normal; /* Permite que el texto se divida en varias líneas */
+    overflow-wrap: break-word; /* Permite que las palabras largas se dividan */
+    word-break: break-all; /* Rompe el texto en cualquier punto si es necesario */
 }
 </style>
 @endif

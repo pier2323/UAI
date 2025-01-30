@@ -11,9 +11,10 @@ class DocumentController extends Controller
 {
     public function upload(Request $request)
     {
-        // Validar el archivo
+        // Validar los archivos
         $request->validate([
-            'file' => 'required|file|mimes:doc,docx,xls,xlsx,pdf|max:2048', // Máximo 2MB
+            'file' => 'required|array', // Asegúrate de que se suban archivos
+            'file.*' => 'file|mimes:doc,docx,xls,xlsx,pdf|max:2048', // Máximo 2MB por archivo
         ]);
     
         // Obtener el public_id de la actividad de auditoría
@@ -21,7 +22,7 @@ class DocumentController extends Controller
         
         // Obtener la actividad de auditoría utilizando el public_id
         $auditActivity = AuditActivity::where('public_id', $public_id)->first();
-
+    
         // Manejar el caso en que no se encuentra la actividad
         if (!$auditActivity) {
             return back()->withErrors(['error' => 'Actividad de auditoría no encontrada.']);
@@ -35,22 +36,33 @@ class DocumentController extends Controller
             Storage::makeDirectory($activity_folder, 0755, true);
         }
     
-        // Guardar el archivo en la carpeta específica
-        $path = $request->file('file')->storeAs($activity_folder, $request->file('file')->getClientOriginalName());
+        try {
+            // Iterar sobre los archivos y guardarlos
+foreach ($request->file('file') as $file) {
+    // Obtener el nombre original del archivo
+    $originalFileName = $file->getClientOriginalName();
     
-        // Guardar el nombre y la ruta en la base de datos
-        Document::create([
-            'name' => $request->file('file')->getClientOriginalName(),
-            'path' => $path,
-            'audit_activity_id' => $auditActivity->id, // Usar el id de la actividad encontrada
-        ]);
+    // Usar una expresión regular para eliminar cualquier número seguido de un guion bajo al inicio del nombre
+    $modifiedFileName = preg_replace('/^\d+_/', '', $originalFileName);
     
-        return back()->with('success', 'Documento subido correctamente: ' . $path);
+    // Guardar el archivo en la carpeta específica
+    $path = $file->storeAs($activity_folder, $modifiedFileName);
+    
+    // Guardar el nombre y la ruta en la base de datos
+    Document::create([
+        'name' => $modifiedFileName,
+        'path' => $path,
+        'audit_activity_id' => $auditActivity->id,
+    ]);
+}
+            
+            // Mensaje de éxito
+            return back()->with('success', 'Documentos subidos correctamente.');
+        } catch (\Exception $e) {
+            // Manejo de errores en caso de fallo en la carga
+            return back()->withErrors(['error' => 'Error al subir los documentos.']);
+        }
     }
-  
-
-
-
 
     public function destroy($id)
     {

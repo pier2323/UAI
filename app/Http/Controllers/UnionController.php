@@ -7,9 +7,12 @@ use App\Models\AuditActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
 
 class UnionController extends Controller
 {
+    private PhpWord $document;
     public function union(Request $request)
     {
         // Validar la entrada
@@ -46,24 +49,74 @@ class UnionController extends Controller
             return response()->json(['message' => 'No se encontraron documentos suficientes para fusionar.'], 404);
         }
 
-        // Definir la ruta base
-        $basePath = 'C:\Users\pier\Desktop\UAI\public\storage\\';
+        $this->createDocument();
 
-        // Cargar los documentos a fusionar
-        $templateProcessor1 = new TemplateProcessor($basePath . str_replace('public/', '', $documentsIA->first()->path)); // Construye la ruta para el primer documento
-        $templateProcessor2 = new TemplateProcessor($basePath . str_replace('public/', '', $documentsTieneCeco->first()->path)); // Construye la ruta para el segundo documento
+        // // Definir la ruta base
+        define("__DIRPATH" , 'C:\Users\pier\Desktop\UAI');
 
-        // Combinar los documentos
-        $templateProcessor1->cloneBlock('todo', $templateProcessor2); // Asegúrate de que 'todo' sea un bloque definido en el documento 1
+        // // Combinar los documentos
+        // $archivo = __DIRNAME . "\\App\\OOXML\\HasNoCECO.ooxml";
 
-        // Guardar el documento resultante
-        $outputPath = 'documento_final.docx'; // Ruta donde se guardará el documento final
-        $templateProcessor1->saveAs($outputPath);
+        // // Leer todo el contenido del archivo en una cadena
+        // $HasNoCECO = file_get_contents(filename: $archivo);
 
-        // Retornar la respuesta con el archivo generado
-        return response()->json([
-            'message' => 'Documentos combinados exitosamente.',
-            'output_file' => url($outputPath), // Devuelve la URL del archivo generado
-        ], 200);
+        // $basePath = 'C:\Users\pier\Desktop\UAI\public\storage\\';
+
+        // // Cargar los documentos a fusionar
+        // $templateProcessor1 = new TemplateProcessor($basePath . str_replace('public/', '', $documentsIA->first()->path)); 
+
+        // $templateProcessor1->setValue('hasNoCECO', $HasNoCECO);
+
+        // // Guardar el documento resultante
+        // $outputPath = 'documento_final.docx'; // Ruta donde se guardará el documento final
+        // $templateProcessor1->saveAs($outputPath);
+
+        // // Retornar la respuesta con el archivo generado
+        // return response()->json([
+        //     'message' => 'Documentos combinados exitosamente.',
+        //     'output_file' => url($outputPath), // Devuelve la URL del archivo generado
+        // ], 200);
+    }
+
+    function createDocument()
+    {
+        // $this->document = new PhpWord();
+
+        // $documents = ['document1' => '', 'document2' => '']; 
+
+        $html = 'App\\HtmlForDocument\\hasNoCECO.html';
+
+        $phpWord = $this->loadHtmlDocument($html);
+
+        // // Modificar el documento (opcional)
+        // $section = $phpWord->getFirstSection();
+        // $section->addText('Texto añadido desde PHP');
+
+        // Guardar el documento como Word
+        $documentForAdding = IOFactory::createWriter($phpWord, 'Word2007');
+
+        dd($documentForAdding->getPhpWord()->getSections());
+
+
+        $writer->save('documento_convertido.docx'); 
+    }
+    
+    // function loadDocument(string $nameOfDocument)
+    // {
+    //     return IOFactory::load($nameOfDocument, $this->document);
+    // }
+
+    function loadHtmlDocument(string $nameOfDocument)
+    {
+        try 
+        {
+            $file = 'C:\\Users\\pier\\Desktop\\UAI\\' . $nameOfDocument;
+            return IOFactory::load($file ,'HTML');
+        } 
+        
+        catch (\Throwable $th) 
+        {
+            dd($th->getMessage());
+        }
     }
 }

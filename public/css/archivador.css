@@ -1,0 +1,17 @@
+.drop-area {
+    border: 2px dashed #007BFF; /* Color del borde */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    text-align: center; /* Centrar el texto */
+    margin: 20px 0; /* Margen superior e inferior */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.drop-area.highlight {
+    background-color: #e9f7ff; /* Color de fondo al arrastrar */
+}
+
+.drop-area p {
+    margin: 0; /* Sin margen */
+    color: #007BFF; /* Color del texto */
+}
