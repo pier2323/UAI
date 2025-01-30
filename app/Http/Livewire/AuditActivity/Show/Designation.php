@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class Designation extends Component
 {
     public TableCardsEmployeeForm $tableEmployees;
-
+    public PlanningScheduleForm $planningSchedule;
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
     public ?ModelsAcreditation $acreditation;
