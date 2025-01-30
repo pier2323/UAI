@@ -19,7 +19,7 @@ class PlanningSchedule extends Component
     public bool $isEditing = false;
 
     #[Modelable]
-    public array $dates;
+    public object $dates;
 
     #[Locked]
     public $excludeDays;
@@ -35,7 +35,7 @@ class PlanningSchedule extends Component
     public function mount()
     {
         // if (isset($this->designation)) $this->dates->load($this->auditActivity);
-        // $this->excludeDays = NotWorkingDays::pluck('day');
+        $this->excludeDays = NotWorkingDays::pluck('day');
     }
 
     public function render()
