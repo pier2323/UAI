@@ -4,7 +4,6 @@ namespace App\Http\Livewire\AuditActivity\Show;
 
 use App\Actions\DesignationAcreditation\Designate;
 use App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument\TableCardsEmployeeForm;
-use App\Http\Livewire\Components\PlanningScheduleForm;
 use App\Http\Livewire\Components\PlanningSchedule;
 use App\Http\Livewire\Components\TableCardsEmployee;
 use App\Models\AuditActivity;
@@ -19,7 +18,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class Designation extends Component
 {
     public TableCardsEmployeeForm $tableEmployees;
-
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
     public ?ModelsAcreditation $acreditation;
@@ -31,7 +29,6 @@ class Designation extends Component
 
     public function mount(): void
     {
-        $this->planningSchedule->mount();
         $this->isCreated = $this->isDesignated();
 
         if (!$this->isCreated) return;
