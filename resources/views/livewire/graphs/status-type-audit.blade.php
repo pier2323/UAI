@@ -6,12 +6,32 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * todo Este componente tiene como funcionalidad preparar los datos y utilizarlos en una grafica de barras donde se contrasta cuantos Actuaciones fiscales hay por tipo 
+*/ 
 new class extends Component
 {
+    /**
+     * ? almacena todo el json de configuracion y datos para usarlo en el grafico 
+     * @var array $config
+    */
     public array $config;
+
+    /**
+     * ? nombre del grafico 
+    */
     public string $name = 'statusTypeAudit';
+
+    /**
+     * ? un array asociativo donde las claves son el nombre de los tipos de Actuaciones Fiscales y el valor es la cantidad de Actuaciones Fiscales que tiene ese tipo 
+     * @var array $typeAudits
+    */
     public array $typeAudits = array();
 
+    /**
+     * todo carga la variable los tipos de Auditoría y Carga las configuraciones del json del gráfico 
+     * @return void
+    */
     public function mount(): void
     {
         foreach(App\Models\TypeAudit::with('auditActivity')->get() as $type)
@@ -20,6 +40,10 @@ new class extends Component
         $this->config = $this->data();
     }
 
+    /**
+     * todo estructura la informacion del json y lo retorna en forma de array 
+     * @return array
+    */
     private function data(): array
     {
         $data = [
@@ -68,6 +92,10 @@ new class extends Component
         return $config;
     }
 
+    /**
+     * todo se dispara por el evento 'refresh' y actualiza las variables y dispara el evento graph-statustypeaudit
+     * @return void
+    */
     #[On('refresh')]
     public function updateGraph(): void
     {

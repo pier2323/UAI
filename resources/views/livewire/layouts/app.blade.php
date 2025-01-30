@@ -48,6 +48,10 @@
         </div>
         
         <div role="alert" class="fixed flex flex-col bottom-10 right-10">
+            {{-- ? global --}}
+            @include('../alerts/notAllowed')
+
+            {{-- ? stack --}}
             @stack('alert')     
         </div>
         
@@ -57,7 +61,7 @@
         
         @stack('script')     
 
-        <x-footer></x-footer>
+        <x-footer />
     </body>
 </html>
 

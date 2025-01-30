@@ -42,7 +42,6 @@ class Loader extends Component
     
     public function here()
     {
-        
         return $this->dispatch('saved-new-year');
     }
 

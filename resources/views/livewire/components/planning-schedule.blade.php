@@ -12,8 +12,8 @@
     </div>
     <hr>
     <div x-data="plannigSchedule"
-    x-init="@if(!isset($designation) || $isEditing) start() @else destroy() @endif"
-    class="flex flex-col justify-between p-4 py-3 font-semibold"
+        x-init="@if(!isset($designation) || $isEditing) start() @else destroy() @endif"
+        class="flex flex-col justify-between p-4 py-3 font-semibold"
     >
         {{-- todo planning --}}
             <x-input-date-planning
@@ -170,10 +170,12 @@
                                 "definitive_end"
                             ];
 
+                            @can('auditActivity.show.designationAcreditation')
                             this.flatpickrs = inputsDateId.reduce((acc, current) => {
                                 acc[current] = flatpickr(`#${current}`, config);
                                 return acc;
                             }, {});
+                            @endcan
 
                     },
                 }

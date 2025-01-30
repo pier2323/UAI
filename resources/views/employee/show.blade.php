@@ -16,14 +16,14 @@
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2">
                     <section
-                        class="container mx-auto flex flex-col items-center justify-center px-8 py-3 align-middle sm:flex-row-reverse sm:px-12">
+                        class="container flex flex-col items-center justify-center px-8 py-3 mx-auto align-middle sm:flex-row-reverse sm:px-12">
                         <div style="overflow:hidden ; border: 1px solid #525252; border-radius: 20px"
                             class="border-slate-500">
                             <img alt="foto de perfil" style="width: 15vw"
                                 src="{{ asset("storage/$employee->profile_photo") }}" />
                         </div>
-                        <div class="border- mr-4 w-full text-center sm:w-1/2 sm:text-left">
-                            <ul class="mb-8 flex flex-col items-center space-y-1 dark:text-slate-400 sm:items-start">
+                        <div class="w-full mr-4 text-center border- sm:w-1/2 sm:text-left">
+                            <ul class="flex flex-col items-center mb-8 space-y-1 dark:text-slate-400 sm:items-start">
                                 <li class="flex items-end">
                                     <h2 class="mt-4 text-2xl font-semibold">
                                         {{ "$employee->first_name $employee->second_name $employee->first_surname $employee->second_surname" }}
@@ -57,7 +57,7 @@
                             <div class="flex flex-col space-y-3 md:flex-row md:space-x-2 md:space-y-0">
                                 <a href="{{ route('employee.edit', $employee->id) }}">
                                     <x-button
-                                        class="shadow-lg shadow-slate-600 transition hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
+                                        class="transition shadow-lg shadow-slate-600 hover:bg-blue-600 hover:text-slate-900 hover:shadow-blue-600 dark:bg-blue-600 dark:text-black dark:shadow-sm dark:shadow-blue-600 dark:hover:bg-blue-400 sm:py-2">
                                         Editar
                                     </x-button>
                                 </a>
@@ -74,23 +74,23 @@
                             <div class="modal fade" id="confirm_modal" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered rounded-0">
                                     <div class="modal-content rounded-0">
-                                        <div class="modal-header py-1">
+                                        <div class="py-1 modal-header">
                                             <h5 class="modal-title">Eliminar</h5>
                                         </div>
                                         <div class="modal-body">
                                         </div>
 
-                                        <div class="modal-footer py-1">
+                                        <div class="py-1 modal-footer">
                                             <form action="{{ route('employee.delete', $employee->id) }}" method="POST">
                                                 @method('delete')
                                                 <button type="submit"
-                                               class="rounded-lg border-0 btn btn-danger 0 py-1 text-base text-white shadow-lg ">
+                                               class="py-1 text-base text-white border-0 rounded-lg shadow-lg btn btn-danger 0 ">
                                                     Eliminar 
                                                 </button>
 
                                             </form>
 
-                                            <button type="button" class="rounded-lg border-0 btn btn-primary 0 py-1 text-base text-white shadow-lg"
+                                            <button type="button" class="py-1 text-base text-white border-0 rounded-lg shadow-lg btn btn-primary 0"
                                                 data-bs-dismiss="modal">Cancelar</button>
                                         </div>
                                     </div>
@@ -99,13 +99,13 @@
                             <div class="modal fade" id="action_display" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered rounded-0">
                                     <div class="modal-content rounded-0">
-                                        <div class="modal-header py-1">
+                                        <div class="py-1 modal-header">
                                             <h5 class="modal-title">Action Result</h5>
                                         </div>
                                         <div class="modal-body">
                                         </div>
-                                        <div class="modal-footer py-1">
-                                            <button type="button" class="btn btn-secondary btn-sm rounded-0 py-1"
+                                        <div class="py-1 modal-footer">
+                                            <button type="button" class="py-1 btn btn-secondary btn-sm rounded-0"
                                                 data-bs-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>

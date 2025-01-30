@@ -57,6 +57,14 @@
 
     @stack('modals')
 
+    <div>
+        {{-- ? global --}}
+        @include('../alerts/notAllowed')
+
+        {{-- ? stack --}}
+        @stack('alerts')
+    </div>
+
     @livewireScripts
     <x-footer></x-footer>
 
