@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "73c8ebf4994c04ee75cca3d1a73ac22a",
+
+    "content-hash": "952b024637d0526178aa576a694e0d93",
+
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2749,6 +2753,7 @@
         },
         {
             "name": "monolog/monolog",
+
             "version": "3.8.1",
             "source": {
                 "type": "git",
@@ -2759,6 +2764,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Seldaek/monolog/zipball/aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
                 "reference": "aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
+
+            "version": "3.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/32e515fdc02cdafbe4593e30a9350d486b125b67",
+                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67",
+
                 "shasum": ""
             },
             "require": {
@@ -2836,7 +2853,11 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
+
                 "source": "https://github.com/Seldaek/monolog/tree/3.8.1"
+
+                "source": "https://github.com/Seldaek/monolog/tree/3.8.0"
+
             },
             "funding": [
                 {
@@ -2848,7 +2869,11 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2024-12-05T17:15:07+00:00"
+
+            "time": "2024-11-12T13:57:08+00:00"
+
         },
         {
             "name": "mpdf/mpdf",

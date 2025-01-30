@@ -9,6 +9,7 @@
         "ext-fileinfo": "*",
         "ext-gd": "*",
         "dompdf/dompdf": "^3.0",
+        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.0",
         "laravel/jetstream": "^5.1",
         "laravel/sanctum": "^4.0",

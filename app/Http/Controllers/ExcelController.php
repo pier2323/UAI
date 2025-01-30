@@ -119,7 +119,7 @@ public function hallazasgo($request){
          $hoja1->setCellValue('A5', "ACTUACIÓN FISCAL SOBRE LA VERIFICACIÓN DE LA SINCERIDAD Y EXACTITUD DEL CONTENIDO DEL ACTA DE ENTREGA DE LA $unidad_entrega ADSCRITA A LA $unidad_adscrita CORRESPONDIENTE AL SERVIDOR(A) PÚBLICO(A) SALIENTE CIUDADANO(A) $nombre_saliente, TITULAR DE LA CÉDULA DE IDENTIDAD NRO. $cedula_saliente, DURANTE EL PERIODO DE GESTIÓN DEL $periodo_saliente_desde AL  $periodo_saliente_hasta");
 
          $hoja2 = $spreadsheet->getSheetByName('CEDULA');
-         $hoja2->setCellValue('A6',  "Actuación $periodo_saliente_desde a la  $periodo_saliente_hasta");
+         $hoja2->setCellValue('A6',  "Actuación $periodo_saliente_desde al   $periodo_saliente_hasta");
          $hoja2->setCellValue('B10', "$unidad_entrega");
          $hoja2->setCellValue('D10', "$unidad_adscrita");
          $hoja2->setCellValue('K10', "$nombre_saliente");
@@ -244,7 +244,6 @@ public function hallazasgo($request){
    }
 
          $hoja5 = $spreadsheet->getSheetByName('desglose de hallazgos');
-         $hoja5->setCellValue('D16', "$cargo");
          $hoja5->setCellValue('B4', "Dirección, Unidad o Departamento:  $unidad_entrega adscrita a la  $unidad_adscrita ");
     
          // Reiniciar el índice y la fila para los inputs adicionales de los checkboxes no seleccionados

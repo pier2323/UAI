@@ -62,39 +62,112 @@ final class informeAuditor
     
         // Definir días feriados (ejemplo)
         $holidays = [
-
-                // Días festivos de 2024
-              '2024-01-01', // Año Nuevo
-              '2024-02-12', // Carnaval
-              '2024-02-13', // Carnaval
-              '2024-03-28', // jueves santo
-              '2024-03-29', // viernes Santo
-              '2024-04-19', // Declaracion Indevendencia
-              '2024-05-01', // Día del Trabajador
-              '2024-06-24', // Día de la Batalla de Carabobo
-              '2024-07-05', // Día de la Independencia
-              '2024-07-24', // Natalicio de Simón Bolivar
-              '2024-07-28', // telecominicador
-              '2024-12-24', // Navidad
-               '2024-12-25', // Navidad
-              '2024-12-31', //Fin de Año
-               // Días festivos de 2025
-              '2025-01-01', // Año Nuevo
-              '2025-03-3', //  Lunes Carnaval
-              '2025-03-4', // Martes Carnaval
-              '2025-04-17', // jueves santo
-              '2025-04-18', // viernes Santo
-              '2025-04-19', // Declaracion Indevendencia
-              '2025-05-01', // Día del Trabajador
-              '2025-06-24', // Día de la Batalla de Carabobo
-              '2025-07-05', // Día de la Independencia
-              '2025-07-24', // Natalicio de Simón Bolivar
-              '2025-07-28', // telecominicador
-              '2025-12-24', // Navidad
-              '2025-12-25', // Navidad
-              '2025-12-31', //Fin de Año
-  
-          ];
+            // Días festivos de 2024
+            '2024-01-01', // Año Nuevo
+            '2024-02-12', // Carnaval
+            '2024-02-13', // Carnaval
+            '2024-03-28', // Jueves Santo
+            '2024-03-29', // Viernes Santo
+            '2024-04-19', // Declaración de Independencia
+            '2024-05-01', // Día del Trabajador
+            '2024-06-24', // Día de la Batalla de Carabobo
+            '2024-07-05', // Día de la Independencia
+            '2024-07-24', // Natalicio de Simón Bolívar
+            '2024-07-28', // Día del Telecomunicador
+            '2024-12-24', // Navidad
+            '2024-12-25', // Navidad
+            '2024-12-31', // Fin de Año
+            // Días festivos de 2025
+            '2025-01-01', // Año Nuevo
+            '2025-03-03', // Lunes de Carnaval
+            '2025-03-04', // Martes de Carnaval
+            '2025-04-17', // Jueves Santo
+            '2025-04-18', // Viernes Santo
+            '2025-04-19', // Declaración de Independencia
+            '2025-05-01', // Día del Trabajador
+            '2025-06-24', // Día de la Batalla de Carabobo
+            '2025-07-05', // Día de la Independencia
+            '2025-07-24', // Natalicio de Simón Bolívar
+            '2025-07-28', // Día del Telecomunicador
+            '2025-12-24', // Navidad
+            '2025-12-25', // Navidad
+            '2025-12-31', // Fin de Año
+            // Días festivos de 2026
+            '2026-01-01', // Año Nuevo
+            '2026-02-16', // Lunes de Carnaval
+            '2026-02-17', // Martes de Carnaval
+            '2026-04-02', // Jueves Santo
+            '2026-04-03', // Viernes Santo
+            '2026-04-19', // Declaración de Independencia
+            '2026-05-01', // Día del Trabajador
+            '2026-06-24', // Día de la Batalla de Carabobo
+            '2026-07-05', // Día de la Independencia
+            '2026-07-24', // Natalicio de Simón Bolívar
+            '2026-07-28', // Día del Telecomunicador
+            '2026-12-24', // Navidad
+            '2026-12-25', // Navidad
+            '2026-12-31', // Fin de Año
+            // Días festivos de 2027
+            '2027-01-01', // Año Nuevo
+            '2027-02-08', // Lunes de Carnaval
+            '2027-02-09', // Martes de Carnaval
+            '2027-03-25', // Jueves Santo
+            '2027-03-26', // Viernes Santo
+            '2027-04-19', // Declaración de Independencia
+            '2027-05-01', // Día del Trabajador
+            '2027-06-24', // Día de la Batalla de Carabobo
+            '2027-07-05', // Día de la Independencia
+            '2027-07-24', // Natalicio de Simón Bolívar
+            '2027-07-28', // Día del Telecomunicador
+            '2027-12-24', // Navidad
+            '2027-12-25', // Navidad
+            '2027-12-31', // Fin de Año
+            // Días festivos de 2028
+            '2028-01-01', // Año Nuevo
+            '2028-02-28', // Lunes de Carnaval
+            '2028-02-29', // Martes de Carnaval
+            '2028-04-13', // Jueves Santo
+            '2028-04-14', // Viernes Santo
+            '2028-04-19', // Declaración de Independencia
+            '2028-05-01', // Día del Trabajador
+            '2028-06-24', // Día de la Batalla de Carabobo
+            '2028-07-05', // Día de la Independencia
+            '2028-07-24', // Natalicio de Simón Bolívar
+            '2028-07-28', // Día del Telecomunicador
+            '2028-12-24', // Navidad
+            '2028-12-25', // Navidad
+            '2028-12-31', // Fin de Año
+            // Días festivos de 2029
+            '2029-01-01', // Año Nuevo
+            '2029-02-12', // Lunes de Carnaval
+            '2029-02-13', // Martes de Carnaval
+            '2029-03-29', // Jueves Santo
+            '2029-03-30', // Viernes Santo
+            '2029-04-19', // Declaración de Independencia
+            '2029-05-01', // Día del Trabajador
+            '2029-06-24', // Día de la Batalla de Carabobo
+            '2029-07-05', // Día de la Independencia
+            '2029-07-24', // Natalicio de Simón Bolívar
+            '2029-07-28', // Día del Telecomunicador
+            '2029-12-24', // Navidad
+            '2029-12-25', // Navidad
+            '2029-12-31', // Fin de Año
+            // Días festivos de 2030
+            '2030-01-01', // Año Nuevo
+            '2030-03-04', // Lunes de Carnaval
+            '2030-03-05', // Martes de Carnaval
+            '2030-04-18', // Jueves Santo
+            '2030-04-19', // Viernes Santo
+            '2030-04-19', // Declaración de Independencia
+            '2030-05-01', // Día del Trabajador
+            '2030-06-24', // Día de la Batalla de Carabobo
+            '2030-07-05', // Día de la Independencia
+            '2030-07-24', // Natalicio de Simón Bolívar
+            '2030-07-28', // Día del Telecomunicador
+            '2030-12-24', // Navidad
+            '2030-12-25', // Navidad
+            '2030-12-31', // Fin de Año
+        ];
     
         // Ajustar la fecha de inicio para que comience desde el día siguiente
         $startCountingDate = $fechaFija->copy()->addDay();
@@ -123,7 +196,11 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
        
         // Extraer el año con datos estáticos 
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
-        $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
+        $full_name_Outgoing = ucwords(strtolower("$employeeOutgoing->first_name " . 
+            (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . 
+            "$employeeOutgoing->first_surname" . 
+            (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '')));
+        $full_name_Outgoing = str_replace('Ñ', 'ñ', $full_name_Outgoing);
         // Definición de variables comunes
       $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
         $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
@@ -131,7 +208,7 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $codigoDesignacion = "UAI\\GCP\\DES-COM $code";
         $nombreSaliente = $full_name_Outgoing;
         $cedulaSaliente = preg_replace('/(\d{1,3})(\d{3})(\d{3})/', '$1.$2.$3', $this->auditActivity->handoverDocument->EmployeeOutgoing->personal_id,);
-        $periodoGestion = "$periodo_inicial hasta el $periodo_cease";
+        $periodoGestion = "$periodo_inicial al $periodo_cease";
         $unidad_entrega = $this->auditActivity->handoverDocument->departament;
 
 
@@ -233,17 +310,20 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
         $periodo_cease = date('d/m/Y', strtotime($this->auditActivity->handoverDocument->cease));
         // Extraer el año con datos estáticos 
 
-        $cargo_saliente = $this->auditActivity->handoverDocument->EmployeeOutgoing->job_title;
+        $cargo_saliente = ucwords(strtolower($this->auditActivity->handoverDocument->EmployeeOutgoing->job_title));
+        $cargo_saliente = str_replace(' De ', ' de ', $cargo_saliente);
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
         $full_name_Outgoing = ucwords(strtolower("$employeeOutgoing->first_name " . 
             (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . 
             "$employeeOutgoing->first_surname" . 
             (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '')));
+        $full_name_Outgoing = str_replace('Ñ', 'ñ', $full_name_Outgoing);
         $employeeIncoming = $this->auditActivity->handoverDocument->employeeIncoming;
         $full_name_Incoming = "$employeeIncoming->first_name " . (isset($employeeIncoming->second_name) ? "$employeeIncoming->second_name " : '') . "$employeeIncoming->first_surname" . (isset($employeeIncoming->second_surnam) ? " $employeeIncoming->second_surnam " : '');
         $fecha_variable = $this->fechaVariable;
         $Designacion =  $this->auditActivity->employee()->first()->pivot->designation_id;
         $fechaDesignacion = date('d/m/Y', strtotime(Designation::find($Designacion)->date_release));
+       
        
 
             $this->document->data = [
@@ -309,4 +389,4 @@ $diferenciaEnDias = $this->countBusinessDays($fechaActual, $startCountingDate, $
     }
        
     }
-    
+
