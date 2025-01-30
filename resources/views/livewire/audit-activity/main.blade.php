@@ -8,7 +8,7 @@
         $active = false;
     @endphp
 
-    @if ($active) <livewire:audit-activity.header :auditActivities="['no_poa' => $auditActivityNoPoa, 'poa' => $auditActivityPoa]"> @endif
+    @if ($active) <livewire:audit-activity.header :$year :auditActivities="['no_poa' => $auditActivityNoPoa, 'poa' => $auditActivityPoa]"> @endif
 
     @push('script') @assets @vite(['resources/js/hola.js']) @endassets @endpush
 

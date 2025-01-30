@@ -54,8 +54,8 @@ new class extends Component
             'type' => 'pie',
             'data' => [
                 'labels' => [
-                    'poa',
-                    'no_poa',
+                    'POA',
+                    'NO POA',
                 ],
                 'datasets' => [[
                     // 'hoverOffset' => 4,

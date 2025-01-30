@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\AuditActivity\Show;
 
+use App\Actions\DesignationAcreditation\Designate;
 use App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument\TableCardsEmployeeForm;
+use App\Http\Livewire\Components\PlanningScheduleForm;
 use App\Http\Livewire\Components\PlanningSchedule;
 use App\Http\Livewire\Components\TableCardsEmployee;
 use App\Models\AuditActivity;
@@ -27,9 +29,9 @@ class Designation extends Component
     public bool $isCreated = false;
     public bool $isAcredit = false;
 
-
     public function mount(): void
     {
+        $this->planningSchedule->mount();
         $this->isCreated = $this->isDesignated();
 
         if (!$this->isCreated) return;
@@ -50,7 +52,8 @@ class Designation extends Component
     {
         $this->tableEmployees->validate();
         $this->isCreated = true;
-        $this->designation = $this->create();
+        
+        $this->designation = (new Designate($this->auditActivity))->create();
 
        $this->tableEmployees->save(
             $this->auditActivity,
@@ -67,13 +70,6 @@ class Designation extends Component
         $designation = new DesignationService($this->auditActivity, date: $this->designation->date_release, nameDocument: "UAI-GCP-DES-COM $code.docx");
         $this->dispatch('designation_download', message: \__('se ha iniciado la descarga!'));
         return $designation->download();
-    }
-
-    public function create()
-    {
-        return ModelsDesignation::create([
-            'date_release' => $this->auditActivity->planning_start ?? now()->format("Y-m-d"),
-        ]);
     }
 
     public function edit(): void

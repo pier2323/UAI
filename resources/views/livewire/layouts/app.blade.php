@@ -61,7 +61,7 @@
         
         @stack('script')     
 
-        <x-footer></x-footer>
+        <x-footer />
     </body>
 </html>
 
