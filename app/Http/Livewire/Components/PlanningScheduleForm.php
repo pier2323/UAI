@@ -59,11 +59,12 @@ final class PlanningScheduleForm extends Form
     #[Validate('required', as: "Fecha de fin del informe definitivo")]
     public $definitive_end;
 
+    public array $dates = [];
+
     public function mount(): void
     {
-        $this->reset();
+        $this->dates = $this->except('dates');
     }
-
 
     public function save(AuditActivity $auditActivity)
     {

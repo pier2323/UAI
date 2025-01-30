@@ -83,7 +83,9 @@
                 >
 
                 <div class="ml-4">
-                    <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated>
+                    <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated
+                    wire:model.live="planningSchedule.dates" :errors="$errors->all()"
+                    >
                 </div>
                 
             </div>
