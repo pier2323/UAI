@@ -34,7 +34,6 @@ class PlanningSchedule extends Component
 
     public function mount()
     {
-        // if (isset($this->designation)) $this->dates->load($this->auditActivity);
         $this->excludeDays = NotWorkingDays::pluck('day');
     }
 

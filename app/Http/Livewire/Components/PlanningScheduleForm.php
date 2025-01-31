@@ -68,6 +68,7 @@ final class PlanningScheduleForm extends Form
 
     public function save(AuditActivity $auditActivity)
     {
+        $this->loadVariablesFromDates();
         $this->validate();
         $dates = $this->getPropertiesForCarbon();
 
@@ -80,12 +81,14 @@ final class PlanningScheduleForm extends Form
         // todo update dates
         $auditActivity->update($this->all());
 
-        $this->mapModelProperties($auditActivity, $this->all());
+        $this->mapModelProperties($auditActivity, $this->except('dates'));
+        $this->mount();
     }
 
     public function load(AuditActivity $auditActivity)
     {
-        $this->mapModelProperties($auditActivity, $this->all());
+        $this->mapModelProperties($auditActivity, $this->except('dates'));
+        $this->mount();
     }
 
     public function delete(AuditActivity $auditActivity): void
@@ -93,6 +96,11 @@ final class PlanningScheduleForm extends Form
         $this->reset();
 
         $auditActivity->update($this->all());
+    }
+
+    private function loadVariablesFromDates(): void
+    {
+        foreach ($this->dates as $property => $date) $this->{$property} = $date;
     }
 
     private function getPropertiesForCarbon(): array

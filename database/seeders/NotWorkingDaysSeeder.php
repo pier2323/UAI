@@ -16,11 +16,20 @@ class NotWorkingDaysSeeder extends Seeder
         $dates = [
             // ? 2024 
             '2024-01-01', // Año Nuevo
+            '2024-02-12', // Carnaval
+            '2024-02-13', // Carnaval
+            '2024-03-27', // dias santos
+            '2024-03-28', // dias santos
+            '2024-03-29', // dias santos
             '2024-04-19', // Declaración de la Independencia
             '2024-05-01', // Día del Trabajador
             '2024-06-24', // Batalla de Carabobo
+            '2024-07-05', // Dia de la Independencia
+            '2024-10-12', // dia de la raza
+            '2024-12-24', // vispera de navida 
+            '2024-12-25', // Navidad
             '2024-12-31', // fin de año 
-            '2024-07-05',  // Día de la Independencia
+            '2024-07-05' , // Día de la Independencia
 
             // ? 2025 
             '2025-01-01', // Año Nuevo
@@ -41,11 +50,11 @@ class NotWorkingDaysSeeder extends Seeder
 
             // ? 2026 
             '2026-01-01', // Año Nuevo
-            '2026-03-03', // Carnaval
-            '2026-03-04', // Carnaval
-            '2026-04-16', // dias santos
-            '2026-04-17', // dias santos
-            '2026-04-18', // dias santos
+            '2026-02-16', // Carnaval
+            '2026-02-17', // Carnaval
+            '2026-04-01', // dias santos
+            '2026-04-02', // dias santos
+            '2026-04-03', // dias santos
             '2026-04-19', // Declaración de la Independencia
             '2026-05-01', // Día del Trabajador
             '2026-06-24', // Batalla de Carabobo
