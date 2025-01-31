@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AuditActivity\Show;
 
 use App\Actions\DesignationAcreditation\Designate;
 use App\Http\Livewire\AuditActivity\Show\RegisterFormHandoverDocument\TableCardsEmployeeForm;
+use App\Http\Livewire\Components\PlanningScheduleForm;
 use App\Http\Livewire\Components\PlanningSchedule;
 use App\Http\Livewire\Components\TableCardsEmployee;
 use App\Models\AuditActivity;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class Designation extends Component
 {
     public TableCardsEmployeeForm $tableEmployees;
+    public PlanningScheduleForm $planningSchedule;
     public AuditActivity $auditActivity;
     public ?ModelsDesignation $designation;
     public ?ModelsAcreditation $acreditation;
@@ -34,6 +36,7 @@ class Designation extends Component
         if (!$this->isCreated) return;
 
         $this->tableEmployees->load($this->auditActivity);
+        $this->planningSchedule->load($this->auditActivity);
         $this->pivot = $this->getPivot();
         $this->designation = $this->getDesignationModel();
         $this->acreditation = $this->getAcreditationModel();
@@ -49,10 +52,12 @@ class Designation extends Component
     {
         $this->tableEmployees->validate();
         $this->isCreated = true;
+
+        $this->planningSchedule->save($this->auditActivity);
         
         $this->designation = (new Designate($this->auditActivity))->create();
 
-       $this->tableEmployees->save(
+        $this->tableEmployees->save(
             $this->auditActivity,
             designation: $this->designation->id
         );
@@ -83,7 +88,7 @@ class Designation extends Component
 
     public function update(): void
     {
-        $this->designation->update(['date_release' => $this->auditActivity->planning_start ?? now()->format("Y-m-d"),]);
+        $this->designation->update(['date_release' => $this->planningSchedule->dates['planning_start']]);
 
         $this->tableEmployees->save(
             $this->auditActivity,
@@ -98,6 +103,7 @@ class Designation extends Component
     {
         $this->dispatch('deleted');
         $this->auditActivity->employee()->detach();
+        $this->planningSchedule->delete($this->auditActivity);
         $this->designation = ModelsDesignation::make();
         $this->isCreated = false;
         $this->isDeleting = false;

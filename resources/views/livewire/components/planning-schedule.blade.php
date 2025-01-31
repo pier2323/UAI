@@ -5,7 +5,7 @@
         $widthInputDays = 'w-28';
         $dateDiv = 'mt-3 w-max text-center flex-col justify-center';
     @endphp
-
+    
     <div>
         <h3 class="p-2 pl-5 text-lg font-semibold">Cronograma de la Actuación Fiscal</h3>
         <hr>
@@ -91,16 +91,11 @@
 
                     calculateDates(start = '13/12/2024', workingDays = 5) {
                         const date = moment(start, 'DD-MM-YYYY');
-                        while (
-                            workingDays > 1
-                            // || this.excludeDaysMoment.some(date => date.isSame(date, 'day'))
-                            // || !date.isSame(endDate)
-                        ) {
+                        while (workingDays > 1) {
                             workingDays--;
+                            if(this.excludeDaysMoment.some(moment => date.isSame(moment))) { workingDays++; }
                             date.add(1, 'days');
-                            if (this.isWeekend(date)) {
-                                date.add(2, 'days');
-                            }
+                            if (this.isWeekend(date)) { date.add(2, 'days'); }
                         }
 
                         return date.format('DD/MM/YYYY');
@@ -139,7 +134,7 @@
                     start() {
 
                             this.loadExcludeDays();
-
+                            console.log(this.excludeDaysMoment);
                             const config = {
                                 // minDate: this.nextDay(),
                                 dateFormat: this.formatDate,

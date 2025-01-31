@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(AuditActivitySeeder::class);
         $this->call(YearSeeder::class);
+        $this->call(NotWorkingDaysSeeder::class);
         // utilizando la factory para crear x numero de filas
 
         // AuditActivity::factory(count: 5)->create();

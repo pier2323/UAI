@@ -10,6 +10,7 @@ final class TableCardsEmployeeForm extends Form
 {
     #[Validate('required|array|between:2,20', as: 'Lista de Auditores')]
     public array $list = array();
+    public int $auditorNumber = 0;
 
     public bool $verified = false;
 
