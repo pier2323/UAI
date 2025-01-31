@@ -77,11 +77,11 @@
             </div>
 
             <div class="flex justify-between w-full px-10">
-
+                
                 <livewire:Components.TableCardsEmployee :$auditActivity :$isEditing :$isCreated
                 wire:model.live="tableEmployees.list" :errors="$errors->all()"
                 >
-
+                
                 <div class="ml-4">
                     <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated
                     wire:model.live="planningSchedule.dates" :errors="$errors->all()"

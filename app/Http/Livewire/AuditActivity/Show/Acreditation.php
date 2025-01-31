@@ -43,7 +43,8 @@ class Acreditation extends Component
     #[Renderless]
     public function getAcreditationDocument(): BinaryFileResponse
     {
-        $acreditation = new AcreditationService($this->auditActivity, date: $this->acreditation->date_release);
+        $code = $this->auditActivity->code;
+        $acreditation = new AcreditationService($this->auditActivity, date: $this->acreditation->date_release , nameDocument: "UAI-GCP-ACRE-COM $code.docx");
         $this->dispatch('acreditation_acredit', message: \__('se ha iniciado la descarga!'));
         return $acreditation->download();
     }

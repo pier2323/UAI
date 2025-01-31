@@ -1,4 +1,10 @@
  <div @isset($auditActivity) x-on:saved.window="await $wire.$parent.load()" @endisset>
+
+    @can('handoverDocument.register')
+        @push('alert')
+            <x-alert on="saved" />
+        @endpush
+    @endcan
     
     <form 
         @can('handoverDocument.register')

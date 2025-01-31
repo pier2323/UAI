@@ -16,7 +16,18 @@
             x-init="
             flatpickr('#acreditationDateRelease', {
                 dateFormat: 'd/m/Y',
-                disable: [(date) => (date.getDay() === 0 || date.getDay() === 6)]
+                disable: [(date) => (date.getDay() === 0 || date.getDay() === 6)],
+                locale: {
+                    // firstDayOfWeek: 1,
+                    weekdays: {
+                    shorthand: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                    longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    },
+                    months: {
+                    shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+                    longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    },
+                },
             });"
         >
             

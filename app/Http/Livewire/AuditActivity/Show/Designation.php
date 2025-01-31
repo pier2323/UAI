@@ -31,10 +31,11 @@ class Designation extends Component
 
     public function mount(): void
     {
+        $this->planningSchedule->mount();
         $this->isCreated = $this->isDesignated();
 
         if (!$this->isCreated) return;
-
+        
         $this->tableEmployees->load($this->auditActivity);
         $this->planningSchedule->load($this->auditActivity);
         $this->pivot = $this->getPivot();
