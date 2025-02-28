@@ -1,3 +1,32 @@
+<?php
+
+use App\Models\Area;
+use Livewire\Attributes\Modelable;
+use Livewire\Attributes\Validate;
+
+new class extends \Livewire\Volt\Component
+{
+    #[Modelable]
+    public string $selected;
+
+    public $areas;
+
+    #[Validate(['unique:areas,name'])]
+    public string $new;
+
+    public function mount()
+    {
+        $this->areas = Area::all();
+    }
+
+    public function save()
+    {
+        $this->validate();
+        Area::create(['name' => $this->pull('new')]);
+        $this->areas = Area::all();
+    }
+}; ?>
+
 <div x-data="selectArea()">
     <label for="SelectArea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Área de la Actuación Fiscal</label>
 

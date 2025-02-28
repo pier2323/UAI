@@ -24,7 +24,9 @@ class NotWorkingDaysSeeder extends Seeder
             '2024-04-19', // Declaración de la Independencia
             '2024-05-01', // Día del Trabajador
             '2024-06-24', // Batalla de Carabobo
+            '2024-06-28', // Dia del Telecomunicador
             '2024-07-05', // Dia de la Independencia
+            '2024-07-24', // Natalicio del Libertador
             '2024-10-12', // dia de la raza
             '2024-12-24', // vispera de navida 
             '2024-12-25', // Navidad
@@ -41,12 +43,13 @@ class NotWorkingDaysSeeder extends Seeder
             '2025-04-19', // Declaración de la Independencia
             '2025-05-01', // Día del Trabajador
             '2025-06-24', // Batalla de Carabobo
+            '2025-06-27', // Dia del Telecomunicador
             '2025-07-05', // Dia de la Independencia
+            '2025-07-24', // Natalicio del Libertador
             '2025-10-12', // dia de la raza
             '2025-12-24', // vispera de navida 
             '2025-12-25', // Navidad
             '2025-12-31', // fin de año 
-            '2025-07-05' , // Día de la Independencia
 
             // ? 2026 
             '2026-01-01', // Año Nuevo

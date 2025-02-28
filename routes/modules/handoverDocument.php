@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Handover\Main;
-use App\Http\Livewire\Handover\Show;
-use App\Http\Livewire\Handover\Review;
-use App\Http\Livewire\Handover\Register;
-use App\Http\Middleware\HasPermission;
+use App\Livewire\Handover\Main;
+use App\Livewire\Handover\Show;
+use App\Livewire\Handover\Review;
+use App\Livewire\Handover\Register;
+use App\Middlewares\HasPermission;
 
 Route::prefix('acta-de-entrega')->name('handoverDocument.')->group(
     function (): void {

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Employee\Main;
-use App\Http\Livewire\Employee\Show;
+use App\Livewire\Employee\Main;
+use App\Livewire\Employee\Show;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('personal')->name('employee.')->group(

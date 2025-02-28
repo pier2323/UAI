@@ -59,8 +59,14 @@
                 
                 x-model="{{ $text }}"
                 placeholder="{{ \__('dias') }}"
-                @readonly($designation or auth()->user()->cannot('auditActivity.show.designationAcreditation'))
+                @if(auth()->user()->can('auditActivity.show.designationAcreditation'))
+                    x-bind:readonly="$wire.designation"
+                @else
+                    readonly
+                    sad
+                @endif
             >
         </div>
     </div>
+    <p x-text="$wire.designation ? 'true': 'false'"></p>
 </div>

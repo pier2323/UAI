@@ -27,15 +27,20 @@ class ExcelController extends Controller
 
     public $outgoing = [];
     public $employee = [];
+
+    public function hablar()
+    {
+
+    }
  
     public function __construct(Request $request)
     {
+        $objeto = new ExcelController(new Request());
+        $objeto->hablar();
         // Asegúrate de que el public_id esté presente en el request
         $auditActivityId = $request->input('auditActivityId'); // Cambia esto al nombre correcto del input
         if ($auditActivityId) {
-            $this->auditActivity = AuditActivity::with([ 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
-                ->where('public_id', $auditActivityId)
-                ->first();
+            $this->auditActivity = \App\Models\AuditActivity::where('public_id', 1)->first();
 
         }
     }

@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres-db
+    image: postgres:16
+    volumes:
+      # - pokemon_post:/var/lib/postgresql/data
+      - ./uai_post:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment: 
+      - POSTGRES_PASSWORD=123456
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+
+# volumes:
+#   pokemon_post:
+#     external: true

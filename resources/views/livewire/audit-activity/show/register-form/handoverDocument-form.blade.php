@@ -47,6 +47,7 @@
                 <textarea id="handoverDocument.departament_affiliation" rows="2" 
                 wire:model="handoverDocument.departament_affiliation" 
                 placeholder="Escribe aqui el nombre completo de la Unidad de Adscripcion" 
+                x-effect="toggleAttr(isEditing, this.$el)"
                 @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                 @cannot('handoverDocument.register') 

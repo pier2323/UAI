@@ -1,20 +1,11 @@
-<div role="designation">
-    @can('auditActivity.show.designationAcreditation')
-        @if($isCreated)
-            @push('alert')
-                <x-notification on='designation_designate'/>
-                <x-notification on='designation_download'/>
-            @endpush
-        @endif
-    @endcan
+@push('alert')
+    <x-alert on='designation_designate'/>
+    <x-alert on='designation_download'/>
+    <x-alert on='designation_updated'/> 
+    <x-alert on='designation_deleted'/> 
+@endpush
 
-    @can('auditActivity.show.designationAcreditation')
-        @if($isCreated) 
-            @push('alert') 
-                <x-notification on='designation_updated'/> 
-            @endpush 
-        @endif
-    @endcan
+<div role="designation" x-on:designation_deleted.window="window.location.reload();">
 
     {{-- todo planning form --}}
     <form 
@@ -78,13 +69,30 @@
 
             <div class="flex justify-between w-full px-10">
                 
-                <livewire:Components.TableCardsEmployee :$auditActivity :$isEditing :$isCreated
-                wire:model.live="tableEmployees.list" :errors="$errors->all()"
+                @php
+                    $tableEmployeeErrors = array();
+                    foreach ($errors->getMessages() as $key => $values) {
+                        if($key === "tableEmployees.list") 
+                        foreach ($values as $value) 
+                        $tableEmployeeErrors[] = $value;
+                    }
+                @endphp
+                <livewire:components.table-cards-employees :$auditActivity :$isEditing :$isCreated
+                wire:model.live="tableEmployees.list" :errors="$tableEmployeeErrors"
                 >
-                
+
+                @php
+                    $planningScheduleErrors = array();
+                    foreach ($errors->getMessages() as $key => $values) {
+                        $keyDivided = explode('.', $key)[0];
+                        if($keyDivided === "planningSchedule") 
+                        foreach ($values as $value) 
+                        $planningScheduleErrors[] = $value;
+                    }
+                @endphp
                 <div class="ml-4">
-                    <livewire:Components.PlanningSchedule :$auditActivity :$designation :$isEditing :$isCreated
-                    wire:model.live="planningSchedule.dates" :errors="$errors->all()"
+                    <livewire:components.planning-schedule :$auditActivity :designation="$isCreated" :$isEditing :$isCreated :$typeAudit
+                    wire:model.live="planningSchedule.dates" :errors="$planningScheduleErrors"
                     >
                 </div>
                 

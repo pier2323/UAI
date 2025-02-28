@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class NotWorkingDays extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'day'
+    ];
 }

@@ -1,3 +1,25 @@
+<?php
+
+use App\Models\AuditActivity;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Reactive;
+
+new class extends \Livewire\Volt\Component
+{
+    #[Reactive]
+    public AuditActivity $auditActivity;
+
+    #[Locked]
+    public $objective;
+
+    public function mount(Bool $objective = false)
+    {
+        $this->objective = $objective;
+    }
+};
+
+?>
+
 <div>
     @php
         function divideWords($text, $numbersOfWords, $divideBy = " "): array {
@@ -44,14 +66,14 @@
         
             {{-- todo Objective --}}
             <div class="mt-10">
-                    @php [$firstWord, $restOfWords] = divideWords($auditActivity->objective, 1, '"'); @endphp
+                    @php [$firstWord, $restOfWords] = divideWords($auditActivity->objective, 1, '“'); @endphp
             
                     {{-- ? objetive --}}
                     <h3 class="font-semibold" role="objective">
                             @php $firstWord = rtrim($firstWord) @endphp
 
                             <b class="block w-full text-5xl font-bold h-fit" id='heading-objective-firstword'>{{ $firstWord }}.</b>
-                            <p class="p-6 pt-10 mt-3 text-2xl text-justify border-t-2 border-black bg-amber-50">"{{ $restOfWords }}</p>
+                            <p class="p-6 pt-10 mt-3 text-2xl text-justify border-t-2 border-black bg-amber-50">“{{ $restOfWords }}</p>
                     </h3>
             </div>
         

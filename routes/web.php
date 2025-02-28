@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Documentos;
 use App\Http\Controllers\ExcelController;
@@ -11,11 +10,10 @@ use App\Http\Controllers\DownloadSinHallazgoController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\TuControlador; 
 use App\Http\Controllers\UnionController; 
-use App\Http\Livewire\MemoOficio\MemoOfico;
+use App\Livewire\MemoOficio\MemoOfico;
 use App\Http\Controllers\GmailController;
 use App\Http\Controllers\HallazgosController;
 use App\Http\Controllers\DescargaMemoController;
-use App\Http\Livewire\Components\Main as MainComponents;
 
 // todo before login 
 Route::get('/', fn() => view('welcome'))->name('welcome');
@@ -28,8 +26,7 @@ Route::controller(Documentos::class)->group(function () {
 
 // todo after login 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/dashboard', [MainController::class, '__invoke'])->name('dashboard.index');
-    Route::get('/private/components', MainComponents::class)->name('components.main');
+    Route::get('/dashboard', fn() => view(view: 'dashboard'))->name('dashboard.index');
 
     // todo auditActivity Routes 
     include_once('modules/auditActivity.php');
