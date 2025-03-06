@@ -17,7 +17,7 @@ class Show extends Component
     // #[Reactive]
     public AuditActivityRepository $auditActivity;
 
-    public ?HandoverDocument $handoverDocument;
+    // public ?HandoverDocument $handoverDocument;
 
     public function render(): Renderable
     {
@@ -26,14 +26,12 @@ class Show extends Component
 
     public function mount(int $id): void
     {
-        new AuditActivityRepository();
-        $this->auditActivity = AuditActivity::with('typeAudit')->find($id);
-        $this->handoverDocument = $this->auditActivity->handoverDocument()->first() ?? null;
+        $this->auditActivity = new AuditActivityRepository($id);
     }
 
-    public function load()
-    {
-        $this->handoverDocument = HandoverDocument::first() ?? null;
-        return $this->handoverDocument;
-    }
+    // public function load()
+    // {
+    //     $this->handoverDocument = HandoverDocument::first() ?? null;
+    //     return $this->handoverDocument;
+    // }
 }

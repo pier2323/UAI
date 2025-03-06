@@ -48,7 +48,7 @@
                         </button>
                     </div>
                 </a>
-                <a href="{{ route('handoverDocument.index') }}">
+                <a href="{{ route('handover.index') }}">
                     {{-- 
                 <a href="{{ route('plan de auditoria') }}">
                  --}}      

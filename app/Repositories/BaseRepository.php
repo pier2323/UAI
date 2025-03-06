@@ -6,15 +6,17 @@ use App\Interfaces\Repositories\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseRepository implements BaseRepositoryInterface
+abstract class BaseRepository
 {
     protected Model $model;
+    public object $object;
     public function __construct(string $model, int $id, private array $relations = [])
     {
         self::isValidateModel($model);
         $this->model = $model::findOr($id, function () use ($model) {
             return new $model();
         });
+        $this->object = $this->get();
     }
 
     public static function all(string $model, array $relations = []): Collection
@@ -27,10 +29,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $query->get();
     }
 
-    public function get(): Model
+    public function get()
     {
-        $query = $this->model->with([$this->relations]);
-        return $query->first();
+        $query = $this->model->query();
+        // $query->with([$this->relations]);
+        // dd($query->first());
+        return (object) $query->first()->toArray();
     }
 
     public function saveOrUpdate(array $data): Model

@@ -7,7 +7,7 @@ use App\Livewire\Handover\Review;
 use App\Livewire\Handover\Register;
 use App\Middlewares\HasPermission;
 
-Route::prefix('acta-de-entrega')->name('handoverDocument.')->group(
+Route::prefix('acta-de-entrega')->name('handover.')->group(
     function (): void {
         Route::get('/', Main::class)->name('index');
         Route::get('/nro/{public_id}', Show::class)->name('show');

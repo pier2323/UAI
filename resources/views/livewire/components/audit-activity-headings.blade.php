@@ -2,19 +2,18 @@
 
 use App\Models\AuditActivity;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\Reactive;
 
 new class extends \Livewire\Volt\Component
 {
-    #[Reactive]
-    public AuditActivity $auditActivity;
+    #[Locked]
+    public $auditActivity;
 
     #[Locked]
     public $objective;
 
     public function mount(Bool $objective = false)
     {
-        $this->objective = $objective;
+        if($objective) $this->objective = $objective;
     }
 };
 
@@ -50,7 +49,11 @@ new class extends \Livewire\Volt\Component
         {{-- todo title one --}}
         <div class="flex justify-between">
 
-                @php [$firstWord, $restOfWords] = divideWords($auditActivity->description, 1); @endphp
+                @php 
+                    $description = $auditActivity->object->description;
+                    // dd($description);
+                    [$firstWord, $restOfWords] = divideWords($description, 1); 
+                @endphp
 
                 {{-- ? description --}}
                 <h1 class="w-3/6 text-4xl font-semibold text-justify" role="description">
@@ -62,11 +65,17 @@ new class extends \Livewire\Volt\Component
                 <span class="text-xl text-slate-400" role="code">{{ $auditActivity->code }}</span>
         </div>
 
+        @php
+            $objective = $auditActivity->object->objective;
+            dd($objective);
+            if($objective) 
+            [$firstWord, $restOfWords] = divideWords($auditActivity->objective, 1, '“');
+        @endphp
+
         @if ($objective)
         
             {{-- todo Objective --}}
             <div class="mt-10">
-                    @php [$firstWord, $restOfWords] = divideWords($auditActivity->objective, 1, '“'); @endphp
             
                     {{-- ? objetive --}}
                     <h3 class="font-semibold" role="objective">
