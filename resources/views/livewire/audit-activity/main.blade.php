@@ -96,9 +96,9 @@
                                         'Mes fin' => 'month_end',
                                         'Área UAI Encargada' => 'uai.name',
                                     ]"
-                                    nameColumnId="public_id"
+                                    nameColumnId="id"
                                     eventRow="x-on:dblclick"
-                                    x-on:dblclick="$wire.goTo(row.public_id)"
+                                    x-on:dblclick="$wire.goTo(row.id)"
                                 />
 
                             </div>

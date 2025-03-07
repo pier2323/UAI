@@ -24,7 +24,7 @@ class Show extends Component
 
     public function mount(int $public_id): void
     {
-        $this->auditActivity = AuditActivity::where('public_id', $public_id)->first();
+        $this->auditActivity = AuditActivity::where('id', $public_id)->first();
         $this->handoverDocument = $this->auditActivity->handoverDocument()->first() ?? null;
     }
 
