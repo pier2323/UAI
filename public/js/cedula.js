@@ -25,6 +25,7 @@ const textosPorDefecto = {
     'checkbox20': '',
     'checkbox21':'Artículo 21.- El acta de entrega y sus anexos se elaborarán en original y tres (3) copias certificadas. Una vez suscrita el acta, el original se archivará en el despacho de la máxima autoridad jerárquica del órgano o entidad, o en la oficina o dependencia que se entrega; una (1) copia certificada se entregará al servidor público que recibe; una (1) al servidor público que entrega; y una (1) a la unidad de auditoría interna del órgano o entidad, dentro de los cinco (5) días hábiles siguientes de la fecha de suscripción de la mencionada acta' ,
     'checkbox22': 'Al cotejar el listado del personal adscrito a la "", con fecha de corte al "  y la suministrada por la Gerencia Atención y Desarrollo Gestión Humana , con la relación de personal inserta en el Acta de Entrega, se determinó la cantidad de  DESCRIBIR EL HALLAZGO XX  cargos vacantes no relacionado según el listado de Gestión Humana  Artículo 18.- “Los anexos del acta de entrega deberán incluir datos e información, con fecha de corte al momento del cese en el ejercicio del empleo, cargo o función pública del servidor público que entrega. Es responsabilidad de quien entrega, la exactitud del acta y sus anexos tanto cualitativa como cuantitativamente.”',
+    'checkbox26': '',
     
     
  

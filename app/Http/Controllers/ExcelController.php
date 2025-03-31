@@ -60,6 +60,8 @@ public function hallazasgo($request){
 
     public function downloadExcel(Request $request)
     {
+     
+
         $employeeOutgoing = $this->auditActivity->handoverDocument->employeeOutgoing;
         $cargo_saliente = $this->auditActivity->handoverDocument->EmployeeOutgoing->job_title;
         $full_name_Outgoing = "$employeeOutgoing->first_name " . (isset($employeeOutgoing->second_name) ? "$employeeOutgoing->second_name " : '') . "$employeeOutgoing->first_surname" . (isset($employeeOutgoing->second_surnam) ? " $employeeOutgoing->second_surnam " : '');
@@ -109,6 +111,9 @@ public function hallazasgo($request){
              // Manejar el caso en que no se encuentre un auditor
             
          }
+     
+         // Agregar dd para inspeccionar los valores
+         
      
          $nombre_recibe =  $full_name_Incoming;
          $cedula_recibe = 'C.I.'.$cedula_recibe;
@@ -287,13 +292,21 @@ public function hallazasgo($request){
      }
 //Enviar el archivo Excel al navegador
        // Preparar el nombre del archivo para la descarga
-        $nombreArchivo = "cedula_{$code}_{$unidad_adscrita}.xls"; // Nombre del archivo que incluye el departamento
+        // Replace accented characters in $unidad_entrega
+        $unidad_entrega_cleaned = str_replace(
+            ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'á', 'é', 'í', 'ó', 'ú', 'ñ'],
+            ['A', 'E', 'I', 'O', 'U', 'N', 'a', 'e', 'i', 'o', 'u', 'n'],
+            $unidad_entrega
+        );
+
+        // Generate the file name with cleaned $unidad_entrega
+        $nombreArchivo = "cedula_{$code}_{$unidad_entrega_cleaned}.xls";
 
         // Enviar el archivo Excel al navegador
         $writer = new Xlsx($spreadsheet);
         
         header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=\"$nombreArchivo\"");
+        header("Content-Disposition: attachment; filename=\"$nombreArchivo\"");
         header('Cache-Control: max-age=0');
         
         // Guardar el archivo en la salida estándar

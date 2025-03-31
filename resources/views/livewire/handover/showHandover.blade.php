@@ -1,4 +1,3 @@
-
 <div>
     @php
     
@@ -202,7 +201,9 @@ if ($diasHabilesDiferencia > 3) {
                         
                         <div class="additional-checkboxes">
                             <label class="checkbox-label">
-                                <input type="checkbox" id="checkbox25" name="checkbox25" wire:model="sinHallazgoChecked">
+                                <!-- Campo oculto para enviar un valor predeterminado si el checkbox no está marcado -->
+                                <input type="hidden" name="checkbox25" value="0">
+                                <input type="checkbox" id="checkbox25" name="checkbox25" value="1" wire:model="sinHallazgoChecked">
                                 <label for="checkbox25">Sin Hallazgo</label>
                             </label>
                         </div>
@@ -261,22 +262,88 @@ if ($diasHabilesDiferencia > 3) {
                     <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
                     @csrf
                     <div id="uncheckedCheckboxesContainer" style="margin: 20px 0;"></div>
-                    <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga Cedula </x-button>
-                     <button type="button" class="btn-modern dynamic-button" wire:click="informeDocumen" id="downloadReportButton">Descargar Informe del Auditor</button>
+                    {{-- <x-button type='submit' class="ml-4" id="downloadButton" onclick="handleDownload()">Descarga Cedula </x-button>
+                    <button type="submit" class="btn-modern btn-info" formaction="{{ route('download-definitivo-v2') }}" id="downloadDefinitivoV2Button">Descarga de Informe Definitivo V2</button>--}} 
+                    
+                    <!-- Nuevo botón para llamar a ambos controladores -->
+                    <button type="button" class="btn-modern btn-warning" id="combinedActionButton" onclick="handleCombinedAction()">Descargar Cedula e Informe</button>
+
                     <button type="button" class="btn-modern btn-danger" onclick="closeAllModalsAndReset()">Cerrar</button>
                     <div id="downloadMessage" class="download-message"></div>
-                    </form>
-                    <!-- Formulario para descargar documento Word si "Sin Hallazgo" está marcado -->
-                    <form id="sinHallazgoForm" action="{{ route('download-sin-hallazgo') }}" method="POST" style="display: none;">
-                     @csrf
-                    <input type="hidden" name="auditActivityId" value="{{ $auditActivity->public_id }}">
-                      <button type="submit" class="btn-modern btn-success" id="downloadSinHallazgoButton">Descarga del AI Sin Hallazgo</button>
                 </form>
+
+<script>
+    function handleCombinedAction() {
+        const formData = new FormData(document.getElementById('secondForm'));
+        const auditActivityId = document.querySelector('input[name="auditActivityId"]').value;
+
+        // Add auditActivityId to the request body
+        formData.append('auditActivityId', auditActivityId);
+
+        // Call the ExcelController
+        fetch("{{ route('download-excel') }}", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                "Accept": "application/json"
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al generar el archivo Excel.");
+            }
+            const contentDisposition = response.headers.get('Content-Disposition');
+            const fileName = contentDisposition
+                ? contentDisposition.split('filename=')[1].split(';')[0].replace(/"/g, '')
+                : `cedula_${auditActivityId}.xls`;
+            return response.blob().then(blob => ({ blob, fileName }));
+        })
+        .then(({ blob, fileName }) => {
+            const excelUrl = window.URL.createObjectURL(blob);
+            const excelLink = document.createElement('a');
+            excelLink.href = excelUrl;
+            excelLink.download = fileName; // Usa el nombre correcto del archivo
+            excelLink.click();
+        })
+        .then(() => {
+            // Call the DefinitivoV2Controller
+            return fetch("{{ route('download-definitivo-v2') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Accept": "application/json"
+                },
+                body: formData
+            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al generar el Informe Definitivo.");
+            }
+            const contentDisposition = response.headers.get('Content-Disposition');
+            const fileName = contentDisposition
+                ? contentDisposition.split('filename=')[1].split(';')[0].replace(/"/g, '')
+                : `IA_${auditActivityId}_departament.doc`;
+            return response.blob().then(blob => ({ blob, fileName }));
+        })
+        .then(({ blob, fileName }) => {
+            const docUrl = window.URL.createObjectURL(blob);
+            const docLink = document.createElement('a');
+            docLink.href = docUrl;
+            docLink.download = fileName; // Usa el nombre correcto del archivo
+            docLink.click();
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocurrió un error al ejecutar ambos controladores.");
+        });
+    }
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const checkboxSinHallazgo = document.getElementById('checkbox25');
     const sinHallazgoForm = document.getElementById('sinHallazgoForm');
     const downloadSinHallazgoButton = document.getElementById('downloadSinHallazgoButton');
     const downloadReportButton = document.getElementById('downloadReportButton');

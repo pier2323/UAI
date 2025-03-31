@@ -32,8 +32,11 @@ class Main extends Component
     private function query()
     {
         $auditActivies = array();
-        foreach(AuditActivity::with($this->queryEmployee())->get() as $auditActivity) {
-            if($auditActivity->employee->isEmpty()) continue;
+        foreach (AuditActivity::with($this->queryEmployee())
+            ->where('type_audit_id', 1) // Filter by type_audit_id: 1
+            ->orderBy('public_id', 'asc') // Order by public_id ascending
+            ->get() as $auditActivity) {
+            if ($auditActivity->employee->isEmpty()) continue;
 
             $auditActivies[] = $auditActivity;
         }

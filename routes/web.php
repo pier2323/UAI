@@ -16,6 +16,8 @@ use App\Http\Livewire\MemoOficio\MemoOfico;
 use App\Http\Controllers\GmailController;
 use App\Http\Controllers\HallazgosController;
 use App\Http\Controllers\DescargaMemoController;
+use App\Http\Controllers\DefinitivoV2Controller; // Import the new controller
+use App\Http\Controllers\RemisionDefinitivoController; // Import the new controller
 
 // routes/web.php
 
@@ -26,8 +28,9 @@ Route::get(uri: '/memo-ofico', action: MemoOfico::class)->name('memo_ofico.index
     Route::post('/guardar-memo', [HallazgosController::class, 'guardarMemo'])->name('guardar.memo');
     Route::post('/actualizar-memo/{id}', [HallazgosController::class, 'actualizarMemo'])->name('actualizar.memo');
     Route::delete('/eliminar-memo/{id}', [HallazgosController::class, 'eliminarMemo'])->name('eliminar.memo');
-
-
+    Route::get('/remision-definitivo/download/{id}', [RemisionDefinitivoController::class, 'downloadTemplate']);
+Route::post('/remision-definitivo/update/{id}', [RemisionDefinitivoController::class, 'update'])->name('remision-definitivo.update');
+Route::delete('/remision-definitivo/delete/{id}', [RemisionDefinitivoController::class, 'destroy'])->name('remision-definitivo.destroy');
 
 
 
@@ -57,8 +60,6 @@ Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('
 Route::post('/documents/save-text', [DocumentController::class, 'saveText'])->name('documents.save-text');
 Route::post('/generate-word', [DocumentController::class, 'generateWord']);
 Route::post('/download-sin-hallazgo', [DownloadSinHallazgoController::class, 'download'])->name('download-sin-hallazgo');
-Route::post('/download-report', [ReportController::class, 'downloadReport'])->name('download-report')->middleware('auditActivity');
-
 // Fin  Rutas de la carga de los archivos 
 
 
@@ -68,7 +69,11 @@ Route::get('/enviar-correo-zimbra', [ZimbraMailController::class, 'enviarCorreo'
 Route::post('/download-excel', [ExcelController::class, 'downloadExcel'])->name('download-excel');
 // Fin  Rutas 
 
+// Route for downloading "Informe Definitivo V2"
+Route::post('/download-definitivo-v2', [DefinitivoV2Controller::class, 'download'])->name('download-definitivo-v2');
 
+// Route for storing "Remision Definitivo"
+Route::post('/remision-definitivo', [RemisionDefinitivoController::class, 'store'])->name('remision-definitivo.store');
 
 // todo before login 
 Route::get('/', function () {

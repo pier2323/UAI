@@ -2,6 +2,7 @@
     // Formatear las fechas en el formato dd-mm-yyyy
     $fechaInicio = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));
     $fechaFin = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->delivery_uai)); // Cambia esto si quieres usar una fecha fija
+    $fecha_subcripcion = date('Y-m-d', strtotime($this->auditActivity->handoverDocument->subscription)); // Formato para el valor del input date
 @endphp
 
 <style>
@@ -153,7 +154,7 @@
 
 
     <label for="startDate">Fecha de Inicio:</label>
-    <input type="date" id="startDate" required>
+    <input type="date" id="startDate" value="{{ $fecha_subcripcion }}" required>
 
     <button onclick="showSelectedDate()">Mostrar Fecha</button>
     <button onclick="resetCalendar()">Reiniciar</button>
