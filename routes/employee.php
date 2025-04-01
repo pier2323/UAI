@@ -3,10 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get(
-    uri: '/personal',
-    action: App\Http\Livewire\Employee\Main::class
-)->name('employee.index');
+Route::get('/personal', 'index')->name('employee.index');
 
 Route::controller(EmployeeController::class)->group( function (): void {
     Route::post('/personal/almacenar', 'store')->name('employee.store');
