@@ -1,14 +1,15 @@
-<div role='add'>
-    @assets @vite(['resources/js/hola.js']) @endassets
+@push('alert')
+    <x-alert on="add-audit-activity-save-ok" />
+    <x-alert on="add-audit-activity-cancel-ok" theme="warning" />
+@endpush
 
-    @push('alert')
-        <x-notification on="add-audit-activity-save-ok" />
-        <x-notification on="add-audit-activity-cancel-ok" theme="warning" />
-    @endpush
+<x-script src="hola"/>
 
-    <x-button class="m-4" x-on:click="$wire.open = true">{{\__("Nueva Actuación Fiscal")}}</x-button>
+<div role='add' x-data="add">
 
-    <form wire:submit="save" x-data>
+    <x-button class="m-4" x-on:click="openModal()">{{\__("Nueva Actuación Fiscal")}}</x-button>
+
+    <form wire:submit="save">
     <x-dialog-modal wire:model="open" maxWidth="3xl" class="overflow-hidden">
         <x-slot:title>
             <div class="flex justify-between">
@@ -34,17 +35,17 @@
             <div class="flex justify-between align-middle">
 
                 <div>
-                    <livewire:AuditActivity.SelectArea wire:model="auditActivity.area">
+                    <livewire:audit-activity.select-area wire:model="auditActivity.area">
                     <x-input-error for="auditActivity.area" />
                 </div>
 
                 <div>
-                    <livewire:Components.SelectSomething wire:model="auditActivity.type_audit" :items="App\Models\TypeAudit::select('name')->get()" id="auditActivity.type_audit" placeholder="Seleccione un tipo" title="Tipos de auditoría">
+                    <livewire:components.select-something wire:model="auditActivity.type_audit" :items="App\Models\TypeAudit::select('name')->get()" id="auditActivity.type_audit" placeholder="Seleccione un tipo" title="Tipos de auditoría">
                     <x-input-error for="auditActivity.type_audit" />
                 </div>
 
                 <div>
-                    <livewire:Components.SelectSomething wire:model="auditActivity.uai" :items="App\Models\Uai::select('name')->get()" id="auditActivity.uai" placeholder="Coordinaciones" title="Área de la UAI encargada">
+                    <livewire:components.select-something wire:model="auditActivity.uai" :items="App\Models\Uai::select('name')->get()" id="auditActivity.uai" placeholder="Coordinaciones" title="Área de la UAI encargada">
                     <x-input-error for="auditActivity.uai" />
                 </div>
 
@@ -66,7 +67,7 @@
                 <div class="w-1/2 mr-2">
                     <label for="month_start" class="mr-2 text-base font-semibold">{{\__("Mes inicio:")}}</label>
                     <div>
-                        <livewire:Components.MonthPicker wire:model="auditActivity.month_start" alpine="month_start" id="auditActivity.month_start">
+                        <livewire:components.month-picker wire:model="auditActivity.month_start" alpine="month_start" id="auditActivity.month_start">
                         <x-input-error for="auditActivity.month_start" />
 
                     </div>
@@ -74,7 +75,7 @@
                 <div class="w-1/2">
                     <label for="month_end" class="mr-2 text-base font-semibold">{{\__("Mes Fin:")}}</label>
                     <div>
-                        <livewire:Components.MonthPicker wire:model="auditActivity.month_end" alpine="month_end" id="auditActivity.month_end">
+                        <livewire:components.month-picker wire:model="auditActivity.month_end" alpine="month_end" id="auditActivity.month_end">
                         <x-input-error for="auditActivity.month_end" />
                     </div>
                 </div>
@@ -82,7 +83,7 @@
 
             @isset($handoverDocument)
 
-            <div x-data x-init="$wire.loadInputs()">
+            <div>
                 <h5 >Acta de entrega</h5>
                 <ul class="flex font-semibold border-b cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300">
 
@@ -106,6 +107,23 @@
     </x-dialog-modal>
     </form>
 
-    @push('modals') <livewire:Component.HandoverBrowser> @endpush
+    @push('modals') <livewire:components.handover-browser> @endpush
 
 </div></div>
+
+
+@script
+    <script>
+        Alpine.data('add', () => {
+            return {
+                openModal() {
+                    $wire.open = true;
+                },
+
+                init() {
+                    $wire.loadInputs();
+                },
+            }
+        })
+    </script>
+@endscript

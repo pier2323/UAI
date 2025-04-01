@@ -13,7 +13,7 @@ return new class extends Migration
             $table->integer('public_id')->nullable();
             $table->boolean('is_poa')->nullable()->default(false);
             $table->string('year', length: 4)->default('2024');
-            $table->string('description')->nullable();
+            $table->string('description', length: 1000)->nullable();
             $table->string('objective', length: 5000)->nullable();
             $table->string('month_start')->nullable();
             $table->string('month_end')->nullable();

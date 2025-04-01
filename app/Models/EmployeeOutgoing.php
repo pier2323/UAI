@@ -38,10 +38,10 @@ class EmployeeOutgoing extends Model
     //     return $this->belongsTo(related: JobTitle::class);
     // }
 
-    // public function departament(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    // {
-    //     return $this->belongsTo(related: Departament::class);
-    // }
+    public function departament(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(related: Departament::class);
+    }
 
     public function handoverDocument(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

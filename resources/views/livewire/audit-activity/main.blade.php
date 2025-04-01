@@ -94,7 +94,7 @@
                                         'Descripción' => 'description',
                                         'Mes inicio' => 'month_start',
                                         'Mes fin' => 'month_end',
-                                        'Área UAI Encargada' => 'uai.name',
+                                        'Tipo de Auditoria' => 'type_audit.name',
                                     ]"
                                     nameColumnId="id"
                                     eventRow="x-on:dblclick"
@@ -122,7 +122,7 @@
                                     auditActivity => {
                                         return auditActivity.code.includes(query)
                                         || auditActivity.description.includes(query)
-                                        || auditActivity.uai.name.includes(query)
+                                        || auditActivity.type_audit.name.includes(query)
                                     }
                                 );
 

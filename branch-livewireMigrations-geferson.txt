@@ -1,1 +1,0 @@
-Aqui en esta rema se procede a hacer integrar livewire para algunas funcionalides

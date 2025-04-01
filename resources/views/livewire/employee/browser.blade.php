@@ -1,3 +1,23 @@
+<?php 
+
+use App\Models\Employee;
+use Livewire\Attributes\Session;
+
+new class extends \Livewire\Volt\Component
+{
+    public $open = false;
+
+    #[Session]
+    public $employees;
+
+    public function mount()
+    {
+        $this->employees = Employee::with('uai')->get();
+    }
+};
+
+?>
+
 <div x-on:open-browser.window="$wire.open = true;" class="absolute">
 
     <x-dialog-modal id='browser' maxWidth='2xl' wire:model='open'>
@@ -14,13 +34,13 @@
                     x-on:delete-card.window="filterEmployees($event.detail.employees)"
                 />
 
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+                <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
 
                     {{-- todo table --}}
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-300">
                             <tr>
-                                <th scope="col" class="px-6 py-3 flex justify-center">
+                                <th scope="col" class="flex justify-center px-6 py-3">
                                     P00
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -35,7 +55,7 @@
 
                             {{-- todo rows --}}
                             <template x-for="item in filteredItems" :key="item.id">    
-                                <tr class="border-b font-semibold hover:bg-gray-100 cursor-pointer select-none active:bg-gray-300" 
+                                <tr class="font-semibold border-b cursor-pointer select-none hover:bg-gray-100 active:bg-gray-300" 
                                 x-on:click="clickTableRows(item)">
 
                                     <td class="px-6 py-3" scope="row" x-text='item.p00'></td>
@@ -48,17 +68,17 @@
                             {{-- todo messages not found --}}
                             <template x-if="filteredItems.length === 0">
                                 <tr>
-                                    <td align="center" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-400" colspan="3">No se encontraron resultados</td>
+                                    <td align="center" class="px-6 py-4 font-medium text-gray-900 bg-gray-400 whitespace-nowrap" colspan="3">No se encontraron resultados</td>
                                 </tr>                              
                             </template>
                         </tbody>
                     </table>
-                    <div x-show="search.length === 0" class="m-3 flex justify-center align-middle">
+                    <div x-show="search.length === 0" class="flex justify-center m-3 align-middle">
 
                         {{-- todo numbers below --}}
                         <template x-for="number in pages.length" :key='number'>
                                 <button 
-                                    class= "border rounded-full p-2 flex justify-center align-middle h-10 w-10 font-bold mx-3" 
+                                    class= "flex justify-center w-10 h-10 p-2 mx-3 font-bold align-middle border rounded-full" 
                                     type="button" 
                                     x-on:click="page = number - 1" 
                                     x-text="number" 

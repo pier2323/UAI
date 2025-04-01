@@ -1,13 +1,34 @@
+<?php
+
+use Livewire\Attributes\Locked;
+
+new class extends \Livewire\Volt\Component
+{
+    #[Locked]
+    public $repository;
+
+    #[Locked]
+    public bool $hasObjective;
+
+    public object $object;
+
+    public function mount(): void
+    {
+        $this->object = (object) $this->repository->object;
+    }
+};
+
+function divideWords($text, $numbersOfWords, $divideBy = " "): array {
+    $words = explode($divideBy, $text);
+    $firstWords = array_slice($words, 0, $numbersOfWords);
+    $firstWord = implode($divideBy, $firstWords);
+    $restOfWords = implode($divideBy, array_slice($words, $numbersOfWords));
+    return [$firstWord, $restOfWords];
+}
+
+?>
+
 <div>
-    @php
-        function divideWords($text, $numbersOfWords, $divideBy = " "): array {
-            $words = explode($divideBy, $text);
-            $firstWords = array_slice($words, 0, $numbersOfWords);
-            $firstWord = implode($divideBy, $firstWords);
-            $restOfWords = implode($divideBy, array_slice($words, $numbersOfWords));
-            return [$firstWord, $restOfWords];
-        }
-    @endphp
 
     @push('styles') 
         <style>
@@ -28,31 +49,40 @@
         {{-- todo title one --}}
         <div class="flex justify-between">
 
-                @php [$firstWord, $restOfWords] = divideWords($auditActivity->description, 1); @endphp
+            @php 
+                $description = $object->description;
+                // dd($description);
+                [$firstWord, $restOfWords] = divideWords($description, 1); 
+            @endphp
 
-                {{-- ? description --}}
-                <h1 class="w-3/6 text-4xl font-semibold text-justify" role="description">
-                        <b class="text-4xl font-bold border-b-2 border-black h-fit w-fit" id='heading-description-firstword'>{{ $firstWord }}</b>
-                        <span>{{ $restOfWords }}</span>
-                </h1>
+            {{-- ? description --}}
+            <h1 class="w-3/6 text-4xl font-semibold text-justify" role="description">
+                    <b class="text-4xl font-bold border-b-2 border-black h-fit w-fit" id='heading-description-firstword'>{{ $firstWord }}</b>
+                    <span>{{ $restOfWords }}</span>
+            </h1>
 
-                {{-- ? code --}}
-                <span class="text-xl text-slate-400" role="code">{{ $auditActivity->code }}</span>
+            {{-- ? code --}}
+            <span class="text-xl text-slate-400" role="code">{{ $object->code }}</span>
         </div>
+
+        @php
+            $objective = $object->objective;
+            // dd($objective);
+            if($objective) [$firstWord, $restOfWords] = divideWords($objective, 1, '“');
+        @endphp
 
         @if ($objective)
         
             {{-- todo Objective --}}
             <div class="mt-10">
-                    @php [$firstWord, $restOfWords] = divideWords($auditActivity->objective, 1, '"'); @endphp
             
-                    {{-- ? objetive --}}
-                    <h3 class="font-semibold" role="objective">
-                            @php $firstWord = rtrim($firstWord) @endphp
+                {{-- ? objetive --}}
+                <h3 class="font-semibold" role="objective">
+                        @php $firstWord = rtrim($firstWord) @endphp
 
-                            <b class="block w-full text-5xl font-bold h-fit" id='heading-objective-firstword'>{{ $firstWord }}.</b>
-                            <p class="p-6 pt-10 mt-3 text-2xl text-justify border-t-2 border-black bg-amber-50">"{{ $restOfWords }}</p>
-                    </h3>
+                        <b class="block w-full text-5xl font-bold h-fit" id='heading-objective-firstword'>{{ $firstWord }}.</b>
+                        <p class="p-6 pt-10 mt-3 text-2xl text-justify border-t-2 border-black bg-amber-50">“{{ $restOfWords }}</p>
+                </h3>
             </div>
         
         @endif

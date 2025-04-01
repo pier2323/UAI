@@ -122,7 +122,7 @@ if ($diasHabilesDiferencia > 3) {
 }
 @endphp      
 {{-- todo Headings --}}
-<div role="headings"> <livewire:Components.AuditActivityHeadings :$auditActivity objective></div>
+<div role="headings"> <livewire:components.audit-activity-headings :$auditActivity objective></div>
 
             <x-section-basic> 
 

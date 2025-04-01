@@ -6,7 +6,7 @@
         <div class="flex gap-4 mb-4">
 
             {{-- todo P00 --}}
-            <x-input-text-handover property="incoming.p00" title="P00" input="updateValue" :readonly="$modelsHandoverDocument">
+            <x-input-text-handover property="incoming.p00" title="P00" input="updateValue" :readonly="$hasHandoverDocument">
                 <x-slot:prefix>
                     <div class="flex items-center h-10 p-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" >P00</div>
                         
@@ -15,7 +15,7 @@
             </x-input-text-handover>
             
             {{-- todo Personal ID --}}
-            <x-input-text-handover property="incoming.personal_id" title="Numero de Cedula" input="updateValue" limit="8" :readonly="$modelsHandoverDocument">
+            <x-input-text-handover property="incoming.personal_id" title="Numero de Cedula" input="updateValue" limit="8" :readonly="$hasHandoverDocument">
                 <x-slot:prefix>
                     <div class="flex items-center h-10 p-3 text-sm font-normal text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border focus:border-indigo-500 focus:outline-none" >V</div>
                         
@@ -33,10 +33,10 @@
             <div role="names" class="flex justify-between gap-4">
 
                 {{-- todo first_name --}}
-                <x-input-text-handover property="incoming.first_name" title="Primer Nombre" :readonly="$modelsHandoverDocument"/>
+                <x-input-text-handover property="incoming.first_name" title="Primer Nombre" :readonly="$hasHandoverDocument"/>
                
                 {{-- todo second_name --}}
-                <x-input-text-handover property="incoming.second_name" title="Segundo Nombre" :readonly="$modelsHandoverDocument"/>
+                <x-input-text-handover property="incoming.second_name" title="Segundo Nombre" :readonly="$hasHandoverDocument"/>
 
             </div>
 
@@ -44,10 +44,10 @@
             <div role="surnames" class="flex justify-between gap-4">
 
                 {{-- todo first_surname --}}
-                <x-input-text-handover property="incoming.first_surname" title="Primer Apellido" placeholder="VANEGAS" :readonly="$modelsHandoverDocument"/>
+                <x-input-text-handover property="incoming.first_surname" title="Primer Apellido" placeholder="VANEGAS" :readonly="$hasHandoverDocument"/>
 
                 {{-- todo second_surname --}}
-                <x-input-text-handover property="incoming.second_surname" title="Segundo Apellido" placeholder="GARCÍA" :readonly="$modelsHandoverDocument"/>
+                <x-input-text-handover property="incoming.second_surname" title="Segundo Apellido" placeholder="GARCÍA" :readonly="$hasHandoverDocument"/>
 
             </div>
         </div>
@@ -57,10 +57,10 @@
         <div class="flex gap-4">
             
             {{-- todo Gmail --}}
-            <x-input-text-handover property="incoming.gmail" title="Correo UAI gmail" custom :readonly="$modelsHandoverDocument"/>
+            <x-input-text-handover property="incoming.gmail" title="Correo UAI gmail" custom :readonly="$hasHandoverDocument"/>
             
             {{-- todo Email cantv --}}
-            <x-input-text-handover property="incoming.email_cantv" title="Correo Institucional" custom :readonly="$modelsHandoverDocument"/>
+            <x-input-text-handover property="incoming.email_cantv" title="Correo Institucional" custom :readonly="$hasHandoverDocument"/>
             
         </div>
 
@@ -70,8 +70,8 @@
 
             {{-- todo Phone --}}
 
-            @if (isset($modelsHandoverDocument) or auth()->user()->cannot('handoverDocument.register'))
-                <x-input-text-handover property="incoming.phone" title="Telefono" :readonly="$modelsHandoverDocument" />
+            @if ($hasHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
+                <x-input-text-handover property="incoming.phone" title="Telefono" :readonly="$hasHandoverDocument" />
                 
             @else
                 <x-input-text-handover property="incoming.phone_number" title="Telefono" input="updateValue" limit="7">
@@ -98,13 +98,13 @@
             @endif
 
             {{-- todo Job title --}}
-            <x-input-text-handover property="incoming.job_title" title="Cargo" :readonly="$modelsHandoverDocument" custom />
+            <x-input-text-handover property="incoming.job_title" title="Cargo" :readonly="$hasHandoverDocument" custom />
 
         </div>
 
     </div>
 
-    @if(empty($modelsHandoverDocument) and auth()->user()->can('handoverDocument.register'))
+    @if(!$hasHandoverDocument and auth()->user()->can('handoverDocument.register'))
         
         {{-- todo All Erros --}}
         <div class="flex justify-center w-full mt-2">
