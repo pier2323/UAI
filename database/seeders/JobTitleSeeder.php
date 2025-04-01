@@ -31,6 +31,7 @@ class JobTitleSeeder extends Seeder
             'analista', // 12
             'consultor II', // 12
             'mensajero', // 12
+            'consultor II', // 13
         ];
 
         foreach($names as $name)

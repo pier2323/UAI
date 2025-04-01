@@ -2,11 +2,12 @@
 <x-section-basic>
     <section>
         <h2 class="flex justify-between w-full px-12 my-10 text-5xl font-bold">
-            <span>Personal</span>
+            Personal
         </h2>
     </section>
     <div class="m-12">
-        <livewire:employee.registerForm>
+        <x-button x-on:click="$wire.newPersonalModal = true">Registrar nuevo personal</x-button>
+        <livewire:employee.registerForm wire:model="newPersonalModal">
     </div>
     <livewire:employee.tableEmployee :$employees />
 </x-section-basic>

@@ -122,7 +122,10 @@ if ($diasHabilesDiferencia > 3) {
 }
 @endphp      
 {{-- todo Headings --}}
-<div role="headings"> <livewire:Components.AuditActivityHeadings :$auditActivity objective></div>
+@php
+    $repository = new \App\Repositories\AuditActivityRepository($auditActivity->id);
+@endphp
+<div role="headings"> <livewire:components.audit-activity-headings :$repository hasObjective></div>
 
             <x-section-basic> 
 
