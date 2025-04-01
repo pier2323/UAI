@@ -16,7 +16,7 @@ class Main extends Component
     // public $query = '';
     public function render()
     {
-
+        dd('asdsa');
         return view('livewire.handover.main', [
            
             'auditActivity' => $this->query()

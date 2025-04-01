@@ -8,7 +8,7 @@ new class extends \Livewire\Volt\Component
     public $repository;
 
     #[Locked]
-    public bool $hasObjective;
+    public bool $hasObjective = false;
 
     public object $object;
 
@@ -71,7 +71,7 @@ function divideWords($text, $numbersOfWords, $divideBy = " "): array {
             if($objective) [$firstWord, $restOfWords] = divideWords($objective, 1, '“');
         @endphp
 
-        @if ($objective)
+        @if ($hasObjective)
         
             {{-- todo Objective --}}
             <div class="mt-10">

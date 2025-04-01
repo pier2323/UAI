@@ -44,9 +44,19 @@
             @foreach ($auditActivity as $audit)
                 @php
                 $audit->code = $audit->code;
-                $audit->uai->name = $audit->uai->name;
+                /*** // modificado por geferson
+                 * codigo anterior
+                 * $audit->uai->name = $audit->uai->name;
+                 * en este caso el poa 2025 no estuvo asignado a las coordinaciones (variable $audit->uai)
+                 * este campo saldrá vacio, si se usa directamente da error porque esta en null
+                 * para que funcione, y asi en las columnas que tengan las mismas condiciones de que pueden ser null
+                 * hay que consultar si existe el campo con el if y la funcion isset()
+                */
+                if (isset($audit->uai)) {
+                    $audit->uai->name = $audit->uai->name;
+                }
                 @endphp   
-               @endforeach
+            @endforeach
 
               
 
@@ -56,7 +66,7 @@
                 'Descripción' => 'description',
                 'Mes inicio' => 'month_start',
                 'Mes fin' => 'month_end',
-               'Área UAI Encargada' => 'uai.name',
+                'Área UAI Encargada' => isset($audit->uai) ? 'uai.name' : 'null', 
             ]" nameColumnId="id"
                 eventRow="x-on:dblclick" x-on:dblclick="$wire.goTo(row.id)" />
 
