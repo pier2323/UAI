@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewirekjlkj\AuditActivity;
+namespace App\Http\Livewire\AuditActivity;
 
 use App\Models\AuditActivity;
 use App\Models\Year;
@@ -40,8 +40,6 @@ class Main extends Component
      */
     public function mount(): void
     {
-
-        dd('asd');
         $this->year = Year::get();
         $this->auditActivityPoa = AuditActivity::with([
             'handoverDocument' => [

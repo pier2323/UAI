@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\AuditActivity\Main;
-use App\Livewire\AuditActivity\Show;
+use App\Http\Livewire\AuditActivity\Main;
+use App\Http\Livewire\AuditActivity\Show;
 use Illuminate\Support\Facades\Log;
 use Livewire\Livewire;
 
