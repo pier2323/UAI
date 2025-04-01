@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AuditActivity;
+use App\Repositories\AuditActivityRepository;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,7 +16,7 @@ final class AcreditationService
     public WorkingPaper $document;
 
     public function __construct(
-        private readonly AuditActivity $auditActivity, 
+        private readonly AuditActivityRepository $repository, 
         public readonly ?string $nameDocument = null,
         public readonly ?Carbon $date = null,
     ){
@@ -29,7 +30,7 @@ final class AcreditationService
     public function download(): BinaryFileResponse
     {
         // todo save the employee/auditors in "" 
-        $this->setAuditor($this->auditActivity->employee()->orderBy('role', 'desc')->get());
+        $this->setAuditor($this->repository->makeQuery()->employee()->orderBy('role', 'desc')->get());
 
         // todo save all data 
         $this->setData();
@@ -62,7 +63,7 @@ final class AcreditationService
 
     private function setData(): void
     {
-        $date_release_designation = $this->auditActivity->designation()->first()->date_release;
+        $date_release_designation = $this->repository->makeQuery()->designation()->first()->date_release;
 
         $date_release = // todo make date in spanish example '4 de abril de 2001' 
         $this->document->date->format('j') ." de ". // todo '$day de'   
@@ -71,13 +72,13 @@ final class AcreditationService
 
         $this->document->data = [
 
-            'code_audit_activity' => $this->auditActivity->code,
-            'code_designation' => 'UAI/GCP/DES-COM ' . $this->auditActivity->code,
+            'code_audit_activity' => $this->repository->object['code'],
+            'code_designation' => 'UAI/GCP/DES-COM ' . $this->repository->object['code'],
             'date_release_designation' => $date_release_designation->format('d/m/Y'),
 
             // todo checked 
             'date_release' => $date_release,
-            'auditActivity_objective' => $this->auditActivity->objective,
+            'auditActivity_objective' => $this->repository->object['objective'],
 
             'auditors' => $this->fomatAuditorData('fullname'),
 

@@ -37,7 +37,7 @@
                 @cannot('handoverDocument.register') 
                     bg-slate-200 
                 @endcannot
-                " placeholder="Escribe aqui el nombre completo de la Unidad que Entrega..." @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))></textarea>
+                " placeholder="Escribe aqui el nombre completo de la Unidad que Entrega..." @readonly($hasHandoverDocument or auth()->user()->cannot('handoverDocument.register'))></textarea>
                 <x-input-error for="handoverDocument.departament" />
             </div>
 
@@ -48,7 +48,7 @@
                 wire:model="handoverDocument.departament_affiliation" 
                 placeholder="Escribe aqui el nombre completo de la Unidad de Adscripcion" 
                 x-effect="toggleAttr(isEditing, this.$el)"
-                @readonly($modelsHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
+                @readonly($hasHandoverDocument or auth()->user()->cannot('handoverDocument.register'))
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                 @cannot('handoverDocument.register') 
                     bg-slate-200
@@ -61,7 +61,7 @@
         
     </div>
 
-    @empty($modelsHandoverDocument)
+    @if(!$hasHandoverDocument)
     @script
     <script>
         Alpine.data('handoverDates', () => {
@@ -102,6 +102,6 @@
         })
     </script>
     @endscript
-    @endempty
+    @endif
 
 </div>

@@ -23,7 +23,7 @@ class Incoming extends Form
     ];
 
     // todo inputs variables 
-    #[Validate('required|unique:employee_incoming,p00|max:6|min:5', as: 'P00')]
+    #[Validate(as: 'P00')]
     public $p00; 
 
     #[Validate('required|max:255|min:3', as: 'Primer Nombre')]
@@ -44,7 +44,7 @@ class Incoming extends Form
     #[Validate('required|max:5|min:3', as: 'Codigo de Telefono')]
     public $phone_code;
 
-    #[Validate('email|unique:employee_incoming|max:255', as: 'Correo Corporativo')]
+    #[Validate('unique:employee_incoming|max:255', as: 'Correo Corporativo')]
     public $email_cantv;
 
     #[Validate('required|email|max:255', as: 'Correo Gmail')]
@@ -78,7 +78,7 @@ class Incoming extends Form
         return $this->only(self::properties);
     }
 
-    public function load(EmployeeIncoming $incoming): void 
+    public function load(object $incoming): void 
     {
         foreach(self::properties as $property) 
         $this->{$property} = $incoming->$property;

@@ -24,7 +24,7 @@ final class Outgoing extends Form
     ];
 
     // todo inputs variables 
-    #[Validate('required|unique:employee_outgoing,p00|max:10|min:6', as: 'P00')]
+    #[Validate('unique:employee_outgoing,p00|max:10|min:6', as: 'P00')]
     public $p00; 
 
     #[Validate('required|max:255|min:3', as: 'Primer Nombre')]
@@ -78,8 +78,9 @@ final class Outgoing extends Form
         return $this->only(self::properties);
     }
 
-    public function load(EmployeeOutgoing $outgoing): void 
+    public function load(object $outgoing): void 
     {
+        // dd($outgoing);
         foreach(self::properties as $property) 
         $this->{$property} = $outgoing->$property;
     }

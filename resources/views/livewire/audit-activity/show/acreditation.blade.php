@@ -18,7 +18,7 @@
                 </div>
             </x-slot>
             <x-slot:footer>
-                <x-button class="mr-4" type="button" wire:click="acredit">{{ \__('Guardar') }}</x-button>
+                <x-button class="mr-4" type="button" wire:click="acredit">Guardar</x-button>
                 <x-secondary-button type="button" x-on:click="cancel()">Cancelar</x-secondary-button>
             </x-slot>
         </x-dialog-modal>
@@ -67,7 +67,7 @@
                     $wire.accreditDateRelease = null ;
                 },
 
-                openModel() {
+                openModal() {
                     $wire.openModalAcreditation = true
                 },
                 

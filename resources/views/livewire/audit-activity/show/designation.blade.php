@@ -36,7 +36,9 @@
 
                             @if($isCreated and !$isEditing)
                             <figure type="button" x-on:click="$wire.isDeleting = true" class="flex items-center justify-between p-2 mr-2 bg-red-100 rounded-full m hover:bg-red-200 active:bg-red-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                                </svg>
                             </figure>
 
 
@@ -49,8 +51,10 @@
                             </x-dialog-modal>
 
 
-                            <figure type="button" wire:click="edit" class="flex items-center justify-between p-2 bg-yellow-100 rounded-full hover:bg-yellow-200 active:bg-yellow-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/></svg>
+                            <figure type="button" wire:click="$set('isEditing', true)" class="flex items-center justify-between p-2 bg-yellow-100 rounded-full hover:bg-yellow-200 active:bg-yellow-300">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/>
+                                </svg>
                             </figure>
                             @elseif ($isEditing)
                             <span class="mr-3 text-xl font-semibold">Editando</span>
@@ -77,7 +81,7 @@
                         $tableEmployeeErrors[] = $value;
                     }
                 @endphp
-                <livewire:components.table-cards-employees :$auditActivity :$isEditing :$isCreated
+                <livewire:components.table-cards-employees :$repository :$isEditing :$isCreated 
                 wire:model.live="tableEmployees.list" :errors="$tableEmployeeErrors"
                 >
 
@@ -91,7 +95,7 @@
                     }
                 @endphp
                 <div class="ml-4">
-                    <livewire:components.planning-schedule :$auditActivity :designation="$isCreated" :$isEditing :$isCreated :$typeAudit
+                    <livewire:components.planning-schedule :$repository :designation="$isCreated" :$isEditing :$isCreated :typeAudit="(object) $object->type_audit"
                     wire:model.live="planningSchedule.dates" :errors="$planningScheduleErrors"
                     >
                 </div>
@@ -131,7 +135,7 @@
                     <div class="mx-2">
                         @if(!$isEditing && $isCreated)
                         {{-- todo Acreditation --}}
-                        <livewire:AuditActivity.Show.Acreditation :$auditActivity :$acreditation :$pivot>
+                        <livewire:AuditActivity.Show.Acreditation :$repository :$object :$acreditation>
                         @endif
                     </div>
 

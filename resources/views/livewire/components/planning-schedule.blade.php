@@ -2,6 +2,7 @@
 
 use App\Models\Acreditation;
 use App\Models\AuditActivity;
+use App\Repositories\AuditActivityRepository;
 use App\Models\Designation;
 use App\Models\NotWorkingDays;
 use App\Models\TypeAudit;
@@ -21,14 +22,14 @@ new class extends \Livewire\Volt\Component
     public $excludeDays;
 
     #[Reactive]
-    public AuditActivity $auditActivity;
+    public AuditActivityRepository $repository;
 
     #[Reactive]
     public bool $designation;
 
     public Acreditation|null $acreditation;
 
-    public TypeAudit $typeAudit;
+    public object $typeAudit;
 
     #[Reactive]
     public ?array $errors;

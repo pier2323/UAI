@@ -2,36 +2,23 @@
 
 namespace App\Livewire\AuditActivity;
 
-use App\Models\Acreditation;
-use App\Models\AuditActivity;
-use App\Models\Designation;
-use App\Models\HandoverDocument;
 use App\Repositories\AuditActivityRepository;
-use Illuminate\Contracts\Support\Renderable;
-use Livewire\Attributes\Locked;
-use Livewire\Attributes\Reactive;
+use App\Traits\RenderComponentTrait;
 use Livewire\Component;
 
 class Show extends Component
 {
-    // #[Reactive]
-    public AuditActivityRepository $auditActivity;
+    use RenderComponentTrait;
+    const view = "livewire.audit-activity.show";
 
-    // public ?HandoverDocument $handoverDocument;
-
-    public function render(): Renderable
-    {
-        return view('livewire.audit-activity.show');
-    }
+    public AuditActivityRepository $repository;
+    public object $object;
+    public bool $isHandoverDocument;
 
     public function mount(int $id): void
     {
-        $this->auditActivity = new AuditActivityRepository($id);
+        $this->repository = new AuditActivityRepository($id);
+        $this->object = (object) $this->repository->object;
+        $this->isHandoverDocument = $this->object->type_audit['code'] == 'ae';
     }
-
-    // public function load()
-    // {
-    //     $this->handoverDocument = HandoverDocument::first() ?? null;
-    //     return $this->handoverDocument;
-    // }
 }

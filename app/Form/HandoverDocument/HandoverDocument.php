@@ -2,14 +2,13 @@
 
 namespace App\Form\HandoverDocument;
 
-use App\Models\AuditActivity;
 use App\Models\EmployeeIncoming;
 use App\Models\EmployeeOutgoing;
 use App\Models\HandoverDocument as ModelsHandoverDocument;
+use App\Repositories\AuditActivityRepository;
 use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use PhpParser\Node\Stmt\Else_;
 
 class HandoverDocument extends Form
 {
@@ -25,7 +24,6 @@ class HandoverDocument extends Form
         'audit_activity_id',
     ];
 
-    
     #[Validate('nullable', 'date_format:d/m/Y',  as: 'Fecha de Inicio del Periodo')]
     public $start = '';
 
@@ -48,30 +46,22 @@ class HandoverDocument extends Form
     public string|int $employee_incoming_id = ''; 
     public string|int $audit_activity_id = '';
 
-    public function save(
-        EmployeeOutgoing $outgoing, 
-        EmployeeIncoming $incoming, 
-        ?AuditActivity $auditActivity
-    ): ModelsHandoverDocument
+    public function save(EmployeeOutgoing $outgoing, EmployeeIncoming $incoming, ?int $audit_activity_id = null): ModelsHandoverDocument
     {
         $this->validate();     
 
-        $this->employee_outgoing_id = $outgoing->id ?? '';
-        $this->employee_incoming_id = $incoming->id ?? '';
+        $this->employee_outgoing_id = $outgoing->id;
+        $this->employee_incoming_id = $incoming->id;
         
-        $this->toFormatDate();
-
-        if(isset($auditActivity) && $auditActivity !== '') {
-            $this->audit_activity_id = $auditActivity->id;
-            return ModelsHandoverDocument::create($this->propertiesToSave());
+        foreach (['start', 'cease', 'subscription', 'delivery_uai'] as $date) {
+            $this->{$date} = self::format(date: $this->{$date});
         }
 
-        else {
-            $propertiesToSave = $this->propertiesToSave(audit_activity: false);
-            $propertiesToSave['audit_activity_id'] = null;
-            
-            return ModelsHandoverDocument::create($propertiesToSave);
-        }
+        $propertiesToSave = $this->only(self::properties);
+
+        $propertiesToSave['audit_activity_id'] = isset($audit_activity_id) ? $audit_activity_id : null; 
+
+        return ModelsHandoverDocument::create($propertiesToSave);
     }
 
     private static function format(String $date): string 
@@ -80,32 +70,12 @@ class HandoverDocument extends Form
         return $date->format('Y-m-d');
     }
 
-    private function toFormatDate(): void
+    public function load(object $handoverDocument): void 
     {
-        foreach (['start', 'cease', 'subscription', 'delivery_uai'] as $date) {
-            $this->{$date} = self::format(date: $this->{$date});
-        }
-    }
-
-    private function propertiesToSave(bool $audit_activity = true): array
-    {
-        if(!$audit_activity) {
-            return $this->only(array_filter(self::properties, function($value) {
-                return $value !== 'audit_activity_id';
-            }));
-        };
-
-        return $this->only(self::properties);
-    }
-
-    public function load(ModelsHandoverDocument $handoverDocument): void 
-    {
-        $handoverDocument = (object) $handoverDocument->toArray();
         foreach(self::properties as $property) {
             $this->{$property} = $handoverDocument->{$property};
         }
     }
-
 }
 
 

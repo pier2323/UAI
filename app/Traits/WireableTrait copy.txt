@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Traits;
+
+trait WireableTrait {
+    public static function fromLivewire($object)
+    {
+        return new static($object['id'], $object);
+    }
+
+    public function toLivewire()
+    {
+        return $this->object;
+    }
+}

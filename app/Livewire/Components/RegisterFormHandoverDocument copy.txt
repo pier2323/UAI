@@ -23,11 +23,10 @@ class RegisterFormHandoverDocument extends Component
     public Incoming $incoming;
     public HandoverDocument $handoverDocument;
     
+    
+    public ?AuditActivityRepository $auditActivityRepository;
+
     public HandoverDocumentRepository $repository;
-
-    public ?int $handoverDocumentId;
-
-    public object $auditActivity;
 
     public object $object;
     public bool $hasHandoverDocument = false;
@@ -37,14 +36,14 @@ class RegisterFormHandoverDocument extends Component
     public function mount()
     {
         $this->departaments = Departament::all();
-        
-        if (empty($this->handoverDocumentId)) return;
-        
-        $repository = new HandoverDocumentRepository($this->handoverDocumentId);
-        $this->object = (object) $repository->object;
-        
+
+        if(empty($this->auditActivityRepository)) return;
+
+        $HandoverDocumentId = $this->auditActivityRepository->object['handover_document']['id'];
+        $this->repository = new HandoverDocumentRepository($HandoverDocumentId);
+        $this->object = (object) $this->repository->object;
         $this->hasHandoverDocument = isset($this->object);
-        
+
         if($this->hasHandoverDocument) {
             $this->outgoing->load((object) $this->object->employee_outgoing);
             $this->incoming->load((object) $this->object->employee_incoming);
@@ -54,7 +53,7 @@ class RegisterFormHandoverDocument extends Component
 
     public function cancel(): void
     {
-        $this->resetExcept('handoverDocumentId', 'departaments', 'outgoing', 'incoming', 'handoverDocument');
+        $this->reset();
         $this->mount();
     }
 
@@ -65,7 +64,7 @@ class RegisterFormHandoverDocument extends Component
         $this->handoverDocument->save(
             outgoing: $this->outgoing->save(),
             incoming: $this->incoming->save(),
-            audit_activity_id: $this->auditActivity->id,
+            audit_activity_id: $this->object->id,
         );
 
         // $this->iterator('restart');

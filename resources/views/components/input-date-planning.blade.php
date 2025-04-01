@@ -68,5 +68,4 @@
             >
         </div>
     </div>
-    <p x-text="$wire.designation ? 'true': 'false'"></p>
 </div>

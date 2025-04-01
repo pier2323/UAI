@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AuditActivity;
+use App\Repositories\AuditActivityRepository;
 use App\Models\Employee;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Attributes\Locked;
@@ -23,7 +24,7 @@ new class extends \Livewire\Volt\Component
     public bool $isCreated = false;
 
     #[Reactive]
-    public AuditActivity $auditActivity;
+    public AuditActivityRepository $repository;
 
     #[Renderless]
     public function addCard($id): object
@@ -36,8 +37,6 @@ new class extends \Livewire\Volt\Component
 
 <div class="">
     {{-- ? A good traveler has no fixed plans and is not intent upon arriving. --}}
-
-    @dump($employees)
 
     <div :class="typeof $wire.errors[0] !== 'undefined' ? 'border-red-400' : ''"
     class="flex flex-col flex-grow h-full px-3 pt-3 pb-5 align-middle border-2 shadow rounded-sd w-fit"

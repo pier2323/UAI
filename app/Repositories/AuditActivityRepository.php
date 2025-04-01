@@ -10,17 +10,25 @@ final class AuditActivityRepository extends BaseRepository
         'typeAudit',
         'handoverDocument',
     ];
-
-    public $code;
-
-    public function __construct(int $id)
+    
+    public function __construct(?int $id = null, ?array $repositoryOld = [])
     {
-        parent::__construct(AuditActivity::class, $id, self::relations);
-        $this->mount();
+        if (!empty($repositoryOld)) {
+            parent::__construct($repositoryOld['model'], $repositoryOld['relations'], $repositoryOld['object']);
+        }
+
+        else {
+            $modelObject = [
+                'name' => AuditActivity::class, 
+                'id'=> $id,
+            ];
+            parent::__construct($modelObject, self::relations);
+            $this->mount();
+        }
     }
 
     private function mount(): void
     {
-        $this->object->code = $this->model->code;
+        $this->object['code'] = getModel::execute($this->model)->code;
     }
 }

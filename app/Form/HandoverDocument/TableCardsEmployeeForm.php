@@ -2,7 +2,9 @@
 
 namespace App\Form\HandoverDocument;
 
+use App\Actions\AuditActivityActions\SyncDesignationComissionAction;
 use App\Models\AuditActivity;
+use App\Repositories\AuditActivityRepository;
 use Livewire\Attributes\Modelable;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -15,31 +17,18 @@ final class TableCardsEmployeeForm extends Form
 
     public bool $verified = false;
 
-    public function save(AuditActivity $auditActivity, ?int $designation = null, ?int $acreditation = null): array
+    public function save(AuditActivityRepository $repository, SyncDesignationComissionAction $action, ?int $designation = null, ?int $acreditation = null): array
     {
         $this->validate();
 
-        $employees = array();
-
-        foreach ($this->list as $employee) {
-            $id = $employee['data']['id'];
-            $role = $employee['role'] == 1 ? 'Coordinador' : 'Auditor';
-
-            $array = array();
-            $array['role'] = $role;
-            $array['designation_id'] = $designation;
-            if(isset($acreditation)) $array['acreditation_id'] = $acreditation;
-
-            $employees[$id] = $array;
-        }
-
-        return $auditActivity->employee()->sync($employees);
+        return $action($repository, $this->list, $designation, $acreditation);
     }
 
-    public function load(AuditActivity $auditActivity): void
+    public function load(AuditActivityRepository $repository): void
     {
         $employeesArray = array();
-        $employees = $auditActivity
+        $employees = $repository
+        ->makeQuery()
         ->employee()
         ->with('jobTitle')
         ->get()

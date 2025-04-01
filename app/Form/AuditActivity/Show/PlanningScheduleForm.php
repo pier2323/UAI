@@ -4,8 +4,10 @@ namespace App\Form\AuditActivity\Show;
 
 use App\Models\AuditActivity;
 use App\Models\TypeAudit;
+use App\Repositories\AuditActivityRepository;
 use App\Traits\ModelPropertyMapper;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -67,17 +69,15 @@ final class PlanningScheduleForm extends Form
         $this->dates = (object) $this->except('dates');
     }
 
-    public function save(AuditActivity $auditActivity)
+    public function save(AuditActivityRepository $repository, object $object): void
     {
-        $typeAudit = $auditActivity->typeAudit;
         $this->loadVariablesFromDates();
         
-        $this->conditionValidate($typeAudit);
+        $this->conditionValidate((object) $object->type_audit);
 
-        $dates = !\in_array($typeAudit->code, ['as', 'ae']) 
+        $dates = !\in_array($object->type_audit['code'], ['as', 'ae']) 
         ? $dates = $this->getPropertiesForCarbon()
         : array_diff($this->getPropertiesForCarbon(), $this->getPropertiesPreliminaryAndDownload());
-
 
         // todo format dates
         foreach ($this->only($dates) as $key => $value) {
@@ -86,23 +86,23 @@ final class PlanningScheduleForm extends Form
         }
 
         // todo update dates
-        $auditActivity->update($this->all());
+        $repository->makeQuery()->update($this->all());
 
-        $this->mapModelProperties($auditActivity, $this->except('dates'));
+        $this->mapModelProperties($repository->makeQuery(), $this->except('dates'));
         $this->mount();
     }
 
-    public function load(AuditActivity $auditActivity)
+    public function load(AuditActivityRepository $repository)
     {
-        $this->mapModelProperties($auditActivity, $this->except('dates'));
+        $this->mapModelProperties($repository->makeQuery(), $this->except('dates'));
         $this->mount();
     }
 
-    public function delete(AuditActivity $auditActivity): void
+    public function delete(AuditActivityRepository $repository): void
     {
         $this->reset();
 
-        $auditActivity->update($this->all());
+        $this->load($repository);
     }
 
     private function loadVariablesFromDates(): void
@@ -139,7 +139,7 @@ final class PlanningScheduleForm extends Form
         ];
     }
     
-    private function conditionValidate(TypeAudit $typeAudit)
+    private function conditionValidate(object $typeAudit)
     {
         if(!\in_array($typeAudit->code, ['as', 'ae'])) 
         return $this->validate();

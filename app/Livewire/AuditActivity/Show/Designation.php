@@ -2,32 +2,35 @@
 
 namespace App\Livewire\AuditActivity\Show;
 
+use App\Actions\AuditActivityActions\DeletedDesignationComissionAction;
+use App\Actions\AuditActivityActions\GetDesignationDocument;
+use App\Actions\AuditActivityActions\SyncDesignationComissionAction;
 use App\Actions\DesignationAcreditation\Designate;
 use App\Form\AuditActivity\Show\PlanningScheduleForm;
 use App\Form\HandoverDocument\TableCardsEmployeeForm;
-use App\Models\AuditActivity;
-use App\Models\Acreditation as ModelsAcreditation;
-use App\Models\AuditActivityEmployee;
-use App\Models\Designation as ModelsDesignation;
-use App\Models\TypeAudit;
-use App\Services\DesignationService;
+use App\Repositories\AcreditationRepository;
+use App\Repositories\AuditActivityRepository;
+use App\Repositories\ComissionRepository;
+use App\Repositories\DesignationRepository;
 use Livewire\Attributes\Modelable;
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Renderless;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Designation extends Component
 {
+    use \App\Traits\RenderComponentTrait;
+    const view = 'livewire.audit-activity.show.designation';
+
+    public AuditActivityRepository $repository;
+
     #[Modelable]
-    public AuditActivity $auditActivity;
+    public object $object;
 
     public TableCardsEmployeeForm $tableEmployees;
     public PlanningScheduleForm $planningSchedule;
-    public ?ModelsDesignation $designation;
-    public ?ModelsAcreditation $acreditation;
-    public ?AuditActivityEmployee $pivot;
-    public TypeAudit $typeAudit;
+    public DesignationRepository $designation;
+    public AcreditationRepository $acreditation;
+    public ComissionRepository $comission;
     public bool $isEditing = false;
     public bool $isDeleting = false;
     public bool $isCreated = false;
@@ -35,128 +38,111 @@ class Designation extends Component
 
     public function mount(): void
     {
-        $this->planningSchedule->mount();
+        $this->planningSchedule->mount(); // ! 
+
+        $this->comission = new ComissionRepository($this->object->id);
+
+        // finish the function if is created
         $this->isCreated = $this->isDesignated();
-
         if (!$this->isCreated) return;
-        
-        $this->tableEmployees->load($this->auditActivity);
-        $this->planningSchedule->load($this->auditActivity);
-        $this->pivot = $this->getPivot();
-        $this->designation = $this->getDesignationModel();
-        $this->acreditation = $this->getAcreditationModel();
-        $this->isAcredit = isset($this->acreditation) ? true : false;
-    }
 
-    public function render()
-    {
-        return view('livewire.audit-activity.show.designation');
+        // load data
+        $this->tableEmployees->load($this->repository);
+        $this->planningSchedule->load($this->repository);
+        
+        $this->designation = new DesignationRepository($this->comission['designation_id']);
+
+        $this->isAcredit = $this->isAcredited();
+
+        if (!$this->isAcredit) return;
+        $this->acreditation = new AcreditationRepository($this->comission['acreditation_id']);
     }
 
     public function designate(): void
     {
         $this->tableEmployees->validate();
         
-        $this->planningSchedule->save($this->auditActivity);
+        $this->planningSchedule->save($this->repository, $this->object);
         
-        $this->designation = (new Designate($this->auditActivity))->create();
+        $action = new Designate($this->planningSchedule->dates->planning_start);
+        $designationModel = $action();
+        $this->designation = new DesignationRepository($designationModel->id);
         
         $this->tableEmployees->save(
-            $this->auditActivity,
-            designation: $this->designation->id
+            repository: $this->repository,
+            action: new SyncDesignationComissionAction(),
+            designation: $this->designation->object['id'],
         );
         
         $this->isCreated = true;
         $this->dispatch('designation_designate', message: \__('se ha designado la comision correctamente!'));
     }
 
-    #[Renderless]
-    public function getDesignationDocument(): BinaryFileResponse
+    public function getDesignationDocument(GetDesignationDocument $action): BinaryFileResponse
     {
-        $code = $this->auditActivity->code;
-
-        if(\in_array($this->auditActivity->typeAudit->code, ['as', 'ae']) )
-        $nameTemplate = 'designationTemplateForAsAndAE.docx';
-
-        $designation = new DesignationService(
-            auditActivity: $this->auditActivity, 
-            date: $this->designation->date_release, 
-            nameDocument: "UAI-GCP-DES-COM $code.docx", 
-            nameTemplate: $nameTemplate ?? null
-        );
-
-        $this->dispatch('designation_download', message: \__('se ha iniciado la descarga!'));
-        return $designation->download();
-    }
-
-    public function edit(): void
-    {
-        $this->isEditing = true;
+        return $action($this->object, $this->designation, $this->repository);
     }
 
     public function cancelEdit(): void
     {
-        // foreach([TableCardsEmployee::class] as $component)
-        // $this->dispatch('cancelEdit')->to($component);
-        // $this->isEditing = false;
+        $this->planningSchedule->mount();
+        $this->isEditing = false;
     }
 
     public function update(): void
     {
-        $this->designation->update(['date_release' => $this->planningSchedule->dates['planning_start']]);
+        $action = new Designate($this->planningSchedule->dates->planning_start);
+        $designationModel = $action();
+        $this->designation = new DesignationRepository($designationModel->id);
 
+        $this->planningSchedule->save($this->repository, $this->object);
         $this->tableEmployees->save(
-            $this->auditActivity,
-            designation: $this->designation->id
+            repository: $this->repository,
+            action: new SyncDesignationComissionAction(),
+            designation: $this->designation->object['id'],
         );
+        
+        $this->mount();
 
-        $this->dispatch('designation_updated', message: \__('se ha actualizado la comision correctamente!'));
         $this->isEditing = false;
+        $this->dispatch('designation_updated', message: \__('se ha actualizado la comision correctamente!'));
     }
 
-    public function delete()
+    public function delete(DeletedDesignationComissionAction $action): void 
     {
+        $action($this->repository, (object) [
+          'designation' => $this->designation,
+          'acreditation' => $this->acreditation ?? null
+        ]);
+        
+        // reseting properties
+        $this->reset([
+            'designation',
+            'acreditation',
+            'isCreated',
+            'isDeleting',
+        ]);
+
+        // reseting forms
+        $this->planningSchedule->delete($this->repository);
+        $this->tableEmployees->list = array();
+
         $this->dispatch('designation_deleted', message: 'se ha eliminado la comisión y la planificación correctamente!');
         $this->dispatch('deleted');
-        if(isset($this->designation)) {
-            $this->designation->delete();
-        }
-        if(isset($this->acreditation)) {
-            $this->acreditation->delete();
-        }
-        $this->auditActivity->employee()->detach();
-        $this->designation = null;
-        $this->acreditation = null;
-        $this->isCreated = false;
-        $this->isDeleting = false;
-        $this->planningSchedule->delete($this->auditActivity);
-        $this->designation = ModelsDesignation::make();
-        $this->tableEmployees->list = array();
-        $this->planningSchedule->load($this->auditActivity);
+    }
+
+    public function updateTableEmployee($data): void //  ? using in table-cards-employees
+    {
+        $this->tableEmployees->update($data);
     }
 
     private function isDesignated(): bool
     {
-        return $this->auditActivity->employee()->first() !== null ? true : false;
+        return !empty($this->comission->object);
     }
 
-    private function getPivot(): AuditActivityEmployee
+    private function isAcredited(): bool
     {
-        return AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->first();
-    }
-
-    private function getDesignationModel(): ModelsDesignation
-    {
-        return $this->pivot->designation()->first();
-    }
-
-    private function getAcreditationModel(): ModelsAcreditation|null
-    {
-        return $this->pivot->acreditation()->first();
-    }
-
-    public function updateTableEmployee($data): void
-    {
-        $this->tableEmployees->update($data);
+        return $this->comission['acreditation_id'] !== null;
     }
 }

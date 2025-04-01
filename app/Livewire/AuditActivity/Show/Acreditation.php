@@ -2,42 +2,37 @@
 
 namespace App\Livewire\AuditActivity\Show;
 
-use App\Models\Acreditation as ModelsAcreditation;
-use App\Models\AuditActivity;
 use App\Models\AuditActivityEmployee;
+use App\Repositories\AuditActivityRepository;
 use App\Services\AcreditationService;
-use Carbon\Carbon;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Actions\AuditActivityActions\AcreditComissionAction;
+use App\Repositories\AcreditationRepository;
+use App\Traits\RenderComponentTrait;
+use Carbon\Carbon;
 
 class Acreditation extends Component
 {
+    use RenderComponentTrait;
+    const view = 'livewire.audit-activity.show.acreditation';
+
     #[Reactive]
-    public AuditActivity $auditActivity;
-    public ?ModelsAcreditation $acreditation;
+    public AuditActivityRepository $repository;
+    
+    public ?AcreditationRepository $acreditation;
+    
+    public object $object;
     public ?string $accreditDateRelease;
     public bool $openModalAcreditation = false;
 
-    public function render()
+    public function acredit(AcreditComissionAction $action): void
     {
-        return view('livewire.audit-activity.show.acreditation');
-    }
+        $acreditationModel = $action($this->accreditDateRelease, $this->object->id);
 
-    public function acredit(): void
-    {
-        $dateCarbon = Carbon::createFromFormat('d/m/Y', $this->accreditDateRelease);
-        $this->acreditation = ModelsAcreditation::create([
-            'date_release' => $dateCarbon->format('Y-m-d'),
-        ]);
-
-        foreach (AuditActivityEmployee::where('audit_activity_id', $this->auditActivity->id)->get()
-        as $pivot)
-        {
-            $pivot->acreditation_id = $this->acreditation->id;
-            $pivot->save();
-        }
+        $this->acreditation = new AcreditationRepository($acreditationModel->id);
 
         $this->dispatch('acreditation_acredit', message: \__('se ha acreditado la comisión correctamente!'));
     }
@@ -45,9 +40,16 @@ class Acreditation extends Component
     #[Renderless]
     public function getAcreditationDocument(): BinaryFileResponse
     {
-        $code = $this->auditActivity->code;
-        $acreditation = new AcreditationService($this->auditActivity, date: $this->acreditation->date_release , nameDocument: "UAI-GCP-ACRE-COM $code.docx");
+        $code = $this->object->code;
+        $date_release = Carbon::createFromFormat('d/m/Y', $this->acreditation->object['date_release']);
+
+        $document = new AcreditationService(
+            repository: $this->repository, 
+            date: $date_release,
+            nameDocument: "UAI-GCP-ACRE-COM $code.docx"
+        );
+
         $this->dispatch('acreditation_download', message: \__('se ha iniciado la descarga!'));
-        return $acreditation->download();
+        return $document->download();
     }
 }

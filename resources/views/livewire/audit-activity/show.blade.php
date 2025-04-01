@@ -1,17 +1,23 @@
 <div>
-    @isset($auditActivity->public_id)
-        @dump($auditActivity->public_id)
-    @endisset
         
     {{-- todo Headings --}}
-    <div role="headings"> <livewire:components.audit-activity-headings :$auditActivity objective></div>
-
+    <livewire:components.audit-activity-headings 
+        :$repository 
+        :hasObjective="true"
+    >
+    
     {{-- todo Designation --}}
-    {{-- <livewire:AuditActivity.Show.Designation wire:model='auditActivity' :typeAudit="$auditActivity->typeAudit"> --}}
-
-    {{-- @if($auditActivity->typeAudit->code == 'ae') --}}
-     {{-- todo type_audit_id => 1 = Acta de Entrega --}}
-    {{-- <livewire:Components.RegisterFormHandoverDocument :$auditActivity :modelsHandoverDocument="$handoverDocument"> --}}
-    {{-- @endif --}}
+    <livewire:AuditActivity.Show.Designation 
+        :$repository wire:model='object' 
+        :typeAudit="$object->type_audit"
+    >
+        
+    {{-- todo handover Document register --}}
+    @if($isHandoverDocument)
+        <livewire:Components.RegisterFormHandoverDocument 
+            :auditActivity="$object" 
+            :handoverDocumentId="$object->handover_document['id'] ?? null" 
+        />
+    @endif
 
 </div>
