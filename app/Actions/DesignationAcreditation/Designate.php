@@ -5,7 +5,8 @@ namespace App\Actions\DesignationAcreditation;
 use App\Models\Designation;
 use Carbon\Carbon;
 
-readonly final class Designate
+
+final class Designate
 {
     private array $data;
     public function __construct(string $date_release) 
