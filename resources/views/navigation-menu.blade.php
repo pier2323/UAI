@@ -1,4 +1,4 @@
- <!-- la clase de azul esta en bosstrap.min -->
+<!-- la clase de azul esta en bosstrap.min -->
 <nav x-data="{ open: false }" class="bg-blue-700">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8" >
@@ -14,13 +14,13 @@
 
                 @php
                     $routes = [
-
                         'dashboard.index' => ['name' => 'Inicio', 'hasPermission' => false],
                         'employee.index' => ['name' => 'Personal', 'hasPermission' => false],
                         'handoverDocument.register' => ['name' => 'Registro del Acta de entrega', 'hasPermission' => true],
                         'auditActivity.index' => ['name' => 'Plan Operativo Anual', 'hasPermission' => false],
                         'handover.index' => ['name' => 'Acta de Entrega', 'hasPermission' => false],
                         'memo_ofico.index' => ['name' => 'Memo y Oficio', 'hasPermission' => false],
+                        'archivo.movil' => ['name' => 'Archivo Móvil', 'hasPermission' => false], // Added route
                     ];  
                 @endphp
 

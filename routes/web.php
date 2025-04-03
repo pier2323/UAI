@@ -18,34 +18,29 @@ use App\Http\Controllers\HallazgosController;
 use App\Http\Controllers\DescargaMemoController;
 use App\Http\Controllers\DefinitivoV2Controller; // Import the new controller
 use App\Http\Controllers\RemisionDefinitivoController; // Import the new controller
+use App\Http\Controllers\ArchivoMovilController;
 
 // routes/web.php
 
-
+Route::get('/archivo-movil', [ArchivoMovilController::class, 'index'])->name('archivo.movil');
+Route::post('/archivo-movil/save', [ArchivoMovilController::class, 'save'])->name('archivo.movil.save');
 
 Route::get(uri: '/memo-ofico', action: MemoOfico::class)->name('memo_ofico.index');
-    Route::get('/descarga-memo/{input_tipo1}', [DescargaMemoController::class, 'index']);
-    Route::post('/guardar-memo', [HallazgosController::class, 'guardarMemo'])->name('guardar.memo');
-    Route::post('/actualizar-memo/{id}', [HallazgosController::class, 'actualizarMemo'])->name('actualizar.memo');
-    Route::delete('/eliminar-memo/{id}', [HallazgosController::class, 'eliminarMemo'])->name('eliminar.memo');
-    Route::get('/remision-definitivo/download/{id}', [RemisionDefinitivoController::class, 'downloadTemplate']);
+Route::get('/descarga-memo/{input_tipo1}', [DescargaMemoController::class, 'index']);
+Route::post('/guardar-memo', [HallazgosController::class, 'guardarMemo'])->name('guardar.memo');
+Route::post('/actualizar-memo/{id}', [HallazgosController::class, 'actualizarMemo'])->name('actualizar.memo');
+Route::delete('/eliminar-memo/{id}', [HallazgosController::class, 'eliminarMemo'])->name('eliminar.memo');
+Route::get('/remision-definitivo/download/{id}', [RemisionDefinitivoController::class, 'downloadTemplate']);
 Route::post('/remision-definitivo/update/{id}', [RemisionDefinitivoController::class, 'update'])->name('remision-definitivo.update');
 Route::delete('/remision-definitivo/delete/{id}', [RemisionDefinitivoController::class, 'destroy'])->name('remision-definitivo.destroy');
 
-
-
-
-
 Route::get('/gmail', [GmailController::class, 'index']);
 Route::get('/union', [UnionController::class, 'union'])->name('ruta.union');
-
-
 
 Route::get(
     uri: '/acta-de-entrega', 
     action: App\Http\Livewire\Handover\Main::class
 )->name('handover.index');
-
 
 //Rutas de la carga de los archivos 
 Route::get('/documento-ceco', [TuControlador::class, 'descargarCeco'])->name('documento.ceco');
@@ -61,7 +56,6 @@ Route::post('/documents/save-text', [DocumentController::class, 'saveText'])->na
 Route::post('/generate-word', [DocumentController::class, 'generateWord']);
 Route::post('/download-sin-hallazgo', [DownloadSinHallazgoController::class, 'download'])->name('download-sin-hallazgo');
 // Fin  Rutas de la carga de los archivos 
-
 
 // Rutas de la Ceudla y del envio de zizmbra 
 Route::post('/calculate-date', [CalendarController::class, 'calculate'])->name('calculate.date');
@@ -98,9 +92,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // todo employee routes 
     include_once('employee.php');
-
-
-
 
     Route::get(
         uri: '/private/components', 
