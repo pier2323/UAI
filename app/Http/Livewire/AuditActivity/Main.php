@@ -87,7 +87,7 @@ class Main extends Component
      */
     public function goTo(int $id): void
     {
-        $this->redirectRoute('auditActivity.show', ['public_id' => $id], navigate: true);
+        $this->redirectRoute('auditActivity.show', ['id' => $id], navigate: true);
     }
 
 }

@@ -36,7 +36,7 @@ return new class extends \Livewire\Volt\Component
         ]"
         nameColumnId="p00"
         eventRow="x-on:dblclick" 
-        x-on:dblclick="$wire.goTo(row.p00)" 
+        x-on:dblclick="$wire.goTo(row.id)" 
     />
 </div>
 

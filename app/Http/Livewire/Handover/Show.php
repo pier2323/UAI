@@ -79,7 +79,7 @@ class Show extends Component
 public function mount(int $public_id): void
 {
     $this->auditActivity = AuditActivity::with([ 'handoverDocument' => ['employeeOutgoing', 'employeeIncoming'], 'employee'])
-        ->where('public_id', $public_id)
+        ->where('id', $public_id)
         ->first();
 
         $fechaInicio = date('d-m-Y', strtotime($this->auditActivity->handoverDocument->subscription));

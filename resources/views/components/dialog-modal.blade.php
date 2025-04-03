@@ -1,4 +1,4 @@
-@props(['id' => null, 'maxWidth' => null])
+@props(['id' => null, 'maxWidth' => null, 'contentAttributes' => []])
 
 <x-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
     <div class="px-6 py-4">
@@ -7,7 +7,7 @@
         </div>
 
         @isset($content)
-        <div class="mt-4 text-sm text-gray-600">
+        <div @foreach ($contentAttributes as $key => $value) {{$key}}="{{$value}}" @endforeach>
             {{ $content }}
         </div>
         @endisset

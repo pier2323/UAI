@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
-use App\Http\Livewire\Handover\informeAuditor;
+use App\Livewire\Handover\informeAuditor;
 
 class ReportController extends Controller
 {

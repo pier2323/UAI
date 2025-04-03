@@ -22,9 +22,10 @@ final class DesignationService
         private readonly AuditActivity $auditActivity, 
         public readonly ?string $nameDocument = null,
         public readonly ?Carbon $date = null,
+        public readonly ?string $nameTemplate = null,
     ){
         $this->document = new WorkingPaper (
-            templateFile: WorkingPaper::getTemplate(self::NAME_TEMPLATE), 
+            templateFile: WorkingPaper::getTemplate($this->nameTemplate ?? self::NAME_TEMPLATE), 
             nameDocument: $nameDocument ?? self::NAME_DOCUMENT,
             date: $date ?? now(),
         ); 

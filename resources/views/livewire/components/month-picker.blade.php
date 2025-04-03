@@ -1,3 +1,20 @@
+<?php
+
+use Livewire\Attributes\Modelable;
+
+new class extends \Livewire\Volt\Component
+{
+    public array $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    public string $id = 'hola';
+    public string $class = '';
+    public string $alpine = '';
+
+    #[Modelable]
+    public string $selected = '';
+};
+
+?>
+
 <div>
     <div x-data="{{ $alpine }}">
 

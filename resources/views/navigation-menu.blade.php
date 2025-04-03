@@ -16,7 +16,7 @@
                     $routes = [
                         'dashboard.index' => ['name' => 'Inicio', 'hasPermission' => false],
                         'employee.index' => ['name' => 'Personal', 'hasPermission' => false],
-                        'handoverDocument.register' => ['name' => 'Registro del Acta de entrega', 'hasPermission' => true],
+                        'handover.register' => ['name' => 'Registro del Acta de entrega', 'hasPermission' => true],
                         'auditActivity.index' => ['name' => 'Plan Operativo Anual', 'hasPermission' => false],
                         'handover.index' => ['name' => 'Acta de Entrega', 'hasPermission' => false],
                         'memo_ofico.index' => ['name' => 'Memo y Oficio', 'hasPermission' => false],

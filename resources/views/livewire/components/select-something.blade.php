@@ -1,3 +1,25 @@
+<?php
+
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Modelable;
+use Livewire\Attributes\Reactive;
+use Livewire\Component;
+
+new class extends \Livewire\Volt\Component
+{
+    #[Modelable]
+    public string $selected;
+
+    #[Reactive]
+    public Collection $items;
+
+    public ?string $id;
+    public ?string $placeholder;
+    public ?string $title;
+};
+
+?>
+
 <div>
     <label for="{{ $id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $title }}</label>
 

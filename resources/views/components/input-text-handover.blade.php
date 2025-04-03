@@ -10,7 +10,7 @@
 ])
 
 <div class="w-full">
-    <label class="col-form-label" for="{{ $property }}">{{$title}}:</label>
+    <label class="col-form-label" for="{{ $property }}">{{$title ?? dd($property)}}:</label>
     <div class="flex">
         @if (!$select)
         @isset($prefix) {{ $prefix }} @endisset
@@ -25,7 +25,7 @@
             x-model="$wire.{{ $property }}"
             wire:model="{{ $property }}"
             {{ $attributes['x-on:input'] }}
-            @readonly(isset($readonly) or auth()->user()->cannot('handoverDocument.register'))
+            @readonly($readonly or auth()->user()->cannot('handoverDocument.register'))
         >
 
         @else

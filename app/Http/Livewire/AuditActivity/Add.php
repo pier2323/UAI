@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\AuditActivity;
 
+use App\Form\AuditActivity\AuditActivityForm;
 use App\Models\AuditActivity;
 use App\Models\HandoverDocument;
 use Livewire\Attributes\On;
@@ -59,6 +60,7 @@ class Add extends Component
 
     public function loadInputs(): void
     {
+        if(isset($this->handoverDocument))
         $this->auditActivity->objective = $this->auditActivity->getObjective($this->handoverDocument);
     }
 }
